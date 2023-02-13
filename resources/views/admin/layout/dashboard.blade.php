@@ -125,7 +125,7 @@
                           </td>
                           <td>
                             <div class="d-flex ">
-                              <img src="{{  }}images/faces/face1.jpg') }}" alt="">
+                              <img src="images/faces/face1.jpg') }}" alt="">
                               <div>
                                 <h6>Brandon Washington</h6>
                                 <p>Head admin</p>

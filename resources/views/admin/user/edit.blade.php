@@ -4,7 +4,6 @@
       <div class="card-body">
         <h4 class="card-title">Chỉnh sửa nhân viên</h4>
         <form id="updateUser" class="form-sample" method="POST" enctype="multipart/form-data">
-          {{-- @method('PUT') --}}
           @csrf
           <p class="card-description">
             Thông tin nhân viên

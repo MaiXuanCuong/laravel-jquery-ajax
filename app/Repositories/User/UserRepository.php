@@ -132,12 +132,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function getTrashed()
     {
         $users = $this->model->onlyTrashed();
-        return $users->orderBy('id', 'DESC')->paginate(3);
+        return $users->orderBy('id', 'DESC')->paginate(100);
     }
 
     public function restore($id)
     {
-        $user = $this->model->withTrashed()->findOrFail($id);
+        $user = $this->model->onlyTrashed()->findOrFail($id);
         try {
             $user->restore();
             return true;

@@ -1,7 +1,7 @@
 $(document).ready(function() {
     getUser();
 });
-
+// ------
 function getUser(){
     $.ajax({
         type: 'GET',
@@ -24,6 +24,7 @@ function getUser(){
         }
     })
 }
+// ------
 function myFunction(id) {
     // Get the text field
     var copyText = document.getElementById("copyPhone"+id);
@@ -35,15 +36,45 @@ function myFunction(id) {
     // Alert the copied text
     alert("Sao chép thành công: " + copyText.value);
   }
+// ------
 $(document).on('click', '#deleteUser' ,function(e) {
     e.preventDefault();
     var id = $(this).val();
-    $('#confirm_delete_user').val(id);
+    $('#confirm-text').html('');
+    var node = document.createTextNode("Xóa User này không?");
+    $('#confirm-text')[0].appendChild(node);
+    $('#confirm').val(id);
+    $('#confirm-true').addClass("confirmdeleteUser");
     $('#confirmUserModal').modal('show');
 })
-$(document).on('click', '#confirm-true', function(e){
+// ------
+$(document).on('click', '#restoreUser' ,function(e) {
     e.preventDefault();
-    var id = $('#confirm_delete_user').val();
+    $('#trashCanUserModal').modal('hide');
+    var id = $(this).val();
+    $('#confirm-text').html('');
+    var node = document.createTextNode("khôi phục User này không?");
+    $('#confirm-text')[0].appendChild(node);
+    $('#confirm').val(id);
+    $('#confirm-true').addClass("confirmrestoreUser");
+    $('#confirmUserModal').modal('show');
+})
+// ------
+$(document).on('click', '#destroyUser' ,function(e) {
+    e.preventDefault();
+    $('#trashCanUserModal').modal('hide');
+    var id = $(this).val();
+    $('#confirm-text').html('');
+    var node = document.createTextNode("Xóa vĩnh viễn User này không?");
+    $('#confirm-text')[0].appendChild(node);
+    $('#confirm').val(id);
+    $('#confirm-true').addClass("confirmdestroyUser");
+    $('#confirmUserModal').modal('show');
+})
+// -------
+$(document).on('click', '.confirmdeleteUser', function(e){
+    e.preventDefault();
+    var id = $('#confirm').val();
     $.ajaxSetup({
         headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -53,8 +84,10 @@ $(document).on('click', '#confirm-true', function(e){
         type: 'DELETE',
         url : "/user/delete_user/"+id,
         success: function(){
-            getUser();
             showSuccess();
+            $('#confirm').val("");
+            $('#confirm-true').removeClass("confirmdeleteUser");
+            getUser();
             $('#confirmUserModal').modal('hide');
         },
         error: function(e) {
@@ -62,7 +95,53 @@ $(document).on('click', '#confirm-true', function(e){
         }
     })
 })
-//add vs lấy tỉnh
+// --------
+$(document).on('click', '.confirmrestoreUser', function(e){
+    e.preventDefault();
+    var id = $('#confirm').val();
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url : "/user/restore_user/"+id,
+        success: function(){
+            getUser();
+            showSuccess();
+            $('#confirm').val("");
+            $('#confirmUserModal').modal('hide');
+        },
+        error: function(e) {
+            showError();
+        }
+    })
+})
+// ------
+$(document).on('click', '.confirmdestroyUser', function(e){
+    e.preventDefault();
+    var id = $('#confirm').val();
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        type: 'DELETE',
+        url : "/user/destroy_user/"+id,
+        success: function(){
+            getUser();
+            showSuccess();
+            $('#confirm').val("");
+            $('#confirmUserModal').modal('hide');
+        },
+        error: function(e) {
+            showError();
+        }
+    })
+})
+// ------
 $(document).on('click','#addUser', function(e){
     e.preventDefault();
     $('#addUserModal').modal('show');
@@ -79,8 +158,7 @@ $(document).on('click','#addUser', function(e){
         }
     });
 })
-
-// edit user
+// ------
 function editUser(user){
     $('#editUserModal').modal('show');
     $.ajax({
@@ -149,8 +227,7 @@ function editUser(user){
         }
     })
 }
-
-// update user 
+// ------
 function updateUser(event){
     event.preventDefault();
     var name = $('#nameUserEdit').val();
@@ -252,6 +329,7 @@ function updateUser(event){
     })
     }
 }
+// ------
 $('#insertUser').on('submit', function(e){
     e.preventDefault();
     var name = $('#nameUser').val();
@@ -361,7 +439,7 @@ if(ward == ""){
          });
      }
 })
-
+// ------
 $(function() {
     $(document).on('change', '.province_id, .add_user', function() {
         var province_id = $(this).val();
@@ -385,6 +463,7 @@ $(function() {
         })
     });
 });
+// ------
 $(function() {
     $(document).on('change', '.district_id, .add_user', function() {
         var district_id = $(this).val();
@@ -406,8 +485,7 @@ $(function() {
         })
     });
 });
-
-
+// ------
 $(document).ready(function() {
     if( $('#blah').hide()){
       $('#blah').hide();
@@ -428,3 +506,29 @@ $(document).ready(function() {
           }
       });
   });
+// ------
+  $(document).on('click','#trashCanUser', function(e){
+    e.preventDefault();
+    $('#trashCanUserModal').modal('show');
+    $.ajax({
+        url: '/user/getTrashCanUser',
+        type: 'GET',
+        success: function(response){
+            $('#tbodyTrashCanUser').html(" ");
+                $.each(response.users.data, function(index, user){
+                    $('#tbodyTrashCanUser').append(
+                '<tr>\
+                    <td><img style="width:100px; height:100px" src="'+ user.image +'" alt=""></td>\
+                    <td class="text-danger">'+ user.name +'</td>\
+                    <td class="text-danger">'+ user.gender +'</td>\
+                    <td><label class="badge badge-danger" ><input onclick="myFunction('+ user.id +')" id="copyPhone'+ user.id +'" value="'+ user.phone +'" hidden/>'+ user.phone +'</label></td>\
+                    <td><button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="restoreUser">Lấy lại</button> &nbsp;&nbsp; \
+                    <button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="destroyUser">Xóa vĩnh viễn</button></td>\
+                </tr>'
+                    )
+                })
+        }
+    });
+})
+// ------
+

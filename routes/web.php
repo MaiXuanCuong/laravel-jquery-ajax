@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('//', function () {
-    // return view('admin.user.edit');
-    // return view('admin.user.index');
-    // return view('admin.layout.master');
-});
+// Route::get('/', function () {
+//     // return view('admin.user.edit');
+//     // return view('admin.user.index');
+//     // return view('admin.layout.master');
+//     return view('admin.layout.dashboard');
+// });
+
+Route::get('/',[HomeController::class, 'index'])->name('dashboard');
+
 Route::prefix('user')->group(function () {
 Route::get('/',[UserController::class, 'index'])->name('user.index');
 Route::get('/get_user',[UserController::class, 'getUser'])->name('user.getUser');
@@ -29,4 +34,9 @@ Route::delete('/delete_user/{id}',[UserController::class, 'destroy'])->name('use
 Route::get('/getProvinces', [UserController::class, 'getProvinces'])->name('user.getProvinces');
 Route::get('/getDistricts', [UserController::class, 'getDistricts'])->name('user.getDistricts');
 Route::get('/getWards', [UserController::class, 'getWards'])->name('user.getWards');
+Route::get('/getTrashCanUser', [UserController::class, 'getTrashCan'])->name('user.getTrashCan');
+Route::post('/restore_user/{id}', [UserController::class, 'restore'])->name('user.restore');
+Route::delete('/destroy_user/{id}', [UserController::class, 'force_destroy'])->name('user.force_destroy');
+
+
 });

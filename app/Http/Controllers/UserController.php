@@ -133,19 +133,38 @@ class UserController extends Controller
             ]);
         }
     }
-    public function getTrashed()
+    public function getTrashCan()
     {
+        try {
         $users = $this->userService->getTrashed();
-        $params = [
+        return response()->json([
             'users' => $users,
-        ];
+            'status' => 200,
+        ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'messege' => 'not fund',
+                'status' => 404,
+            ]);
+        }
+       
+
+     
     }
 
     public function restore($id)
     {
         try {
             $this->userService->restore($id);
-        } catch (\Exception$e) {
+            return response()->json([
+                'message' => "Khôi phục thành công",
+                'status' => 200,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'messege' => 'Khôi phục không thành công',
+                'status' => 404,
+            ]);
         }
     }
 
@@ -153,7 +172,16 @@ class UserController extends Controller
     {
         try {
             $this->userService->force_destroy($id);
+            return response()->json([
+                'message' => "Xóa thành công",
+                'status' => 200,
+            ]);
+
         } catch (Exception $e) {
+            return response()->json([
+                'messege' => 'Xóa không thành công',
+                'status' => 404,
+            ]);
         }
     }
     public function info()

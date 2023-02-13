@@ -66,7 +66,7 @@
         <li class="nav-item">
           <form class="search-form" action="#">
             <i class="icon-search"></i>
-            <input type="search" class="form-control" placeholder="Search Here" title="Search here">
+            <input type="search" name="search" id="search" class="form-control" placeholder="Search Here" title="Search here">
           </form>
         </li>
         <li class="nav-item dropdown">
