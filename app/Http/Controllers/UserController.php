@@ -184,6 +184,21 @@ class UserController extends Controller
             ]);
         }
     }
+    public function search(Request $request){
+        try {
+            $users = $this->userService->search($request->search);
+            return response()->json([
+                'users' => $users,
+            ]);
+
+        } catch (Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            return response()->json([
+                'messege' => 'Xóa không thành công',
+                'status' => 404,
+            ]);
+        }
+    }
     public function info()
     {
         $item = Auth()->user();

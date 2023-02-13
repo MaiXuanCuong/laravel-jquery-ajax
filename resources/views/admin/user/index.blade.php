@@ -34,7 +34,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
+                                <tbody id="index-users">
 
                                 </tbody>
                             </table>

@@ -25,15 +25,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function all($request)
     {
         $users = $this->model->select('*');
-        if (!empty($request->search)) {
-            $search = $request->search;
-            $users = $users->where('name', 'like', '%' . $search . '%')
-                ->orWhere('id', 'like', '%' . $search . '%')
-                ->orWhere('group_id', 'like', '%' . $search . '%');
-
-        }
+        return $users->orderBy('id', 'DESC')->paginate(100);
+    }
+    public function search($request){
+        $users = $this->model->select('*');
        
-
+        $users->where('name', 'like', '%'.$request.'%')
+        ->orWhere('phone','like', '%'.$request.'%')
+        ->orWhere('gender','like', '%'.$request.'%')
+        ->orWhere('email','like', '%'.$request.'%');
         return $users->orderBy('id', 'DESC')->paginate(100);
     }
     public function delete($id)

@@ -37,6 +37,8 @@ Route::get('/getWards', [UserController::class, 'getWards'])->name('user.getWard
 Route::get('/getTrashCanUser', [UserController::class, 'getTrashCan'])->name('user.getTrashCan');
 Route::post('/restore_user/{id}', [UserController::class, 'restore'])->name('user.restore');
 Route::delete('/destroy_user/{id}', [UserController::class, 'force_destroy'])->name('user.force_destroy');
+Route::get('/search_user',[UserController::class, 'search'])->name('user.search');
+
 
 
 });
