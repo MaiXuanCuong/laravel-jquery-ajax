@@ -198,7 +198,7 @@ function updateUser(event){
         haserrorEdit = true;
     }
         if(haserrorEdit == true){
-            $('#editUserModal').keyup('shown.bs.modal', function() {
+            $('#editUserModal').change('shown.bs.modal', function() {
                 if($('#name').val() != ""){
                     $('#nameUserEditError').empty()
                 }
@@ -302,7 +302,7 @@ if(ward == ""){
     haserror = true;
 }
      if(haserror == true){
-         $('#addUserModal').keyup('shown.bs.modal', function() {
+         $('#addUserModal').change('shown.bs.modal', function() {
              if($('#name').val() != ""){
                  $('#nameUserAddError').empty()
              }
@@ -406,3 +406,25 @@ $(function() {
         })
     });
 });
+
+
+$(document).ready(function() {
+    if( $('#blah').hide()){
+      $('#blah').hide();
+    }
+    $('#imageUser').change(function() {
+          $('#blah').show();
+          const file = $(this)[0].files;
+          if (file[0]) {
+              jQuery('#blah').attr('src', URL.createObjectURL(file[0]));
+              jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
+          }
+      });
+    $('#imageUserEdit').change(function() {
+          $('#blah1').show();
+          const file = $(this)[0].files;
+          if (file[0]) {
+              jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
+          }
+      });
+  });

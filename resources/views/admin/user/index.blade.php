@@ -74,20 +74,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="{{ asset('asset/jqueryajax/ajax.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
-  <script>
-    $(document).ready(function() {
-      if( $('#blah').hide()){
-        $('#blah').hide();
-      }
-      $('#imageUser').change(function() {
-            $('#blah').show();
-            const file = $(this)[0].files;
-            if (file[0]) {
-                jQuery('#blah').attr('src', URL.createObjectURL(file[0]));
-                jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
-            }
-        });
-    });
-</script>
+
 @endsection
