@@ -19,12 +19,14 @@ Route::get('//', function () {
     // return view('admin.user.index');
     // return view('admin.layout.master');
 });
+Route::prefix('user')->group(function () {
 Route::get('/',[UserController::class, 'index'])->name('user.index');
 Route::get('/get_user',[UserController::class, 'getUser'])->name('user.getUser');
 Route::get('/edit_user/{id}',[UserController::class, 'edit'])->name('user.edit');
 Route::post('/store_user',[UserController::class, 'store'])->name('user.store');
-Route::put('/update_user/{id}',[UserController::class, 'update'])->name('user.update');
+Route::post('/update_user/{id}',[UserController::class, 'update'])->name('user.update');
 Route::delete('/delete_user/{id}',[UserController::class, 'destroy'])->name('user.destroy');
-Route::get('user/getProvinces', [UserController::class, 'getProvinces'])->name('user.getProvinces');
-Route::get('user/getDistricts', [UserController::class, 'getDistricts'])->name('user.getDistricts');
-Route::get('user/getWards', [UserController::class, 'getWards'])->name('user.getWards');
+Route::get('/getProvinces', [UserController::class, 'getProvinces'])->name('user.getProvinces');
+Route::get('/getDistricts', [UserController::class, 'getDistricts'])->name('user.getDistricts');
+Route::get('/getWards', [UserController::class, 'getWards'])->name('user.getWards');
+});

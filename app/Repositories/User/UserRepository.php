@@ -60,7 +60,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $user->birthday = $data->birthday;
             $user->email = $data->email;
             $user->gender = $data->gender;
-            $user->image = $data->image;
             $user->province_id = $data->province_id;
             $user->ward_id = $data->ward_id;
             $user->district_id = $data->district_id;
@@ -98,14 +97,19 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function update($data, $id)
     {
+
+        // Log::error('Message: ' . $data);
         try {
 
             $user = $this->model->find($id);
-            $user->name = $data->name;
+            $user->name = $data->username;
             $user->phone = $data->phone;
             $user->birthday = $data->birthday;
             $user->email = $data->email;
             $user->gender = $data->gender;
+            $user->province_id = $data->province_id;
+            $user->ward_id = $data->ward_id;
+            $user->district_id = $data->district_id;
             $fieldName = 'inputFileUpdate';
           
             if ($data->hasFile($fieldName)) {
@@ -121,6 +125,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
          
             return true;
         } catch (\Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
     }

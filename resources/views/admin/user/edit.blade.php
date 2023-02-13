@@ -3,7 +3,8 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Chỉnh sửa nhân viên</h4>
-        <form id="updateUser" class="form-sample" enctype="multipart/form-data">
+        <form id="updateUser" class="form-sample" method="POST" enctype="multipart/form-data">
+          {{-- @method('PUT') --}}
           @csrf
           <p class="card-description">
             Thông tin nhân viên
@@ -14,7 +15,7 @@
                 <label class="col-sm-3 col-form-label">Tên nhân viên</label>
                 <div class="col-sm-9">
                   <input type="text" id="idUserEdit" class="form-control" hidden/>
-                  <input type="text" id="nameUserEdit" name="name" class="form-control" placeholder="Nhập họ và tên"/>
+                  <input type="text" id="nameUserEdit" name="username" class="form-control" placeholder="Nhập họ và tên"/>
                   <div id="nameUserEditError" class="form-text text-danger error-msg"></div>
                 </div>
               </div>
@@ -63,6 +64,40 @@
                   <div id="emailUserEditError" class="form-text text-danger error-msg"></div>
                 </div>
               </div>
+
+              {{-- start-update tỉnh  --}}
+              <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tỉnh/Thành Phố</label>
+                        <select name="province_id" class="form-control province_id" id="province_edit_id">
+                          <option selected="" value="">Chọn Tỉnh/Thành Phố</option>
+                           
+                        </select>
+                        <div id="provincesUserEditError" class="form-text text-danger error-msg"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Quận/Huyện</label>
+                        <select name="district_id" class="form-control district_id" id="district_edit_id">
+  
+                        </select>
+                        <div id="districtsUserEditError" class="form-text text-danger error-msg"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Xã/Phường</label>
+                        <select name="ward_id" class="form-control ward_id" id="ward_edit_id">
+  
+                        </select>
+                        <div id="wardUserEditError" class="form-text text-danger error-msg"></div>
+                    </div>
+                </div>
+            </div>
+  
+              {{-- end-update tỉnh  --}}
             </div>
 
               <div class="col-md-6">

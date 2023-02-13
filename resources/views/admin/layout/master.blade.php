@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="{{ asset('asset/jqueryajax/style.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('asset/images/favicon.png') }}" />
-  <style>
+  {{-- <style>
     body{
          -webkit-touch-callout: none;
          -webkit-user-select: none;
@@ -79,7 +79,7 @@
   return true;
   }
   });
-  </script>
+  </script> --}}
 </head>
 <body>
   <div id="toast" class="container__toast">

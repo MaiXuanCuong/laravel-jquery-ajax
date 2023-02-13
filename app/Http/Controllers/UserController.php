@@ -102,13 +102,17 @@ class UserController extends Controller
 
     }
 
-    public function update(Request $request, $id)
+    public function update($id,Request $request)
     {
         try {
-            $this->userService->update($request, $id);
-            return response()->json([
-                "status" => 200,
-            ]);
+
+            if($this->userService->update($request, $id)){
+
+                return response()->json([
+                    "status" => 200,
+                ]);
+            }
+            
         } catch (Exception $e) {
             return response()->json([
                 "status" => 400,
