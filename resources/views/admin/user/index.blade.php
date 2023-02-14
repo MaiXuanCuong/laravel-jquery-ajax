@@ -23,7 +23,7 @@
                             Làm việc tại <code>Xuân Cường Shop</code>
                         </p>
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-hover text-align-center">
                                 <thead>
                                     <tr>
                                         <th>Ảnh Đại Diện</th>
@@ -84,7 +84,16 @@
       </div>
   </div>
 
+  <div class="modal fade" id="inforUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            @include('admin.user.infor')
+        </div>
+    </div>
+</div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="{{ asset('asset/jqueryajax/ajax.js') }}"></script>
+    <script src="{{ asset('asset/jqueryajax/ajaxUser.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection

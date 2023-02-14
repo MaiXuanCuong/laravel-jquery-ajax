@@ -30775,6 +30775,37 @@ div.tagsinput span.tag a {
 }
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
+ .alert-body-title {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: bold;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
 
-
+.alert-body-message {
+  padding-top: 5px;
+  color: #aaa;
+  font-size: 1.1rem;
+  text-align: justify;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+.text-align-center{
+  text-align: center;
+}
+.text-align-left{
+  text-align: left;
+}
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+  
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+  }
 

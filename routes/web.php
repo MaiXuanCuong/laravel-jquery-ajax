@@ -38,6 +38,8 @@ Route::get('/getTrashCanUser', [UserController::class, 'getTrashCan'])->name('us
 Route::post('/restore_user/{id}', [UserController::class, 'restore'])->name('user.restore');
 Route::delete('/destroy_user/{id}', [UserController::class, 'force_destroy'])->name('user.force_destroy');
 Route::get('/search_user',[UserController::class, 'search'])->name('user.search');
+Route::get('/inforUser/{id}',[UserController::class, 'show'])->name('user.info');
+
 
 
 

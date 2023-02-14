@@ -1,27 +1,3 @@
-
-<style>
-  .alert-body-title {
-  color: #000;
-  font-size: 1.5rem;
-  font-weight: bold;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-}
-
-.alert-body-message {
-  padding-top: 5px;
-  color: #aaa;
-  font-size: 1.1rem;
-  text-align: justify;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-}
-.text-align-center{
-  text-align: center;
-}
-</style>
 <div class="row">
     <div class="col-12">
       <div class="card">

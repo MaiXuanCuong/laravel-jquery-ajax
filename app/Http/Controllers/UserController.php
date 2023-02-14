@@ -80,8 +80,18 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = $this->userService->find($id);
-        return view('admin.users.detail', compact('user'));
+        try {
+            $user = $this->userService->find($id);
+            return response()->json([
+                'user' => $user,
+                'status' => 200,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 404,
+            ]);
+        }
+       
     }
 
     public function edit($id)
@@ -199,7 +209,7 @@ class UserController extends Controller
             ]);
         }
     }
-    public function info()
+    public function info(Request $request, $id)
     {
         $item = Auth()->user();
         return view('admin.Users.infor', compact('item'));

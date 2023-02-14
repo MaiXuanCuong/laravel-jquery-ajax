@@ -17,6 +17,7 @@ function getUser(){
                            <td class="text-danger">'+ user.gender +'</td>\
                            <td><label class="badge badge-danger" ><input onclick="myFunction('+ user.id +')" id="copyPhone'+ user.id +'" value="'+ user.phone +'" hidden/>'+ user.phone +'</label></td>\
                            <td><button style="text-align: center" class="badge badge-danger" onclick=editUser('+ user.id +') id="editUser">Sửa</button> &nbsp;&nbsp; \
+                           <button style="text-align: center" class="badge badge-danger" onclick=inforUser('+ user.id +') id="inforUser">Chi tiết</button>\
                            <button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="deleteUser">Xóa</button></td>\
                          </tr>'
                 )
@@ -26,14 +27,10 @@ function getUser(){
 }
 // ------
 function myFunction(id) {
-    // Get the text field
     var copyText = document.getElementById("copyPhone"+id);
-    // Select the text field
     copyText.select();
-    copyText.setSelectionRange(0, 99999); // For mobile devices
-    // Copy the text inside the text field
+    copyText.setSelectionRange(0, 99999); 
     navigator.clipboard.writeText(copyText.value);
-    // Alert the copied text
     alert("Sao chép thành công: " + copyText.value);
   }
 // ------
@@ -160,7 +157,6 @@ $(document).on('click','#addUser', function(e){
 })
 // ------
 function editUser(user){
-    $('#editUserModal').modal('show');
     $.ajax({
         url: '/user/getProvinces',
         type: 'GET',
@@ -220,7 +216,32 @@ function editUser(user){
                 $('#province_edit_id').val(res.user.province_id);
                 $('#district_edit_id').val(res.user.district_id);
                 $('#ward_edit_id').val(res.user.ward_id);
+                if($('#name').val() != ""){
+                    $('#nameUserEditError').empty()
+                }
+                if($('#phone').val() != ""){
+                    $('#phoneUserEditError').empty()
+                }
+                if($('#email').val() != ""){
+                    $('#emailUserEditError').empty()
+                }
+                if($('#gender').val() != ""){
+                    $('#genderUserEditError').empty()
+                }
+                if($('#birthday').val() != ""){
+                    $('#birthdayUserEditError').empty()
+                }
+                if($('#province_edit_id').val() != ""){
+                    $('#provincesUserEditError').empty()
+                }
+                if($('#district_edit_id').val() != ""){
+                    $('#districtsUserEditError').empty()
+                }
+                if($('#ward_edit_id').val() != ""){
+                    $('#wardUserEditError').empty()
+                }
             }
+    $('#editUserModal').modal('show');
         },
         error: function(err) {
             showError();
@@ -238,7 +259,6 @@ function updateUser(event){
     var province = $('#province_edit_id').val();
     var district = $('#district_edit_id').val();
     var ward = $('#ward_edit_id').val();
-    // var image = $('#imageUserEdit').val();
     var haserrorEdit = false;
     var id = $('#idUserEdit').val();
     if(name == ""){
@@ -509,7 +529,6 @@ $(document).ready(function() {
 // ------
   $(document).on('click','#trashCanUser', function(e){
     e.preventDefault();
-    $('#trashCanUserModal').modal('show');
     $.ajax({
         url: '/user/getTrashCanUser',
         type: 'GET',
@@ -529,6 +548,8 @@ $(document).ready(function() {
                 })
         }
     });
+    $('#trashCanUserModal').modal('show');
+
 })
 // ------
 $(document).on('keyup', function (e){
@@ -550,7 +571,8 @@ $(document).on('keyup', function (e){
                            <td class="text-danger">'+ user.name +'</td>\
                            <td class="text-danger">'+ user.gender +'</td>\
                            <td><label class="badge badge-danger" ><input onclick="myFunction('+ user.id +')" id="copyPhone'+ user.id +'" value="'+ user.phone +'" hidden/>'+ user.phone +'</label></td>\
-                           <td><button style="text-align: center" class="badge badge-danger" onclick=editUser('+ user.id +') id="editUser">Sửa</button> &nbsp;&nbsp; \
+                           <td><button style="text-align: center" class="badge badge-danger" onclick=editUser('+ user.id +') id="editUser">Sửa</button>\
+                           <button style="text-align: center" class="badge badge-danger" onclick=inforUser('+ user.id +') id="inforUser">Chi tiết</button>\
                            <button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="deleteUser">Xóa</button></td>\
                          </tr>'
                 )
@@ -558,3 +580,43 @@ $(document).on('keyup', function (e){
         }
     })
 })
+function inforUser(id){
+    
+    $.ajax({
+        url: "/user/inforUser/"+id,
+        method: 'GET',
+        success: function(users){
+            user = users.user
+            $("#inforImageUser").attr("src", user.image);
+
+            $('#inforNameUser').html('');
+            var node = document.createTextNode(user.name);
+            $('#inforNameUser')[0].appendChild(node);
+            // $('#inforRoleUser').html('');
+            // var node = document.createTextNode(user.name);
+            // $('#inforRoleUser')[0].appendChild(node);
+            $('#inforEmailUser').html('');
+            var node = document.createTextNode(user.email);
+            $('#inforEmailUser')[0].appendChild(node);
+
+            $('#inforPhoneUser').html('');
+            var node = document.createTextNode(user.phone);
+            $('#inforPhoneUser')[0].appendChild(node);
+
+            $('#inforGenderUser').html('');
+            var node = document.createTextNode(user.gender);
+            $('#inforGenderUser')[0].appendChild(node);
+
+            $('#inforBirthdayUser').html('');
+            var node = document.createTextNode(user.birthday);
+            $('#inforBirthdayUser')[0].appendChild(node);
+  
+        },
+        errors: function(){
+            showError();
+        }
+    }),
+   
+    $('#inforUserModal').modal('show');
+
+}
