@@ -69,7 +69,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
                 $extenshion = $data->file($fieldName)->getClientOriginalExtension();
                 $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
-                $path = 'storage/' . $data->file($fieldName)->storeAs('public/images', $fileName);
+                $path = 'storage/' . $data->file($fieldName)->storeAs('public/images/users', $fileName);
                 $path = str_replace('public/', '', $path);
                 $user->image = $path;
             }
@@ -102,7 +102,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         try {
 
             $user = $this->model->find($id);
-            $user->name = $data->username;
+            $user->name = $data->name;
             $user->phone = $data->phone;
             $user->birthday = $data->birthday;
             $user->email = $data->email;
@@ -117,7 +117,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
                 $extenshion = $data->file($fieldName)->getClientOriginalExtension();
                 $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
-                $path = 'storage/' . $data->file($fieldName)->storeAs('public/images', $fileName);
+                $path = 'storage/' . $data->file($fieldName)->storeAs('public/images/users', $fileName);
                 $path = str_replace('public/', '', $path);
                 $user->image = $path;
             }
@@ -154,38 +154,5 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $user->forceDelete();
         return $user;
     }
-    public function update_info($request,$id)
-    {
-        $item=User::find($id);
-        $item->name = $request->name;
-        $item->address = $request->address;
-        $item->phone = $request->phone;
-        $item->email = $request->email;
-        $item->gender = $request->gender;
-        $item->birthday = $request->birth_day;
-        $item->province_id = $request->province_id;
-        $item->district_id = $request->district_id;
-        $item->ward_id = $request->ward_id;
-
-        $file = $request->inputFile;
-        if ($request->hasFile('inputFileUpdate')) {
-            $images = 'public/images/user/'.$item->image;
-            $fileExtension = $file->getClientOriginalName();
-            //Lưu file vào thư mục storage/app/public/image với tên mới
-            $request->file('inputFileUpdate')->storeAs('public/images_admin', $fileExtension);
-            // Gán trường image của đối tượng task với tên mới
-            $item->image = $fileExtension;
-        }
-        try {
-            $item->save();
-            if(isset($fileExtension)){
-                Storage::delete($images);
-            }
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            $image = 'public/images_admin/'.$fileExtension;
-            Storage::delete($image);
-        }
-        return $item;
-    }
+   
 }

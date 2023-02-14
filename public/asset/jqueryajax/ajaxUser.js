@@ -5,7 +5,7 @@ $(document).ready(function() {
 function getUser(){
     $.ajax({
         type: 'GET',
-        url: '/user/get_user',
+        url: '/user/getUser',
         dataType: 'json',
         success: function(response){
             $('#index-users').html(" ");
@@ -36,6 +36,7 @@ function myFunction(id) {
 // ------
 $(document).on('click', '#deleteUser' ,function(e) {
     e.preventDefault();
+    $('#confirm').val("");
     var id = $(this).val();
     $('#confirm-text').html('');
     var node = document.createTextNode("Xóa User này không?");
@@ -47,6 +48,7 @@ $(document).on('click', '#deleteUser' ,function(e) {
 // ------
 $(document).on('click', '#restoreUser' ,function(e) {
     e.preventDefault();
+    $('#confirm').val("");
     $('#trashCanUserModal').modal('hide');
     var id = $(this).val();
     $('#confirm-text').html('');
@@ -59,6 +61,7 @@ $(document).on('click', '#restoreUser' ,function(e) {
 // ------
 $(document).on('click', '#destroyUser' ,function(e) {
     e.preventDefault();
+    $('#confirm').val("");
     $('#trashCanUserModal').modal('hide');
     var id = $(this).val();
     $('#confirm-text').html('');
@@ -79,7 +82,7 @@ $(document).on('click', '.confirmdeleteUser', function(e){
     });
     $.ajax({
         type: 'DELETE',
-        url : "/user/delete_user/"+id,
+        url : "/user/deleteUser/"+id,
         success: function(){
             showSuccess();
             $('#confirm').val("");
@@ -103,7 +106,7 @@ $(document).on('click', '.confirmrestoreUser', function(e){
     });
     $.ajax({
         type: 'POST',
-        url : "/user/restore_user/"+id,
+        url : "/user/restoreUser/"+id,
         success: function(){
             getUser();
             showSuccess();
@@ -126,7 +129,7 @@ $(document).on('click', '.confirmdestroyUser', function(e){
     });
     $.ajax({
         type: 'DELETE',
-        url : "/user/destroy_user/"+id,
+        url : "/user/destroyUser/"+id,
         success: function(){
             getUser();
             showSuccess();
@@ -172,7 +175,7 @@ function editUser(user){
    
     $.ajax({
         type: 'GET',
-        url: '/user/edit_user/'+user,
+        url: '/user/editUser/'+user,
         success: function(res){
             if(res.status == 200){
                 $('#idUserEdit').val(res.user.id);
@@ -331,7 +334,7 @@ function updateUser(event){
             });
     $.ajax({
         type: "POST",
-        url: "/user/update_user/"+id,
+        url: "/user/updateUser/"+id,
         data: formdata,
         contentType:false,
         processData:false,
@@ -438,7 +441,7 @@ if(ward == ""){
          });
          let formdata = new FormData($('#insertUser')[0]);
          $.ajax({
-             url:"/user/store_user",
+             url:"/user/storeUser",
              method: "post",
              data: formdata,
              contentType:false,
@@ -555,9 +558,8 @@ $(document).ready(function() {
 $(document).on('keyup', function (e){
     e.preventDefault();
     let search = $('#search').val();
-    // console.log(search);
     $.ajax({
-        url: "/user/search_user",
+        url: "/user/searchUser",
         method: 'GET',
         data: {
             search: search
@@ -592,9 +594,6 @@ function inforUser(id){
             $('#inforNameUser').html('');
             var node = document.createTextNode(user.name);
             $('#inforNameUser')[0].appendChild(node);
-            // $('#inforRoleUser').html('');
-            // var node = document.createTextNode(user.name);
-            // $('#inforRoleUser')[0].appendChild(node);
             $('#inforEmailUser').html('');
             var node = document.createTextNode(user.email);
             $('#inforEmailUser')[0].appendChild(node);

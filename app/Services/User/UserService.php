@@ -43,10 +43,7 @@ class UserService extends BaseService implements UserServiceInterface
     {
         return $this->repository->force_destroy($id);
     }
-    public function update_info($request,$id)
-    {
-        return $this->repository->update_info($request,$id);
-    }
+   
     public function search($request)
     {
         return $this->repository->search($request);

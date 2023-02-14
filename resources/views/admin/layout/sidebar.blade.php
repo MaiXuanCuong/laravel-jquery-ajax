@@ -41,7 +41,7 @@
         </a>
         <div class="collapse" id="charts">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Danh sách danh mục</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('category.index') }}">Danh sách danh mục</a></li>
           </ul>
         </div>
       </li>

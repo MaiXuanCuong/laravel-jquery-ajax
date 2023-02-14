@@ -3,8 +3,6 @@
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
-
-
                 <button type="button" class="btn btn-primary" id="addUser" data-bs-toggle="modal">
                     Thêm nhân viên
                 </button> &emsp;
@@ -13,7 +11,6 @@
               </button>
             </div>
         </div>
-
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
@@ -42,11 +39,8 @@
                     </div>
                 </div>
             </div>
-            
         </div>;
-
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -95,5 +89,4 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="{{ asset('asset/jqueryajax/ajaxUser.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection

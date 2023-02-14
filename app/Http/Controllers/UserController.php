@@ -209,19 +209,6 @@ class UserController extends Controller
             ]);
         }
     }
-    public function info(Request $request, $id)
-    {
-        $item = Auth()->user();
-        return view('admin.Users.infor', compact('item'));
-    }
-
-    public function update_info(Request $request, $id)
-    {
-        try {
-            $item = $this->userService->update_info($request, $id);
-        } catch (\Exception$e) {
-        }
-    }
     public function change_password(Request $request)
     {
         if ($request->renewpassword == $request->newpassword) {
