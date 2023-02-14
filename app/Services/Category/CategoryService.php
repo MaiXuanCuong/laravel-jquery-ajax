@@ -33,5 +33,9 @@ class CategoryService extends BaseService implements CategoryServiceInterface {
     public function force_destroy($id){
         return $this->repository->force_destroy($id);
     }
+    public function search($request)
+    {
+        return $this->repository->search($request);
+    }
 
 }

@@ -555,7 +555,7 @@ $(document).ready(function() {
 
 })
 // ------
-$(document).on('keyup', function (e){
+$(document).on('keyup','#search', function (e){
     e.preventDefault();
     let search = $('#search').val();
     $.ajax({

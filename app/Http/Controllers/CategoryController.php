@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Services\Category\CategoryServiceInterface;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -115,6 +116,21 @@ class CategoryController extends Controller
         try {
             $category = $this->categoryService->force_destroy($id);
         } catch (Exception $e) {
+        }
+    }
+    public function search(Request $request){
+        try {
+            $category = $this->categoryService->search($request->search);
+            return response()->json([
+                'category' => $category,
+            ]);
+
+        } catch (Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            return response()->json([
+                'messege' => 'Xóa không thành công',
+                'status' => 404,
+            ]);
         }
     }
 }

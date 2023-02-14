@@ -328,31 +328,28 @@ $(document).ready(function() {
 
 })
 // ------
-// $(document).on('keyup', function (e){
-//     e.preventDefault();
-//     let search = $('#search').val();
-//     // console.log(search);
-//     $.ajax({
-//         url: "/user/search_user",
-//         method: 'GET',
-//         data: {
-//             search: search
-//         },
-//         success: function(response){
-//             $('#index-users').html(" ");
-//             $.each(response.users.data, function(index, user){
-//                 $('#index-users').append(
-//                     '<tr>\
-//                            <td><img style="width:100px; height:100px" src="'+ user.image +'" alt=""></td>\
-//                            <td class="text-danger">'+ user.name +'</td>\
-//                            <td class="text-danger">'+ user.gender +'</td>\
-//                            <td><label class="badge badge-danger" ><input onclick="myFunction('+ user.id +')" id="copyPhone'+ user.id +'" value="'+ user.phone +'" hidden/>'+ user.phone +'</label></td>\
-//                            <td><button style="text-align: center" class="badge badge-danger" onclick=editUser('+ user.id +') id="editUser">Sửa</button>\
-//                            <button style="text-align: center" class="badge badge-danger" onclick=inforUser('+ user.id +') id="inforUser">Chi tiết</button>\
-//                            <button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="deleteUser">Xóa</button></td>\
-//                          </tr>'
-//                 )
-//             })
-//         }
-//     })
-// })
+$(document).on('keyup','#search', function (e){
+    e.preventDefault();
+    let search = $('#search').val();
+    $.ajax({
+        url: "/category/searchCategory",
+        method: 'GET',
+        data: {
+            search: search
+        },
+        success: function(response){
+            $('#index-categories').html(" ");
+            $.each(response.category.data, function(index, category){
+                $('#index-categories').append(
+                    '<tr>\
+                    <td><img style="width:100px; height:100px" src="'+ category.image +'" alt=""></td>\
+                    <td class="text-danger">'+ category.name +'</td>\
+                    <td><label class="badge badge-danger" >'+ category.description +'</label></td>\
+                    <td><button style="text-align: center" class="badge badge-danger" onclick=editCategory('+ category.id +') id="editCategory">Sửa</button> &nbsp;&nbsp; \
+                    <button style="text-align: center" class="badge badge-danger" value="'+ category.id +'" id="deleteCategory">Xóa</button></td>\
+                  </tr>'
+                )
+            })
+        }
+    })
+})

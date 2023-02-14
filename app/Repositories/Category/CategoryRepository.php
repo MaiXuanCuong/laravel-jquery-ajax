@@ -17,6 +17,12 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $categories = $this->model->select('*');
         return $categories->orderBy('id', 'DESC')->paginate(100);
     }
+    public function search($request){
+        $category = $this->model->select('*');
+        $category->where('name', 'like', '%'.$request.'%')
+        ->orWhere('description','like', '%'.$request.'%');
+        return $category->orderBy('id', 'DESC')->paginate(100);
+    }
 
     public function create($data)
     {
