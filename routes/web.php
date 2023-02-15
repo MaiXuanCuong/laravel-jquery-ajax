@@ -47,6 +47,7 @@ Route::prefix('user')->group(function () {
     Route::get('/editCategory/{id}',[CategoryController::class, 'edit'])->name('category.edit');
     Route::get('/searchCategory',[CategoryController::class, 'search'])->name('category.search');
     Route::get('/getTrashCanCategory', [CategoryController::class, 'getTrashCan'])->name('category.getTrashCan');
+    Route::get('/inforCategory/{id}',[CategoryController::class, 'show'])->name('category.info');
         Route::post('/storeCategory',[CategoryController::class, 'store'])->name('category.store');
         Route::post('/updateCategory/{id}',[CategoryController::class, 'update'])->name('category.update');
         Route::post('/restoreCategory/{id}', [CategoryController::class, 'restore'])->name('category.restore');

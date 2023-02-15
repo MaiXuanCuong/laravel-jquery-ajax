@@ -76,6 +76,15 @@
       </div>
   </div>
 </div>
+<div class="modal fade" id="inforCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            @include('admin.category.infor')
+        </div>
+    </div>
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="{{ asset('asset/jqueryajax/ajaxCategory.js') }}"></script>

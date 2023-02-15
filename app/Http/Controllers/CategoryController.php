@@ -133,4 +133,19 @@ class CategoryController extends Controller
             ]);
         }
     }
+    public function show($id)
+    {
+        try {
+            $category = $this->categoryService->find($id);
+            return response()->json([
+                'category' => $category,
+                'status' => 200,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 404,
+            ]);
+        }
+       
+    }
 }
