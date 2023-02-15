@@ -3,21 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\User;
 use App\Models\Ward;
 use App\Services\User\UserServiceInterface;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -32,7 +23,7 @@ class UserController extends Controller
     {
         $allProvinces = Province::all();
         return response()->json(
-           ['Provinces' => $allProvinces]);
+            ['Provinces' => $allProvinces]);
     }
     public function getDistricts(Request $request)
     {
@@ -53,124 +44,146 @@ class UserController extends Controller
     }
     public function getUser()
     {
-        $users = User::All();
-        return response()->json([
-            'users' => $users,
-        ]);
+        $users = $this->userService->all();
+        // $users = User::All();
+        // echo "<pre>";
+        // print_r($users);
+        // die();
+        if($users){
+            return response()->json([
+                'users' => $users,
+                'status' => 200,
+            ]);
+        } else{
+            return response()->json([
+                'status' => 404,
+                "messeges" => 'Có lỗi xãy ra',
+            ]);
+        }
     }
 
     public function store(Request $request)
     {
-        try {
-            $user = $this->userService->create($request);
-
+        $user = $this->userService->create($request);
+        if ($user) {
             return response()->json([
                 'status' => 200,
-                'messenger' => "thành công"
+                'messeges' => "Thêm thành công",
             ]);
 
-        } catch (Exception $e) {
+        } else {
             return response()->json([
                 'status' => 400,
-                'error' => "lỗi"
+                "messeges" => 'Thêm không thành công',
             ]);
 
         }
+
     }
 
     public function show($id)
     {
-        try {
-            $user = $this->userService->find($id);
+        $user = $this->userService->find($id);
+        if ($user) {
             return response()->json([
                 'user' => $user,
                 'status' => 200,
             ]);
-        } catch (\Exception $e) {
+
+        } else {
             return response()->json([
+                "messeges" => 'Không tìm thấy người dùng',
                 'status' => 404,
             ]);
         }
-       
+
     }
 
     public function edit($id)
     {
-        try {
-            $user = $this->userService->find($id);
+        $user = $this->userService->find($id);
+        if ($user) {
             return response()->json([
                 "user" => $user,
                 "status" => 200,
             ]);
-        } catch (\Exception $e) {
+
+        } else {
+
             return response()->json([
-                "messege" => 'user not found',
+                "messeges" => 'Không tìm thấy người dùng',
                 "status" => 404,
             ]);
         }
-       
 
     }
 
-    public function update($id,Request $request)
+    public function update($id, Request $request)
     {
-        try {
+        $user = $this->userService->update($request, $id);
+        if ($user) {
 
-            if($this->userService->update($request, $id)){
-
-                return response()->json([
-                    "status" => 200,
-                ]);
-            }
-            
-        } catch (Exception $e) {
             return response()->json([
+                'messeges' => 'Cập nhật thành công',
+                "status" => 200,
+            ]);
+        } else {
+
+            return response()->json([
+                'messeges' => 'Cập nhật không thành công',
                 "status" => 400,
             ]);
         }
+
     }
 
     public function destroy($id)
     {
-        try {
-            $this->userService->delete($id);
+        $user = $this->userService->delete($id);
+        if ($user) {
+
             return response()->json([
+                'messeges' => 'Xóa thành công',
                 "status" => 200,
             ]);
-        } catch (\Exception $e) {
+        } else {
+
             return response()->json([
+                'messeges' => 'Xóa không thành công',
                 "status" => 404,
             ]);
         }
     }
     public function getTrashCan()
     {
-        try {
         $users = $this->userService->getTrashed();
-        return response()->json([
-            'users' => $users,
-            'status' => 200,
-        ]);
-        } catch (\Exception $e) {
+        if ($users) {
+
             return response()->json([
-                'messege' => 'not fund',
+                'users' => $users,
+                'status' => 200,
+            ]);
+        } else {
+
+            return response()->json([
+                'messeges' => 'Có lỗi xãy ra',
                 'status' => 404,
             ]);
         }
-       
 
-     
     }
 
     public function restore($id)
     {
-        try {
-            $this->userService->restore($id);
+        $user = $this->userService->restore($id);
+        if ($user) {
             return response()->json([
-                'message' => "Khôi phục thành công",
+                'messeges' => "Khôi phục thành công",
                 'status' => 200,
             ]);
-        } catch (\Exception $e) {
+
+        } else {
+
             return response()->json([
                 'messege' => 'Khôi phục không thành công',
                 'status' => 404,
@@ -180,135 +193,39 @@ class UserController extends Controller
 
     public function force_destroy($id)
     {
-        try {
-            $this->userService->force_destroy($id);
+        $user = $this->userService->force_destroy($id);
+        if ($user) {
+
             return response()->json([
-                'message' => "Xóa thành công",
+                'messeges' => "Xóa thành công",
                 'status' => 200,
             ]);
 
-        } catch (Exception $e) {
+        } else {
+
             return response()->json([
-                'messege' => 'Xóa không thành công',
+                'messeges' => 'Xóa không thành công',
                 'status' => 404,
             ]);
         }
+
     }
-    public function search(Request $request){
-        try {
-            $users = $this->userService->search($request->search);
+    public function search(Request $request)
+    {
+        $users = $this->userService->search($request->search);
+        if ($users) {
             return response()->json([
                 'users' => $users,
+                'status' => 200,
             ]);
 
-        } catch (Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        } else {
             return response()->json([
-                'messege' => 'Xóa không thành công',
+                'messeges' => 'Tìm không thành công',
                 'status' => 404,
             ]);
         }
-    }
-    public function change_password(Request $request)
-    {
-        if ($request->renewpassword == $request->newpassword) {
-            if ((Hash::check($request->password, Auth::user()->password))) {
-                $item = User::find(Auth()->user()->id);
-                $item->password = bcrypt($request->newpassword);
-                $item->save();
-            } else {
 
-            }
-        } else {
+    }
 
-        }
-    }
-    public function password_by_email(Request $request)
-    {
-        if ($request->email == Auth()->user()->email) {
-            $password = Str::random(6);
-            $item = User::find(Auth()->user()->id);
-            $item->password = bcrypt($password);
-            $item->save();
-            $params = [
-                'name' => Auth()->user()->name,
-                'password' => $password,
-            ];
-            Mail::send('admin.emails.password', compact('params'), function ($email) {
-                $email->subject('TCC-Shop');
-                $email->to(Auth()->user()->email, Auth()->user()->name);
-            });
-            return redirect()->route('user.info');
-        } else {
-            return redirect()->route('user.info');
-        }
-    }
-    public function accountByEmail(Request $request)
-    {
-        $user = DB::table('users')->where('email', $request->email)->first();
-        if ($request->email == $user->email) {
-            try {
-                $password = Str::random(6);
-                $item = User::find($user->id);
-                $item->password = bcrypt($password);
-                $item->save();
-                $params = [
-                    'name' => $user->name,
-                    'password' => $password,
-                ];
-                Mail::send('admin.emails.password', compact('params'), function ($email) use ($user) {
-                    $email->subject('TCC-Shop');
-                    $email->to($user->email, $user->name);
-                });
-                Session::flash('success', config('define.update.succes'));
-                return redirect()->route('login');
-            } catch (\Exception$e) {
-                Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
-            }
-        } else {
-            Session::flash('error', config('define.update.error'));
-            return redirect()->route('login');
-        }
-    }
-    public function changePassByEmailCustomer(Request $request)
-    {
-        $customer = DB::table('customers')->where('email', $request->email)->first();
-        if (!$customer) {
-            return response()->json([
-                'message' => 'Mail không tồn tại',
-                'status' => false,
-            ], 401);
-        }
-        if ($request->email == $customer->email && $customer->phone != 0) {
-            try {
-                $password = Str::random(6);
-                $item = Customer::find($customer->id);
-                $item->password = bcrypt($password);
-                $item->save();
-                $params = [
-                    'name' => $customer->name,
-                    'password' => $password,
-                ];
-                Mail::send('admin.emails.password', compact('params'), function ($email) use ($customer) {
-                    $email->subject('TCC-Shop');
-                    $email->to($customer->email, $customer->name);
-                });
-                return response()->json([
-                    'message' => 'Gửi mật khẩu về mail thành công',
-                    'user' => $customer,
-                ], 201);
-            } catch (\Exception$e) {
-                Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
-                return response()->json([
-                    'message' => 'Mail không tồn tại',
-                    'status' => false,
-                ], 401);
-            }
-        } else {
-            return response()->json([
-                'message' => 'Mail không tồn tại',
-                'status' => false,
-            ], 401);
-        }
-    }
 }

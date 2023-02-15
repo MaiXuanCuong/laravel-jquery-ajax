@@ -14,9 +14,9 @@ class UserService extends BaseService implements UserServiceInterface
         $this->repository = $userRepository;
     }
 
-    public function all($request)
+    public function all()
     {
-        return $this->repository->all($request);
+        return $this->repository->all();
     }
    
     public function create($request)

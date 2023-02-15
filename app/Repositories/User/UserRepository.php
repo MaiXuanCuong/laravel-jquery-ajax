@@ -4,13 +4,9 @@ namespace App\Repositories\User;
 use App\Repositories\BaseRepository;
 use App\Models\User;
 use App\Traits\StorageImageTrait;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
@@ -22,7 +18,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return User::class;
     }
 
-    public function all($request)
+    public function all()
     {
         $users = $this->model->select('*');
         return $users->orderBy('id', 'DESC')->paginate(100);
@@ -38,15 +34,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
     public function delete($id)
     {
-        $user = $this->model->findOrFail($id);
         try {
+            $user = $this->model->findOrFail($id);
             $user->delete();
             return true;
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
-        return $user;
     }
 
     public function create($data)
@@ -87,18 +82,14 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             // Session::flash('success', 'Thêm nhân viên' . ' ' . $data->name . ' ' . 'thành công');
             return true;
         } catch (\Exception $e) {
-            // DB::rollBack();
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
-        return $user;
     }
 
 
     public function update($data, $id)
     {
-
-        // Log::error('Message: ' . $data);
         try {
 
             $user = $this->model->find($id);
@@ -130,29 +121,39 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
     }
     public function getTrashed()
-    {
+    {   try {
         $users = $this->model->onlyTrashed();
-        return $users->orderBy('id', 'DESC')->paginate(100);
+        return $users->orderBy('deleted_at', 'DESC')->paginate(100);
+      
+    } catch (\Exception $e) {
+        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        return false;
+    }
     }
 
     public function restore($id)
-    {
-        $user = $this->model->onlyTrashed()->findOrFail($id);
+    {   
         try {
+            $user = $this->model->onlyTrashed()->find($id);
             $user->restore();
             return true;
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
-        return $user;
     }
 
     public function force_destroy($id)
-    {
-        $user = $this->model->onlyTrashed()->findOrFail($id);
-        $user->forceDelete();
-        return $user;
+    {   
+        try {
+            $user = $this->model->onlyTrashed()->find($id);
+            $user->forceDelete();
+            return $user;
+           
+        } catch (\Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            return false;
+        }
     }
    
 }

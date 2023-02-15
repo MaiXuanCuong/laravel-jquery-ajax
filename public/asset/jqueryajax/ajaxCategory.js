@@ -8,28 +8,32 @@ function getCategory() {
         url: "/category/getCategory",
         dataType: "json",
         success: function (response) {
-            $("#index-categories").html(" ");
-            $.each(response.categories, function (index, category) {
-                $("#index-categories").append(
-                    '<tr>\
-                           <td><img style="width:100px; height:100px" src="' +
-                        category.image +
-                        '" alt=""></td>\
-                           <td class="text-danger">' +
-                        category.name +
-                        '</td>\
-                           <td><button style="text-align: center" class="badge badge-danger" onclick=editCategory(' +
-                        category.id +
-                        ') id="editCategory">Sửa</button>\
-                           <button style="text-align: center" class="badge badge-danger" onclick=inforCategory(' +
-                        category.id +
-                        ') id="inforCategory">Chi tiết</button>\
-                           <button style="text-align: center" class="badge badge-danger" value="' +
-                        category.id +
-                        '" id="deleteCategory">Xóa</button></td>\
-                         </tr>'
-                );
-            });
+            if (response.status == 200) {
+                $("#index-categories").html(" ");
+                $.each(response.categories.data, function (index, category) {
+                    $("#index-categories").append(
+                        '<tr>\
+                               <td><img style="width:100px; height:100px" src="' +
+                            category.image +
+                            '" alt=""></td>\
+                               <td class="text-danger">' +
+                            category.name +
+                            '</td>\
+                               <td><button style="text-align: center" class="badge badge-danger" onclick=editCategory(' +
+                            category.id +
+                            ') id="editCategory">Sửa</button>\
+                               <button style="text-align: center" class="badge badge-danger" onclick=inforCategory(' +
+                            category.id +
+                            ') id="inforCategory">Chi tiết</button>\
+                               <button style="text-align: center" class="badge badge-danger" value="' +
+                            category.id +
+                            '" id="deleteCategory">Xóa</button></td>\
+                             </tr>'
+                    );
+                });
+            } else {
+                showError();
+            }
         },
     });
 }
@@ -84,12 +88,16 @@ $(document).on("click", ".confirmdeleteCategory", function (e) {
     $.ajax({
         type: "DELETE",
         url: "/category/deleteCategory/" + id,
-        success: function () {
-            showSuccess();
-            $("#confirm").val("");
-            $("#confirm-true").removeClass("confirmdeleteCategory");
-            getCategory();
-            $("#confirmCategoryModal").modal("hide");
+        success: function (res) {
+            if (res.status == 200) {
+                showSuccess();
+                $("#confirm").val("");
+                $("#confirm-true").removeClass("confirmdeleteCategory");
+                getCategory();
+                $("#confirmCategoryModal").modal("hide");
+            } else {
+                showError();
+            }
         },
         error: function (e) {
             showError();
@@ -108,11 +116,15 @@ $(document).on("click", ".confirmrestoreCategory", function (e) {
     $.ajax({
         type: "POST",
         url: "/category/restoreCategory/" + id,
-        success: function () {
-            getCategory();
-            showSuccess();
-            $("#confirm").val("");
-            $("#confirmCategoryModal").modal("hide");
+        success: function (res) {
+            if (res.status == 200) {
+                getCategory();
+                showSuccess();
+                $("#confirm").val("");
+                $("#confirmCategoryModal").modal("hide");
+            } else {
+                showError();
+            }
         },
         error: function (e) {
             showError();
@@ -131,11 +143,15 @@ $(document).on("click", ".confirmdestroyCategory", function (e) {
     $.ajax({
         type: "DELETE",
         url: "/category/destroyCategory/" + id,
-        success: function () {
-            getCategory();
-            showSuccess();
-            $("#confirm").val("");
-            $("#confirmCategoryModal").modal("hide");
+        success: function (res) {
+            if (res.status == 200) {
+                getCategory();
+                showSuccess();
+                $("#confirm").val("");
+                $("#confirmCategoryModal").modal("hide");
+            } else {
+                showError();
+            }
         },
         error: function (e) {
             showError();
@@ -213,10 +229,14 @@ function updateCategory(event) {
             processData: false,
 
             success: function (res) {
-                $("#editCategoryModal").modal("hide");
-                $("#editCategoryModal").find("input").val("");
-                getCategory();
-                showSuccess();
+                if (res.status === 200) {
+                    $("#editCategoryModal").modal("hide");
+                    $("#editCategoryModal").find("input").val("");
+                    getCategory();
+                    showSuccess();
+                } else {
+                    showError();
+                }
             },
             error: function (err) {
                 showError();
@@ -272,14 +292,18 @@ $("#insertCategory").on("submit", function (e) {
             dataType: "json",
             contentType: false,
             processData: false,
-            success: function (data) {
-                CKEDITOR.instances.ckeditor.setData("");
-                $("#addCategoryModal").modal("hide");
-                $("#addCategoryModal").find("input").val("");
-                getCategory();
-                $("#blah").hide();
-                jQuery("#blah1").attr("src", "");
-                showSuccess();
+            success: function (res) {
+                if (res.status == 200) {
+                    CKEDITOR.instances.ckeditor.setData("");
+                    $("#addCategoryModal").modal("hide");
+                    $("#addCategoryModal").find("input").val("");
+                    getCategory();
+                    $("#blah").hide();
+                    jQuery("#blah1").attr("src", "");
+                    showSuccess();
+                } else {
+                    showError();
+                }
             },
             error: function (err) {
                 showError();
@@ -316,28 +340,32 @@ $(document).on("click", "#trashCanCategory", function (e) {
         url: "/category/getTrashCanCategory",
         type: "GET",
         success: function (response) {
-            $("#tbodyTrashCanCategory").html(" ");
-            $.each(response.categories.data, function (index, category) {
-                $("#tbodyTrashCanCategory").append(
-                    '<tr>\
+            if (response.status === 200) {
+                $("#tbodyTrashCanCategory").html(" ");
+                $.each(response.categories.data, function (index, category) {
+                    $("#tbodyTrashCanCategory").append(
+                        '<tr>\
                     <td><img style="width:100px; height:100px" src="' +
-                        category.image +
-                        '" alt=""></td>\
+                            category.image +
+                            '" alt=""></td>\
                     <td class="text-danger">' +
-                        category.name +
-                        '</td>\
+                            category.name +
+                            '</td>\
                     <td><button style="text-align: center" class="badge badge-danger" value="' +
-                        category.id +
-                        '" id="restoreCategory">Lấy lại</button> &nbsp;&nbsp; \
+                            category.id +
+                            '" id="restoreCategory">Lấy lại</button> &nbsp;&nbsp; \
                     <button style="text-align: center" class="badge badge-danger" value="' +
-                        category.id +
-                        '" id="destroyCategory">Xóa vĩnh viễn</button></td>\
+                            category.id +
+                            '" id="destroyCategory">Xóa vĩnh viễn</button></td>\
                 </tr>'
-                );
-            });
+                    );
+                });
+                $("#trashCanCategoryModal").modal("show");
+            } else {
+                showError();
+            }
         },
     });
-    $("#trashCanCategoryModal").modal("show");
 });
 // ------
 $(document).on("keyup", "#search", function (e) {
@@ -350,28 +378,32 @@ $(document).on("keyup", "#search", function (e) {
             search: search,
         },
         success: function (response) {
-            $("#index-categories").html(" ");
-            $.each(response.category.data, function (index, category) {
-                $("#index-categories").append(
-                    '<tr>\
+            if (response.status == 200) {
+                $("#index-categories").html(" ");
+                $.each(response.category.data, function (index, category) {
+                    $("#index-categories").append(
+                        '<tr>\
                     <td><img style="width:100px; height:100px" src="' +
-                        category.image +
-                        '" alt=""></td>\
+                            category.image +
+                            '" alt=""></td>\
                     <td class="text-danger">' +
-                        category.name +
-                        '</td>\
+                            category.name +
+                            '</td>\
                     <td><button style="text-align: center" class="badge badge-danger" onclick=editCategory(' +
-                        category.id +
-                        ') id="editCategory">Sửa</button>\
+                            category.id +
+                            ') id="editCategory">Sửa</button>\
                     <button style="text-align: center" class="badge badge-danger" onclick=inforCategory(' +
-                        category.id +
-                        ') id="inforCategory">Chi tiết</button>\
+                            category.id +
+                            ') id="inforCategory">Chi tiết</button>\
                     <button style="text-align: center" class="badge badge-danger" value="' +
-                        category.id +
-                        '" id="deleteCategory">Xóa</button></td>\
+                            category.id +
+                            '" id="deleteCategory">Xóa</button></td>\
                   </tr>'
-                );
-            });
+                    );
+                });
+            } else {
+                showError();
+            }
         },
     });
 });
@@ -380,13 +412,17 @@ function inforCategory(id) {
         url: "/category/inforCategory/" + id,
         method: "GET",
         success: function (categorys) {
-            let category = categorys.category;
-            $("#inforImageCategory").attr("src", category.image);
-            $("#inforNameCategory").html("");
-            var node = document.createTextNode(category.name);
-            $("#inforNameCategory")[0].appendChild(node);
-            $("#inforDescriptionCategory").html("");
-            $("#inforDescriptionCategory").html(category.description);
+            if (categorys.status == 200) {
+                let category = categorys.category;
+                $("#inforImageCategory").attr("src", category.image);
+                $("#inforNameCategory").html("");
+                var node = document.createTextNode(category.name);
+                $("#inforNameCategory")[0].appendChild(node);
+                $("#inforDescriptionCategory").html("");
+                $("#inforDescriptionCategory").html(category.description);
+            } else {
+                showError();
+            }
         },
         errors: function () {
             showError();

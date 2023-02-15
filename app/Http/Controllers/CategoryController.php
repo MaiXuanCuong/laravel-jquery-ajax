@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Services\Category\CategoryServiceInterface;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -24,48 +22,53 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        
-        try {
-            $this->categoryService->create($request);
 
+        $category = $this->categoryService->create($request);
+        if ($category) {
             return response()->json([
                 'status' => 200,
-                'messenger' => "thành công"
+                'messeges' => "Thêm thành công",
             ]);
-        } catch (\Exception $e) {
+
+        } else {
             return response()->json([
                 'status' => 404,
-                'messenger' => "không thành công"
+                'messeges' => "Thêm không thành công",
             ]);
+
         }
-        
+
     }
 
     public function edit($id)
     {
-        try {
-            $category = $this->categoryService->find($id);
+        $category = $this->categoryService->find($id);
+        if ($category) {
             return response()->json([
                 "category" => $category,
                 "status" => 200,
             ]);
-        } catch (\Exception $e) {
+
+        } else {
+
             return response()->json([
-                "messege" => "category not found",
+                "messeges" => "Không tìm thấy",
                 "status" => 404,
             ]);
         }
-      
+
     }
 
     public function update(Request $request, $id)
     {
-        try {
-            $this->categoryService->update($id, $request);
+        $category = $this->categoryService->update($id, $request);
+        if ($category) {
             return response()->json([
                 "status" => 200,
             ]);
-        } catch (\Exception$e) {
+
+        } else {
+
             return response()->json([
                 "status" => 404,
             ]);
@@ -73,79 +76,113 @@ class CategoryController extends Controller
     }
     public function getCategory()
     {
-        $categories = Category::All();
-        return response()->json([
-            'categories' => $categories,
-        ]);
+        $categories = $this->categoryService->all();
+        if ($categories) {
+            return response()->json([
+                'categories' => $categories,
+                'status' => 200,
+            ]);
+        } else {
+            return response()->json([
+                'messeges' => 'Có lỗi xãy ra',
+                'status' => 404,
+            ]);
+        }
     }
     public function destroy($id)
     {
-        try {
-            $category = $this->categoryService->delete($id);
-        } catch (\Exception$e) {
+        $category = $this->categoryService->delete($id);
+        if ($category) {
+            return response()->json([
+                'messeges' => 'Xóa thành công',
+                'status' => 200,
+            ]);
+        } else {
+            return response()->json([
+                'messeges' => 'Có lỗi xãy ra',
+                'status' => 404,
+            ]);
         }
     }
 
     public function getTrashCan()
     {
-        try {
-          
-            $categories = $this->categoryService->getTrashed();
-            return response()->json([
-                'categories' => $categories,
-                'status' => 200,
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'messege' => 'not fund',
-                'status' => 404,
-            ]);
-        }
+
+        $categories = $this->categoryService->getTrashed();
+        return response()->json([
+            'categories' => $categories,
+            'status' => 200,
+        ]);
+        return response()->json([
+            'messeges' => 'Có lỗi xãy ra',
+            'status' => 404,
+        ]);
     }
 
     public function restore($id)
     {
-        try {
-            $this->categoryService->restore($id);
-        } catch (\Exception$e) {
+        $category = $this->categoryService->restore($id);
+        if ($category) {
+            return response()->json([
+                'messeges' => 'Khôi phục thành công',
+                'status' => 200,
+            ]);
+        } else {
+            return response()->json([
+                'messeges' => 'Khôi phục không thành công',
+                'status' => 404,
+            ]);
         }
     }
 
     public function force_destroy($id)
     {
-        try {
-            $category = $this->categoryService->force_destroy($id);
-        } catch (Exception $e) {
-        }
-    }
-    public function search(Request $request){
-        try {
-            $category = $this->categoryService->search($request->search);
+        $category = $this->categoryService->force_destroy($id);
+        if ($category) {
             return response()->json([
-                'category' => $category,
+                'messeges' => 'Xóa thành công',
+                'status' => 200,
             ]);
-
-        } catch (Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        } else {
             return response()->json([
-                'messege' => 'Xóa không thành công',
+                'messeges' => 'Xóa không thành công',
                 'status' => 404,
             ]);
+
         }
     }
-    public function show($id)
+    public function search(Request $request)
     {
-        try {
-            $category = $this->categoryService->find($id);
+        $category = $this->categoryService->search($request->search);
+        if ($category) {
+
             return response()->json([
                 'category' => $category,
                 'status' => 200,
             ]);
-        } catch (\Exception $e) {
+        } else {
+
             return response()->json([
+                'messeges' => 'Không tìm thấy',
                 'status' => 404,
             ]);
         }
-       
+
+    }
+    public function show($id)
+    {
+        $category = $this->categoryService->find($id);
+        if ($category) {
+            return response()->json([
+                'category' => $category,
+                'status' => 200,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'messeges' => 'Không tìm thấy',
+            ]);
+        }
+
     }
 }

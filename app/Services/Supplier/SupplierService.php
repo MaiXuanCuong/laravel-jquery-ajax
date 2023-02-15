@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Services\Category;
+namespace App\Services\Supplier;
 
-use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Supplier\SupplierRepositoryInterface;
 use App\Services\BaseService;
 
-class CategoryService extends BaseService implements CategoryServiceInterface {
+class SupplierService extends BaseService implements SupplierServiceInterface {
 
     public $repository;
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(SupplierRepositoryInterface $SupplierRepository)
     {
-        $this->repository = $categoryRepository;
+        $this->repository = $SupplierRepository;
     }
     public function all()
     {
@@ -32,10 +32,6 @@ class CategoryService extends BaseService implements CategoryServiceInterface {
     }
     public function force_destroy($id){
         return $this->repository->force_destroy($id);
-    }
-    public function search($request)
-    {
-        return $this->repository->search($request);
     }
 
 }

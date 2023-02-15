@@ -2,26 +2,9 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Route::get('/', function () {
-//     // return view('admin.user.edit');
-//     // return view('admin.user.index');
-//     // return view('admin.layout.master');
-//     return view('admin.layout.dashboard');
-// });
 
 Route::get('/',[HomeController::class, 'index'])->name('dashboard');
 
@@ -54,3 +37,18 @@ Route::prefix('user')->group(function () {
             Route::delete('/deleteCategory/{id}',[CategoryController::class, 'destroy'])->name('category.destroy');
             Route::delete('/destroyCategory/{id}', [CategoryController::class, 'force_destroy'])->name('category.force_destroy');
  });
+ Route::prefix('supplier')->group(function () {
+    Route::get('/',[SupplierController::class, 'index'])->name('supplier.index');
+    Route::get('/getSupplier',[SupplierController::class, 'getSupplier'])->name('supplier.getSupplier');
+    Route::get('/editSupplier/{id}',[SupplierController::class, 'edit'])->name('supplier.edit');
+    Route::get('/searchSupplier',[SupplierController::class, 'search'])->name('supplier.search');
+    Route::get('/getProvinces', [SupplierController::class, 'getProvinces'])->name('supplier.getProvinces');
+    Route::get('/getDistricts', [SupplierController::class, 'getDistricts'])->name('supplier.getDistricts');
+    Route::get('/getWards', [SupplierController::class, 'getWards'])->name('supplier.getWards');
+    Route::get('/getTrashCanSupplier', [SupplierController::class, 'getTrashCan'])->name('supplier.getTrashCan');
+        Route::post('/storeSupplier',[SupplierController::class, 'store'])->name('supplier.store');
+        Route::post('/updateSupplier/{id}',[SupplierController::class, 'update'])->name('supplier.update');
+        Route::post('/restoreSupplier/{id}', [SupplierController::class, 'restore'])->name('supplier.restore');
+            Route::delete('/deleteSupplier/{id}',[SupplierController::class, 'destroy'])->name('supplier.destroy');
+            Route::delete('/destroySupplier/{id}', [SupplierController::class, 'force_destroy'])->name('supplier.force_destroy');
+});

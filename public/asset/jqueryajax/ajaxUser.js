@@ -1,621 +1,717 @@
-$(document).ready(function() {
+$(document).ready(function () {
     getUser();
 });
 // ------
-function getUser(){
+function getUser() {
     $.ajax({
-        type: 'GET',
-        url: '/user/getUser',
-        dataType: 'json',
-        success: function(response){
-            $('#index-users').html(" ");
-            $.each(response.users, function(index, user){
-                $('#index-users').append(
+        type: "GET",
+        url: "/user/getUser",
+        dataType: "json",
+        success: function (response) {
+            $("#index-users").html(" ");
+            $.each(response.users.data, function (index, user) {
+                $("#index-users").append(
                     '<tr>\
-                           <td><img style="width:100px; height:100px" src="'+ user.image +'" alt=""></td>\
-                           <td class="text-danger">'+ user.name +'</td>\
-                           <td class="text-danger">'+ user.gender +'</td>\
-                           <td><label class="badge badge-danger" ><input onclick="myFunction('+ user.id +')" id="copyPhone'+ user.id +'" value="'+ user.phone +'" hidden/>'+ user.phone +'</label></td>\
-                           <td><button style="text-align: center" class="badge badge-danger" onclick=editUser('+ user.id +') id="editUser">Sửa</button> &nbsp;&nbsp; \
-                           <button style="text-align: center" class="badge badge-danger" onclick=inforUser('+ user.id +') id="inforUser">Chi tiết</button>\
-                           <button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="deleteUser">Xóa</button></td>\
+                           <td><img style="width:100px; height:100px" src="' +
+                        user.image +
+                        '" alt=""></td>\
+                           <td class="text-danger">' +
+                        user.name +
+                        '</td>\
+                           <td class="text-danger">' +
+                        user.gender +
+                        '</td>\
+                           <td><label class="badge badge-danger" ><input onclick="myFunction(' +
+                        user.id +
+                        ')" id="copyPhone' +
+                        user.id +
+                        '" value="' +
+                        user.phone +
+                        '" hidden/>' +
+                        user.phone +
+                        '</label></td>\
+                           <td><button style="text-align: center" class="badge badge-danger" onclick=editUser(' +
+                        user.id +
+                        ') id="editUser">Sửa</button> &nbsp;&nbsp; \
+                           <button style="text-align: center" class="badge badge-danger" onclick=inforUser(' +
+                        user.id +
+                        ') id="inforUser">Chi tiết</button>\
+                           <button style="text-align: center" class="badge badge-danger" value="' +
+                        user.id +
+                        '" id="deleteUser">Xóa</button></td>\
                          </tr>'
-                )
-            })
-        }
-    })
+                );
+            });
+        },
+    });
 }
 // ------
 function myFunction(id) {
-    var copyText = document.getElementById("copyPhone"+id);
+    var copyText = document.getElementById("copyPhone" + id);
     copyText.select();
-    copyText.setSelectionRange(0, 99999); 
+    copyText.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(copyText.value);
     alert("Sao chép thành công: " + copyText.value);
-  }
+}
 // ------
-$(document).on('click', '#deleteUser' ,function(e) {
+$(document).on("click", "#deleteUser", function (e) {
     e.preventDefault();
-    $('#confirm').val("");
+    $("#confirm").val("");
     var id = $(this).val();
-    $('#confirm-text').html('');
+    $("#confirm-text").html("");
     var node = document.createTextNode("Xóa User này không?");
-    $('#confirm-text')[0].appendChild(node);
-    $('#confirm').val(id);
-    $('#confirm-true').addClass("confirmdeleteUser");
-    $('#confirmUserModal').modal('show');
-})
+    $("#confirm-text")[0].appendChild(node);
+    $("#confirm").val(id);
+    $("#confirm-true").addClass("confirmdeleteUser");
+    $("#confirmUserModal").modal("show");
+});
 // ------
-$(document).on('click', '#restoreUser' ,function(e) {
+$(document).on("click", "#restoreUser", function (e) {
     e.preventDefault();
-    $('#confirm').val("");
-    $('#trashCanUserModal').modal('hide');
+    $("#confirm").val("");
+    $("#trashCanUserModal").modal("hide");
     var id = $(this).val();
-    $('#confirm-text').html('');
+    $("#confirm-text").html("");
     var node = document.createTextNode("khôi phục User này không?");
-    $('#confirm-text')[0].appendChild(node);
-    $('#confirm').val(id);
-    $('#confirm-true').addClass("confirmrestoreUser");
-    $('#confirmUserModal').modal('show');
-})
+    $("#confirm-text")[0].appendChild(node);
+    $("#confirm").val(id);
+    $("#confirm-true").addClass("confirmrestoreUser");
+    $("#confirmUserModal").modal("show");
+});
 // ------
-$(document).on('click', '#destroyUser' ,function(e) {
+$(document).on("click", "#destroyUser", function (e) {
     e.preventDefault();
-    $('#confirm').val("");
-    $('#trashCanUserModal').modal('hide');
+    $("#confirm").val("");
+    $("#trashCanUserModal").modal("hide");
     var id = $(this).val();
-    $('#confirm-text').html('');
+    $("#confirm-text").html("");
     var node = document.createTextNode("Xóa vĩnh viễn User này không?");
-    $('#confirm-text')[0].appendChild(node);
-    $('#confirm').val(id);
-    $('#confirm-true').addClass("confirmdestroyUser");
-    $('#confirmUserModal').modal('show');
-})
+    $("#confirm-text")[0].appendChild(node);
+    $("#confirm").val(id);
+    $("#confirm-true").addClass("confirmdestroyUser");
+    $("#confirmUserModal").modal("show");
+});
 // -------
-$(document).on('click', '.confirmdeleteUser', function(e){
+$(document).on("click", ".confirmdeleteUser", function (e) {
     e.preventDefault();
-    var id = $('#confirm').val();
+    var id = $("#confirm").val();
     $.ajaxSetup({
         headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
     $.ajax({
-        type: 'DELETE',
-        url : "/user/deleteUser/"+id,
-        success: function(){
-            showSuccess();
-            $('#confirm').val("");
-            $('#confirm-true').removeClass("confirmdeleteUser");
-            getUser();
-            $('#confirmUserModal').modal('hide');
+        type: "DELETE",
+        url: "/user/deleteUser/" + id,
+        success: function (res) {
+            if (res.status == 200) {
+                showSuccess();
+                $("#confirm").val("");
+                $("#confirm-true").removeClass("confirmdeleteUser");
+                getUser();
+                $("#confirmUserModal").modal("hide");
+            } else {
+                showError();
+            }
         },
-        error: function(e) {
+        error: function (e) {
             showError();
-        }
-    })
-})
+        },
+    });
+});
 // --------
-$(document).on('click', '.confirmrestoreUser', function(e){
+$(document).on("click", ".confirmrestoreUser", function (e) {
     e.preventDefault();
-    var id = $('#confirm').val();
+    var id = $("#confirm").val();
     $.ajaxSetup({
         headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
     $.ajax({
-        type: 'POST',
-        url : "/user/restoreUser/"+id,
-        success: function(){
-            getUser();
-            showSuccess();
-            $('#confirm').val("");
-            $('#confirmUserModal').modal('hide');
+        type: "POST",
+        url: "/user/restoreUser/" + id,
+        success: function (res) {
+            if (res.status == 200) {
+                getUser();
+                showSuccess();
+                $("#confirm").val("");
+                $("#confirmUserModal").modal("hide");
+            } else {
+                showError();
+            }
         },
-        error: function(e) {
+        error: function (e) {
             showError();
-        }
-    })
-})
+        },
+    });
+});
 // ------
-$(document).on('click', '.confirmdestroyUser', function(e){
+$(document).on("click", ".confirmdestroyUser", function (e) {
     e.preventDefault();
-    var id = $('#confirm').val();
+    var id = $("#confirm").val();
     $.ajaxSetup({
         headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type: 'DELETE',
-        url : "/user/destroyUser/"+id,
-        success: function(){
-            getUser();
-            showSuccess();
-            $('#confirm').val("");
-            $('#confirmUserModal').modal('hide');
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        error: function(e) {
+    });
+    $.ajax({
+        type: "DELETE",
+        url: "/user/destroyUser/" + id,
+        success: function (res) {
+            if (res.status == 200) {
+                getUser();
+                showSuccess();
+                $("#confirm").val("");
+                $("#confirmUserModal").modal("hide");
+            } else {
+                showError();
+            }
+        },
+        error: function (e) {
             showError();
-        }
-    })
-})
+        },
+    });
+});
 // ------
-$(document).on('click','#addUser', function(e){
+$(document).on("click", "#addUser", function (e) {
     e.preventDefault();
-    $('#addUserModal').modal('show');
+    $("#addUserModal").modal("show");
     $.ajax({
-        url: '/user/getProvinces',
-        type: 'GET',
-        dataType: 'json',
-        success: function(response){
-            $.each(response.Provinces, function(index, Provinces){
-                $('#province_id').append(
-                    '<option value="'+Provinces.id+'">'+Provinces.name+'</option>'
-                )
-            })
-        }
+        url: "/user/getProvinces",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            $.each(response.Provinces, function (index, Provinces) {
+                $("#province_id").append(
+                    '<option value="' +
+                        Provinces.id +
+                        '">' +
+                        Provinces.name +
+                        "</option>"
+                );
+            });
+        },
     });
-})
+});
 // ------
-function editUser(user){
+function editUser(user) {
     $.ajax({
-        url: '/user/getProvinces',
-        type: 'GET',
-        dataType: 'json',
-        success: function(response){
-            $.each(response.Provinces, function(index, Provinces){
-                $('#province_edit_id').append(
-                    '<option value="'+Provinces.id+'">'+Provinces.name+'</option>'
-                )
-            })
-        }
+        url: "/user/getProvinces",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            $.each(response.Provinces, function (index, Provinces) {
+                $("#province_edit_id").append(
+                    '<option value="' +
+                        Provinces.id +
+                        '">' +
+                        Provinces.name +
+                        "</option>"
+                );
+            });
+        },
     });
-   
+
     $.ajax({
-        type: 'GET',
-        url: '/user/editUser/'+user,
-        success: function(res){
-            if(res.status == 200){
-                $('#idUserEdit').val(res.user.id);
-                $('#nameUserEdit').val(res.user.name);
-                $('#phoneUserEdit').val(res.user.phone);
-                $('#emailUserEdit').val(res.user.email);
-                $('#genderUserEdit').val(res.user.gender);
-                $('#birthdayUserEdit').val(res.user.birthday);
-                $('#blah1').attr('src', res.user.image);
+        type: "GET",
+        url: "/user/editUser/" + user,
+        success: function (res) {
+            if (res.status == 200) {
+                $("#idUserEdit").val(res.user.id);
+                $("#nameUserEdit").val(res.user.name);
+                $("#phoneUserEdit").val(res.user.phone);
+                $("#emailUserEdit").val(res.user.email);
+                $("#genderUserEdit").val(res.user.gender);
+                $("#birthdayUserEdit").val(res.user.birthday);
+                $("#blah1").attr("src", res.user.image);
                 $.ajax({
                     url: "/user/getDistricts",
                     type: "GET",
                     data: {
-                        province_id: res.user.province_id
+                        province_id: res.user.province_id,
                     },
-                    success: function(data) {
-                      
+                    success: function (data) {
                         var html = '<option value="">Chọn Quận/Huyện</option>';
-                        $.each(data, function(key, v) {
-                            $('#district_edit_id').append(
-                                '<option value="'+v.id+'">'+v.name+'</option>'
-                            )
+                        $.each(data, function (key, v) {
+                            $("#district_edit_id").append(
+                                '<option value="' +
+                                    v.id +
+                                    '">' +
+                                    v.name +
+                                    "</option>"
+                            );
                         });
-                    }
+                    },
                 });
                 $.ajax({
                     url: "/user/getWards",
                     type: "GET",
                     data: {
-                        district_id: res.user.district_id
+                        district_id: res.user.district_id,
                     },
-                    success: function(data) {
+                    success: function (data) {
                         var html = '<option value="">Chọn Xã/Phường</option>';
-                        $.each(data, function(key, v) {
-                            $('#ward_edit_id').append(
-                                '<option value="'+v.id+'">'+v.name+'</option>'
-                            )
+                        $.each(data, function (key, v) {
+                            $("#ward_edit_id").append(
+                                '<option value="' +
+                                    v.id +
+                                    '">' +
+                                    v.name +
+                                    "</option>"
+                            );
                         });
-                    }
-                })
-                $('#province_edit_id').val(res.user.province_id);
-                $('#district_edit_id').val(res.user.district_id);
-                $('#ward_edit_id').val(res.user.ward_id);
-                if($('#name').val() != ""){
-                    $('#nameUserEditError').empty()
+                    },
+                });
+                $("#province_edit_id").val(res.user.province_id);
+                $("#district_edit_id").val(res.user.district_id);
+                $("#ward_edit_id").val(res.user.ward_id);
+                if ($("#name").val() != "") {
+                    $("#nameUserEditError").empty();
                 }
-                if($('#phone').val() != ""){
-                    $('#phoneUserEditError').empty()
+                if ($("#phone").val() != "") {
+                    $("#phoneUserEditError").empty();
                 }
-                if($('#email').val() != ""){
-                    $('#emailUserEditError').empty()
+                if ($("#email").val() != "") {
+                    $("#emailUserEditError").empty();
                 }
-                if($('#gender').val() != ""){
-                    $('#genderUserEditError').empty()
+                if ($("#gender").val() != "") {
+                    $("#genderUserEditError").empty();
                 }
-                if($('#birthday').val() != ""){
-                    $('#birthdayUserEditError').empty()
+                if ($("#birthday").val() != "") {
+                    $("#birthdayUserEditError").empty();
                 }
-                if($('#province_edit_id').val() != ""){
-                    $('#provincesUserEditError').empty()
+                if ($("#province_edit_id").val() != "") {
+                    $("#provincesUserEditError").empty();
                 }
-                if($('#district_edit_id').val() != ""){
-                    $('#districtsUserEditError').empty()
+                if ($("#district_edit_id").val() != "") {
+                    $("#districtsUserEditError").empty();
                 }
-                if($('#ward_edit_id').val() != ""){
-                    $('#wardUserEditError').empty()
+                if ($("#ward_edit_id").val() != "") {
+                    $("#wardUserEditError").empty();
                 }
+                $("#editUserModal").modal("show");
             }
-    $('#editUserModal').modal('show');
         },
-        error: function(err) {
+        error: function (err) {
             showError();
-        }
-    })
+        },
+    });
 }
 // ------
-function updateUser(event){
+function updateUser(event) {
     event.preventDefault();
-    var name = $('#nameUserEdit').val();
-    var phone = $('#phoneUserEdit').val();
-    var email = $('#emailUserEdit').val();
-    var gender = $('#genderUserEdit').val();
-    var birthday = $('#birthdayUserEdit').val();
-    var province = $('#province_edit_id').val();
-    var district = $('#district_edit_id').val();
-    var ward = $('#ward_edit_id').val();
+    var name = $("#nameUserEdit").val();
+    var phone = $("#phoneUserEdit").val();
+    var email = $("#emailUserEdit").val();
+    var gender = $("#genderUserEdit").val();
+    var birthday = $("#birthdayUserEdit").val();
+    var province = $("#province_edit_id").val();
+    var district = $("#district_edit_id").val();
+    var ward = $("#ward_edit_id").val();
     var haserrorEdit = false;
-    var id = $('#idUserEdit').val();
-    if(name == ""){
-        $('#nameUserEditError').html('Vui Lòng Nhập Tên');
+    var id = $("#idUserEdit").val();
+    if (name == "") {
+        $("#nameUserEditError").html("Vui Lòng Nhập Tên");
         haserrorEdit = true;
     }
-    if(phone == ""){
-        $('#phoneUserEditError').html('Hãy Nhập Số Điện Thoại');
+    if (phone == "") {
+        $("#phoneUserEditError").html("Hãy Nhập Số Điện Thoại");
         haserrorEdit = true;
     }
-    if(email == ""){
-        $('#emailUserEditError').html('Hãy Nhập email');
+    if (email == "") {
+        $("#emailUserEditError").html("Hãy Nhập email");
         haserrorEdit = true;
     }
-    if(gender == ""){
-        $('#genderUserEditError').html('Hãy Chọn Giới Tính');
+    if (gender == "") {
+        $("#genderUserEditError").html("Hãy Chọn Giới Tính");
         haserrorEdit = true;
     }
-    if(birthday == ""){
-        $('#birthdayUserEditError').html('Hãy Nhập Ngày Sinh');
+    if (birthday == "") {
+        $("#birthdayUserEditError").html("Hãy Nhập Ngày Sinh");
         haserrorEdit = true;
     }
 
-    if(province == ""){
-        $('#provincesUserEditError').html('Hãy Chọn Tỉnh/Thành Phố');
+    if (province == "") {
+        $("#provincesUserEditError").html("Hãy Chọn Tỉnh/Thành Phố");
         haserrorEdit = true;
     }
-    if(district == ""){
-        $('#districtsUserEditError').html('Hãy Chọn Quận/Huyện');
+    if (district == "") {
+        $("#districtsUserEditError").html("Hãy Chọn Quận/Huyện");
         haserrorEdit = true;
     }
-    if(ward == ""){
-        $('#wardUserEditError').html('Hãy Chọn Xã/Phường');
+    if (ward == "") {
+        $("#wardUserEditError").html("Hãy Chọn Xã/Phường");
         haserrorEdit = true;
     }
-        if(haserrorEdit == true){
-            $('#editUserModal').change('shown.bs.modal', function() {
-                if($('#name').val() != ""){
-                    $('#nameUserEditError').empty()
+    if (haserrorEdit == true) {
+        $("#editUserModal").change("shown.bs.modal", function () {
+            if ($("#name").val() != "") {
+                $("#nameUserEditError").empty();
+            }
+            if ($("#phone").val() != "") {
+                $("#phoneUserEditError").empty();
+            }
+            if ($("#email").val() != "") {
+                $("#emailUserEditError").empty();
+            }
+            if ($("#gender").val() != "") {
+                $("#genderUserEditError").empty();
+            }
+            if ($("#birthday").val() != "") {
+                $("#birthdayUserEditError").empty();
+            }
+            if ($("#province_edit_id").val() != "") {
+                $("#provincesUserEditError").empty();
+            }
+            if ($("#district_edit_id").val() != "") {
+                $("#districtsUserEditError").empty();
+            }
+            if ($("#ward_edit_id").val() != "") {
+                $("#wardUserEditError").empty();
+            }
+        });
+    }
+    if (haserrorEdit === false) {
+        let formdata = new FormData($("#updateUser")[0]);
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $.ajax({
+            type: "POST",
+            url: "/user/updateUser/" + id,
+            data: formdata,
+            contentType: false,
+            processData: false,
+
+            success: function (res) {
+                if (res.status == 200) {
+                    $("#editUserModal").modal("hide");
+                    $("#editUserModal").find("input").val("");
+                    $("#editUserModal").find("select").val("");
+                    getUser();
+                    showSuccess();
+                } else {
+                    showError();
                 }
-                if($('#phone').val() != ""){
-                    $('#phoneUserEditError').empty()
-                }
-                if($('#email').val() != ""){
-                    $('#emailUserEditError').empty()
-                }
-                if($('#gender').val() != ""){
-                    $('#genderUserEditError').empty()
-                }
-                if($('#birthday').val() != ""){
-                    $('#birthdayUserEditError').empty()
-                }
-                if($('#province_edit_id').val() != ""){
-                    $('#provincesUserEditError').empty()
-                }
-                if($('#district_edit_id').val() != ""){
-                    $('#districtsUserEditError').empty()
-                }
-                if($('#ward_edit_id').val() != ""){
-                    $('#wardUserEditError').empty()
-                }
-        })
-        }
-        if(haserrorEdit === false){
-            let formdata = new FormData($('#updateUser')[0]);
-            $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-    $.ajax({
-        type: "POST",
-        url: "/user/updateUser/"+id,
-        data: formdata,
-        contentType:false,
-        processData:false,
-        
-        success: function(res){
-            $('#editUserModal').modal('hide');
-            $('#editUserModal').find('input').val("");
-            $('#editUserModal').find('select').val("");
-            getUser();
-            showSuccess();
-        },
-        error: function(err) {
-            showError();
-        }
-    })
+            },
+            error: function (err) {
+                showError();
+            },
+        });
     }
 }
 // ------
-$('#insertUser').on('submit', function(e){
+$("#insertUser").on("submit", function (e) {
     e.preventDefault();
-    var name = $('#nameUser').val();
-     var phone = $('#phoneUser').val();
-     var email = $('#emailUser').val();
-     var gender = $('#genderUser').val();
-     var birthday = $('#birthdayUser').val();
-     var image = $('#imageUser').val();
-     var province = $('#province_id').val();
-     var district = $('#district_id').val();
-     var ward = $('#ward_id').val();
-     
-     var haserror = false;
- if(name == ""){
-     $('#nameUserAddError').html('Vui Lòng Nhập Tên');
-     haserror = true;
- }
- if(phone == ""){
-     $('#phoneUserAddError').html('Hãy Nhập Số Điện Thoại');
-     haserror = true;
- }
- if(email == ""){
-     $('#emailUserAddError').html('Hãy Nhập email');
-     haserror = true;
- }
- if(gender == ""){
-     $('#genderUserAddError').html('Hãy Chọn Giới Tính');
-     haserror = true;
- }
- if(birthday == ""){
-     $('#birthdayUserAddError').html('Hãy Nhập Ngày Sinh');
-     haserror = true;
- }
- if(image == ""){
-     $('#imageUserAddError').html('Hãy Nhập Chọn Ảnh');
-     haserror = true;
- }
- if(province == ""){
-    $('#provincesUserAddError').html('Chọn Tình/Thành Phố');
-    haserror = true;
-}
-if(district == ""){
-    $('#districtsUserAddError').html('Chọn Quận/Huyện');
-    haserror = true;
-}
-if(ward == ""){
-    $('#wardsUserAddError').html('Chọn Xã/Phường');
-    haserror = true;
-}
-     if(haserror == true){
-         $('#addUserModal').change('shown.bs.modal', function() {
-             if($('#name').val() != ""){
-                 $('#nameUserAddError').empty()
-             }
-             if($('#phone').val() != ""){
-                 $('#phoneUserAddError').empty()
-             }
-             if($('#email').val() != ""){
-                 $('#emailUserAddError').empty()
-             }
-             if($('#gender').val() != ""){
-                 $('#genderUserAddError').empty()
-             }
-             if($('#birthday').val() != ""){
-                 $('#birthdayUserAddError').empty()
-             }
-             if($('#image').val() != ""){
-                 $('#imageUserAddError').empty()
-             }
-             if($('#province_id').val() != ""){
-                $('#provincesUserAddError').empty()
-            }
-            if($('#district_id').val() != ""){
-                $('#districtsUserAddError').empty()
-            }
-            if($('#ward_id').val() != ""){
-                $('#wardsUserAddError').empty()
-            }
-     })
-     }
-     if(haserror === false){
-         $.ajaxSetup({
-             headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             }
-         });
-         let formdata = new FormData($('#insertUser')[0]);
-         $.ajax({
-             url:"/user/storeUser",
-             method: "post",
-             data: formdata,
-             contentType:false,
-             processData:false,
-             success: function(data) {
-                 $('#addUserModal').modal('hide');
-                 $('#addUserModal').find('input').val("");
-                 $('#addUserModal').find('select').val("");
-                 getUser();
-                 $('#blah').hide();
-                 jQuery('#blah1').attr('src', '');
-                 showSuccess();
+    var name = $("#nameUser").val();
+    var phone = $("#phoneUser").val();
+    var email = $("#emailUser").val();
+    var gender = $("#genderUser").val();
+    var birthday = $("#birthdayUser").val();
+    var image = $("#imageUser").val();
+    var province = $("#province_id").val();
+    var district = $("#district_id").val();
+    var ward = $("#ward_id").val();
 
-             },
-             error: function(err) {
-             showError();
-             }
-         });
-     }
-})
+    var haserror = false;
+    if (name == "") {
+        $("#nameUserAddError").html("Vui Lòng Nhập Tên");
+        haserror = true;
+    }
+    if (phone == "") {
+        $("#phoneUserAddError").html("Hãy Nhập Số Điện Thoại");
+        haserror = true;
+    }
+    if (email == "") {
+        $("#emailUserAddError").html("Hãy Nhập email");
+        haserror = true;
+    }
+    if (gender == "") {
+        $("#genderUserAddError").html("Hãy Chọn Giới Tính");
+        haserror = true;
+    }
+    if (birthday == "") {
+        $("#birthdayUserAddError").html("Hãy Nhập Ngày Sinh");
+        haserror = true;
+    }
+    if (image == "") {
+        $("#imageUserAddError").html("Hãy Nhập Chọn Ảnh");
+        haserror = true;
+    }
+    if (province == "") {
+        $("#provincesUserAddError").html("Chọn Tình/Thành Phố");
+        haserror = true;
+    }
+    if (district == "") {
+        $("#districtsUserAddError").html("Chọn Quận/Huyện");
+        haserror = true;
+    }
+    if (ward == "") {
+        $("#wardsUserAddError").html("Chọn Xã/Phường");
+        haserror = true;
+    }
+    if (haserror == true) {
+        $("#addUserModal").change("shown.bs.modal", function () {
+            if ($("#name").val() != "") {
+                $("#nameUserAddError").empty();
+            }
+            if ($("#phone").val() != "") {
+                $("#phoneUserAddError").empty();
+            }
+            if ($("#email").val() != "") {
+                $("#emailUserAddError").empty();
+            }
+            if ($("#gender").val() != "") {
+                $("#genderUserAddError").empty();
+            }
+            if ($("#birthday").val() != "") {
+                $("#birthdayUserAddError").empty();
+            }
+            if ($("#image").val() != "") {
+                $("#imageUserAddError").empty();
+            }
+            if ($("#province_id").val() != "") {
+                $("#provincesUserAddError").empty();
+            }
+            if ($("#district_id").val() != "") {
+                $("#districtsUserAddError").empty();
+            }
+            if ($("#ward_id").val() != "") {
+                $("#wardsUserAddError").empty();
+            }
+        });
+    }
+    if (haserror === false) {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        let formdata = new FormData($("#insertUser")[0]);
+        $.ajax({
+            url: "/user/storeUser",
+            method: "post",
+            data: formdata,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.status == 200) {
+                    $("#addUserModal").modal("hide");
+                    $("#addUserModal").find("input").val("");
+                    $("#addUserModal").find("select").val("");
+                    getUser();
+                    $("#blah").hide();
+                    jQuery("#blah1").attr("src", "");
+                    showSuccess();
+                } else {
+                    showError();
+                }
+            },
+            error: function (err) {
+                showError();
+            },
+        });
+    }
+});
 // ------
-$(function() {
-    $(document).on('change', '.province_id, .add_user', function() {
+$(function () {
+    $(document).on("change", ".province_id, .add_user", function () {
         var province_id = $(this).val();
         $.ajax({
             url: "/user/getDistricts",
             type: "GET",
             data: {
-                province_id: province_id
+                province_id: province_id,
             },
-            success: function(data) {
+            success: function (data) {
                 let district = '<option value="">Chọn Quận/Huyện</option>';
-                $('.district_id').html(district);
+                $(".district_id").html(district);
                 let ward = '<option value="">Chọn Xã/Phường</option>';
-                $('.ward_id').html(ward);
-                $.each(data, function(key, v) {
-                    $('.district_id').append(
-                        '<option value="'+v.id+'">'+v.name+'</option>'
-                    )
+                $(".ward_id").html(ward);
+                $.each(data, function (key, v) {
+                    $(".district_id").append(
+                        '<option value="' + v.id + '">' + v.name + "</option>"
+                    );
                 });
-            }
-        })
+            },
+        });
     });
 });
 // ------
-$(function() {
-    $(document).on('change', '.district_id, .add_user', function() {
+$(function () {
+    $(document).on("change", ".district_id, .add_user", function () {
         var district_id = $(this).val();
         $.ajax({
             url: "/user/getWards",
             type: "GET",
             data: {
-                district_id: district_id
+                district_id: district_id,
             },
-            success: function(data) {
+            success: function (data) {
                 var html = '<option value="">Chọn Xã/Phường</option>';
-                $('.ward_id').html(html);
-                $.each(data, function(key, v) {
-                    $('.ward_id').append(
-                        '<option value="'+v.id+'">'+v.name+'</option>'
-                    )
+                $(".ward_id").html(html);
+                $.each(data, function (key, v) {
+                    $(".ward_id").append(
+                        '<option value="' + v.id + '">' + v.name + "</option>"
+                    );
                 });
-            }
-        })
+            },
+        });
     });
 });
 // ------
-$(document).ready(function() {
-    if( $('#blah').hide()){
-      $('#blah').hide();
+$(document).ready(function () {
+    if ($("#blah").hide()) {
+        $("#blah").hide();
     }
-    $('#imageUser').change(function() {
-          $('#blah').show();
-          const file = $(this)[0].files;
-          if (file[0]) {
-              jQuery('#blah').attr('src', URL.createObjectURL(file[0]));
-              jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
-          }
-      });
-    $('#imageUserEdit').change(function() {
-          $('#blah1').show();
-          const file = $(this)[0].files;
-          if (file[0]) {
-              jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
-          }
-      });
-  });
-// ------
-  $(document).on('click','#trashCanUser', function(e){
-    e.preventDefault();
-    $.ajax({
-        url: '/user/getTrashCanUser',
-        type: 'GET',
-        success: function(response){
-            $('#tbodyTrashCanUser').html(" ");
-                $.each(response.users.data, function(index, user){
-                    $('#tbodyTrashCanUser').append(
-                '<tr>\
-                    <td><img style="width:100px; height:100px" src="'+ user.image +'" alt=""></td>\
-                    <td class="text-danger">'+ user.name +'</td>\
-                    <td class="text-danger">'+ user.gender +'</td>\
-                    <td><label class="badge badge-danger" ><input onclick="myFunction('+ user.id +')" id="copyPhone'+ user.id +'" value="'+ user.phone +'" hidden/>'+ user.phone +'</label></td>\
-                    <td><button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="restoreUser">Lấy lại</button> &nbsp;&nbsp; \
-                    <button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="destroyUser">Xóa vĩnh viễn</button></td>\
-                </tr>'
-                    )
-                })
+    $("#imageUser").change(function () {
+        $("#blah").show();
+        const file = $(this)[0].files;
+        if (file[0]) {
+            jQuery("#blah").attr("src", URL.createObjectURL(file[0]));
+            jQuery("#blah1").attr("src", URL.createObjectURL(file[0]));
         }
     });
-    $('#trashCanUserModal').modal('show');
-
-})
+    $("#imageUserEdit").change(function () {
+        $("#blah1").show();
+        const file = $(this)[0].files;
+        if (file[0]) {
+            jQuery("#blah1").attr("src", URL.createObjectURL(file[0]));
+        }
+    });
+});
 // ------
-$(document).on('keyup','#search', function (e){
+$(document).on("click", "#trashCanUser", function (e) {
     e.preventDefault();
-    let search = $('#search').val();
+    $.ajax({
+        url: "/user/getTrashCanUser",
+        type: "GET",
+        success: function (response) {
+            if (response.status == 200) {
+                $("#tbodyTrashCanUser").html(" ");
+                $.each(response.users.data, function (index, user) {
+                    $("#tbodyTrashCanUser").append(
+                        '<tr>\
+                    <td><img style="width:100px; height:100px" src="' +
+                            user.image +
+                            '" alt=""></td>\
+                    <td class="text-danger">' +
+                            user.name +
+                            '</td>\
+                    <td class="text-danger">' +
+                            user.gender +
+                            '</td>\
+                    <td><label class="badge badge-danger" ><input onclick="myFunction(' +
+                            user.id +
+                            ')" id="copyPhone' +
+                            user.id +
+                            '" value="' +
+                            user.phone +
+                            '" hidden/>' +
+                            user.phone +
+                            '</label></td>\
+                    <td><button style="text-align: center" class="badge badge-danger" value="' +
+                            user.id +
+                            '" id="restoreUser">Lấy lại</button> &nbsp;&nbsp; \
+                    <button style="text-align: center" class="badge badge-danger" value="' +
+                            user.id +
+                            '" id="destroyUser">Xóa vĩnh viễn</button></td>\
+                </tr>'
+                    );
+                });
+                $("#trashCanUserModal").modal("show");
+            } else {
+                showError();
+            }
+        },
+    });
+});
+// ------
+$(document).on("keyup", "#search", function (e) {
+    e.preventDefault();
+    let search = $("#search").val();
     $.ajax({
         url: "/user/searchUser",
-        method: 'GET',
+        method: "GET",
         data: {
-            search: search
+            search: search,
         },
-        success: function(response){
-            $('#index-users').html(" ");
-            $.each(response.users.data, function(index, user){
-                $('#index-users').append(
-                    '<tr>\
-                           <td><img style="width:100px; height:100px" src="'+ user.image +'" alt=""></td>\
-                           <td class="text-danger">'+ user.name +'</td>\
-                           <td class="text-danger">'+ user.gender +'</td>\
-                           <td><label class="badge badge-danger" ><input onclick="myFunction('+ user.id +')" id="copyPhone'+ user.id +'" value="'+ user.phone +'" hidden/>'+ user.phone +'</label></td>\
-                           <td><button style="text-align: center" class="badge badge-danger" onclick=editUser('+ user.id +') id="editUser">Sửa</button>\
-                           <button style="text-align: center" class="badge badge-danger" onclick=inforUser('+ user.id +') id="inforUser">Chi tiết</button>\
-                           <button style="text-align: center" class="badge badge-danger" value="'+ user.id +'" id="deleteUser">Xóa</button></td>\
-                         </tr>'
-                )
-            })
-        }
-    })
-})
-function inforUser(id){
-    
+        success: function (response) {
+            if (response.status == 200) {
+                $("#index-users").html(" ");
+                $.each(response.users.data, function (index, user) {
+                    $("#index-users").append(
+                        '<tr>\
+                               <td><img style="width:100px; height:100px" src="' +
+                            user.image +
+                            '" alt=""></td>\
+                               <td class="text-danger">' +
+                            user.name +
+                            '</td>\
+                               <td class="text-danger">' +
+                            user.gender +
+                            '</td>\
+                               <td><label class="badge badge-danger" ><input onclick="myFunction(' +
+                            user.id +
+                            ')" id="copyPhone' +
+                            user.id +
+                            '" value="' +
+                            user.phone +
+                            '" hidden/>' +
+                            user.phone +
+                            '</label></td>\
+                               <td><button style="text-align: center" class="badge badge-danger" onclick=editUser(' +
+                            user.id +
+                            ') id="editUser">Sửa</button>\
+                               <button style="text-align: center" class="badge badge-danger" onclick=inforUser(' +
+                            user.id +
+                            ') id="inforUser">Chi tiết</button>\
+                               <button style="text-align: center" class="badge badge-danger" value="' +
+                            user.id +
+                            '" id="deleteUser">Xóa</button></td>\
+                             </tr>'
+                    );
+                });
+            }
+        },
+    });
+});
+function inforUser(id) {
     $.ajax({
-        url: "/user/inforUser/"+id,
-        method: 'GET',
-        success: function(users){
-            user = users.user
-            $("#inforImageUser").attr("src", user.image);
+        url: "/user/inforUser/" + id,
+        method: "GET",
+        success: function (users) {
+            if (users.status == 200) {
+                user = users.user;
+                $("#inforImageUser").attr("src", user.image);
+                $("#inforNameUser").html("");
+                var node = document.createTextNode(user.name);
+                $("#inforNameUser")[0].appendChild(node);
+                $("#inforEmailUser").html("");
+                var node = document.createTextNode(user.email);
+                $("#inforEmailUser")[0].appendChild(node);
 
-            $('#inforNameUser').html('');
-            var node = document.createTextNode(user.name);
-            $('#inforNameUser')[0].appendChild(node);
-            $('#inforEmailUser').html('');
-            var node = document.createTextNode(user.email);
-            $('#inforEmailUser')[0].appendChild(node);
+                $("#inforPhoneUser").html("");
+                var node = document.createTextNode(user.phone);
+                $("#inforPhoneUser")[0].appendChild(node);
 
-            $('#inforPhoneUser').html('');
-            var node = document.createTextNode(user.phone);
-            $('#inforPhoneUser')[0].appendChild(node);
+                $("#inforGenderUser").html("");
+                var node = document.createTextNode(user.gender);
+                $("#inforGenderUser")[0].appendChild(node);
 
-            $('#inforGenderUser').html('');
-            var node = document.createTextNode(user.gender);
-            $('#inforGenderUser')[0].appendChild(node);
-
-            $('#inforBirthdayUser').html('');
-            var node = document.createTextNode(user.birthday);
-            $('#inforBirthdayUser')[0].appendChild(node);
-  
+                $("#inforBirthdayUser").html("");
+                var node = document.createTextNode(user.birthday);
+                $("#inforBirthdayUser")[0].appendChild(node);
+                $("#inforUserModal").modal("show");
+            } else {
+                showError();
+            }
         },
-        errors: function(){
+        errors: function () {
             showError();
-        }
-    }),
-   
-    $('#inforUserModal').modal('show');
-
+        },
+    });
 }

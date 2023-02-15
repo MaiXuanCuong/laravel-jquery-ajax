@@ -12,7 +12,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     {
         return Category::class;
     }
-    public function all($request)
+    public function all()
     {
         $categories = $this->model->select('*');
         return $categories->orderBy('id', 'DESC')->paginate(100);
@@ -68,6 +68,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             return $category;
         } catch (\Exception$e) {
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            return false;
         }
 
     }
@@ -78,27 +79,43 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             $category->delete();
             return true;
         } catch (\Exception$e) {
-            Log::error($e->getMessage());
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
-        return $category;
+       
     }
     public function getTrashed()
     {
-        $category = $this->model->onlyTrashed();
-        return $category->orderBy('id', 'DESC')->paginate(100);
+        try {
+            $category = $this->model->onlyTrashed();
+            return $category->orderBy('deleted_at', 'DESC')->paginate(100);
+        } catch (\Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            return false;
+        }
     }
     public function restore($id)
-    {
-        $category = $this->model->withTrashed()->findOrFail($id);
-        $category->restore();
-        return $category;
+    {   
+        try {
+            $category = $this->model->onlyTrashed()->find($id);
+            $category->restore();
+            return $category;
+          
+        } catch (\Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            return false;
+        }
     }
     public function force_destroy($id)
     {
-        $category = $this->model->onlyTrashed()->findOrFail($id);
-        $category->forceDelete();
-        return $category;
+        try {
+            $category = $this->model->onlyTrashed()->find($id);
+            $category->forceDelete();
+            return $category;
+        } catch (\Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            return false;
+        }
     }
 
 }

@@ -1,13 +1,12 @@
 <?php
-namespace App\Repositories\Category;
+namespace App\Repositories\Supplier;
 
 use App\Repositories\RepositoryInterface;
 
-interface CategoryRepositoryInterface extends RepositoryInterface{
+interface SupplierRepositoryInterface extends RepositoryInterface{
     public function all();
     public function getTrashed();
     public function restore($id);
     public function force_destroy($id);
-    public function search($request);
 
 }
