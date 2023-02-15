@@ -11,7 +11,6 @@
                         <tr>
                             <th>Ảnh Danh Mục</th>
                             <th>Tên Danh Mục</th>
-                            <th>Mô Tả</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>

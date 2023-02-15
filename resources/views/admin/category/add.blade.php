@@ -11,9 +11,7 @@
                     <div class="row">
                         <div class="col-md-12">
                                 <label class="col-sm-auto col-form-label">Mô tả</label>
-                                <input type="text" name="description" id="descriptionCategory" class="form-control"
-                                placeholder="Nhập mô tả danh mục">
-                                    {{-- <textarea name="description" class="form-control is-invalid" id="ckeditor" rows="4" style="resize: none"></textarea> --}}
+                                    <textarea name="description" class="form-control is-invalid" value="" id="ckeditor" rows="4" style="resize: none"></textarea>
                                     <div id="desciptionCategoryAddError" class="form-text text-danger error-msg"></div>
                         </div>
                     </div><br><br>

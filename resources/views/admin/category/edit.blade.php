@@ -12,8 +12,8 @@
               <div class="col-md-12">
                   <label class="col-sm-3 col-form-label">Mô tả</label>
                     <input type="text" id="idCategoryEdit" class="form-control" hidden/>
-                    <input type="text" id="descriptionCategoryEdit" name="description" class="form-control" placeholder="Nhập mô tả danh mục"/>
-                    {{-- <textarea name="description" class="form-control is-invalid" id="ckeditor" rows="4" style="resize: none"></textarea> --}}
+                    {{-- <input type="text" id="descriptionCategoryEdit" name="description" class="form-control" placeholder="Nhập mô tả danh mục"/> --}}
+                    <textarea name="description" class="form-control is-invalid" id="ckeditor1" rows="4" style="resize: none"></textarea>
 
                     <div id="nameCategoryEditError" class="form-text text-danger error-msg"></div>
               </div>

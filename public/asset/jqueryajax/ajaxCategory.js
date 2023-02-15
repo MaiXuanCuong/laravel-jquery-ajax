@@ -10,12 +10,10 @@ function getCategory(){
         success: function(response){
             $('#index-categories').html(" ");
             $.each(response.categories, function(index, category){
-                // console.log(response.categories);
                 $('#index-categories').append(
                     '<tr>\
                            <td><img style="width:100px; height:100px" src="'+ category.image +'" alt=""></td>\
                            <td class="text-danger">'+ category.name +'</td>\
-                           <td><label class="badge badge-danger" >'+ category.description +'</label></td>\
                            <td><button style="text-align: center" class="badge badge-danger" onclick=editCategory('+ category.id +') id="editCategory">Sửa</button> &nbsp;&nbsp; \
                            <button style="text-align: center" class="badge badge-danger" value="'+ category.id +'" id="deleteCategory">Xóa</button></td>\
                          </tr>'
@@ -144,7 +142,7 @@ function editCategory(category){
                let category = res.category
                 $('#idCategoryEdit').val(category.id);
                 $('#nameCategoryEdit').val(category.name);
-                $('#descriptionCategoryEdit').val(category.description);
+                CKEDITOR.instances.ckeditor1.setData(category.description);
         
                 $('#blah1').attr('src', category.image);
          
@@ -167,8 +165,7 @@ function editCategory(category){
 function updateCategory(event){
     event.preventDefault();
     var name = $('#nameCategoryEdit').val();
-    var description = $('#descriptionCategoryEdit').val();
- 
+    var description = CKEDITOR.instances.ckeditor1.getData();
     var haserrorEdit = false;
     var id = $('#idCategoryEdit').val();
     if(name == ""){
@@ -179,7 +176,6 @@ function updateCategory(event){
         $('#descriptionCategoryEditError').html('Hãy Nhập Mô Tả');
         haserrorEdit = true;
     }
-   
         if(haserrorEdit == true){
             $('#editCategoryModal').change('shown.bs.modal', function() {
                 if($('#name').val() != ""){
@@ -188,16 +184,17 @@ function updateCategory(event){
                 if($('#description').val() != ""){
                     $('#descriptionCategoryEditError').empty()
                 }
-               
         })
         }
         if(haserrorEdit === false){
             let formdata = new FormData($('#updateCategory')[0]);
+            formdata.append('description', description)
             $.ajaxSetup({
                 headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
     $.ajax({
         type: "POST",
         url: "/category/updateCategory/"+id,
@@ -226,10 +223,9 @@ $(document).on('click','#addCategory', function(e){
 $('#insertCategory').on('submit', function(e){
     e.preventDefault();
     var name = $('#nameCategory').val();
-     var image = $('#imageCategory').val();
-    
-     
-     var haserror = false;
+    var image = $('#imageCategory').val();
+    var haserror = false;
+
  if(name == ""){
      $('#nameCategoryAddError').html('Hãy Nhập Tên Danh Mục');
      haserror = true;
@@ -252,12 +248,14 @@ $('#insertCategory').on('submit', function(e){
      })
      }
      if(haserror === false){
+        var description = CKEDITOR.instances.ckeditor.getData();
          $.ajaxSetup({
              headers: {
              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
              }
          });
          let formdata = new FormData($('#insertCategory')[0]);
+         formdata.append('description', description)
          $.ajax({
              url:"/category/storeCategory",
              method: "post",
@@ -266,6 +264,7 @@ $('#insertCategory').on('submit', function(e){
              contentType:false,
              processData:false,
              success: function(data) {
+                CKEDITOR.instances.ckeditor.setData('');
                  $('#addCategoryModal').modal('hide');
                  $('#addCategoryModal').find('input').val("");
                  getCategory();
@@ -316,7 +315,6 @@ $(document).ready(function() {
                 '<tr>\
                     <td><img style="width:100px; height:100px" src="'+ category.image +'" alt=""></td>\
                     <td class="text-danger">'+ category.name +'</td>\
-                    <td><label class="badge badge-danger" >'+ category.description +'</label></td>\
                     <td><button style="text-align: center" class="badge badge-danger" value="'+ category.id +'" id="restoreCategory">Lấy lại</button> &nbsp;&nbsp; \
                     <button style="text-align: center" class="badge badge-danger" value="'+ category.id +'" id="destroyCategory">Xóa vĩnh viễn</button></td>\
                 </tr>'
@@ -344,7 +342,6 @@ $(document).on('keyup','#search', function (e){
                     '<tr>\
                     <td><img style="width:100px; height:100px" src="'+ category.image +'" alt=""></td>\
                     <td class="text-danger">'+ category.name +'</td>\
-                    <td><label class="badge badge-danger" >'+ category.description +'</label></td>\
                     <td><button style="text-align: center" class="badge badge-danger" onclick=editCategory('+ category.id +') id="editCategory">Sửa</button> &nbsp;&nbsp; \
                     <button style="text-align: center" class="badge badge-danger" value="'+ category.id +'" id="deleteCategory">Xóa</button></td>\
                   </tr>'

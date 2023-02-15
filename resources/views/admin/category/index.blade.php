@@ -1,5 +1,6 @@
 @extends('admin.layout.master')
 @section('content')
+
 <div class="content-wrapper">
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
@@ -25,7 +26,6 @@
                                 <tr>
                                     <th>Ảnh Danh Mục</th>
                                     <th>Tên Danh Mục</th>
-                                    <th>Mô Tả</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
@@ -79,10 +79,13 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="{{ asset('asset/jqueryajax/ajaxCategory.js') }}"></script>
-{{-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>
     CKEDITOR.replace('ckeditor');
-</script> --}}
+    CKEDITOR.replace('ckeditor1');
+</script>
+
+
 
 @endsection
 
