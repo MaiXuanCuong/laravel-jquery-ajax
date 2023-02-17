@@ -1,6 +1,23 @@
 $(document).ready(function () {
     getUser();
 });
+//------
+$(document).ready(function(){
+  $("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#index-users tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+$(document).ready(function(){
+    $("#searchTrashcan").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#tbodyTrashCanUser tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
 // ------
 function getUser() {
     $.ajax({
@@ -30,12 +47,12 @@ function getUser() {
                         '" hidden/>' +
                         user.phone +
                         '</label></td>\
-                           <td><button style="text-align: center" class="badge badge-danger" onclick=editUser(' +
+                           <td><button style="text-align: center" class="badge badge-danger" value="' +
                         user.id +
-                        ') id="editUser">Sửa</button> &nbsp;&nbsp; \
-                           <button style="text-align: center" class="badge badge-danger" onclick=inforUser(' +
+                        '" id="editUser">Sửa</button>\
+                           <button style="text-align: center" class="badge badge-danger" value=' +
                         user.id +
-                        ') id="inforUser">Chi tiết</button>\
+                        ' id="inforUser">Chi tiết</button>\
                            <button style="text-align: center" class="badge badge-danger" value="' +
                         user.id +
                         '" id="deleteUser">Xóa</button></td>\
@@ -54,123 +71,164 @@ function myFunction(id) {
     alert("Sao chép thành công: " + copyText.value);
 }
 // ------
+
 $(document).on("click", "#deleteUser", function (e) {
     e.preventDefault();
-    $("#confirm").val("");
-    var id = $(this).val();
-    $("#confirm-text").html("");
-    var node = document.createTextNode("Xóa User này không?");
-    $("#confirm-text")[0].appendChild(node);
-    $("#confirm").val(id);
-    $("#confirm-true").addClass("confirmdeleteUser");
-    $("#confirmUserModal").modal("show");
+    let tr = $(this);
+    Swal.fire({
+        title: "Bạn có chắc chắn?",
+        text: "Bạn sẽ không thể hoàn tác này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Đúng vậy,Tôi đồng ý!",
+        cancelButtonText : "Hủy",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var id = $("#deleteUser").val();
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+            $.ajax({
+                type: "DELETE",
+                url: "/user/deleteUser/" + id,
+                success: function (res) {
+                    if (res.status == 200) {
+                        tr.parent().parent().remove();
+                        Swal.fire(
+                            "Đã xóa!",
+                            "Xóa thành công",
+                            "success"
+                        );
+                    } else {
+                        Swal.fire(
+                            "Lỗi xãy ra!",
+                            "Xóa không thành công",
+                            "error"
+                        );
+                    }
+                },
+                error: function (e) {
+                    Swal.fire(
+                        "Lỗi xãy ra!",
+                        "Xóa không thành công",
+                        "error"
+                    );
+                },
+            });
+        }
+    });
 });
-// ------
+// --------
+
 $(document).on("click", "#restoreUser", function (e) {
     e.preventDefault();
-    $("#confirm").val("");
-    $("#trashCanUserModal").modal("hide");
-    var id = $(this).val();
-    $("#confirm-text").html("");
-    var node = document.createTextNode("khôi phục User này không?");
-    $("#confirm-text")[0].appendChild(node);
-    $("#confirm").val(id);
-    $("#confirm-true").addClass("confirmrestoreUser");
-    $("#confirmUserModal").modal("show");
+    let tr = $(this);
+    Swal.fire({
+        title: "Bạn có chắc chắn?",
+        text: "Bạn sẽ không thể hoàn tác này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Đúng vậy,Tôi đồng ý!",
+        cancelButtonText : "Hủy",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var id = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+            $.ajax({
+                type: "POST",
+                url: "/user/restoreUser/" + id,
+                success: function (res) {
+                    if (res.status == 200) {
+                        tr.parent().parent().remove();
+                        Swal.fire(
+                            "Đã xóa!",
+                            "Xóa thành công",
+                            "success"
+                        );
+                    } else {
+                        Swal.fire(
+                            "Lỗi xãy ra!",
+                            "Xóa không thành công",
+                            "error"
+                        );
+                    }
+                },
+                error: function (e) {
+                    Swal.fire(
+                        "Lỗi xãy ra!",
+                        "Xóa không thành công",
+                        "error"
+                    );
+                },
+            });
+        }
+    });
 });
 // ------
 $(document).on("click", "#destroyUser", function (e) {
     e.preventDefault();
-    $("#confirm").val("");
-    $("#trashCanUserModal").modal("hide");
-    var id = $(this).val();
-    $("#confirm-text").html("");
-    var node = document.createTextNode("Xóa vĩnh viễn User này không?");
-    $("#confirm-text")[0].appendChild(node);
-    $("#confirm").val(id);
-    $("#confirm-true").addClass("confirmdestroyUser");
-    $("#confirmUserModal").modal("show");
-});
-// -------
-$(document).on("click", ".confirmdeleteUser", function (e) {
-    e.preventDefault();
-    var id = $("#confirm").val();
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    $.ajax({
-        type: "DELETE",
-        url: "/user/deleteUser/" + id,
-        success: function (res) {
-            if (res.status == 200) {
-                showSuccess();
-                $("#confirm").val("");
-                $("#confirm-true").removeClass("confirmdeleteUser");
-                getUser();
-                $("#confirmUserModal").modal("hide");
-            } else {
-                showError();
-            }
-        },
-        error: function (e) {
-            showError();
-        },
-    });
-});
-// --------
-$(document).on("click", ".confirmrestoreUser", function (e) {
-    e.preventDefault();
-    var id = $("#confirm").val();
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    $.ajax({
-        type: "POST",
-        url: "/user/restoreUser/" + id,
-        success: function (res) {
-            if (res.status == 200) {
-                getUser();
-                showSuccess();
-                $("#confirm").val("");
-                $("#confirmUserModal").modal("hide");
-            } else {
-                showError();
-            }
-        },
-        error: function (e) {
-            showError();
-        },
-    });
-});
-// ------
-$(document).on("click", ".confirmdestroyUser", function (e) {
-    e.preventDefault();
-    var id = $("#confirm").val();
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    $.ajax({
-        type: "DELETE",
-        url: "/user/destroyUser/" + id,
-        success: function (res) {
-            if (res.status == 200) {
-                getUser();
-                showSuccess();
-                $("#confirm").val("");
-                $("#confirmUserModal").modal("hide");
-            } else {
-                showError();
-            }
-        },
-        error: function (e) {
-            showError();
-        },
+    let tr = $(this);
+    Swal.fire({
+        title: "Bạn có chắc chắn?",
+        text: "Bạn sẽ không thể hoàn tác này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Đúng vậy,Tôi đồng ý!",
+        cancelButtonText : "Hủy",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var id = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+            $.ajax({
+                type: "DELETE",
+                url: "/user/destroyUser/" + id,
+                success: function (res) {
+                    if (res.status == 200) {
+                        tr.parent().parent().remove();
+                        Swal.fire(
+                            "Đã xóa!",
+                            "Xóa thành công",
+                            "success"
+                        );
+                    } else {
+                        Swal.fire(
+                            "Lỗi xãy ra!",
+                            "Xóa không thành công",
+                            "error"
+                        );
+                    }
+                },
+                error: function (e) {
+                    Swal.fire(
+                        "Lỗi xãy ra!",
+                        "Xóa không thành công",
+                        "error"
+                    );
+                },
+            });
+        }
     });
 });
 // ------
@@ -195,7 +253,8 @@ $(document).on("click", "#addUser", function (e) {
     });
 });
 // ------
-function editUser(user) {
+$(document).on("click", "#editUser", function (e) {
+    let id = $(this).val();
     $.ajax({
         url: "/user/getProvinces",
         type: "GET",
@@ -215,7 +274,7 @@ function editUser(user) {
 
     $.ajax({
         type: "GET",
-        url: "/user/editUser/" + user,
+        url: "/user/editUser/" + id,
         success: function (res) {
             if (res.status == 200) {
                 $("#idUserEdit").val(res.user.id);
@@ -232,7 +291,6 @@ function editUser(user) {
                         province_id: res.user.province_id,
                     },
                     success: function (data) {
-                        var html = '<option value="">Chọn Quận/Huyện</option>';
                         $.each(data, function (key, v) {
                             $("#district_edit_id").append(
                                 '<option value="' +
@@ -251,7 +309,6 @@ function editUser(user) {
                         district_id: res.user.district_id,
                     },
                     success: function (data) {
-                        var html = '<option value="">Chọn Xã/Phường</option>';
                         $.each(data, function (key, v) {
                             $("#ward_edit_id").append(
                                 '<option value="' +
@@ -297,9 +354,9 @@ function editUser(user) {
             showError();
         },
     });
-}
+});
 // ------
-function updateUser(event) {
+$(document).on("click", "#confirmUpdateUser", function (event) {
     event.preventDefault();
     var name = $("#nameUserEdit").val();
     var phone = $("#phoneUserEdit").val();
@@ -402,7 +459,7 @@ function updateUser(event) {
             },
         });
     }
-}
+});
 // ------
 $("#insertUser").on("submit", function (e) {
     e.preventDefault();
@@ -502,7 +559,38 @@ $("#insertUser").on("submit", function (e) {
                     $("#addUserModal").modal("hide");
                     $("#addUserModal").find("input").val("");
                     $("#addUserModal").find("select").val("");
-                    getUser();
+                    let user = res.user;
+                    $("#index-users").prepend(
+                        '<tr>\
+                           <td><img style="width:100px; height:100px" src="' +
+                        user.image +
+                        '" alt=""></td>\
+                           <td class="text-danger">' +
+                        user.name +
+                        '</td>\
+                           <td class="text-danger">' +
+                        user.gender +
+                        '</td>\
+                           <td><label class="badge badge-danger" ><input onclick="myFunction(' +
+                        user.id +
+                        ')" id="copyPhone' +
+                        user.id +
+                        '" value="' +
+                        user.phone +
+                        '" hidden/>' +
+                        user.phone +
+                        '</label></td>\
+                           <td><button style="text-align: center" class="badge badge-danger" value="' +
+                        user.id +
+                        '" id="editUser">Sửa</button>\
+                           <button style="text-align: center" class="badge badge-danger" value=' +
+                        user.id +
+                        ' id="inforUser">Chi tiết</button>\
+                           <button style="text-align: center" class="badge badge-danger" value="' +
+                        user.id +
+                        '" id="deleteUser">Xóa"</button></td>\
+                         </tr>'
+                    )
                     $("#blah").hide();
                     jQuery("#blah1").attr("src", "");
                     showSuccess();
@@ -583,6 +671,12 @@ $(document).ready(function () {
         }
     });
 });
+//---------
+$(document).on("click", "#close-modal", function () {
+    getUser();
+    $('#searchTrashcan').val("");
+    $("#trashCanUserModal").modal("hide");
+});
 // ------
 $(document).on("click", "#trashCanUser", function (e) {
     e.preventDefault();
@@ -615,7 +709,7 @@ $(document).on("click", "#trashCanUser", function (e) {
                             '</label></td>\
                     <td><button style="text-align: center" class="badge badge-danger" value="' +
                             user.id +
-                            '" id="restoreUser">Lấy lại</button> &nbsp;&nbsp; \
+                            '" id="restoreUser">Lấy lại</button>\
                     <button style="text-align: center" class="badge badge-danger" value="' +
                             user.id +
                             '" id="destroyUser">Xóa vĩnh viễn</button></td>\
@@ -630,56 +724,8 @@ $(document).on("click", "#trashCanUser", function (e) {
     });
 });
 // ------
-$(document).on("keyup", "#search", function (e) {
-    e.preventDefault();
-    let search = $("#search").val();
-    $.ajax({
-        url: "/user/searchUser",
-        method: "GET",
-        data: {
-            search: search,
-        },
-        success: function (response) {
-            if (response.status == 200) {
-                $("#index-users").html(" ");
-                $.each(response.users.data, function (index, user) {
-                    $("#index-users").append(
-                        '<tr>\
-                               <td><img style="width:100px; height:100px" src="' +
-                            user.image +
-                            '" alt=""></td>\
-                               <td class="text-danger">' +
-                            user.name +
-                            '</td>\
-                               <td class="text-danger">' +
-                            user.gender +
-                            '</td>\
-                               <td><label class="badge badge-danger" ><input onclick="myFunction(' +
-                            user.id +
-                            ')" id="copyPhone' +
-                            user.id +
-                            '" value="' +
-                            user.phone +
-                            '" hidden/>' +
-                            user.phone +
-                            '</label></td>\
-                               <td><button style="text-align: center" class="badge badge-danger" onclick=editUser(' +
-                            user.id +
-                            ') id="editUser">Sửa</button>\
-                               <button style="text-align: center" class="badge badge-danger" onclick=inforUser(' +
-                            user.id +
-                            ') id="inforUser">Chi tiết</button>\
-                               <button style="text-align: center" class="badge badge-danger" value="' +
-                            user.id +
-                            '" id="deleteUser">Xóa</button></td>\
-                             </tr>'
-                    );
-                });
-            }
-        },
-    });
-});
-function inforUser(id) {
+$(document).on("click", "#inforUser", function (e) {
+    let id = $(this).val();
     $.ajax({
         url: "/user/inforUser/" + id,
         method: "GET",
@@ -714,4 +760,4 @@ function inforUser(id) {
             showError();
         },
     });
-}
+})

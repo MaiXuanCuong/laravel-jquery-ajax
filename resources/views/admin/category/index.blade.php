@@ -59,15 +59,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="confirmCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            @include('admin.category.confirm')
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="trashCanCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
       <div class="modal-content">

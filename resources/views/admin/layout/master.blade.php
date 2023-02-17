@@ -313,7 +313,7 @@
   <script src="{{ asset('asset/js/dashboard.js') }}"></script>
   <script src="{{ asset('asset/js/Chart.roundedBarCharts.js') }}"></script>
   <script src="{{ asset('asset/jqueryajax/toast.js') }}"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- End custom js for this page-->
   
  </body>

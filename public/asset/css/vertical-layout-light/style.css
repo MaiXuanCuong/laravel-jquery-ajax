@@ -27834,7 +27834,7 @@ table.dataTable tbody td.select-checkbox:after {
   border: 1px solid #dee2e6;
 }
 
-/* SweetAlert */
+SweetAlert
 .swal2-container {
   z-index: 1500;
 }
@@ -27862,7 +27862,7 @@ table.dataTable tbody td.select-checkbox:after {
 .swal2-modal .swal2-icon,
 .swal2-modal .swal2-success-ring {
   margin-top: 0;
-  margin-bottom: 42px;
+  /* margin-bottom: 42px; */
 }
 
 .swal2-modal .swal2-buttonswrapper {

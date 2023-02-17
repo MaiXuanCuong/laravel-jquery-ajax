@@ -23,15 +23,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $users = $this->model->select('*');
         return $users->orderBy('id', 'DESC')->paginate(100);
     }
-    public function search($request){
-        $users = $this->model->select('*');
-       
-        $users->where('name', 'like', '%'.$request.'%')
-        ->orWhere('phone','like', '%'.$request.'%')
-        ->orWhere('gender','like', '%'.$request.'%')
-        ->orWhere('email','like', '%'.$request.'%');
-        return $users->orderBy('id', 'DESC')->paginate(100);
-    }
+ 
     public function delete($id)
     {
         try {
@@ -80,7 +72,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
             // DB::commit();
             // Session::flash('success', 'Thêm nhân viên' . ' ' . $data->name . ' ' . 'thành công');
-            return true;
+            return $user;
         } catch (\Exception $e) {
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;

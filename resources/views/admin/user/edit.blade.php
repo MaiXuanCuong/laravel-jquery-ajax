@@ -114,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" onclick=updateUser(event) class="btn btn-primary me-2">Sửa</button>
+                    <button type="submit" id="confirmUpdateUser" class="btn btn-primary me-2">Sửa</button>
                     <button class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
                 </form>
             </div>

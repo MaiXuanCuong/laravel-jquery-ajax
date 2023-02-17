@@ -151,24 +151,6 @@ class CategoryController extends Controller
 
         }
     }
-    public function search(Request $request)
-    {
-        $category = $this->categoryService->search($request->search);
-        if ($category) {
-
-            return response()->json([
-                'category' => $category,
-                'status' => 200,
-            ]);
-        } else {
-
-            return response()->json([
-                'messeges' => 'Không tìm thấy',
-                'status' => 404,
-            ]);
-        }
-
-    }
     public function show($id)
     {
         $category = $this->categoryService->find($id);

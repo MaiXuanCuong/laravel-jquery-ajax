@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\User;
 use App\Models\Ward;
 use App\Services\User\UserServiceInterface;
 use Illuminate\Http\Request;
@@ -45,10 +44,6 @@ class UserController extends Controller
     public function getUser()
     {
         $users = $this->userService->all();
-        // $users = User::All();
-        // echo "<pre>";
-        // print_r($users);
-        // die();
         if($users){
             return response()->json([
                 'users' => $users,
@@ -67,6 +62,7 @@ class UserController extends Controller
         $user = $this->userService->create($request);
         if ($user) {
             return response()->json([
+                'user' => $user,
                 'status' => 200,
                 'messeges' => "Thêm thành công",
             ]);
@@ -210,22 +206,6 @@ class UserController extends Controller
         }
 
     }
-    public function search(Request $request)
-    {
-        $users = $this->userService->search($request->search);
-        if ($users) {
-            return response()->json([
-                'users' => $users,
-                'status' => 200,
-            ]);
-
-        } else {
-            return response()->json([
-                'messeges' => 'Tìm không thành công',
-                'status' => 404,
-            ]);
-        }
-
-    }
+  
 
 }
