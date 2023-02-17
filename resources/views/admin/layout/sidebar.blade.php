@@ -53,7 +53,7 @@
         </a>
         <div class="collapse" id="tables">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Danh sách nhà cung cấp</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('supplier.index') }}">Danh sách nhà cung cấp</a></li>
           </ul>
         </div>
       </li>

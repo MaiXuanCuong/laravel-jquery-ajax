@@ -16,7 +16,7 @@ class SupplierController extends Controller
 
     public function index(Request $request)
     {
-        // return view('');
+        return view('admin.supplier.index');
     }
 
     public function store(Request $request)
