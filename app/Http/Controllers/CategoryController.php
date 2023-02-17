@@ -26,6 +26,7 @@ class CategoryController extends Controller
         $category = $this->categoryService->create($request);
         if ($category) {
             return response()->json([
+                'category' => $category,
                 'status' => 200,
                 'messeges' => "Thêm thành công",
             ]);

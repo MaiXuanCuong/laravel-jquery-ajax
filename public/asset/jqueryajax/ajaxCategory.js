@@ -1,6 +1,22 @@
 $(document).ready(function () {
     getCategory();
 });
+$(document).ready(function(){
+    $("#search").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#index-categories tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  $(document).ready(function(){
+      $("#searchTrashcan").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#tbodyTrashCanCategory tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
 // ------
 function getCategory() {
     $.ajax({
@@ -19,12 +35,12 @@ function getCategory() {
                                <td class="text-danger">' +
                             category.name +
                             '</td>\
-                               <td><button style="text-align: center" class="badge badge-danger" onclick=editCategory(' +
+                               <td><button style="text-align: center" class="badge badge-danger" value=' +
                             category.id +
-                            ') id="editCategory">Sửa</button>\
-                               <button style="text-align: center" class="badge badge-danger" onclick=inforCategory(' +
+                            ' id="editCategory">Sửa</button>\
+                               <button style="text-align: center" class="badge badge-danger" value=' +
                             category.id +
-                            ') id="inforCategory">Chi tiết</button>\
+                            ' id="inforCategory">Chi tiết</button>\
                                <button style="text-align: center" class="badge badge-danger" value="' +
                             category.id +
                             '" id="deleteCategory">Xóa</button></td>\
@@ -39,131 +55,177 @@ function getCategory() {
 }
 // ------
 
+
+// -------
 $(document).on("click", "#deleteCategory", function (e) {
     e.preventDefault();
-    $("#confirm").val("");
-    var id = $(this).val();
-    $("#confirm-text").html("");
-    var node = document.createTextNode("Xóa danh mục này không?");
-    $("#confirm-text")[0].appendChild(node);
-    $("#confirm").val(id);
-    $("#confirm-true").addClass("confirmdeleteCategory");
-    $("#confirmCategoryModal").modal("show");
-});
-// ------
-$(document).on("click", "#restoreCategory", function (e) {
-    e.preventDefault();
-    $("#confirm").val("");
-    $("#trashCanCategoryModal").modal("hide");
-    var id = $(this).val();
-    $("#confirm-text").html("");
-    var node = document.createTextNode("khôi phục danh mục này không?");
-    $("#confirm-text")[0].appendChild(node);
-    $("#confirm").val(id);
-    $("#confirm-true").addClass("confirmrestoreCategory");
-    $("#confirmCategoryModal").modal("show");
-});
-// ------
-$(document).on("click", "#destroyCategory", function (e) {
-    e.preventDefault();
-    $("#confirm").val("");
-    $("#trashCanCategoryModal").modal("hide");
-    var id = $(this).val();
-    $("#confirm-text").html("");
-    var node = document.createTextNode("Xóa vĩnh viễn danh mục này không?");
-    $("#confirm-text")[0].appendChild(node);
-    $("#confirm").val(id);
-    $("#confirm-true").addClass("confirmdestroyCategory");
-    $("#confirmCategoryModal").modal("show");
-});
-// -------
-$(document).on("click", ".confirmdeleteCategory", function (e) {
-    e.preventDefault();
-    var id = $("#confirm").val();
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
+    let tr = $(this);
+    Swal.fire({
+        title: "Bạn có chắc chắn?",
+        text: "Bạn sẽ không thể hoàn tác này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Đúng vậy,Tôi đồng ý!",
+        cancelButtonText : "Hủy",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var id = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+            $.ajax({
+                type: "DELETE",
+                url: "/category/deleteCategory/" + id,
+                success: function (res) {
+                    if (res.status == 200) {
+                        tr.parent().parent().remove();
+                        Swal.fire(
+                            "Đã xóa!",
+                            "Xóa thành công",
+                            "success"
+                        );
+                    } else {
+                        Swal.fire(
+                            "Lỗi xãy ra!",
+                            "Xóa không thành công",
+                            "error"
+                        );
+                    }
+                },
+                error: function (e) {
+                    Swal.fire(
+                        "Lỗi xãy ra!",
+                        "Xóa không thành công",
+                        "error"
+                    );
+                },
+            });
+        }
     });
-    $.ajax({
-        type: "DELETE",
-        url: "/category/deleteCategory/" + id,
-        success: function (res) {
-            if (res.status == 200) {
-                showSuccess();
-                $("#confirm").val("");
-                $("#confirm-true").removeClass("confirmdeleteCategory");
-                getCategory();
-                $("#confirmCategoryModal").modal("hide");
-            } else {
-                showError();
-            }
-        },
-        error: function (e) {
-            showError();
-        },
-    });
+
 });
 // --------
-$(document).on("click", ".confirmrestoreCategory", function (e) {
+$(document).on("click", "#restoreCategory", function (e) {
     e.preventDefault();
-    var id = $("#confirm").val();
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    $.ajax({
-        type: "POST",
-        url: "/category/restoreCategory/" + id,
-        success: function (res) {
-            if (res.status == 200) {
-                getCategory();
-                showSuccess();
-                $("#confirm").val("");
-                $("#confirmCategoryModal").modal("hide");
-            } else {
-                showError();
-            }
-        },
-        error: function (e) {
-            showError();
-        },
-    });
-});
-// ------
-$(document).on("click", ".confirmdestroyCategory", function (e) {
-    e.preventDefault();
-    var id = $("#confirm").val();
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    $.ajax({
-        type: "DELETE",
-        url: "/category/destroyCategory/" + id,
-        success: function (res) {
-            if (res.status == 200) {
-                getCategory();
-                showSuccess();
-                $("#confirm").val("");
-                $("#confirmCategoryModal").modal("hide");
-            } else {
-                showError();
-            }
-        },
-        error: function (e) {
-            showError();
-        },
+    let tr = $(this);
+    Swal.fire({
+        title: "Bạn có chắc chắn?",
+        text: "Bạn sẽ không thể hoàn tác này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Đúng vậy,Tôi đồng ý!",
+        cancelButtonText : "Hủy",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var id = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+            $.ajax({
+                type: "POST",
+                url: "/category/restoreCategory/" + id,
+                success: function (res) {
+                    if (res.status == 200) {
+                        tr.parent().parent().remove();
+                        Swal.fire(
+                            "Đã khôi phục",
+                            "Khôi phục thành công",
+                            "success"
+                        );
+                    } else {
+                        Swal.fire(
+                            "Lỗi xãy ra!",
+                            "Khôi phục không thành công",
+                            "error"
+                        );
+                    }
+                },
+                error: function (e) {
+                    Swal.fire(
+                        "Lỗi xãy ra!",
+                        "Xóa không thành công",
+                        "error"
+                    );
+                },
+            });
+        }
     });
 });
 
+
+$(document).on("click", "#destroyCategory", function (e) {
+    e.preventDefault();
+    let tr = $(this);
+    Swal.fire({
+        title: "Bạn có chắc chắn?",
+        text: "Bạn sẽ không thể hoàn tác này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Đúng vậy,Tôi đồng ý!",
+        cancelButtonText : "Hủy",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var id = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+            $.ajax({
+                type: "DELETE",
+                url: "/category/destroyCategory/" + id,
+                success: function (res) {
+                    if (res.status == 200) {
+                        tr.parent().parent().remove();
+                        Swal.fire(
+                            "Đã xóa!",
+                            "Xóa thành công",
+                            "success"
+                        );
+                    } else {
+                        Swal.fire(
+                            "Lỗi xãy ra!",
+                            "Xóa không thành công",
+                            "error"
+                        );
+                    }
+                },
+                error: function (e) {
+                    Swal.fire(
+                        "Lỗi xãy ra!",
+                        "Xóa không thành công",
+                        "error"
+                    );
+                },
+            });
+        }
+    });
+
+});
+
 // ------
-function editCategory(category) {
+$(document).on("click", "#editCategory", function (e) {
+    e.preventDefault();
+    var id = $(this).val();
     $.ajax({
         type: "GET",
-        url: "/category/editCategory/" + category,
+        url: "/category/editCategory/" + id,
         success: function (res) {
             if (res.status == 200) {
                 let category = res.category;
@@ -186,10 +248,11 @@ function editCategory(category) {
             showError();
         },
     });
-}
+})
 // ------
-function updateCategory(event) {
-    event.preventDefault();
+$(document).on("click", "#confirmeditCategory", function (e) {
+    e.preventDefault();
+    var id = $(this).val();
     var name = $("#nameCategoryEdit").val();
     var description = CKEDITOR.instances.ckeditor1.getData();
     var haserrorEdit = false;
@@ -243,7 +306,7 @@ function updateCategory(event) {
             },
         });
     }
-}
+})
 // ------
 $(document).on("click", "#addCategory", function (e) {
     e.preventDefault();
@@ -297,7 +360,26 @@ $("#insertCategory").on("submit", function (e) {
                     CKEDITOR.instances.ckeditor.setData("");
                     $("#addCategoryModal").modal("hide");
                     $("#addCategoryModal").find("input").val("");
-                    getCategory();
+                    let category = res.category;
+                    $("#index-categories").prepend(
+                        '<tr>\
+                        <td><img style="width:100px; height:100px" src="' +
+                     category.image +
+                     '" alt=""></td>\
+                        <td class="text-danger">' +
+                     category.name +
+                     '</td>\
+                        <td><button style="text-align: center" class="badge badge-danger" value=' +
+                     category.id +
+                     ' id="editCategory">Sửa</button>\
+                        <button style="text-align: center" class="badge badge-danger" value=' +
+                     category.id +
+                     ' id="inforCategory">Chi tiết</button>\
+                        <button style="text-align: center" class="badge badge-danger" value="' +
+                     category.id +
+                     '" id="deleteCategory">Xóa</button></td>\
+                      </tr>'
+                    )
                     $("#blah").hide();
                     jQuery("#blah1").attr("src", "");
                     showSuccess();
@@ -333,6 +415,11 @@ $(document).ready(function () {
         }
     });
 });
+$(document).on("click", "#close-modal", function () {
+    getCategory();
+    $('#searchTrashcan').val("");
+    $("#trashCanCategoryModal").modal("hide");
+});
 // ------
 $(document).on("click", "#trashCanCategory", function (e) {
     e.preventDefault();
@@ -353,7 +440,7 @@ $(document).on("click", "#trashCanCategory", function (e) {
                             '</td>\
                     <td><button style="text-align: center" class="badge badge-danger" value="' +
                             category.id +
-                            '" id="restoreCategory">Lấy lại</button> &nbsp;&nbsp; \
+                            '" id="restoreCategory">Lấy lại</button> \
                     <button style="text-align: center" class="badge badge-danger" value="' +
                             category.id +
                             '" id="destroyCategory">Xóa vĩnh viễn</button></td>\
@@ -368,46 +455,9 @@ $(document).on("click", "#trashCanCategory", function (e) {
     });
 });
 // ------
-$(document).on("keyup", "#search", function (e) {
-    e.preventDefault();
-    let search = $("#search").val();
-    $.ajax({
-        url: "/category/searchCategory",
-        method: "GET",
-        data: {
-            search: search,
-        },
-        success: function (response) {
-            if (response.status == 200) {
-                $("#index-categories").html(" ");
-                $.each(response.category.data, function (index, category) {
-                    $("#index-categories").append(
-                        '<tr>\
-                    <td><img style="width:100px; height:100px" src="' +
-                            category.image +
-                            '" alt=""></td>\
-                    <td class="text-danger">' +
-                            category.name +
-                            '</td>\
-                    <td><button style="text-align: center" class="badge badge-danger" onclick=editCategory(' +
-                            category.id +
-                            ') id="editCategory">Sửa</button>\
-                    <button style="text-align: center" class="badge badge-danger" onclick=inforCategory(' +
-                            category.id +
-                            ') id="inforCategory">Chi tiết</button>\
-                    <button style="text-align: center" class="badge badge-danger" value="' +
-                            category.id +
-                            '" id="deleteCategory">Xóa</button></td>\
-                  </tr>'
-                    );
-                });
-            } else {
-                showError();
-            }
-        },
-    });
-});
-function inforCategory(id) {
+
+$(document).on("click", "#inforCategory", function (e) {
+    let id = $(this).val();
     $.ajax({
         url: "/category/inforCategory/" + id,
         method: "GET",
@@ -429,4 +479,4 @@ function inforCategory(id) {
         },
     }),
         $("#inforCategoryModal").modal("show");
-}
+})

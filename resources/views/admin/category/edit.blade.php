@@ -44,7 +44,7 @@
             </div>
          
             </div>
-            <button type="submit" onclick=updateCategory(event) class="btn btn-primary me-2">Sửa</button>
+            <button type="submit" id="confirmeditCategory" class="btn btn-primary me-2">Sửa</button>
             <button class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
           </form>
         </div>

@@ -27,6 +27,7 @@ function getUser() {
         success: function (response) {
             $("#index-users").html(" ");
             $.each(response.users.data, function (index, user) {
+                if (response.status == 200) {
                 $("#index-users").append(
                     '<tr>\
                            <td><img style="width:100px; height:100px" src="' +
@@ -58,7 +59,11 @@ function getUser() {
                         '" id="deleteUser">Xóa</button></td>\
                          </tr>'
                 );
+            } else {
+                showError();
+            }
             });
+            
         },
     });
 }
@@ -86,7 +91,7 @@ $(document).on("click", "#deleteUser", function (e) {
         cancelButtonText : "Hủy",
     }).then((result) => {
         if (result.isConfirmed) {
-            var id = $("#deleteUser").val();
+            var id = $(this).val();
             $.ajaxSetup({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -155,14 +160,14 @@ $(document).on("click", "#restoreUser", function (e) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
                         Swal.fire(
-                            "Đã xóa!",
-                            "Xóa thành công",
+                            "Đã khôi phục",
+                            "Khôi phục thành công",
                             "success"
                         );
                     } else {
                         Swal.fire(
                             "Lỗi xãy ra!",
-                            "Xóa không thành công",
+                            "Khôi phục không thành công",
                             "error"
                         );
                     }

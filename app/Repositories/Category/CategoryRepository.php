@@ -34,7 +34,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                 $category->image = $path;
             }
             $category->save();
-            return true;
+            return $category;
         } catch (\Exception$e) {
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
