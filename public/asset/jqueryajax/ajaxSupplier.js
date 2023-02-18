@@ -42,9 +42,9 @@ function getSupplier() {
                  <td class="text-danger">' +
                  supplier.address +
                  '</td>\
-                    <td><button style="text-align: center" class="badge badge-danger" value=' +
+                    <td><button style="text-align: center" class="badge badge-danger" value="' +
                  supplier.id +
-                 'id="editSupplier">Sửa</button>\
+                 '" id="editSupplier">Sửa</button>\
                     <button style="text-align: center" class="badge badge-danger" value="' +
                  supplier.id +
                  '" id="deleteSupplier">Xóa</button></td>\
@@ -225,12 +225,13 @@ $(document).on("click", "#addSupplier", function (e) {
 });
 // ------
 $(document).on("click", "#editSupplier", function (e) {
+    e.preventDefault();
     let id = $(this).val();
     $.ajax({
         type: "GET",
-        url: "/supplier/editSupplier/" + supplier,
+        url: "/supplier/editSupplier/" + id,
         dataType: "json",
-        success: function (response) {
+        success: function (res) {
             if (res.status == 200) {
                 $("#idSupplierEdit").val(res.supplier.id);
                 $("#nameSupplierEdit").val(res.supplier.name);
@@ -267,7 +268,6 @@ $(document).on("click", "#confirmUpdateSupplier", function (event) {
     var address = $("#addressSupplierEdit").val();
 
     var haserrorEdit = false;
-    var id = $("#idSupplierEdit").val();
     if (name == "") {
         $("#nameSupplierEditError").html("Vui Lòng Nhập Tên");
         haserrorEdit = true;
@@ -301,6 +301,7 @@ $(document).on("click", "#confirmUpdateSupplier", function (event) {
         });
     }
     if (haserrorEdit === false) {
+        var id = $("#idSupplierEdit").val();
         let formdata = new FormData($("#updateSupplier")[0]);
         $.ajaxSetup({
             headers: {
@@ -337,8 +338,7 @@ $("#insertSupplier").on("submit", function (e) {
     var name = $("#nameSupplier").val();
     var phone = $("#phoneSupplier").val();
     var email = $("#emailSupplier").val();
-    var gender = $("#genderSupplier").val();
-    var birthday = $("#birthdaySupplier").val();
+    var address = $("#addressSupplier").val();
     var haserror = false;
     if (name == "") {
         $("#nameSupplierAddError").html("Vui Lòng Nhập Tên");
@@ -382,7 +382,7 @@ $("#insertSupplier").on("submit", function (e) {
         });
         let formdata = new FormData($("#insertSupplier")[0]);
         $.ajax({
-            url: "/Supplier/storeSupplier",
+            url: "/supplier/storeSupplier",
             method: "post",
             data: formdata,
             contentType: false,

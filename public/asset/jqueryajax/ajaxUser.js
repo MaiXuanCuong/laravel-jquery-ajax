@@ -73,7 +73,15 @@ function myFunction(id) {
     copyText.select();
     copyText.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(copyText.value);
-    alert("Sao chép thành công: " + copyText.value);
+    Swal.fire({
+        title: "Sao chép thành công <br><br>"+copyText.value,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
 }
 // ------
 

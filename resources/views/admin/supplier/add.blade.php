@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tên nhân viên</label>
+                                <label class="col-sm-3 col-form-label">Tên nhà cung cấp</label>
                                 <div class="col-sm-9">
                                     <input type="text" id="nameSupplier" name="name" class="form-control"
                                         placeholder="Nhập họ và tên" />
@@ -33,97 +33,26 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Giới tính</label>
-                                <div class="col-sm-9">
-                                    <select id="genderSupplier" name="gender" class="form-control">
-                                        <option value="">--- Chọn giới tính --- </option>
-                                        <option value="Nam">Nam</option>
-                                        <option value="Nữ">Nữ</option>
-                                        <option value="Khác">Khác</option>
-                                    </select>
-                                    <div id="genderSupplierAddError" class="form-text text-danger error-msg"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Ngày sinh</label>
-                                <div class="col-sm-9">
-                                    <input type="date" id="birthdaySupplier" name="birthday" class="form-control"
-                                        placeholder="dd/mm/yyyy" />
-                                    <div id="birthdaySupplierAddError" class="form-text text-danger error-msg"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" id="emailSupplier" name="email"
-                                        placeholder="Nhập email" />
+                                    <input type="text" id="emailSupplier" name="email" class="form-control"
+                                    placeholder="Nhập số điện thoại" />
                                     <div id="emailSupplierAddError" class="form-text text-danger error-msg"></div>
                                 </div>
                             </div>
-                            <div class="d-flex flex-row align-items-center mb-4">
-                                <i class='fa fa-address-book fa-lg me-3 fa-fw'></i>
-                                <div class="form-outline flex-fill mb-0">
-
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Tỉnh/Thành Phố</label>
-                                                <select name="province_id" id="province_id"
-                                                    class="form-control province_id" aria-label="Default select example"
-                                                    data-toggle="select2">
-                                                    <option selected="" value="">Chọn Tỉnh/Thành Phố</option>
-                                                </select>
-                                                <div id="provincesSupplierAddError" class="form-text text-danger error-msg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Quận/Huyện</label>
-                                                <select name="district_id" id="district_id"
-                                                    class="form-control district_id"
-                                                    aria-label="Default select example">
-                                                    <option selected="" value="">Chọn Quận/Huyện</option>
-                                                </select>
-                                                <div id="districtsSupplierAddError" class="form-text text-danger error-msg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Xã/Phường</label>
-                                                <select name="ward_id" class="form-control ward_id"
-                                                    aria-label="Default select example" id="ward_id">
-                                                    <option selected="" value="">Chọn Xã/Phường</option>
-                                                </select>
-                                                <div id="wardsSupplierAddError" class="form-text text-danger error-msg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Ảnh</label>
+                                <label class="col-sm-3 col-form-label">Địa chỉ</label>
                                 <div class="col-sm-9">
-                                    <input accept="image/*" type='file' class="file-upload-default"
-                                        id="imageSupplier" name="inputFileAdd" />
-                                    <div id="imageSupplierAddError" class="form-text text-danger error-msg"></div>
+                                    <input type="text" id="addressSupplier" name="address" class="form-control"
+                                        placeholder="Nhập địa chỉ" />
+                                    <div id="addressSupplierAddError" class="form-text text-danger error-msg"></div>
                                 </div>
-                                <img type="hidden" width="90px" height="350px" id="blah" src=""
-                                    alt="" />
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary me-2">Thêm</button>
+                    <button type="submit" id="" class="btn btn-primary me-2">Thêm</button>
                     <button class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
                 </form>
             </div>

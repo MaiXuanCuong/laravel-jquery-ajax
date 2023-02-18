@@ -27,7 +27,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function delete($id)
     {
         try {
-            $user = $this->model->findOrFail($id);
+            $user = $this->model->find($id);
             $user->delete();
             return true;
         } catch (\Exception $e) {

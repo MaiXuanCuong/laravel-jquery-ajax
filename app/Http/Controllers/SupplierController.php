@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\Supplier\SupplierServiceInterface;
-use Exception;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -21,50 +20,151 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $this->supplierService->create($request);
-        } catch (\Exception $e) {
+
+        $supplier = $this->supplierService->create($request);
+        if ($supplier) {
+            return response()->json([
+                'supplier' => $supplier,
+                'status' => 200,
+                'messeges' => "Thêm thành công",
+            ]);
+
+        } else {
+            return response()->json([
+                'status' => 400,
+                "messeges" => 'Thêm không thành công',
+            ]);
+
+        }
+    }
+
+    public function getSupplier()
+    {
+        $suppliers = $this->supplierService->all();
+        if($suppliers){
+            return response()->json([
+                'suppliers' => $suppliers,
+                'status' => 200,
+            ]);
+        } else{
+            return response()->json([
+                'status' => 404,
+                "messeges" => 'Có lỗi xãy ra',
+            ]);
         }
     }
 
     public function edit($id)
     {
-        $item = $this->supplierService->find($id);
+        $supplier = $this->supplierService->find($id);
+        if ($supplier) {
+            return response()->json([
+                "supplier" => $supplier,
+                "status" => 200,
+            ]);
+
+        } else {
+
+            return response()->json([
+                "messeges" => 'Không tìm thấy nhà cung cấp',
+                "status" => 404,
+            ]);
+        }
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        try {
-            $this->supplierService->update($request, $id);
-        } catch (\Exception $e) {
+        $supplier = $this->supplierService->update($request, $id);
+        if ($supplier) {
+
+            return response()->json([
+                'messeges' => 'Cập nhật thành công',
+                "status" => 200,
+            ]);
+        } else {
+
+            return response()->json([
+                'messeges' => 'Cập nhật không thành công',
+                "status" => 400,
+            ]);
         }
     }
 
     public function destroy($id)
     {
-        try {
-            $category = $this->supplierService->delete( $id);
-        } catch (\Exception $e) {
+        $supplier = $this->supplierService->delete($id);
+        if ($supplier) {
+
+            return response()->json([
+                'messeges' => 'Xóa thành công',
+                "status" => 200,
+            ]);
+        } else {
+
+            return response()->json([
+                'messeges' => 'Xóa không thành công',
+                "status" => 404,
+            ]);
         }
+
     }
 
-    public function getTrashed(Request $request){
+    public function getTrashCan()
+    {
         $suppliers = $this->supplierService->getTrashed();
+        if ($suppliers) {
+
+            return response()->json([
+                'suppliers' => $suppliers,
+                'status' => 200,
+            ]);
+        } else {
+
+            return response()->json([
+                'messeges' => 'Có lỗi xãy ra',
+                'status' => 404,
+            ]);
+        }
+
     }
 
     public function restore($id)
     {
-        try {
-            $this->supplierService->restore($id);
-        } catch (\Exception $e) {
+
+        $supplier = $this->supplierService->restore($id);
+        if ($supplier) {
+            return response()->json([
+                'messeges' => "Khôi phục thành công",
+                'status' => 200,
+            ]);
+
+        } else {
+
+            return response()->json([
+                'messege' => 'Khôi phục không thành công',
+                'status' => 404,
+            ]);
         }
     }
 
     public function force_destroy($id)
     {
-        try {
-            $category = $this->supplierService->force_destroy( $id);
-        } catch (Exception $e) {
+
+        $supplier = $this->supplierService->force_destroy($id);
+
+        if ($supplier) {
+
+            return response()->json([
+                'messeges' => "Xóa thành công",
+                'status' => 200,
+            ]);
+
+        } else {
+
+            return response()->json([
+                'messeges' => 'Xóa không thành công',
+                'status' => 404,
+            ]);
         }
     }
 }

@@ -14,7 +14,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
     public function all()
     {
         $suppliers = $this->model->select('*');
-        return $suppliers->orderBy('id','DESC')->paginate(5);
+        return $suppliers->orderBy('id','DESC')->paginate(100);
     }
     public function create($data)
     {
@@ -25,8 +25,8 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
             $supplier->address = $data->address;
             $supplier->phone = $data->phone;
             $supplier->save();
-            return true;
-        } catch (\Exception$e) {
+            return $supplier;
+        } catch (\Exception $e) {
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
