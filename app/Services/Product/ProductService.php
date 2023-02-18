@@ -23,9 +23,9 @@ class ProductService extends BaseService implements ProductServiceInterface {
     {
         return $this->repository->delete($id);
     }
-    public function getTrashed($request)
+    public function getTrashed()
     {
-        return $this->repository->getTrashed($request);
+        return $this->repository->getTrashed();
     }
     public function restore($id){
         return $this->repository->restore($id);

@@ -14,7 +14,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
     public function all()
     {
         $suppliers = $this->model->select('*');
-        return $suppliers->orderBy('id','DESC')->paginate(100);
+        return $suppliers->orderBy('id','DESC')->get();
     }
     public function create($data)
     {
@@ -62,7 +62,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
       
        try {
         $query = $this->model->onlyTrashed();
-        return $query->orderBy('id','DESC')->paginate(100);
+        return $query->orderBy('id','DESC')->get();
        } catch (\Exception $e) {
         Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
         return false;

@@ -26,7 +26,7 @@ function getUser() {
         dataType: "json",
         success: function (response) {
             $("#index-users").html(" ");
-            $.each(response.users.data, function (index, user) {
+            $.each(response.users, function (index, user) {
                 if (response.status == 200) {
                 $("#index-users").append(
                     '<tr>\
@@ -699,7 +699,7 @@ $(document).on("click", "#trashCanUser", function (e) {
         success: function (response) {
             if (response.status == 200) {
                 $("#tbodyTrashCanUser").html(" ");
-                $.each(response.users.data, function (index, user) {
+                $.each(response.users, function (index, user) {
                     $("#tbodyTrashCanUser").append(
                         '<tr>\
                     <td><img style="width:100px; height:100px" src="' +

@@ -15,7 +15,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     public function all()
     {
         $categories = $this->model->select('*');
-        return $categories->orderBy('id', 'DESC')->paginate(100);
+        return $categories->orderBy('id', 'DESC')->get();
     }
     public function create($data)
     {
@@ -81,7 +81,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     {
         try {
             $category = $this->model->onlyTrashed();
-            return $category->orderBy('deleted_at', 'DESC')->paginate(100);
+            return $category->orderBy('deleted_at', 'DESC')->get();
         } catch (\Exception $e) {
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;

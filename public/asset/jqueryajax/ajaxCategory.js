@@ -26,7 +26,7 @@ function getCategory() {
         success: function (response) {
             if (response.status == 200) {
                 $("#index-categories").html(" ");
-                $.each(response.categories.data, function (index, category) {
+                $.each(response.categories, function (index, category) {
                     $("#index-categories").append(
                         '<tr>\
                                <td><img style="width:100px; height:100px" src="' +
@@ -429,7 +429,7 @@ $(document).on("click", "#trashCanCategory", function (e) {
         success: function (response) {
             if (response.status === 200) {
                 $("#tbodyTrashCanCategory").html(" ");
-                $.each(response.categories.data, function (index, category) {
+                $.each(response.categories, function (index, category) {
                     $("#tbodyTrashCanCategory").append(
                         '<tr>\
                     <td><img style="width:100px; height:100px" src="' +

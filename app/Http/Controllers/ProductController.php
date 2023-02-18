@@ -4,19 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Exports\ProductExport;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
-use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\User;
 use App\Services\Product\ProductServiceInterface;
-use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
@@ -27,37 +20,56 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $products = $this->productService->all($request);
-        $categories = Category::get();
-        $suppliers = Supplier::get();
-        $params = [
-            'categories' => $categories,
-            'suppliers' => $suppliers,
-            'products' => $products
-        ];
+        return view('admin.product.index');
+      
     }
 
     public function create()
     {
         $categories = Category::get();
         $suppliers = Supplier::get();
-        $params = [
+        return response()->json([
             'categories' => $categories,
             'suppliers' => $suppliers
-        ];
+        ]) ;
     }
 
     public function store(Request $request)
     {
-            $this->productService->create($request);
+           $product = $this->productService->create($request);
+           if ($product) {
+            return response()->json([
+                'product' => $product,
+                'status' => 200,
+                'messeges' => "Thêm thành công",
+            ]);
+
+        } else {
+            return response()->json([
+                'status' => 400,
+                "messeges" => 'Thêm không thành công',
+            ]);
+
+        }
     }
 
     public function show($id)
     {
         $product = $this->productService->find($id);
-        $users= User::all();
+        if ($product) {
+            return response()->json([
+                'product' => $product,
+                'status' => 200,
+            ]);
+
+        } else {
+            return response()->json([
+                "messeges" => 'Không tìm thấy sản phẩm',
+                'status' => 404,
+            ]);
+        }
     }
 
     public function edit($id)
@@ -65,43 +77,114 @@ class ProductController extends Controller
         $product = $this->productService->find($id);
         $categories = Category::get();
         $suppliers = Supplier::get();
-        $params = [
-            'categories' => $categories,
-            'product' => $product,
-            'suppliers' => $suppliers,
-        ];
+        if ($product) {
+            return response()->json([
+                "product" => $product,
+                "categories" => $categories,
+                "suppliers" => $suppliers,
+                "status" => 200,
+            ]);
+
+        } else {
+
+            return response()->json([
+                "messeges" => 'Không tìm thấy người dùng',
+                "status" => 404,
+            ]);
+        }
 
     }
 
     public function update(Request $request, $id)
     {
-            $data = $request->all();
-            $this->productService->update($id, $data);
+        $product = $this->productService->update($id, $request);
+            if ($product) {
+
+                return response()->json([
+                    'messeges' => 'Cập nhật thành công',
+                    "status" => 200,
+                ]);
+            } else {
+    
+                return response()->json([
+                    'messeges' => 'Cập nhật không thành công',
+                    "status" => 400,
+                ]);
+            }
     }
 
     public function destroy($id)
     {
-            $this->productService->delete($id);
+        $product =  $this->productService->delete($id);
+            if ($product) {
+
+                return response()->json([
+                    'messeges' => 'Xóa thành công',
+                    "status" => 200,
+                ]);
+            } else {
+    
+                return response()->json([
+                    'messeges' => 'Xóa không thành công',
+                    "status" => 404,
+                ]);
+            }
     }
-    public function getTrashed(Request $request)
+    public function getTrashCan()
     {
-        $products = $this->productService->getTrashed($request);
-        $categories = Category::get();
-        $suppliers = Supplier::get();
-        $params = [
-            'categories' => $categories,
-            'suppliers' => $suppliers,
-            'products' => $products
-        ];
+        $products = $this->productService->getTrashed();
+        if ($products) {
+
+            return response()->json([
+                'products' => $products,
+                'status' => 200,
+            ]);
+        } else {
+
+            return response()->json([
+                'messeges' => 'Có lỗi xãy ra',
+                'status' => 404,
+            ]);
+        }
+
+     
+      
     }
     public function restore($id)
     {
-            $this->productService->restore($id);
+        $product = $this->productService->restore($id);
+            if ($product) {
+                return response()->json([
+                    'messeges' => "Khôi phục thành công",
+                    'status' => 200,
+                ]);
+    
+            } else {
+    
+                return response()->json([
+                    'messege' => 'Khôi phục không thành công',
+                    'status' => 404,
+                ]);
+            }
     }
 
     public function force_destroy($id)
     {
-            $this->productService->force_destroy($id);
+        $product =   $this->productService->force_destroy($id);
+            if ($product) {
+
+                return response()->json([
+                    'messeges' => "Xóa thành công",
+                    'status' => 200,
+                ]);
+    
+            } else {
+    
+                return response()->json([
+                    'messeges' => 'Xóa không thành công',
+                    'status' => 404,
+                ]);
+            }
     }
     public function updateStatus($id, $status)
     {

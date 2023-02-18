@@ -26,7 +26,7 @@ function getSupplier() {
         dataType: "json",
         success: function (response) {
             $("#index-suppliers").html(" ");
-            $.each(response.suppliers.data, function (index, supplier) {
+            $.each(response.suppliers, function (index, supplier) {
                 if (response.status == 200) {
                 $("#index-suppliers").append(
                     '<tr>\
@@ -441,7 +441,7 @@ $(document).on("click", "#trashCanSupplier", function (e) {
         success: function (response) {
             if (response.status == 200) {
                 $("#tbodyTrashCanSupplier").html(" ");
-                $.each(response.suppliers.data, function (index, supplier) {
+                $.each(response.suppliers, function (index, supplier) {
                     $("#tbodyTrashCanSupplier").append(
                         '<tr>\
                 <td class="text-danger">' +

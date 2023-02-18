@@ -3,7 +3,6 @@
 namespace App\Repositories\User;
 use App\Repositories\BaseRepository;
 use App\Models\User;
-use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -11,7 +10,6 @@ use Illuminate\Support\Str;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
-    use StorageImageTrait;
 
     public function getModel()
     {
@@ -21,7 +19,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function all()
     {
         $users = $this->model->select('*');
-        return $users->orderBy('id', 'DESC')->paginate(100);
+        return $users->orderBy('id', 'DESC')->get();
     }
  
     public function delete($id)
@@ -115,7 +113,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function getTrashed()
     {   try {
         $users = $this->model->onlyTrashed();
-        return $users->orderBy('deleted_at', 'DESC')->paginate(100);
+        return $users->orderBy('deleted_at', 'DESC')->get();
       
     } catch (\Exception $e) {
         Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
