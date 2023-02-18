@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -51,4 +52,20 @@ Route::prefix('user')->group(function () {
         Route::post('/restoreSupplier/{id}', [SupplierController::class, 'restore'])->name('supplier.restore');
             Route::delete('/deleteSupplier/{id}',[SupplierController::class, 'destroy'])->name('supplier.destroy');
             Route::delete('/destroySupplier/{id}', [SupplierController::class, 'force_destroy'])->name('supplier.force_destroy');
+});
+Route::prefix('product')->group(function () {
+    Route::get('/',[ProductController::class, 'index'])->name('product.index');
+    Route::get('/getProduct',[ProductController::class, 'getProduct'])->name('product.getProduct');
+    Route::get('/editProduct/{id}',[ProductController::class, 'edit'])->name('product.edit');
+    Route::get('/searchProduct',[ProductController::class, 'search'])->name('product.search');
+    Route::get('/inforProduct/{id}',[ProductController::class, 'show'])->name('product.info');
+    Route::get('/getProvinces', [ProductController::class, 'getProvinces'])->name('product.getProvinces');
+    Route::get('/getDistricts', [ProductController::class, 'getDistricts'])->name('product.getDistricts');
+    Route::get('/getWards', [ProductController::class, 'getWards'])->name('product.getWards');
+    Route::get('/getTrashCanProduct', [ProductController::class, 'getTrashCan'])->name('product.getTrashCan');
+        Route::post('/storeProduct',[ProductController::class, 'store'])->name('product.store');
+        Route::post('/updateProduct/{id}',[ProductController::class, 'update'])->name('product.update');
+        Route::post('/restoreProduct/{id}', [ProductController::class, 'restore'])->name('product.restore');
+            Route::delete('/deleteProduct/{id}',[ProductController::class, 'destroy'])->name('product.destroy');
+            Route::delete('/destroyProduct/{id}', [ProductController::class, 'force_destroy'])->name('product.force_destroy');
 });
