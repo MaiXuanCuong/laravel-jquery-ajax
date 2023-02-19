@@ -5,7 +5,6 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,8 +18,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function all()
     {
         try {
-        $products = DB::table('products')->selectRaw('products.*,categories.name as name_category')->join('categories','categories.id','products.category_id');
-        return $products->orderBy('products.id', 'DESC')->get();
+        $query = $this->model->newQuery()->with('category')->orderBy('id', 'DESC');
+        $products = $query->get();
+       
+        return $products;
  
     } catch (\Exception $e) {
         Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
@@ -72,7 +73,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                     ]);
                 }
             }
-            return $product;
+           return Product::with('category')->find($product->id);
         } catch (\Exception $e) {
             if (isset($path) && !empty($path)) {
                 $images = str_replace('storage', 'public',  $path);
@@ -93,7 +94,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function update($id, $data)
     {
         try {
-            //create product
             $product = $this->model->find($id);
             $product->name = $data->name;
             $product->price = $data->price;
@@ -102,10 +102,11 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->description = $data->description;
             $product->supplier_id = $data->supplier_id;
             $product->category_id = $data->category_id;
-            $product->image = $data->image;
-            $fieldName = 'inputFileUpdate';
+            if($data->status == 1 || $data->status == 0){
+            $product->status = $data->status;
+            }
+            $fieldName = 'inputFile';
             if ($data->hasFile($fieldName)) {
-                $image = $product->image;
                 $fullFileNameOrigin = $data->file($fieldName)->getClientOriginalName();
                 $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
                 $extenshion = $data->file($fieldName)->getClientOriginalExtension();
@@ -115,46 +116,47 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 $product->image = $path;
             }
             $product->save();
-            if(isset($path)){
-                Storage::delete($image);
-            }
+
             //create product_images
-            $fieldProductImages = 'inputFileUpdateImage';
+            $arrImage = [];
+            $fieldProductImages = 'file_names';
             if ($data->hasFile($fieldProductImages)) {
                 $items = ProductImage::where('product_id', '=', $product->id)->get();
-                foreach($items as $item){
-                    $im = $item->image;
-                    Storage::delete($im);
-                }
-                ProductImage::where('product_id', '=', $product->id)->delete();
-                ProductImage::onlyTrashed()->where('product_id', '=', $product->id)->forceDelete();
-                foreach ($data['file_names'] as $key => $file_detail) {
-                    $fileExtension = $file_detail->getClientOriginalExtension();
-                    $fileName = time(); // create file name by curent time
-                    $newFileName =  $key .$fileName. '.' . $fileExtension;
-                    $file_detail->storeAs('public/images/product', $newFileName);
+                    foreach($items as $item){
+                        $im = str_replace('storage', 'public',  $item->image);
+                        Storage::delete($im);
+                    }
+                    ProductImage::where('product_id', '=', $product->id)->delete();
+                    ProductImage::onlyTrashed()->where('product_id', '=', $product->id)->forceDelete();
+                foreach ($data['file_names'] as $file_detail) {
+                    $fullFileNameOrigin = $file_detail->getClientOriginalName();
+                    $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
+                    $extenshion = $file_detail->getClientOriginalExtension();
+                    $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
+                    $paths = 'storage/' . $file_detail->storeAs('public/images/productsMany', $fileName);
+                    $paths = str_replace('public/', '', $paths);
+                    array_push($arrImage,$paths);
                     $product->product_images()->saveMany([
                         new ProductImage([
-                            'product_id' => $product->id,
-                            'image' => $newFileName,
+                            'image' => $paths,
                         ]),
                     ]);
                 }
             }
-            return true;
+            return Product::with('category')->find($product->id);
         } catch (\Exception $e) {
-            // if (isset($path) && !empty($path)) {
-            //     $images = str_replace('storage', 'public',  $path);
-            //     Storage::delete($images);
-            // }
-            // if (isset($paths) && !empty($arrImage)) {
-            //     foreach ($arrImage as $value) {
-            //         $images = str_replace('storage', 'public',  $value);
-            //         Storage::delete($images);
-            //     }
+            if (isset($path) && !empty($path)) {
+                $images = str_replace('storage', 'public',  $path);
+                Storage::delete($images);
+            }
+            if (isset($paths) && !empty($arrImage)) {
+                foreach ($arrImage as $value) {
+                    $images = str_replace('storage', 'public',  $value);
+                    Storage::delete($images);
+                }
                 
-            // }
-            Log::error($e->getMessage());
+            }
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
         return $product;
@@ -166,25 +168,37 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->delete();
             return true;
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
         return $product;
     }
     public function getTrashed()
     {
-        $products = $this->model->onlyTrashed();
-       
-        return $products->orderBy('id', 'DESC')->get();
+        try {
+            $query = $this->model->newQuery()->onlyTrashed()->with('category')->orderBy('id', 'DESC');
+            $products = $query->get();
+            return $products;
+        } catch (\Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            return false;
+        }
+     
     }
     public function restore($id)
-    {
-        $product = $this->model->withTrashed()->findOrFail($id);
+    {   
+        try {
+        $product = $this->model->onlyTrashed()->findOrFail($id);
         $product->restore();
         return $product;
+    } catch (\Exception $e) {
+        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        return false;
+    }
     }
     public function force_destroy($id)
     {
+        try {
         $product = $this->model->onlyTrashed()->findOrFail($id);
         $items = ProductImage::where('product_id', '=', $product->id)->get();
         foreach($items as $item){
@@ -205,5 +219,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         $product->forceDelete();
         return $product;
+    } catch (\Exception $e) {
+        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        return false;
+    }
     }
 }

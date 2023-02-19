@@ -29,10 +29,10 @@ function getProduct() {
             $.each(response.products, function (index, product) {
                 if (response.status == 200) {
                 $("#index-products").append(
-                    '<tr>\
+                    '<tr data-product-id="' + product.id + '">\
                            <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
                            <td class="text-danger">' + product.name +'</td>\
-                           <td class="text-danger">' +product.name_category +'</td>\
+                           <td class="text-danger">' +product.category.name +'</td>\
                            <td class="text-danger">' + product.price + '</td>\
                            <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
                            <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
@@ -319,79 +319,50 @@ $(document).on("click", "#editProduct", function (e) {
     });
 });
 // ------
-$(document).on("click", "#confirmUpdateProduct", function (event) {
+$(document).on("click", "#confirmUpdateProductEdit", function (event) {
     event.preventDefault();
-    var name = $("#nameProductEdit").val();
-    var phone = $("#phoneProductEdit").val();
-    var email = $("#emailProductEdit").val();
-    var gender = $("#genderProductEdit").val();
-    var birthday = $("#birthdayProductEdit").val();
-   
-    var haserrorEdit = false;
     var id = $("#idProductEdit").val();
-    if (name == "") {
-        $("#nameProductEditError").html("Vui Lòng Nhập Tên");
-        haserrorEdit = true;
-    }
-    if (phone == "") {
-        $("#phoneProductEditError").html("Hãy Nhập Số Điện Thoại");
-        haserrorEdit = true;
-    }
-    if (email == "") {
-        $("#emailProductEditError").html("Hãy Nhập email");
-        haserrorEdit = true;
-    }
-    if (gender == "") {
-        $("#genderProductEditError").html("Hãy Chọn Giới Tính");
-        haserrorEdit = true;
-    }
-    if (birthday == "") {
-        $("#birthdayProductEditError").html("Hãy Nhập Ngày Sinh");
-        haserrorEdit = true;
-    }
-
-    if (province == "") {
-        $("#provincesProductEditError").html("Hãy Chọn Tỉnh/Thành Phố");
-        haserrorEdit = true;
-    }
-    if (district == "") {
-        $("#districtsProductEditError").html("Hãy Chọn Quận/Huyện");
-        haserrorEdit = true;
-    }
-    if (ward == "") {
-        $("#wardProductEditError").html("Hãy Chọn Xã/Phường");
-        haserrorEdit = true;
-    }
+    var name = $("#nameProductEdit").val();
+    var price = $("#priceProductEdit").val();
+    var quantity = $("#quantityProductEdit").val();
+    var description = CKEDITOR.instances.ckeditor1.getData();
+    var supplier_id = $("#supplierProductEdit").val();
+    var category_id = $("#categoryProductEdit").val();
+    var type_gender = $("#type_genderProductEdit").val();
+    // var image = $("#imageProductEdit").val();
+    // var imageMany = $("#file_names").val();
+    var regex = /((^[0-9]{1,9}$)\b)/g;
+    var quantityRegex =  regex.test(quantity);
+    var regexs = /((^[0-9]{1,19}$)\b)/g;
+    var priceRegex =  regexs.test(price);
+    var haserrorEdit = false;
+    if (name == "") { $("#nameProductEditError").html("Vui Lòng Nhập Tên Sản Phẩm");haserrorEdit = true;}
+    if (price == "") { $("#priceProductEditError").html("Hãy Nhập Giá Sản Phẩm");haserrorEdit = true;}
+    if (!priceRegex && price != '')  { $("#priceProductEditError").html("Giá Sản Phẩm Quá Lớn");haserrorEdit = true;}
+    if (quantity == "") {$("#quantityProductEditError").html("Hãy Nhập Số Lượng Sản Phẩm");haserrorEdit = true;}
+    if (!quantityRegex && quantity != '') {$("#quantityProductEditError").html("Số Lượng Sản Phẩm Quá Lớn");haserrorEdit = true;}
+    if (description == "") {$("#descriptionProductEditError").html("Hãy Nhập Mô Tả Sản Phẩm"); haserrorEdit = true;}
+    if (supplier_id == "") { $("#supplierProductEditError").html("Hãy Chọn Nhà Cung Cấp"); haserrorEdit = true;}
+    // if (image == "") { $("#imageProductEditError").html("Hãy Nhập Chọn Ảnh");haserrorEdit = true; }
+    if (category_id == "") { $("#categoryProductEditError").html("Chọn Danh Mục");haserrorEdit = true;}
+    if (type_gender == "") { $("#type_genderProductEditError").html("Chọn Hạng Mục"); haserrorEdit = true;}
+    // if (imageMany == "") { $("#imageManyProductEditError").html("Chọn Ảnh Chi Tiết Sản Phẩm"); haserrorEdit = true;}
     if (haserrorEdit == true) {
         $("#editProductModal").change("shown.bs.modal", function () {
-            if ($("#name").val() != "") {
-                $("#nameProductEditError").empty();
-            }
-            if ($("#phone").val() != "") {
-                $("#phoneProductEditError").empty();
-            }
-            if ($("#email").val() != "") {
-                $("#emailProductEditError").empty();
-            }
-            if ($("#gender").val() != "") {
-                $("#genderProductEditError").empty();
-            }
-            if ($("#birthday").val() != "") {
-                $("#birthdayProductEditError").empty();
-            }
-            if ($("#province_edit_id").val() != "") {
-                $("#provincesProductEditError").empty();
-            }
-            if ($("#district_edit_id").val() != "") {
-                $("#districtsProductEditError").empty();
-            }
-            if ($("#ward_edit_id").val() != "") {
-                $("#wardProductEditError").empty();
-            }
+            if ($("#nameProductEdit").val() != "") { $("#nameProductEditError").empty();}
+            if ($("#priceProductEdit").val() != "") {$("#priceProductEditError").empty();}
+            if ($("#quantityProductEdit").val() != "") { $("#quantityProductEditError").empty();}
+            if ($("#supplierProductEdit").val() != "") { $("#supplierProductEditError").empty();}
+            if ($("#categoryProductEdit").val() != "") {$("#categoryProductEditError").empty();}
+            if ($("#imageProductEdit").val() != "") {$("#imageProductEditError").empty();}
+            if ($("#type_genderProductEdit").val() != "") { $("#type_genderProductEditError").empty();}
+            if ($("#file_name").val() != "") { $("#imageManyProductEditError").empty();}
+            if (CKEDITOR.instances.ckeditor1.getData() != "") {$("#descriptionProductEditError").empty();}
         });
     }
     if (haserrorEdit === false) {
-        let formdata = new FormData($("#updateProduct")[0]);
+        let formdata = new FormData($("#updateProductEdit")[0]);
+            formdata.append("description", description);
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -406,10 +377,35 @@ $(document).on("click", "#confirmUpdateProduct", function (event) {
 
             success: function (res) {
                 if (res.status == 200) {
+                    var product = res.product
                     $("#editProductModal").modal("hide");
                     $("#editProductModal").find("input").val("");
                     $("#editProductModal").find("select").val("");
-                    getProduct();
+                    // getProduct();
+
+
+                    // var $tr = $('tr[data-product-id="' + product.id + '"]');
+                    // var $newTr = $('<tr>')
+                    // .attr('data-product-id', product.id)
+                    // .append($('<td>').text(product.name))
+                    // .append($('<td>').text(product.price))
+                    // .append($('<td>').text(product.category.name));
+                    // $tr.replaceWith($newTr);
+                    var tr = $('tr[data-product-id="' + product.id + '"]');
+
+                    // Tạo HTML mới với thông tin sản phẩm đã cập nhật
+                    var html = '<tr data-product-id="' + product.id + '">\
+                                   <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
+                                   <td class="text-danger">' + product.name +'</td>\
+                                   <td class="text-danger">' + product.category.name +'</td>\
+                                   <td class="text-danger">' + product.price + '</td>\
+                                   <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
+                                   <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
+                                   <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
+                                 </tr>';
+                
+                    // Thay thế thẻ tr hiện tại bằng thẻ tr mới có thông tin sản phẩm đã cập nhật
+                    tr.replaceWith(html);
                     showSuccess();
                 } else {
                     showError();
@@ -484,18 +480,19 @@ $("#insertProduct").on("submit", function (e) {
                     let product = res.product;
                     $("#index-products").prepend(
                         '<tr>\
-                           <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
-                           <td class="text-danger">' + product.name +'</td>\
-                           <td class="text-danger">' + product.price + '</td>\
-                           <td><label class="badge badge-danger" ><input onclick="myFunction(' + product.id +')" id="copyPhone' +product.id +'" value="' + product.phone +'" hidden/>' + product.phone + '</label></td>\
-                           <td><button style="text-align: center" class="badge badge-danger" value="'+ product.id + '" id="editProduct">Sửa</button>\
-                           <button style="text-align: center" class="badge badge-danger" value=' +product.id +' id="inforProduct">Chi tiết</button>\
-                           <button style="text-align: center" class="badge badge-danger" value="' +product.id + '" id="deleteProduct">Xóa"</button></td>\
-                         </tr>'
+                        <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
+                        <td class="text-danger">' + product.name +'</td>\
+                        <td class="text-danger">' +product.category.name +'</td>\
+                        <td class="text-danger">' + product.price + '</td>\
+                        <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
+                        <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
+                        <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
+                      </tr>'
                     )
                     $("#blah").hide();
                     $('#insertProduct')[0].reset();
                     container.innerHTML = '';
+                    CKEDITOR.instances.ckeditor.setData("");
                     showSuccess();
                 } else {
                     showError();
@@ -546,33 +543,16 @@ $(document).on("click", "#trashCanProduct", function (e) {
                 $("#tbodyTrashCanProduct").html(" ");
                 $.each(response.products, function (index, product) {
                     $("#tbodyTrashCanProduct").append(
-                        '<tr>\
-                    <td><img style="width:100px; height:100px" src="' +
-                            product.image +
-                            '" alt=""></td>\
-                    <td class="text-danger">' +
-                            product.name +
-                            '</td>\
-                    <td class="text-danger">' +
-                            product.gender +
-                            '</td>\
-                    <td><label class="badge badge-danger" ><input onclick="myFunction(' +
-                            product.id +
-                            ')" id="copyPhone' +
-                            product.id +
-                            '" value="' +
-                            product.phone +
-                            '" hidden/>' +
-                            product.phone +
-                            '</label></td>\
-                    <td><button style="text-align: center" class="badge badge-danger" value="' +
-                            product.id +
-                            '" id="restoreProduct">Lấy lại</button>\
-                    <button style="text-align: center" class="badge badge-danger" value="' +
-                            product.id +
-                            '" id="destroyProduct">Xóa vĩnh viễn</button></td>\
-                </tr>'
+                    '<tr>\
+                        <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
+                        <td class="text-danger">' + product.name +'</td>\
+                        <td class="text-danger">' +product.category.name +'</td>\
+                        <td class="text-danger">' + product.price + '</td>\
+                        <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="restoreProduct">Lấy lại</button>\
+                        <button style="text-align: center" class="badge badge-danger" value="' + product.id +'" id="destroyProduct">Xóa vĩnh viễn</button></td>\
+                    </tr>'
                     );
+                 
                 });
                 $("#trashCanProductModal").modal("show");
             } else {

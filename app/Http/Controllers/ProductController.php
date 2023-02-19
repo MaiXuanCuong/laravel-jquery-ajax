@@ -118,6 +118,7 @@ class ProductController extends Controller
             if ($product) {
 
                 return response()->json([
+                    'product' => $product,
                     'messeges' => 'Cập nhật thành công',
                     "status" => 200,
                 ]);

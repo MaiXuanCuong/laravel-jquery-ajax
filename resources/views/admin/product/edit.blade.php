@@ -114,7 +114,7 @@
                                 <label class="col-sm-3 col-form-label">Ảnh sản phẩm</label>
                                 <div class="col-sm-9">
                                     <input accept="image/*" type='file' class="form-control"
-                                        id="imageProductEdit" name="inputFileEdit" />
+                                        id="imageProductEdit" name="inputFile" />
                                     <div id="imageProductEditError" class="form-text text-danger error-msg"></div>
                                     <img type="hidden" width="390px" height="350px" id="blah1" src=""
                                         alt="" />
