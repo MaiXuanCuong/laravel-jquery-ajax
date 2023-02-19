@@ -569,26 +569,43 @@ $(document).on("click", "#inforProduct", function (e) {
         method: "GET",
         success: function (products) {
             if (products.status == 200) {
+                // console.log(products.category);
                 product = products.product;
+                category = product.category;
+                supplier = product.supplier;
+                images = product.product_images;
                 $("#inforImageProduct").attr("src", product.image);
                 $("#inforNameProduct").html("");
                 var node = document.createTextNode(product.name);
                 $("#inforNameProduct")[0].appendChild(node);
-                $("#inforEmailProduct").html("");
-                var node = document.createTextNode(product.email);
-                $("#inforEmailProduct")[0].appendChild(node);
+                $("#inforCategoryProduct").html("");
+                var node = document.createTextNode(category.name);
+                $("#inforCategoryProduct")[0].appendChild(node);
 
-                $("#inforPhoneProduct").html("");
-                var node = document.createTextNode(product.phone);
-                $("#inforPhoneProduct")[0].appendChild(node);
+                $("#inforSupplierProduct").html("");
+                var node = document.createTextNode(supplier.phone);
+                $("#inforSupplierProduct")[0].appendChild(node);
+
+                $("#inforPriceProduct").html("");
+                var node = document.createTextNode(product.price);
+                $("#inforPriceProduct")[0].appendChild(node);
+
+                $("#inforQuantityProduct").html("");
+                var node = document.createTextNode(product.quantity);
+                $("#inforQuantityProduct")[0].appendChild(node);
+
+                $("#inforStatusProduct").html("");
+
+                var sts = product.status ? 'Hiện' : 'Ẩn';
+                var node = document.createTextNode(sts);
+                $("#inforStatusProduct")[0].appendChild(node);
 
                 $("#inforGenderProduct").html("");
-                var node = document.createTextNode(product.gender);
+                var gender = product.type_gender == 'All' ? "Nam/Nữ" : product.type_gender
+                var node = document.createTextNode(gender);
                 $("#inforGenderProduct")[0].appendChild(node);
 
-                $("#inforBirthdayProduct").html("");
-                var node = document.createTextNode(product.birthday);
-                $("#inforBirthdayProduct")[0].appendChild(node);
+
                 $("#inforProductModal").modal("show");
             } else {
                 showError();

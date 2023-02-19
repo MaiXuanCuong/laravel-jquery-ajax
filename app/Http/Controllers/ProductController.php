@@ -76,7 +76,8 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = $this->productService->find($id);
+        // $product = $this->productService->find($id);
+        $product = Product::with(['category', 'supplier', 'product_images'])->find($id);
         if ($product) {
             return response()->json([
                 'product' => $product,

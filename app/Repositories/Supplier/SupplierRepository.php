@@ -62,7 +62,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
       
        try {
         $query = $this->model->onlyTrashed();
-        return $query->orderBy('id','DESC')->get();
+        return $query->orderBy('deleted_at','DESC')->get();
        } catch (\Exception $e) {
         Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
         return false;

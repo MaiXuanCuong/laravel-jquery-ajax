@@ -176,7 +176,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function getTrashed()
     {
         try {
-            $query = $this->model->newQuery()->onlyTrashed()->with('category')->orderBy('id', 'DESC');
+            $query = $this->model->newQuery()->onlyTrashed()->with('category')->orderBy('deleted_at', 'DESC');
             $products = $query->get();
             return $products;
         } catch (\Exception $e) {
