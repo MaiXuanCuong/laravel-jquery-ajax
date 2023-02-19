@@ -31,6 +31,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->description = $data->description;
             $product->supplier_id = $data->supplier_id;
             $product->category_id = $data->category_id;
+            if($data->status == 1 || $data->status == 0){
+            $product->status = $data->status;
+            }
             $fieldName = 'inputFileAdd';
             if ($data->hasFile($fieldName)) {
                 $fullFileNameOrigin = $data->file($fieldName)->getClientOriginalName();
@@ -44,14 +47,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->save();
 
             //create product_images
-            $fieldProductImages = 'inputFileAddImage';
+            $fieldProductImages = 'file_names';
             if ($data->hasFile($fieldProductImages)) {
                 foreach ($data['file_names'] as $key => $file_detail) {
                     $fullFileNameOrigin = $data->file($fieldName)->getClientOriginalName();
                     $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
                     $extenshion = $data->file($fieldName)->getClientOriginalExtension();
                     $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
-                    $path = 'storage/' . $data->file($fieldName)->storeAs('public/images/users', $fileName);
+                    $path = 'storage/' . $data->file($fieldName)->storeAs('public/images/products', $fileName);
                     $path = str_replace('public/', '', $path);
                     $product->product_images()->saveMany([
                         new ProductImage([

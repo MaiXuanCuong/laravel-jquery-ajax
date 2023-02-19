@@ -35,7 +35,7 @@
                   <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Ảnh</label>
                 <div class="col-sm-9">
-                <input accept="image/*" type='file' class="file-upload-default" id="imageCategoryEdit" name="inputFileUpdate" />
+                <input accept="image/*" type='file' class="form-control" id="imageCategoryEdit" name="inputFileUpdate" />
                 <div id="imageCategoryEditError" class="form-text text-danger error-msg"></div>
               </div>
               <img type="hidden" width="90px" height="350px" id="blah1" src=""

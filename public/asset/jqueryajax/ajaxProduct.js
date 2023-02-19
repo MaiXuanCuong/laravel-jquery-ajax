@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    getUser();
+    getProduct();
 });
 //------
 $(document).ready(function(){
   $("#search").on("keyup", function() {
     var value = $(this).val().toLowerCase();
-    $("#index-users tr").filter(function() {
+    $("#index-products tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
@@ -13,50 +13,44 @@ $(document).ready(function(){
 $(document).ready(function(){
     $("#searchTrashcan").on("keyup", function() {
       var value = $(this).val().toLowerCase();
-      $("#tbodyTrashCanUser tr").filter(function() {
+      $("#tbodyTrashCanProduct tr").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
     });
   });
 // ------
-function getUser() {
+function getProduct() {
     $.ajax({
         type: "GET",
-        url: "/user/getUser",
+        url: "/product/getProduct",
         dataType: "json",
         success: function (response) {
-            $("#index-users").html(" ");
-            $.each(response.users, function (index, user) {
+            $("#index-products").html(" ");
+            $.each(response.products, function (index, product) {
                 if (response.status == 200) {
-                $("#index-users").append(
+                $("#index-products").append(
                     '<tr>\
                            <td><img style="width:100px; height:100px" src="' +
-                        user.image +
+                        product.image +
                         '" alt=""></td>\
                            <td class="text-danger">' +
-                        user.name +
+                        product.name +
                         '</td>\
                            <td class="text-danger">' +
-                        user.gender +
+                        product.price +
                         '</td>\
-                           <td><label class="badge badge-danger" ><input onclick="myFunction(' +
-                        user.id +
-                        ')" id="copyPhone' +
-                        user.id +
-                        '" value="' +
-                        user.phone +
-                        '" hidden/>' +
-                        user.phone +
-                        '</label></td>\
+                           <td>' +
+                        product.price +
+                        '</td>\
                            <td><button style="text-align: center" class="badge badge-danger" value="' +
-                        user.id +
-                        '" id="editUser">Sửa</button>\
+                        product.id +
+                        '" id="editProduct">Sửa</button>\
                            <button style="text-align: center" class="badge badge-danger" value=' +
-                        user.id +
-                        ' id="inforUser">Chi tiết</button>\
+                        product.id +
+                        ' id="inforProduct">Chi tiết</button>\
                            <button style="text-align: center" class="badge badge-danger" value="' +
-                        user.id +
-                        '" id="deleteUser">Xóa</button></td>\
+                        product.id +
+                        '" id="deleteProduct">Xóa</button></td>\
                          </tr>'
                 );
             } else {
@@ -67,25 +61,9 @@ function getUser() {
         },
     });
 }
-// ------
-function myFunction(id) {
-    var copyText = document.getElementById("copyPhone" + id);
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(copyText.value);
-    Swal.fire({
-        title: "Sao chép thành công <br><br>"+copyText.value,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      })
-}
-// ------
+// -------
 
-$(document).on("click", "#deleteUser", function (e) {
+$(document).on("click", "#deleteProduct", function (e) {
     e.preventDefault();
     let tr = $(this);
     Swal.fire({
@@ -109,7 +87,7 @@ $(document).on("click", "#deleteUser", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/user/deleteUser/" + id,
+                url: "/product/deleteProduct/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -139,7 +117,7 @@ $(document).on("click", "#deleteUser", function (e) {
 });
 // --------
 
-$(document).on("click", "#restoreUser", function (e) {
+$(document).on("click", "#restoreProduct", function (e) {
     e.preventDefault();
     let tr = $(this);
     Swal.fire({
@@ -163,7 +141,7 @@ $(document).on("click", "#restoreUser", function (e) {
             });
             $.ajax({
                 type: "POST",
-                url: "/user/restoreUser/" + id,
+                url: "/product/restoreProduct/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -192,7 +170,7 @@ $(document).on("click", "#restoreUser", function (e) {
     });
 });
 // ------
-$(document).on("click", "#destroyUser", function (e) {
+$(document).on("click", "#destroyProduct", function (e) {
     e.preventDefault();
     let tr = $(this);
     Swal.fire({
@@ -216,7 +194,7 @@ $(document).on("click", "#destroyUser", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/user/destroyUser/" + id,
+                url: "/product/destroyProduct/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -245,122 +223,46 @@ $(document).on("click", "#destroyUser", function (e) {
     });
 });
 // ------
-$(document).on("click", "#addUser", function (e) {
+$(document).on("click", "#addProduct", function (e) {
     e.preventDefault();
-    $("#addUserModal").modal("show");
-    $.ajax({
-        url: "/user/getProvinces",
-        type: "GET",
-        dataType: "json",
-        success: function (response) {
-            $.each(response.Provinces, function (index, Provinces) {
-                $("#province_id").append(
-                    '<option value="' +
-                        Provinces.id +
-                        '">' +
-                        Provinces.name +
-                        "</option>"
-                );
-            });
-        },
-    });
+    $("#addProductModal").modal("show");
 });
 // ------
-$(document).on("click", "#editUser", function (e) {
+$(document).on("click", "#editProduct", function (e) {
     let id = $(this).val();
-    $.ajax({
-        url: "/user/getProvinces",
-        type: "GET",
-        dataType: "json",
-        success: function (response) {
-            $.each(response.Provinces, function (index, Provinces) {
-                $("#province_edit_id").append(
-                    '<option value="' +
-                        Provinces.id +
-                        '">' +
-                        Provinces.name +
-                        "</option>"
-                );
-            });
-        },
-    });
+
 
     $.ajax({
         type: "GET",
-        url: "/user/editUser/" + id,
+        url: "/product/editProduct/" + id,
         success: function (res) {
             if (res.status == 200) {
-                $("#idUserEdit").val(res.user.id);
-                $("#nameUserEdit").val(res.user.name);
-                $("#phoneUserEdit").val(res.user.phone);
-                $("#emailUserEdit").val(res.user.email);
-                $("#genderUserEdit").val(res.user.gender);
-                $("#birthdayUserEdit").val(res.user.birthday);
-                $("#blah1").attr("src", res.user.image);
-                $.ajax({
-                    url: "/user/getDistricts",
-                    type: "GET",
-                    data: {
-                        province_id: res.user.province_id,
-                    },
-                    success: function (data) {
-                        $.each(data, function (key, v) {
-                            $("#district_edit_id").append(
-                                '<option value="' +
-                                    v.id +
-                                    '">' +
-                                    v.name +
-                                    "</option>"
-                            );
-                        });
-                    },
-                });
-                $.ajax({
-                    url: "/user/getWards",
-                    type: "GET",
-                    data: {
-                        district_id: res.user.district_id,
-                    },
-                    success: function (data) {
-                        $.each(data, function (key, v) {
-                            $("#ward_edit_id").append(
-                                '<option value="' +
-                                    v.id +
-                                    '">' +
-                                    v.name +
-                                    "</option>"
-                            );
-                        });
-                    },
-                });
-                $("#province_edit_id").val(res.user.province_id);
-                $("#district_edit_id").val(res.user.district_id);
-                $("#ward_edit_id").val(res.user.ward_id);
+                $("#idProductEdit").val(res.product.id);
+                $("#nameProductEdit").val(res.product.name);
+                $("#phoneProductEdit").val(res.product.phone);
+                $("#emailProductEdit").val(res.product.email);
+                $("#genderProductEdit").val(res.product.gender);
+                $("#birthdayProductEdit").val(res.product.birthday);
+                $("#blah1").attr("src", res.product.image);
+          
+            
                 if ($("#name").val() != "") {
-                    $("#nameUserEditError").empty();
+                    $("#nameProductEditError").empty();
                 }
                 if ($("#phone").val() != "") {
-                    $("#phoneUserEditError").empty();
+                    $("#phoneProductEditError").empty();
                 }
                 if ($("#email").val() != "") {
-                    $("#emailUserEditError").empty();
+                    $("#emailProductEditError").empty();
                 }
                 if ($("#gender").val() != "") {
-                    $("#genderUserEditError").empty();
+                    $("#genderProductEditError").empty();
                 }
                 if ($("#birthday").val() != "") {
-                    $("#birthdayUserEditError").empty();
+                    $("#birthdayProductEditError").empty();
                 }
-                if ($("#province_edit_id").val() != "") {
-                    $("#provincesUserEditError").empty();
-                }
-                if ($("#district_edit_id").val() != "") {
-                    $("#districtsUserEditError").empty();
-                }
-                if ($("#ward_edit_id").val() != "") {
-                    $("#wardUserEditError").empty();
-                }
-                $("#editUserModal").modal("show");
+             
+                $("#editProductModal").modal("show");
             }
         },
         error: function (err) {
@@ -369,81 +271,79 @@ $(document).on("click", "#editUser", function (e) {
     });
 });
 // ------
-$(document).on("click", "#confirmUpdateUser", function (event) {
+$(document).on("click", "#confirmUpdateProduct", function (event) {
     event.preventDefault();
-    var name = $("#nameUserEdit").val();
-    var phone = $("#phoneUserEdit").val();
-    var email = $("#emailUserEdit").val();
-    var gender = $("#genderUserEdit").val();
-    var birthday = $("#birthdayUserEdit").val();
-    var province = $("#province_edit_id").val();
-    var district = $("#district_edit_id").val();
-    var ward = $("#ward_edit_id").val();
+    var name = $("#nameProductEdit").val();
+    var phone = $("#phoneProductEdit").val();
+    var email = $("#emailProductEdit").val();
+    var gender = $("#genderProductEdit").val();
+    var birthday = $("#birthdayProductEdit").val();
+   
     var haserrorEdit = false;
-    var id = $("#idUserEdit").val();
+    var id = $("#idProductEdit").val();
     if (name == "") {
-        $("#nameUserEditError").html("Vui Lòng Nhập Tên");
+        $("#nameProductEditError").html("Vui Lòng Nhập Tên");
         haserrorEdit = true;
     }
     if (phone == "") {
-        $("#phoneUserEditError").html("Hãy Nhập Số Điện Thoại");
+        $("#phoneProductEditError").html("Hãy Nhập Số Điện Thoại");
         haserrorEdit = true;
     }
     if (email == "") {
-        $("#emailUserEditError").html("Hãy Nhập email");
+        $("#emailProductEditError").html("Hãy Nhập email");
         haserrorEdit = true;
     }
     if (gender == "") {
-        $("#genderUserEditError").html("Hãy Chọn Giới Tính");
+        $("#genderProductEditError").html("Hãy Chọn Giới Tính");
         haserrorEdit = true;
     }
     if (birthday == "") {
-        $("#birthdayUserEditError").html("Hãy Nhập Ngày Sinh");
+        $("#birthdayProductEditError").html("Hãy Nhập Ngày Sinh");
         haserrorEdit = true;
     }
 
     if (province == "") {
-        $("#provincesUserEditError").html("Hãy Chọn Tỉnh/Thành Phố");
+        $("#provincesProductEditError").html("Hãy Chọn Tỉnh/Thành Phố");
         haserrorEdit = true;
     }
     if (district == "") {
-        $("#districtsUserEditError").html("Hãy Chọn Quận/Huyện");
+        $("#districtsProductEditError").html("Hãy Chọn Quận/Huyện");
         haserrorEdit = true;
     }
     if (ward == "") {
-        $("#wardUserEditError").html("Hãy Chọn Xã/Phường");
+        $("#wardProductEditError").html("Hãy Chọn Xã/Phường");
         haserrorEdit = true;
     }
     if (haserrorEdit == true) {
-        $("#editUserModal").change("shown.bs.modal", function () {
+        $("#editProductModal").change("shown.bs.modal", function () {
             if ($("#name").val() != "") {
-                $("#nameUserEditError").empty();
+                $("#nameProductEditError").empty();
             }
             if ($("#phone").val() != "") {
-                $("#phoneUserEditError").empty();
+                $("#phoneProductEditError").empty();
             }
             if ($("#email").val() != "") {
-                $("#emailUserEditError").empty();
+                $("#emailProductEditError").empty();
             }
             if ($("#gender").val() != "") {
-                $("#genderUserEditError").empty();
+                $("#genderProductEditError").empty();
             }
             if ($("#birthday").val() != "") {
-                $("#birthdayUserEditError").empty();
+                $("#birthdayProductEditError").empty();
             }
             if ($("#province_edit_id").val() != "") {
-                $("#provincesUserEditError").empty();
+                $("#provincesProductEditError").empty();
             }
             if ($("#district_edit_id").val() != "") {
-                $("#districtsUserEditError").empty();
+                $("#districtsProductEditError").empty();
             }
             if ($("#ward_edit_id").val() != "") {
-                $("#wardUserEditError").empty();
+                $("#wardProductEditError").empty();
             }
         });
     }
     if (haserrorEdit === false) {
-        let formdata = new FormData($("#updateUser")[0]);
+        let formdata = new FormData($("#updateProduct")[0]);
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -451,17 +351,17 @@ $(document).on("click", "#confirmUpdateUser", function (event) {
         });
         $.ajax({
             type: "POST",
-            url: "/user/updateUser/" + id,
+            url: "/product/updateProduct/" + id,
             data: formdata,
             contentType: false,
             processData: false,
 
             success: function (res) {
                 if (res.status == 200) {
-                    $("#editUserModal").modal("hide");
-                    $("#editUserModal").find("input").val("");
-                    $("#editUserModal").find("select").val("");
-                    getUser();
+                    $("#editProductModal").modal("hide");
+                    $("#editProductModal").find("input").val("");
+                    $("#editProductModal").find("select").val("");
+                    getProduct();
                     showSuccess();
                 } else {
                     showError();
@@ -474,83 +374,83 @@ $(document).on("click", "#confirmUpdateUser", function (event) {
     }
 });
 // ------
-$("#insertUser").on("submit", function (e) {
+$("#insertProduct").on("submit", function (e) {
     e.preventDefault();
-    var name = $("#nameUser").val();
-    var phone = $("#phoneUser").val();
-    var email = $("#emailUser").val();
-    var gender = $("#genderUser").val();
-    var birthday = $("#birthdayUser").val();
-    var image = $("#imageUser").val();
-    var province = $("#province_id").val();
-    var district = $("#district_id").val();
-    var ward = $("#ward_id").val();
+    var name = $("#nameProduct").val();
+    var price = $("#priceProduct").val();
+    var quantity = $("#quantityProduct").val();
+    var description = $("#descriptionProduct").val();
+    var supplier_id = $("#supplierProduct").val();
+    var category_id = $("#categoryProduct").val();
+    var type_gender = $("#type_genderProduct").val();
+    var image = $("#imageProduct").val();
+    var imageMany = $("#file_name").val();
 
     var haserror = false;
     if (name == "") {
-        $("#nameUserAddError").html("Vui Lòng Nhập Tên");
+        $("#nameProductAddError").html("Vui Lòng Nhập Tên Sản Phẩm");
         haserror = true;
     }
-    if (phone == "") {
-        $("#phoneUserAddError").html("Hãy Nhập Số Điện Thoại");
+    if (price == "") {
+        $("#priceProductAddError").html("Hãy Nhập Giá Sản Phẩm");
         haserror = true;
     }
-    if (email == "") {
-        $("#emailUserAddError").html("Hãy Nhập email");
+    if (quantity == "") {
+        $("#quantityProductAddError").html("Hãy Nhập Số Lượng Sản Phẩm");
         haserror = true;
     }
-    if (gender == "") {
-        $("#genderUserAddError").html("Hãy Chọn Giới Tính");
+    if (description == "") {
+        $("#descriptionProductAddError").html("Hãy Nhập Mô Tả Sản Phẩm");
         haserror = true;
     }
-    if (birthday == "") {
-        $("#birthdayUserAddError").html("Hãy Nhập Ngày Sinh");
+    if (supplier_id == "") {
+        $("#supplierProductAddError").html("Hãy Chọn Nhà Cung Cấp");
         haserror = true;
     }
     if (image == "") {
-        $("#imageUserAddError").html("Hãy Nhập Chọn Ảnh");
+        $("#imageProductAddError").html("Hãy Nhập Chọn Ảnh");
         haserror = true;
     }
-    if (province == "") {
-        $("#provincesUserAddError").html("Chọn Tình/Thành Phố");
+    if (category_id == "") {
+        $("#categoryProductAddError").html("Chọn Danh Mục");
         haserror = true;
     }
-    if (district == "") {
-        $("#districtsUserAddError").html("Chọn Quận/Huyện");
+    if (type_gender == "") {
+        $("#type_genderProductAddError").html("Chọn Hạng Mục");
         haserror = true;
     }
-    if (ward == "") {
-        $("#wardsUserAddError").html("Chọn Xã/Phường");
+    if (imageMany == "") {
+        $("#imageManyProductAddError").html("Chọn Ảnh Chi Tiết Sản Phẩm");
         haserror = true;
     }
     if (haserror == true) {
-        $("#addUserModal").change("shown.bs.modal", function () {
+        $("#addProductModal").change("shown.bs.modal", function () {
             if ($("#name").val() != "") {
-                $("#nameUserAddError").empty();
+                $("#nameProductAddError").empty();
             }
             if ($("#phone").val() != "") {
-                $("#phoneUserAddError").empty();
+                $("#phoneProductAddError").empty();
             }
             if ($("#email").val() != "") {
-                $("#emailUserAddError").empty();
+                $("#emailProductAddError").empty();
             }
             if ($("#gender").val() != "") {
-                $("#genderUserAddError").empty();
+                $("#genderProductAddError").empty();
             }
             if ($("#birthday").val() != "") {
-                $("#birthdayUserAddError").empty();
+                $("#birthdayProductAddError").empty();
             }
             if ($("#image").val() != "") {
-                $("#imageUserAddError").empty();
+                $("#imageProductAddError").empty();
             }
             if ($("#province_id").val() != "") {
-                $("#provincesUserAddError").empty();
+                $("#provincesProductAddError").empty();
             }
             if ($("#district_id").val() != "") {
-                $("#districtsUserAddError").empty();
+                $("#districtsProductAddError").empty();
             }
             if ($("#ward_id").val() != "") {
-                $("#wardsUserAddError").empty();
+                $("#wardsProductAddError").empty();
             }
         });
     }
@@ -560,48 +460,48 @@ $("#insertUser").on("submit", function (e) {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
         });
-        let formdata = new FormData($("#insertUser")[0]);
+        let formdata = new FormData($("#insertProduct")[0]);
         $.ajax({
-            url: "/user/storeUser",
+            url: "/product/storeProduct",
             method: "post",
             data: formdata,
             contentType: false,
             processData: false,
             success: function (res) {
                 if (res.status == 200) {
-                    $("#addUserModal").modal("hide");
-                    $("#addUserModal").find("input").val("");
-                    $("#addUserModal").find("select").val("");
-                    let user = res.user;
-                    $("#index-users").prepend(
+                    $("#addProductModal").modal("hide");
+                    $("#addProductModal").find("input").val("");
+                    $("#addProductModal").find("select").val("");
+                    let product = res.product;
+                    $("#index-products").prepend(
                         '<tr>\
                            <td><img style="width:100px; height:100px" src="' +
-                        user.image +
+                        product.image +
                         '" alt=""></td>\
                            <td class="text-danger">' +
-                        user.name +
+                        product.name +
                         '</td>\
                            <td class="text-danger">' +
-                        user.gender +
+                        product.gender +
                         '</td>\
                            <td><label class="badge badge-danger" ><input onclick="myFunction(' +
-                        user.id +
+                        product.id +
                         ')" id="copyPhone' +
-                        user.id +
+                        product.id +
                         '" value="' +
-                        user.phone +
+                        product.phone +
                         '" hidden/>' +
-                        user.phone +
+                        product.phone +
                         '</label></td>\
                            <td><button style="text-align: center" class="badge badge-danger" value="' +
-                        user.id +
-                        '" id="editUser">Sửa</button>\
+                        product.id +
+                        '" id="editProduct">Sửa</button>\
                            <button style="text-align: center" class="badge badge-danger" value=' +
-                        user.id +
-                        ' id="inforUser">Chi tiết</button>\
+                        product.id +
+                        ' id="inforProduct">Chi tiết</button>\
                            <button style="text-align: center" class="badge badge-danger" value="' +
-                        user.id +
-                        '" id="deleteUser">Xóa"</button></td>\
+                        product.id +
+                        '" id="deleteProduct">Xóa"</button></td>\
                          </tr>'
                     )
                     $("#blah").hide();
@@ -618,57 +518,12 @@ $("#insertUser").on("submit", function (e) {
     }
 });
 // ------
-$(function () {
-    $(document).on("change", ".province_id, .add_user", function () {
-        var province_id = $(this).val();
-        $.ajax({
-            url: "/user/getDistricts",
-            type: "GET",
-            data: {
-                province_id: province_id,
-            },
-            success: function (data) {
-                let district = '<option value="">Chọn Quận/Huyện</option>';
-                $(".district_id").html(district);
-                let ward = '<option value="">Chọn Xã/Phường</option>';
-                $(".ward_id").html(ward);
-                $.each(data, function (key, v) {
-                    $(".district_id").append(
-                        '<option value="' + v.id + '">' + v.name + "</option>"
-                    );
-                });
-            },
-        });
-    });
-});
-// ------
-$(function () {
-    $(document).on("change", ".district_id, .add_user", function () {
-        var district_id = $(this).val();
-        $.ajax({
-            url: "/user/getWards",
-            type: "GET",
-            data: {
-                district_id: district_id,
-            },
-            success: function (data) {
-                var html = '<option value="">Chọn Xã/Phường</option>';
-                $(".ward_id").html(html);
-                $.each(data, function (key, v) {
-                    $(".ward_id").append(
-                        '<option value="' + v.id + '">' + v.name + "</option>"
-                    );
-                });
-            },
-        });
-    });
-});
-// ------
+
 $(document).ready(function () {
     if ($("#blah").hide()) {
         $("#blah").hide();
     }
-    $("#imageUser").change(function () {
+    $("#imageProduct").change(function () {
         $("#blah").show();
         const file = $(this)[0].files;
         if (file[0]) {
@@ -676,7 +531,7 @@ $(document).ready(function () {
             jQuery("#blah1").attr("src", URL.createObjectURL(file[0]));
         }
     });
-    $("#imageUserEdit").change(function () {
+    $("#imageProductEdit").change(function () {
         $("#blah1").show();
         const file = $(this)[0].files;
         if (file[0]) {
@@ -686,50 +541,50 @@ $(document).ready(function () {
 });
 //---------
 $(document).on("click", "#close-modal", function () {
-    getUser();
+    getProduct();
     $('#searchTrashcan').val("");
-    $("#trashCanUserModal").modal("hide");
+    $("#trashCanProductModal").modal("hide");
 });
 // ------
-$(document).on("click", "#trashCanUser", function (e) {
+$(document).on("click", "#trashCanProduct", function (e) {
     e.preventDefault();
     $.ajax({
-        url: "/user/getTrashCanUser",
+        url: "/product/getTrashCanProduct",
         type: "GET",
         success: function (response) {
             if (response.status == 200) {
-                $("#tbodyTrashCanUser").html(" ");
-                $.each(response.users, function (index, user) {
-                    $("#tbodyTrashCanUser").append(
+                $("#tbodyTrashCanProduct").html(" ");
+                $.each(response.products, function (index, product) {
+                    $("#tbodyTrashCanProduct").append(
                         '<tr>\
                     <td><img style="width:100px; height:100px" src="' +
-                            user.image +
+                            product.image +
                             '" alt=""></td>\
                     <td class="text-danger">' +
-                            user.name +
+                            product.name +
                             '</td>\
                     <td class="text-danger">' +
-                            user.gender +
+                            product.gender +
                             '</td>\
                     <td><label class="badge badge-danger" ><input onclick="myFunction(' +
-                            user.id +
+                            product.id +
                             ')" id="copyPhone' +
-                            user.id +
+                            product.id +
                             '" value="' +
-                            user.phone +
+                            product.phone +
                             '" hidden/>' +
-                            user.phone +
+                            product.phone +
                             '</label></td>\
                     <td><button style="text-align: center" class="badge badge-danger" value="' +
-                            user.id +
-                            '" id="restoreUser">Lấy lại</button>\
+                            product.id +
+                            '" id="restoreProduct">Lấy lại</button>\
                     <button style="text-align: center" class="badge badge-danger" value="' +
-                            user.id +
-                            '" id="destroyUser">Xóa vĩnh viễn</button></td>\
+                            product.id +
+                            '" id="destroyProduct">Xóa vĩnh viễn</button></td>\
                 </tr>'
                     );
                 });
-                $("#trashCanUserModal").modal("show");
+                $("#trashCanProductModal").modal("show");
             } else {
                 showError();
             }
@@ -737,34 +592,34 @@ $(document).on("click", "#trashCanUser", function (e) {
     });
 });
 // ------
-$(document).on("click", "#inforUser", function (e) {
+$(document).on("click", "#inforProduct", function (e) {
     let id = $(this).val();
     $.ajax({
-        url: "/user/inforUser/" + id,
+        url: "/product/inforProduct/" + id,
         method: "GET",
-        success: function (users) {
-            if (users.status == 200) {
-                user = users.user;
-                $("#inforImageUser").attr("src", user.image);
-                $("#inforNameUser").html("");
-                var node = document.createTextNode(user.name);
-                $("#inforNameUser")[0].appendChild(node);
-                $("#inforEmailUser").html("");
-                var node = document.createTextNode(user.email);
-                $("#inforEmailUser")[0].appendChild(node);
+        success: function (products) {
+            if (products.status == 200) {
+                product = products.product;
+                $("#inforImageProduct").attr("src", product.image);
+                $("#inforNameProduct").html("");
+                var node = document.createTextNode(product.name);
+                $("#inforNameProduct")[0].appendChild(node);
+                $("#inforEmailProduct").html("");
+                var node = document.createTextNode(product.email);
+                $("#inforEmailProduct")[0].appendChild(node);
 
-                $("#inforPhoneUser").html("");
-                var node = document.createTextNode(user.phone);
-                $("#inforPhoneUser")[0].appendChild(node);
+                $("#inforPhoneProduct").html("");
+                var node = document.createTextNode(product.phone);
+                $("#inforPhoneProduct")[0].appendChild(node);
 
-                $("#inforGenderUser").html("");
-                var node = document.createTextNode(user.gender);
-                $("#inforGenderUser")[0].appendChild(node);
+                $("#inforGenderProduct").html("");
+                var node = document.createTextNode(product.gender);
+                $("#inforGenderProduct")[0].appendChild(node);
 
-                $("#inforBirthdayUser").html("");
-                var node = document.createTextNode(user.birthday);
-                $("#inforBirthdayUser")[0].appendChild(node);
-                $("#inforUserModal").modal("show");
+                $("#inforBirthdayProduct").html("");
+                var node = document.createTextNode(product.birthday);
+                $("#inforBirthdayProduct")[0].appendChild(node);
+                $("#inforProductModal").modal("show");
             } else {
                 showError();
             }

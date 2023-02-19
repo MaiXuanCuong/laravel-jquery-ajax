@@ -8967,6 +8967,7 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  cursor:pointer;
 }
 
 button,
@@ -11226,7 +11227,9 @@ textarea.form-control-lg {
   border: 1px solid #ced4da;
   border-radius: 2px;
 }
-
+select{
+  color: black !important;
+}
 .input-group-lg > .form-control, .input-group-lg > .asColorPicker-input, .dataTables_wrapper .input-group-lg > select, .select2-container--default .input-group-lg > .select2-selection--single, .select2-container--default .select2-selection--single .input-group-lg > .select2-search__field, .input-group-lg > .typeahead,
 .input-group-lg > .tt-query,
 .input-group-lg > .tt-hint,

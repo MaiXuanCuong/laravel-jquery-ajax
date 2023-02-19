@@ -105,7 +105,7 @@
                             <div class="form-group row">
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Ảnh</label>
-                                    <input accept="image/*" type='file' class="file-upload-default"
+                                    <input accept="image/*" type='file' class="form-control"
                                         id="imageUserEdit" name="inputFileUpdate" />
                                     <div id="imageUserEditError" class="form-text text-danger error-msg"></div>
                                 </div>

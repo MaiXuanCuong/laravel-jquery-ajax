@@ -2,21 +2,21 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Chỉnh sửa nhân viên</h4>
-                <form id="updateUser" class="form-sample" method="POST" enctype="multipart/form-data">
+                <h4 class="card-title">Chỉnh sửa sản phẩm</h4>
+                <form id="updateProduct" class="form-sample" method="POST" enctype="multipart/form-data">
                     @csrf
                     <p class="card-description">
-                        Thông tin nhân viên
+                        Thông tin sản phẩm
                     </p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tên nhân viên</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="idUserEdit" class="form-control" hidden />
-                                    <input type="text" id="nameUserEdit" name="name" class="form-control"
+                                    <input type="text" id="idProductEdit" class="form-control" hidden />
+                                    <input type="text" id="nameProductEdit" name="name" class="form-control"
                                         placeholder="Nhập họ và tên" />
-                                    <div id="nameUserEditError" class="form-text text-danger error-msg"></div>
+                                    <div id="nameProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
                             </div>
                         </div>
@@ -24,9 +24,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Số điện thoại</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="phoneUserEdit" name="phone" class="form-control"
+                                    <input type="text" id="phoneProductEdit" name="phone" class="form-control"
                                         placeholder="Nhập số điện thoại" />
-                                    <div id="phoneUserEditError" class="form-text text-danger error-msg"></div>
+                                    <div id="phoneProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
                             </div>
                         </div>
@@ -36,13 +36,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Giới tính</label>
                                 <div class="col-sm-9">
-                                    <select id="genderUserEdit" name="gender" class="form-control">
+                                    <select id="genderProductEdit" name="gender" class="form-control">
                                         <option value="">--- Chọn giới tính --- </option>
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
                                         <option value="Khác">Khác</option>
                                     </select>
-                                    <div id="genderUserEditError" class="form-text text-danger error-msg"></div>
+                                    <div id="genderProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
                             </div>
                         </div>
@@ -50,9 +50,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Ngày sinh</label>
                                 <div class="col-sm-9">
-                                    <input type="date" id="birthdayUserEdit" name="birthday" class="form-control"
+                                    <input type="date" id="birthdayProductEdit" name="birthday" class="form-control"
                                         placeholder="dd/mm/yyyy" />
-                                    <div id="birthdayUserEditError" class="form-text text-danger error-msg"></div>
+                                    <div id="birthdayProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
                             </div>
                         </div>
@@ -62,9 +62,9 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" name="email" id="emailUserEdit"
+                                    <input class="form-control" name="email" id="emailProductEdit"
                                         placeholder="Nhập email" />
-                                    <div id="emailUserEditError" class="form-text text-danger error-msg"></div>
+                                    <div id="emailProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -76,7 +76,7 @@
                                             <option selected="" value="">Chọn Tỉnh/Thành Phố</option>
 
                                         </select>
-                                        <div id="provincesUserEditError" class="form-text text-danger error-msg"></div>
+                                        <div id="provincesProductEditError" class="form-text text-danger error-msg"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -86,7 +86,7 @@
                                             id="district_edit_id">
 
                                         </select>
-                                        <div id="districtsUserEditError" class="form-text text-danger error-msg"></div>
+                                        <div id="districtsProductEditError" class="form-text text-danger error-msg"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -95,7 +95,7 @@
                                         <select name="ward_id" class="form-control ward_id" id="ward_edit_id">
 
                                         </select>
-                                        <div id="wardUserEditError" class="form-text text-danger error-msg"></div>
+                                        <div id="wardProductEditError" class="form-text text-danger error-msg"></div>
                                     </div>
                                 </div>
                             </div>
@@ -106,15 +106,15 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Ảnh</label>
                                     <input accept="image/*" type='file' class="file-upload-default"
-                                        id="imageUserEdit" name="inputFileUpdate" />
-                                    <div id="imageUserEditError" class="form-text text-danger error-msg"></div>
+                                        id="imageProductEdit" name="inputFileUpdate" />
+                                    <div id="imageProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
                                 <img type="hidden" width="90px" height="350px" id="blah1" src=""
                                     alt="" />
                             </div>
                         </div>
                     </div>
-                    <button type="submit" id="confirmUpdateUser" class="btn btn-primary me-2">Sửa</button>
+                    <button type="submit" id="confirmUpdateProduct" class="btn btn-primary me-2">Sửa</button>
                     <button class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
                 </form>
             </div>

@@ -267,10 +267,10 @@ $(document).on("click", "#confirmeditCategory", function (e) {
     }
     if (haserrorEdit == true) {
         $("#editCategoryModal").change("shown.bs.modal", function () {
-            if ($("#name").val() != "") {
+            if ($("#nameCategory").val() != "") {
                 $("#nameCategoryEditError").empty();
             }
-            if ($("#description").val() != "") {
+            if (CKEDITOR.instances.ckeditor.getData() != "") {
                 $("#descriptionCategoryEditError").empty();
             }
         });
@@ -317,6 +317,7 @@ $("#insertCategory").on("submit", function (e) {
     e.preventDefault();
     var name = $("#nameCategory").val();
     var image = $("#imageCategory").val();
+    var description = CKEDITOR.instances.ckeditor.getData();
     var haserror = false;
 
     if (name == "") {
@@ -328,14 +329,21 @@ $("#insertCategory").on("submit", function (e) {
         $("#imageCategoryAddError").html("Hãy Nhập Chọn Ảnh");
         haserror = true;
     }
+    if (description == "") {
+        $("#desciptionCategoryAddError").html("Hãy Nhập Mô Tả");
+        haserror = true;
+    }
     if (haserror == true) {
         $("#addCategoryModal").change("shown.bs.modal", function () {
-            if ($("#name").val() != "") {
+            if ($("#nameCategory").val() != "") {
                 $("#nameCategoryAddError").empty();
             }
 
-            if ($("#image").val() != "") {
+            if ($("#imageCategory").val() != "") {
                 $("#imageCategoryAddError").empty();
+            }
+            if (CKEDITOR.instances.ckeditor.getData() != "") {
+                $("#desciptionCategoryAddError").empty();
             }
         });
     }

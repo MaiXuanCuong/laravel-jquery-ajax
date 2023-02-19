@@ -266,7 +266,8 @@ $(document).on("click", "#confirmUpdateSupplier", function (event) {
     var phone = $("#phoneSupplierEdit").val();
     var email = $("#emailSupplierEdit").val();
     var address = $("#addressSupplierEdit").val();
-
+    var regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+    var phoneRegex =  regex.test(phone);
     var haserrorEdit = false;
     if (name == "") {
         $("#nameSupplierEditError").html("Vui Lòng Nhập Tên");
@@ -274,6 +275,10 @@ $(document).on("click", "#confirmUpdateSupplier", function (event) {
     }
     if (phone == "") {
         $("#phoneSupplierEditError").html("Hãy Nhập Số Điện Thoại");
+        haserrorEdit = true;
+    }
+    if (!phoneRegex && phone != "") {
+        $("#phoneSupplierEditError").html("Hãy Nhập Đúng Định Dạng");
         haserrorEdit = true;
     }
     if (email == "") {
@@ -286,16 +291,16 @@ $(document).on("click", "#confirmUpdateSupplier", function (event) {
     }
     if (haserrorEdit == true) {
         $("#editSupplierModal").change("shown.bs.modal", function () {
-            if ($("#name").val() != "") {
+            if ($("#nameSupplier").val() != "") {
                 $("#nameSupplierEditError").empty();
             }
-            if ($("#phone").val() != "") {
+            if ($("#phoneSupplier").val() != "") {
                 $("#phoneSupplierEditError").empty();
             }
-            if ($("#email").val() != "") {
+            if ($("#emailSupplier").val() != "") {
                 $("#emailSupplierEditError").empty();
             }
-            if ($("#address").val() != "") {
+            if ($("#addressSupplier").val() != "") {
                 $("#addressSupplierEditError").empty();
             }
         });
@@ -339,6 +344,8 @@ $("#insertSupplier").on("submit", function (e) {
     var phone = $("#phoneSupplier").val();
     var email = $("#emailSupplier").val();
     var address = $("#addressSupplier").val();
+    var regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+    var phoneRegex =  regex.test(phone);
     var haserror = false;
     if (name == "") {
         $("#nameSupplierAddError").html("Vui Lòng Nhập Tên");
@@ -346,6 +353,10 @@ $("#insertSupplier").on("submit", function (e) {
     }
     if (phone == "") {
         $("#phoneSupplierAddError").html("Hãy Nhập Số Điện Thoại");
+        haserror = true;
+    }
+    if (!phoneRegex  && phone != "") {
+        $("#phoneSupplierAddError").html("Hãy Nhập Đúng Định Dạng");
         haserror = true;
     }
     if (email == "") {
@@ -358,16 +369,16 @@ $("#insertSupplier").on("submit", function (e) {
     }
     if (haserror == true) {
         $("#addSupplierModal").change("shown.bs.modal", function () {
-            if ($("#name").val() != "") {
+            if ($("#nameSupplier").val() != "") {
                 $("#nameSupplierAddError").empty();
             }
-            if ($("#phone").val() != "") {
+            if ($("#phoneSupplier").val() != "") {
                 $("#phoneSupplierAddError").empty();
             }
-            if ($("#email").val() != "") {
+            if ($("#emailSupplier").val() != "") {
                 $("#emailSupplierAddError").empty();
             }
-            if ($("#address").val() != "") {
+            if ($("#addressSupplier").val() != "") {
                 $("#addressSupplierAddError").empty();
             }
            

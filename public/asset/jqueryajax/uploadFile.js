@@ -8,7 +8,7 @@ let files = [],
 browses.addEventListener('click', () => inputs.click());
 inputs.addEventListener('change', () => {
     // alert('vào đây chưa vậy');
-    console.log(1);
+    // console.log(1);
     let file = inputs.files;
     for (let i = 0; i < file.length; i++) {
         if (files.every(e => e.name !== file[i].name)) {
@@ -20,12 +20,12 @@ inputs.addEventListener('change', () => {
 })
 const showImages = () => {
     let images = '';
-    console.log(1);
+    // console.log(1);
     files.forEach((e, i) => {
-        console.log(e);
+        // console.log(e);
         images += `
-        <img style="width:90px; height:90px" src=" ${URL.createObjectURL(e)}" alt="image">
-        <span onclick="delImage(${i})">&times;</span>`
+        <img style="width:110px; height:110px" style="cursor:pointer" src=" ${URL.createObjectURL(e)}" alt="image">
+        <span style="cursor:pointer" onclick="delImage(${i})">&times;</span>`
     })
     container.innerHTML = images;
 }

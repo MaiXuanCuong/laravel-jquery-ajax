@@ -30,7 +30,7 @@
                           <div class="form-group row">
                                   <label class="col-sm-3 col-form-label">Ảnh</label>
                                   <div class="col-sm-9">
-                                  <input accept="image/*" type='file' class="file-upload-default"
+                                  <input accept="image/*" type='file' class="form-control"
                                       id="imageCategory" name="inputFileAdd" />
 
 

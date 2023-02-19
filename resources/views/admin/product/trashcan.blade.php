@@ -3,9 +3,9 @@
         <div class="card">
             <div class="card-body">
                
-                <h4 class="card-title">Danh sách nhân viên vi phạm</h4>
+                <h4 class="card-title">Danh sách sản phẩm bị xóa</h4>
                 <p class="card-description">
-                    Làm việc tại <code>Xuân Cường Shop</code>
+                    Có tại <code>Xuân Cường Shop</code>
                  
                           <input type="search" name="search" id="searchTrashcan" class="form-control" placeholder="Tìm kiếm" title="Search here">
                       
@@ -15,15 +15,15 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Ảnh Đại Diện</th>
-                                <th>Tên Nhân Viên</th>
-                                <th>Giới Tính</th>
-                                <th>Số Điện Thoại</th>
+                                <th>Ảnh sản phẩm</th>
+                                <th>Tên</th>
+                                <th>Danh mục</th>
+                                <th>Giá</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
 
-                        <tbody id="tbodyTrashCanUser">
+                        <tbody id="tbodyTrashCanProduct">
 
                         </tbody>
                     </table>

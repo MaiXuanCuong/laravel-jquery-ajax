@@ -380,6 +380,8 @@ $(document).on("click", "#confirmUpdateUser", function (event) {
     var province = $("#province_edit_id").val();
     var district = $("#district_edit_id").val();
     var ward = $("#ward_edit_id").val();
+    var regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+    var phoneRegex =  regex.test(phone);
     var haserrorEdit = false;
     var id = $("#idUserEdit").val();
     if (name == "") {
@@ -388,6 +390,10 @@ $(document).on("click", "#confirmUpdateUser", function (event) {
     }
     if (phone == "") {
         $("#phoneUserEditError").html("Hãy Nhập Số Điện Thoại");
+        haserrorEdit = true;
+    }
+    if (!phoneRegex && phone != "") {
+        $("#phoneUserEditError").html("Hãy Nhập Đúng Định Dạng");
         haserrorEdit = true;
     }
     if (email == "") {
@@ -417,19 +423,19 @@ $(document).on("click", "#confirmUpdateUser", function (event) {
     }
     if (haserrorEdit == true) {
         $("#editUserModal").change("shown.bs.modal", function () {
-            if ($("#name").val() != "") {
+            if ($("#nameUser").val() != "") {
                 $("#nameUserEditError").empty();
             }
-            if ($("#phone").val() != "") {
+            if ($("#phoneUser").val() != "") {
                 $("#phoneUserEditError").empty();
             }
-            if ($("#email").val() != "") {
+            if ($("#emailUser").val() != "") {
                 $("#emailUserEditError").empty();
             }
-            if ($("#gender").val() != "") {
+            if ($("#genderUser").val() != "") {
                 $("#genderUserEditError").empty();
             }
-            if ($("#birthday").val() != "") {
+            if ($("#birthdayUser").val() != "") {
                 $("#birthdayUserEditError").empty();
             }
             if ($("#province_edit_id").val() != "") {
@@ -486,7 +492,8 @@ $("#insertUser").on("submit", function (e) {
     var province = $("#province_id").val();
     var district = $("#district_id").val();
     var ward = $("#ward_id").val();
-
+    var regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+    var phoneRegex =  regex.test(phone);
     var haserror = false;
     if (name == "") {
         $("#nameUserAddError").html("Vui Lòng Nhập Tên");
@@ -494,6 +501,10 @@ $("#insertUser").on("submit", function (e) {
     }
     if (phone == "") {
         $("#phoneUserAddError").html("Hãy Nhập Số Điện Thoại");
+        haserror = true;
+    }
+    if (!phoneRegex && phone != "") {
+        $("#phoneUserAddError").html("Hãy Nhập Đúng Định Dạng");
         haserror = true;
     }
     if (email == "") {
@@ -526,22 +537,23 @@ $("#insertUser").on("submit", function (e) {
     }
     if (haserror == true) {
         $("#addUserModal").change("shown.bs.modal", function () {
-            if ($("#name").val() != "") {
+           
+            if ($("#nameUser").val() != "") {
                 $("#nameUserAddError").empty();
             }
-            if ($("#phone").val() != "") {
+            if ($("#phoneUser").val() != "") {
                 $("#phoneUserAddError").empty();
             }
-            if ($("#email").val() != "") {
+            if ($("#emailUser").val() != "") {
                 $("#emailUserAddError").empty();
             }
-            if ($("#gender").val() != "") {
+            if ($("#genderUser").val() != "") {
                 $("#genderUserAddError").empty();
             }
-            if ($("#birthday").val() != "") {
+            if ($("#birthdayUser").val() != "") {
                 $("#birthdayUserAddError").empty();
             }
-            if ($("#image").val() != "") {
+            if ($("#imageUser").val() != "") {
                 $("#imageUserAddError").empty();
             }
             if ($("#province_id").val() != "") {

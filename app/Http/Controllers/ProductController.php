@@ -25,6 +25,20 @@ class ProductController extends Controller
         return view('admin.product.index');
       
     }
+    public function getProduct(){
+        $products = $this->productService->all();
+        if($products){
+            return response()->json([
+                'products' => $products,
+                'status' => 200,
+            ]);
+        } else{
+            return response()->json([
+                'status' => 404,
+                "messeges" => 'Có lỗi xãy ra',
+            ]);
+        }
+    }
 
     public function create()
     {
