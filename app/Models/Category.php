@@ -10,4 +10,8 @@ use Illuminate\Notifications\Notifiable;
 class Category extends Model
 {
     use HasFactory ,Notifiable, SoftDeletes;
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

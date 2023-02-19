@@ -82,10 +82,9 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="{{ asset('asset/jqueryajax/ajaxProduct.js') }}"></script>
-    <script src="{{ asset('asset/jqueryajax/uploadFile.js') }}"></script>
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace('ckeditor');
-        // CKEDITOR.replace('ckeditor1');
+        CKEDITOR.replace('ckeditor1');
     </script>
 @endsection

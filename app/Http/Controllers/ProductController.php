@@ -93,14 +93,12 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = $this->productService->find($id);
-        $categories = Category::get();
-        $suppliers = Supplier::get();
-        if ($product) {
+        $products = $this->productService->find($id);
+        $productsImage = $products->product_images;
+        if ($products) {
             return response()->json([
-                "product" => $product,
-                "categories" => $categories,
-                "suppliers" => $suppliers,
+                "product" => $products,
+                "productsImage" => $productsImage,
                 "status" => 200,
             ]);
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('quantity');
-            $table->integer('price');
+            $table->bigInteger('price');
             $table->longText('description')->nullable();
             $table->string('image');
             $table->string('type_gender');

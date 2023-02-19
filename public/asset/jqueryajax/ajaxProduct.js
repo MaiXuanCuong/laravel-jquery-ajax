@@ -30,27 +30,13 @@ function getProduct() {
                 if (response.status == 200) {
                 $("#index-products").append(
                     '<tr>\
-                           <td><img style="width:100px; height:100px" src="' +
-                        product.image +
-                        '" alt=""></td>\
-                           <td class="text-danger">' +
-                        product.name +
-                        '</td>\
-                           <td class="text-danger">' +
-                        product.price +
-                        '</td>\
-                           <td>' +
-                        product.price +
-                        '</td>\
-                           <td><button style="text-align: center" class="badge badge-danger" value="' +
-                        product.id +
-                        '" id="editProduct">Sửa</button>\
-                           <button style="text-align: center" class="badge badge-danger" value=' +
-                        product.id +
-                        ' id="inforProduct">Chi tiết</button>\
-                           <button style="text-align: center" class="badge badge-danger" value="' +
-                        product.id +
-                        '" id="deleteProduct">Xóa</button></td>\
+                           <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
+                           <td class="text-danger">' + product.name +'</td>\
+                           <td class="text-danger">' +product.name_category +'</td>\
+                           <td class="text-danger">' + product.price + '</td>\
+                           <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
+                           <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
+                           <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
                          </tr>'
                 );
             } else {
@@ -223,28 +209,90 @@ $(document).on("click", "#destroyProduct", function (e) {
     });
 });
 // ------
+var files = []
 $(document).on("click", "#addProduct", function (e) {
     e.preventDefault();
+    
+    form = document.querySelector('form'),
+    container = document.querySelector('.container_image'),
+    browses = document.querySelector('.select'),
+    inputs = document.querySelector('.form_input input');
+    browses.addEventListener('click', () => inputs.click());
+    inputs.addEventListener('change', () => {
+    let file = inputs.files;
+    for (let i = 0; i < file.length; i++) {
+        if (files.every(e => e.name !== file[i].name)) {
+            files.push(file[i]);
+        }
+    }
+    form.reset();
+    showImages();
+    })
+   
+   
     $("#addProductModal").modal("show");
 });
+const showImages = () => {
+    let images = '';
+    files.forEach((e, i) => {
+        images += `
+        <img style="width:110px; height:110px" style="cursor:pointer" src=" ${URL.createObjectURL(e)}" alt="image">
+        <span style="cursor:pointer" onclick="delImage(${i})">&times;</span>`
+    })
+    container.innerHTML = images;
+    }
+const delImage = index => {
+    files.splice(index, 1)
+    showImages()
+    }
+    function changeImage(element) {
+    var main_prodcut_image = document.getElementById('main_product_image');
+    main_prodcut_image.src = element.src;
+    }
+
 // ------
 $(document).on("click", "#editProduct", function (e) {
+    files = []
     let id = $(this).val();
-
-
+    form = document.querySelector('form'),
+    container = document.querySelector('.container_image_edit'),
+    browses = document.querySelector('.selectEdit'),
+    inputs = document.querySelector('.form_input_edit input');
+    browses.addEventListener('click', () => inputs.click());
+    inputs.addEventListener('change', () => {
+    let file = inputs.files;
+    for (let i = 0; i < file.length; i++) {
+        if (files.every(e => e.name !== file[i].name)) {
+            files.push(file[i]);
+        }
+    }
+    form.reset();
+    showImages();
+    })
     $.ajax({
         type: "GET",
         url: "/product/editProduct/" + id,
         success: function (res) {
+            console.log(res);
             if (res.status == 200) {
                 $("#idProductEdit").val(res.product.id);
                 $("#nameProductEdit").val(res.product.name);
-                $("#phoneProductEdit").val(res.product.phone);
-                $("#emailProductEdit").val(res.product.email);
-                $("#genderProductEdit").val(res.product.gender);
-                $("#birthdayProductEdit").val(res.product.birthday);
+                $("#priceProductEdit").val(res.product.price);
+                $("#quantityProductEdit").val(res.product.quantity);
+                $("#type_genderProductEdit").val(res.product.type_gender);
+                $("#statusProductEdit").val(res.product.status);
+                $("#categoryProductEdit").val(res.product.category_id);
+                $("#supplierProductEdit").val(res.product.supplier_id);
+                CKEDITOR.instances.ckeditor1.setData(res.product.description);
                 $("#blah1").attr("src", res.product.image);
           
+                let imagesEdit = '';
+                res.productsImage.forEach((e, i) => {
+                    imagesEdit += `
+                    <img style="width:110px; height:110px" style="cursor:pointer" src=" ${e.image}" alt="image">`
+                })
+                container.innerHTML = imagesEdit;
+
             
                 if ($("#name").val() != "") {
                     $("#nameProductEditError").empty();
@@ -379,79 +427,39 @@ $("#insertProduct").on("submit", function (e) {
     var name = $("#nameProduct").val();
     var price = $("#priceProduct").val();
     var quantity = $("#quantityProduct").val();
-    var description = $("#descriptionProduct").val();
+    var description = CKEDITOR.instances.ckeditor.getData();
     var supplier_id = $("#supplierProduct").val();
     var category_id = $("#categoryProduct").val();
     var type_gender = $("#type_genderProduct").val();
     var image = $("#imageProduct").val();
     var imageMany = $("#file_name").val();
-
+    var regex = /((^[0-9]{1,9}$)\b)/g;
+    var quantityRegex =  regex.test(quantity);
+    var regexs = /((^[0-9]{1,19}$)\b)/g;
+    var priceRegex =  regexs.test(price);
     var haserror = false;
-    if (name == "") {
-        $("#nameProductAddError").html("Vui Lòng Nhập Tên Sản Phẩm");
-        haserror = true;
-    }
-    if (price == "") {
-        $("#priceProductAddError").html("Hãy Nhập Giá Sản Phẩm");
-        haserror = true;
-    }
-    if (quantity == "") {
-        $("#quantityProductAddError").html("Hãy Nhập Số Lượng Sản Phẩm");
-        haserror = true;
-    }
-    if (description == "") {
-        $("#descriptionProductAddError").html("Hãy Nhập Mô Tả Sản Phẩm");
-        haserror = true;
-    }
-    if (supplier_id == "") {
-        $("#supplierProductAddError").html("Hãy Chọn Nhà Cung Cấp");
-        haserror = true;
-    }
-    if (image == "") {
-        $("#imageProductAddError").html("Hãy Nhập Chọn Ảnh");
-        haserror = true;
-    }
-    if (category_id == "") {
-        $("#categoryProductAddError").html("Chọn Danh Mục");
-        haserror = true;
-    }
-    if (type_gender == "") {
-        $("#type_genderProductAddError").html("Chọn Hạng Mục");
-        haserror = true;
-    }
-    if (imageMany == "") {
-        $("#imageManyProductAddError").html("Chọn Ảnh Chi Tiết Sản Phẩm");
-        haserror = true;
-    }
+    if (name == "") { $("#nameProductAddError").html("Vui Lòng Nhập Tên Sản Phẩm");haserror = true;}
+    if (price == "") { $("#priceProductAddError").html("Hãy Nhập Giá Sản Phẩm");haserror = true;}
+    if (!priceRegex && price != '')  { $("#priceProductAddError").html("Giá Sản Phẩm Quá Lớn");haserror = true;}
+    if (quantity == "") {$("#quantityProductAddError").html("Hãy Nhập Số Lượng Sản Phẩm");haserror = true;}
+    if (!quantityRegex && quantity != '') {$("#quantityProductAddError").html("Số Lượng Sản Phẩm Quá Lớn");haserror = true;}
+    if (description == "") {$("#descriptionProductAddError").html("Hãy Nhập Mô Tả Sản Phẩm"); haserror = true;}
+    if (supplier_id == "") { $("#supplierProductAddError").html("Hãy Chọn Nhà Cung Cấp"); haserror = true;}
+    if (image == "") { $("#imageProductAddError").html("Hãy Nhập Chọn Ảnh");haserror = true; }
+    if (category_id == "") { $("#categoryProductAddError").html("Chọn Danh Mục");haserror = true;}
+    if (type_gender == "") { $("#type_genderProductAddError").html("Chọn Hạng Mục"); haserror = true;}
+    if (imageMany == "") { $("#imageManyProductAddError").html("Chọn Ảnh Chi Tiết Sản Phẩm"); haserror = true;}
     if (haserror == true) {
         $("#addProductModal").change("shown.bs.modal", function () {
-            if ($("#name").val() != "") {
-                $("#nameProductAddError").empty();
-            }
-            if ($("#phone").val() != "") {
-                $("#phoneProductAddError").empty();
-            }
-            if ($("#email").val() != "") {
-                $("#emailProductAddError").empty();
-            }
-            if ($("#gender").val() != "") {
-                $("#genderProductAddError").empty();
-            }
-            if ($("#birthday").val() != "") {
-                $("#birthdayProductAddError").empty();
-            }
-            if ($("#image").val() != "") {
-                $("#imageProductAddError").empty();
-            }
-            if ($("#province_id").val() != "") {
-                $("#provincesProductAddError").empty();
-            }
-            if ($("#district_id").val() != "") {
-                $("#districtsProductAddError").empty();
-            }
-            if ($("#ward_id").val() != "") {
-                $("#wardsProductAddError").empty();
-            }
+            if ($("#nameProduct").val() != "") { $("#nameProductAddError").empty();}
+            if ($("#priceProduct").val() != "") {$("#priceProductAddError").empty();}
+            if ($("#quantityProduct").val() != "") { $("#quantityProductAddError").empty();}
+            if ($("#supplierProduct").val() != "") { $("#supplierProductAddError").empty();}
+            if ($("#categoryProduct").val() != "") {$("#categoryProductAddError").empty();}
+            if ($("#imageProduct").val() != "") {$("#imageProductAddError").empty();}
+            if ($("#type_genderProduct").val() != "") { $("#type_genderProductAddError").empty();}
+            if ($("#file_name").val() != "") { $("#imageManyProductAddError").empty();}
+            if (CKEDITOR.instances.ckeditor.getData() != "") {$("#descriptionProductAddError").empty();}
         });
     }
     if (haserror === false) {
@@ -461,6 +469,7 @@ $("#insertProduct").on("submit", function (e) {
             },
         });
         let formdata = new FormData($("#insertProduct")[0]);
+        formdata.append("description", description);
         $.ajax({
             url: "/product/storeProduct",
             method: "post",
@@ -475,37 +484,18 @@ $("#insertProduct").on("submit", function (e) {
                     let product = res.product;
                     $("#index-products").prepend(
                         '<tr>\
-                           <td><img style="width:100px; height:100px" src="' +
-                        product.image +
-                        '" alt=""></td>\
-                           <td class="text-danger">' +
-                        product.name +
-                        '</td>\
-                           <td class="text-danger">' +
-                        product.gender +
-                        '</td>\
-                           <td><label class="badge badge-danger" ><input onclick="myFunction(' +
-                        product.id +
-                        ')" id="copyPhone' +
-                        product.id +
-                        '" value="' +
-                        product.phone +
-                        '" hidden/>' +
-                        product.phone +
-                        '</label></td>\
-                           <td><button style="text-align: center" class="badge badge-danger" value="' +
-                        product.id +
-                        '" id="editProduct">Sửa</button>\
-                           <button style="text-align: center" class="badge badge-danger" value=' +
-                        product.id +
-                        ' id="inforProduct">Chi tiết</button>\
-                           <button style="text-align: center" class="badge badge-danger" value="' +
-                        product.id +
-                        '" id="deleteProduct">Xóa"</button></td>\
+                           <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
+                           <td class="text-danger">' + product.name +'</td>\
+                           <td class="text-danger">' + product.price + '</td>\
+                           <td><label class="badge badge-danger" ><input onclick="myFunction(' + product.id +')" id="copyPhone' +product.id +'" value="' + product.phone +'" hidden/>' + product.phone + '</label></td>\
+                           <td><button style="text-align: center" class="badge badge-danger" value="'+ product.id + '" id="editProduct">Sửa</button>\
+                           <button style="text-align: center" class="badge badge-danger" value=' +product.id +' id="inforProduct">Chi tiết</button>\
+                           <button style="text-align: center" class="badge badge-danger" value="' +product.id + '" id="deleteProduct">Xóa"</button></td>\
                          </tr>'
                     )
                     $("#blah").hide();
-                    jQuery("#blah1").attr("src", "");
+                    $('#insertProduct')[0].reset();
+                    container.innerHTML = '';
                     showSuccess();
                 } else {
                     showError();

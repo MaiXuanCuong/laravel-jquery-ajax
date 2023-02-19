@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,8 +18,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     }
     public function all()
     {
-        $products = $this->model->select('*');
-        return $products->orderBy('id', 'DESC')->get();
+        try {
+        $products = DB::table('products')->selectRaw('products.*,categories.name as name_category')->join('categories','categories.id','products.category_id');
+        return $products->orderBy('products.id', 'DESC')->get();
+ 
+    } catch (\Exception $e) {
+        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        
+    }
     }
     public function create($data)
     {

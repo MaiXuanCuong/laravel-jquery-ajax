@@ -31,7 +31,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Giá sản phẩm</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="priceProduct" name="price" class="form-control"
+                                    <input type="number" id="priceProduct" name="price" class="form-control"
                                         placeholder="Nhập số điện thoại" />
                                     <div id="priceProductAddError" class="form-text text-danger error-msg"></div>
                                 </div>
@@ -127,8 +127,8 @@
 
                                 <label class="col-sm-3 col-form-label">Ảnh chi tiết</label>
                                     <div class="col-sm-9 form_input">
-                                        <span class="inner"><span class="select"></span>
-                                        </span>
+                                        <span class="select"></span>
+                                        
                                         <input type="file" name="file_names[]" id="file_name" multiple
                                             class="form-control"><br>
                                             <div class="container_image">
