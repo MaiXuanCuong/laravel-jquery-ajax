@@ -9,4 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use HasFactory ,SoftDeletes;
+    public function product_images(){
+        return $this->hasMany(ProductImage::class, 'product_id','id');
+    }
 }

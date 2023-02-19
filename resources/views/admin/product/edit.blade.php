@@ -2,19 +2,26 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Chỉnh sửa sản phẩm</h4>
-                <form id="updateProduct" class="form-sample" method="POST" enctype="multipart/form-data">
+                <h4 class="card-title">Sửa sản phẩm</h4>
+                <form id="updateProduct" class="form-sample" enctype="multipart/form-data">
                     @csrf
                     <p class="card-description">
                         Thông tin sản phẩm
                     </p>
                     <div class="row">
+                        <div class="col-md-12">
+                                <label class="col-sm-auto col-form-label">Mô tả</label>
+                                    <textarea name="description" class="form-control" style="cursor:pointer" value="" id="ckeditor" rows="4" style="resize: none"></textarea>
+                                    <div id="desciptionCategoryEditError" class="form-text text-danger error-msg"></div>
+                        </div>
+                        <div id="descriptionProductEditError" class="form-text text-danger error-msg"></div>
+                    </div><br><br>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tên nhân viên</label>
+                                <label class="col-sm-3 col-form-label">Tên sản phẩm</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="idProductEdit" class="form-control" hidden />
-                                    <input type="text" id="nameProductEdit" name="name" class="form-control"
+                                    <input type="text" id="nameProduct" name="name" class="form-control"
                                         placeholder="Nhập họ và tên" />
                                     <div id="nameProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
@@ -22,11 +29,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Số điện thoại</label>
+                                <label class="col-sm-3 col-form-label">Giá sản phẩm</label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="phoneProductEdit" name="phone" class="form-control"
+                                    <input type="text" id="priceProduct" name="price" class="form-control"
                                         placeholder="Nhập số điện thoại" />
-                                    <div id="phoneProductEditError" class="form-text text-danger error-msg"></div>
+                                    <div id="priceProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
                             </div>
                         </div>
@@ -34,86 +41,106 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Giới tính</label>
+                                <label class="col-sm-3 col-form-label">Danh mục</label>
                                 <div class="col-sm-9">
-                                    <select id="genderProductEdit" name="gender" class="form-control">
-                                        <option value="">--- Chọn giới tính --- </option>
+                                    <select id="categoryProduct" name="category_id" class="form-control">
+                                        <option value="">--- Chọn danh mục --- </option>
+                                        @if(isset($categories) && !empty($categories))
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <div id="categoryProductEditError" class="form-text text-danger error-msg"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Số lượng</label>
+                                <div class="col-sm-9">
+                                    <input type="number" id="quantityProduct" name="quantity" class="form-control"
+                                        placeholder="Nhập số lượng" />
+                                    <div id="quantityProductEditError" class="form-text text-danger error-msg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nhà cung cấp</label>
+                                <div class="col-sm-9">
+                                    <select id="supplierProduct"  name="supplier_id" class="form-control">
+                                        <option value="">--- Chọn nhà cung cấp --- </option>
+                                        @if(isset($suppliers) && !empty($suppliers))
+                                        @foreach ($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <div id="supplierProductEditError" class="form-text text-danger error-msg"></div>
+                                </div>
+                            </div>
+                         
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Trạng thái</label>
+                                <div class="col-sm-4">
+                                    <select id="statusProduct" name="status" class="form-control">
+                                        <option value="1">Hiện sản phẩm</option>
+                                        <option value="0">Ẩn sản phẩm</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <select id="type_genderProduct" name="type_gender" class="form-control">
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
-                                        <option value="Khác">Khác</option>
+                                        <option value="All">Cả Nam/Nữ</option>
                                     </select>
-                                    <div id="genderProductEditError" class="form-text text-danger error-msg"></div>
                                 </div>
+                                <div id="type_genderProductEditError" class="form-text text-danger error-msg"></div>
+
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Ngày sinh</label>
-                                <div class="col-sm-9">
-                                    <input type="date" id="birthdayProductEdit" name="birthday" class="form-control"
-                                        placeholder="dd/mm/yyyy" />
-                                    <div id="birthdayProductEditError" class="form-text text-danger error-msg"></div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Email</label>
+
+                                <label class="col-sm-3 col-form-label">Ảnh sản phẩm</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" name="email" id="emailProductEdit"
-                                        placeholder="Nhập email" />
-                                    <div id="emailProductEditError" class="form-text text-danger error-msg"></div>
+                                    <input accept="image/*" type='file' class="form-control"
+                                        id="imageProduct" name="inputFileEdit" />
+                                    <div id="imageProductEditError" class="form-text text-danger error-msg"></div>
+                                    <img type="hidden" width="390px" height="350px" id="blah" src=""
+                                        alt="" />
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Tỉnh/Thành Phố</label>
-                                        <select name="province_id" class="form-control province_id"
-                                            id="province_edit_id">
-                                            <option selected="" value="">Chọn Tỉnh/Thành Phố</option>
 
-                                        </select>
-                                        <div id="provincesProductEditError" class="form-text text-danger error-msg"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Quận/Huyện</label>
-                                        <select name="district_id" class="form-control district_id"
-                                            id="district_edit_id">
-
-                                        </select>
-                                        <div id="districtsProductEditError" class="form-text text-danger error-msg"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Xã/Phường</label>
-                                        <select name="ward_id" class="form-control ward_id" id="ward_edit_id">
-
-                                        </select>
-                                        <div id="wardProductEditError" class="form-text text-danger error-msg"></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Ảnh</label>
-                                    <input accept="image/*" type='file' class="file-upload-default"
-                                        id="imageProductEdit" name="inputFileUpdate" />
-                                    <div id="imageProductEditError" class="form-text text-danger error-msg"></div>
-                                </div>
-                                <img type="hidden" width="90px" height="350px" id="blah1" src=""
-                                    alt="" />
+
+                                <label class="col-sm-3 col-form-label">Ảnh chi tiết</label>
+                                    <div class="col-sm-9 form_input">
+                                        <span class="inner"><span class="select"></span>
+                                        </span>
+                                        <input type="file" name="file_names[]" id="file_name" multiple
+                                            class="form-control"><br>
+                                            <div class="container_image">
+                                            <div id="imageManyProductEditError" class="form-text text-danger error-msg"></div>
+                                         
+                                    </div>
+                                    </div>
                             </div>
                         </div>
-                    </div>
+
+                       
+                    </div> 
                     <button type="submit" id="confirmUpdateProduct" class="btn btn-primary me-2">Sửa</button>
                     <button class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
                 </form>

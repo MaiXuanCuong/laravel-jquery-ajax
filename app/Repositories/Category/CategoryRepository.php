@@ -4,6 +4,7 @@ namespace App\Repositories\Category;
 use App\Models\Category;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
@@ -36,6 +37,10 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             $category->save();
             return $category;
         } catch (\Exception$e) {
+            if (isset($path) && !empty($path)) {
+                $images = str_replace('storage', 'public',  $path);
+                Storage::delete($images);
+            }
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
@@ -45,7 +50,9 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     {
         try {
             $category = $this->model->find($id);
+            $item = $category->image;
             $category->name = $data->name;
+            $category->description = $data->description;
             $fieldName = 'inputFileUpdate';
             if ($data->hasFile($fieldName)) {
                 $fullFileNameOrigin = $data->file($fieldName)->getClientOriginalName();
@@ -56,10 +63,18 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                 $path = str_replace('public/', '', $path);
                 $category->image = $path;
             }
-            $category->description = $data->description;
+           
+            if (isset($item) && isset($path)) {
+                $images = str_replace('storage', 'public',  $item);
+                Storage::delete($images);
+            }
             $category->save();
             return $category;
         } catch (\Exception$e) {
+            if (isset($path)) {
+                $images = str_replace('storage', 'public', $path);
+                Storage::delete($images);
+            }
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
@@ -103,7 +118,10 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     {
         try {
             $category = $this->model->onlyTrashed()->find($id);
+            $item = $category->image;
+            $images = str_replace('storage', 'public', $item);
             $category->forceDelete();
+            Storage::delete($images);
             return $category;
         } catch (\Exception $e) {
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());

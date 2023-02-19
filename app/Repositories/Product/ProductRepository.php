@@ -47,24 +47,37 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->save();
 
             //create product_images
+            $arrImage = [];
             $fieldProductImages = 'file_names';
             if ($data->hasFile($fieldProductImages)) {
-                foreach ($data['file_names'] as $key => $file_detail) {
-                    $fullFileNameOrigin = $data->file($fieldName)->getClientOriginalName();
+                foreach ($data['file_names'] as $file_detail) {
+                    $fullFileNameOrigin = $file_detail->getClientOriginalName();
                     $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
-                    $extenshion = $data->file($fieldName)->getClientOriginalExtension();
+                    $extenshion = $file_detail->getClientOriginalExtension();
                     $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
-                    $path = 'storage/' . $data->file($fieldName)->storeAs('public/images/products', $fileName);
-                    $path = str_replace('public/', '', $path);
+                    $paths = 'storage/' . $file_detail->storeAs('public/images/productsMany', $fileName);
+                    $paths = str_replace('public/', '', $paths);
+                    array_push($arrImage,$paths);
                     $product->product_images()->saveMany([
                         new ProductImage([
-                            'image' => $path,
+                            'image' => $paths,
                         ]),
                     ]);
                 }
             }
             return $product;
         } catch (\Exception $e) {
+            if (isset($path) && !empty($path)) {
+                $images = str_replace('storage', 'public',  $path);
+                Storage::delete($images);
+            }
+            if (isset($paths) && !empty($arrImage)) {
+                foreach ($arrImage as $value) {
+                    $images = str_replace('storage', 'public',  $value);
+                    Storage::delete($images);
+                }
+                
+            }
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
@@ -123,6 +136,17 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             }
             return true;
         } catch (\Exception $e) {
+            // if (isset($path) && !empty($path)) {
+            //     $images = str_replace('storage', 'public',  $path);
+            //     Storage::delete($images);
+            // }
+            // if (isset($paths) && !empty($arrImage)) {
+            //     foreach ($arrImage as $value) {
+            //         $images = str_replace('storage', 'public',  $value);
+            //         Storage::delete($images);
+            //     }
+                
+            // }
             Log::error($e->getMessage());
             return false;
         }
@@ -157,8 +181,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $product = $this->model->onlyTrashed()->findOrFail($id);
         $items = ProductImage::where('product_id', '=', $product->id)->get();
         foreach($items as $item){
-            $im = 'public/images/product/'.$item->image;
-            Storage::delete($im);
+            $im = $item->image;
+            $image = str_replace('storage', 'public', $im);
+            Storage::delete($image);
         }
         ///xóa ảnh chi tiết trên CSDL
         ProductImage::where('product_id', '=', $product->id)->delete();
@@ -166,6 +191,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         ////xóa ảnh chính ở storage
         $image = $product->image;
+        $image = str_replace('storage', 'public', $image);
         Storage::delete($image);
         ////xóa ảnh chi tiết ở storage
 

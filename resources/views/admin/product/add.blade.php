@@ -14,6 +14,7 @@
                                     <textarea name="description" class="form-control" style="cursor:pointer" value="" id="ckeditor" rows="4" style="resize: none"></textarea>
                                     <div id="desciptionCategoryAddError" class="form-text text-danger error-msg"></div>
                         </div>
+                        <div id="descriptionProductAddError" class="form-text text-danger error-msg"></div>
                     </div><br><br>
                     <div class="row">
                         <div class="col-md-6">
@@ -44,7 +45,11 @@
                                 <div class="col-sm-9">
                                     <select id="categoryProduct" name="category_id" class="form-control">
                                         <option value="">--- Chọn danh mục --- </option>
-                                        
+                                        @if(isset($categories) && !empty($categories))
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                        @endif
                                     </select>
                                     <div id="categoryProductAddError" class="form-text text-danger error-msg"></div>
                                 </div>
@@ -68,7 +73,11 @@
                                 <div class="col-sm-9">
                                     <select id="supplierProduct"  name="supplier_id" class="form-control">
                                         <option value="">--- Chọn nhà cung cấp --- </option>
-                                       
+                                        @if(isset($suppliers) && !empty($suppliers))
+                                        @foreach ($suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                        @endforeach
+                                        @endif
                                     </select>
                                     <div id="supplierProductAddError" class="form-text text-danger error-msg"></div>
                                 </div>
@@ -88,6 +97,7 @@
                                     <select id="type_genderProduct" name="type_gender" class="form-control">
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
+                                        <option value="All">Cả Nam/Nữ</option>
                                     </select>
                                 </div>
                                 <div id="type_genderProductAddError" class="form-text text-danger error-msg"></div>

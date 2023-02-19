@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
@@ -58,6 +59,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $path = str_replace('public/', '', $path);
                 $user->image = $path;
             }
+
             $user->save();
             //     $params = [
             //     "password" => $password,
@@ -72,6 +74,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             // Session::flash('success', 'Thêm nhân viên' . ' ' . $data->name . ' ' . 'thành công');
             return $user;
         } catch (\Exception $e) {
+            if (isset($path) && !empty($path)) {
+                $images = str_replace('storage', 'public',  $path);
+                Storage::delete($images);
+            }
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
@@ -83,6 +89,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         try {
 
             $user = $this->model->find($id);
+            $item = $user->image;
             $user->name = $data->name;
             $user->phone = $data->phone;
             $user->birthday = $data->birthday;
@@ -102,10 +109,19 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $path = str_replace('public/', '', $path);
                 $user->image = $path;
             }
+             
+            if (isset($item) && isset($path)) {
+                $images = str_replace('storage', 'public',  $item);
+                Storage::delete($images);
+            }
             $user->save();
          
             return true;
         } catch (\Exception $e) {
+            if (isset($path)) {
+                $images = str_replace('storage', 'public', $path);
+                Storage::delete($images);
+            }
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;
         }
@@ -137,9 +153,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {   
         try {
             $user = $this->model->onlyTrashed()->find($id);
+            $item = $user->image;
+            $images = str_replace('storage', 'public', $item);
             $user->forceDelete();
+            Storage::delete($images);
             return $user;
-           
+            ;
         } catch (\Exception $e) {
             Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return false;

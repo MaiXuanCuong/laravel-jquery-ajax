@@ -86,6 +86,6 @@
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace('ckeditor');
-        CKEDITOR.replace('ckeditor1');
+        // CKEDITOR.replace('ckeditor1');
     </script>
 @endsection

@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
-use App\Models\User;
 use App\Services\Product\ProductServiceInterface;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -21,8 +20,14 @@ class ProductController extends Controller
     }
 
     public function index()
-    {
-        return view('admin.product.index');
+    {   $categories = Category::get();
+        $suppliers = Supplier::get();
+        $params = [
+            'categories' => $categories,
+            'suppliers' => $suppliers
+        ];
+
+        return view('admin.product.index',$params);
       
     }
     public function getProduct(){
