@@ -29,7 +29,7 @@ function getUser() {
             $.each(response.users, function (index, user) {
                 if (response.status == 200) {
                 $("#index-users").append(
-                    '<tr>\
+                    '<tr data-user-id="' + user.id + '">\
                            <td><img style="width:100px; height:100px" src="' +
                         user.image +
                         '" alt=""></td>\
@@ -465,10 +465,25 @@ $(document).on("click", "#confirmUpdateUser", function (event) {
 
             success: function (res) {
                 if (res.status == 200) {
+                    var user = res.user
                     $("#editUserModal").modal("hide");
                     $("#editUserModal").find("input").val("");
                     $("#editUserModal").find("select").val("");
-                    getUser();
+                    var tr = $('tr[data-user-id="' + user.id + '"]');
+
+                    // Tạo HTML mới với thông tin sản phẩm đã cập nhật
+                    var html = '<tr data-user-id="' + user.id + '">\
+                                   <td><img style="width:100px; height:100px" src="' + user.image +'" alt=""></td>\
+                                   <td class="text-danger">' + user.name +'</td>\
+                                   <td class="text-danger">' + user.gender +'</td>\
+                                   <td><label class="badge badge-danger" ><input onclick="myFunction(' + user.id +')" id="copyPhone' +  user.id + '" value="' + user.phone + '" hidden/>' + user.phone + '</label></td>\
+                                   <td><button style="text-align: center" class="badge badge-danger" value="' + user.id + '" id="editUser">Sửa</button>\
+                                   <button style="text-align: center" class="badge badge-danger" value=' + user.id + ' id="inforUser">Chi tiết</button>\
+                                   <button style="text-align: center" class="badge badge-danger" value="' + user.id + '" id="deleteUser">Xóa</button></td>\
+                                 </tr>';
+                
+                    // Thay thế thẻ tr hiện tại bằng thẻ tr mới có thông tin sản phẩm đã cập nhật
+                    tr.replaceWith(html);
                     showSuccess();
                 } else {
                     showError();
@@ -587,7 +602,7 @@ $("#insertUser").on("submit", function (e) {
                     $("#addUserModal").find("select").val("");
                     let user = res.user;
                     $("#index-users").prepend(
-                        '<tr>\
+                        '<tr data-user-id="' + user.id + '">\
                            <td><img style="width:100px; height:100px" src="' +
                         user.image +
                         '" alt=""></td>\
@@ -714,7 +729,7 @@ $(document).on("click", "#trashCanUser", function (e) {
                 $("#tbodyTrashCanUser").html(" ");
                 $.each(response.users, function (index, user) {
                     $("#tbodyTrashCanUser").append(
-                        '<tr>\
+                        '<tr data-user-id="' + user.id + '">\
                     <td><img style="width:100px; height:100px" src="' +
                             user.image +
                             '" alt=""></td>\

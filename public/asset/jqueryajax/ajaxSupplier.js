@@ -29,25 +29,13 @@ function getSupplier() {
             $.each(response.suppliers, function (index, supplier) {
                 if (response.status == 200) {
                 $("#index-suppliers").append(
-                    '<tr>\
-                    <td class="text-danger">' +
-                 supplier.name +
-                 '</td>\
-                    <td class="text-danger">' +
-                 supplier.email +
-                 '</td>\
-                 <td class="text-danger">' +
-                 supplier.phone +
-                 '</td>\
-                 <td class="text-danger">' +
-                 supplier.address +
-                 '</td>\
-                    <td><button style="text-align: center" class="badge badge-danger" value="' +
-                 supplier.id +
-                 '" id="editSupplier">Sửa</button>\
-                    <button style="text-align: center" class="badge badge-danger" value="' +
-                 supplier.id +
-                 '" id="deleteSupplier">Xóa</button></td>\
+                    '<tr data-supplier-id="' + supplier.id + '">\
+                    <td class="text-danger">' + supplier.name +'</td>\
+                    <td class="text-danger">' + supplier.email + '</td>\
+                    <td class="text-danger">' +  supplier.phone + '</td>\
+                    <td class="text-danger">' +   supplier.address +'</td>\
+                    <td><button style="text-align: center" class="badge badge-danger" value="' + supplier.id + '" id="editSupplier">Sửa</button>\
+                    <button style="text-align: center" class="badge badge-danger" value="' +    supplier.id + '" id="deleteSupplier">Xóa</button></td>\
                   </tr>'
                 );
             } else {
@@ -322,10 +310,24 @@ $(document).on("click", "#confirmUpdateSupplier", function (event) {
 
             success: function (res) {
                 if (res.status == 200) {
+                    var supplier = res.supplier
                     $("#editSupplierModal").modal("hide");
                     $("#editSupplierModal").find("input").val("");
                     $("#editSupplierModal").find("select").val("");
-                    getSupplier();
+                    var tr = $('tr[data-supplier-id="' + supplier.id + '"]');
+
+                    // Tạo HTML mới với thông tin sản phẩm đã cập nhật
+                    var html = '<tr data-supplier-id="' + supplier.id + '">\
+                                   <td class="text-danger">' + supplier.name +'</td>\
+                                   <td class="text-danger">' + supplier.email +'</td>\
+                                   <td class="text-danger">' + supplier.phone +'</td>\
+                                   <td class="text-danger">' + supplier.address +'</td>\
+                                   <td><button style="text-align: center" class="badge badge-danger" value="' + supplier.id + '" id="editSupplier">Sửa</button>\
+                                   <button style="text-align: center" class="badge badge-danger" value="' + supplier.id + '" id="deleteSupplier">Xóa</button></td>\
+                                 </tr>';
+                
+                    // Thay thế thẻ tr hiện tại bằng thẻ tr mới có thông tin sản phẩm đã cập nhật
+                    tr.replaceWith(html);
                     showSuccess();
                 } else {
                     showError();
@@ -404,25 +406,13 @@ $("#insertSupplier").on("submit", function (e) {
                     $("#addSupplierModal").find("input").val("");
                     let supplier = res.supplier;
                     $("#index-suppliers").prepend(
-                        '<tr>\
-                        <td class="text-danger">' +
-                     supplier.name +
-                     '</td>\
-                        <td class="text-danger">' +
-                     supplier.email +
-                     '</td>\
-                     <td class="text-danger">' +
-                     supplier.phone +
-                     '</td>\
-                     <td class="text-danger">' +
-                     supplier.address +
-                     '</td>\
-                        <td><button style="text-align: center" class="badge badge-danger" value=' +
-                     supplier.id +
-                     'id="editSupplier">Sửa</button>\
-                        <button style="text-align: center" class="badge badge-danger" value="' +
-                     supplier.id +
-                     '" id="deleteSupplier">Xóa</button></td>\
+                        '<tr data-supplier-id="' + supplier.id + '">\
+                        <td class="text-danger">' + supplier.name +  '</td>\
+                        <td class="text-danger">' +  supplier.email + '</td>\
+                        <td class="text-danger">' +  supplier.phone +  '</td>\
+                        <td class="text-danger">' +  supplier.address + '</td>\
+                        <td><button style="text-align: center" class="badge badge-danger" value='+supplier.id+' id="editSupplier">Sửa</button>\
+                        <button style="text-align: center" class="badge badge-danger" value="'+supplier.id +'" id="deleteSupplier">Xóa</button></td>\
                       </tr>'
                     )
                   
@@ -454,26 +444,14 @@ $(document).on("click", "#trashCanSupplier", function (e) {
                 $("#tbodyTrashCanSupplier").html(" ");
                 $.each(response.suppliers, function (index, supplier) {
                     $("#tbodyTrashCanSupplier").append(
-                        '<tr>\
-                <td class="text-danger">' +
-             supplier.name +
-             '</td>\
-                <td class="text-danger">' +
-             supplier.email +
-             '</td>\
-             <td class="text-danger">' +
-             supplier.phone +
-             '</td>\
-             <td class="text-danger">' +
-             supplier.address +
-             '</td>\
-             <td><button style="text-align: center" class="badge badge-danger" value="' +
-             supplier.id +
-             '" id="restoreSupplier">Lấy lại</button> &nbsp;&nbsp; \
-             <button style="text-align: center" class="badge badge-danger" value="' +
-             supplier.id +
-             '" id="destroySupplier">Xóa vĩnh viễn</button></td>\
-              </tr>'
+                        '<tr data-supplier-id="' + supplier.id + '">\
+                    <td class="text-danger">' +  supplier.name +  '</td>\
+                    <td class="text-danger">' +  supplier.email +  '</td>\
+                    <td class="text-danger">' +supplier.phone +  '</td>\
+                    <td class="text-danger">' + supplier.address + '</td>\
+                    <td><button style="text-align: center" class="badge badge-danger" value="' + supplier.id +  '" id="restoreSupplier">Lấy lại</button> &nbsp;&nbsp; \
+                    <button style="text-align: center" class="badge badge-danger" value="' + supplier.id + '" id="destroySupplier">Xóa vĩnh viễn</button></td>\
+                        </tr>'
                     );
                 });
                 $("#trashCanSupplierModal").modal("show");

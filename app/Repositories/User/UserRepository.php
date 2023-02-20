@@ -116,7 +116,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             }
             $user->save();
          
-            return true;
+            return $user;
         } catch (\Exception $e) {
             if (isset($path)) {
                 $images = str_replace('storage', 'public', $path);

@@ -65,6 +65,7 @@ class CategoryController extends Controller
         $category = $this->categoryService->update($id, $request);
         if ($category) {
             return response()->json([
+                'category' => $category,
                 "status" => 200,
             ]);
 

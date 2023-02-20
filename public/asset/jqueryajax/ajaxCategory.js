@@ -28,7 +28,7 @@ function getCategory() {
                 $("#index-categories").html(" ");
                 $.each(response.categories, function (index, category) {
                     $("#index-categories").append(
-                        '<tr>\
+                        '<tr data-category-id="' + category.id + '">\
                                <td><img style="width:100px; height:100px" src="' +
                             category.image +
                             '" alt=""></td>\
@@ -293,9 +293,22 @@ $(document).on("click", "#confirmeditCategory", function (e) {
 
             success: function (res) {
                 if (res.status === 200) {
+                    var category = res.category
                     $("#editCategoryModal").modal("hide");
                     $("#editCategoryModal").find("input").val("");
-                    getCategory();
+                    var tr = $('tr[data-category-id="' + category.id + '"]');
+
+                    // Tạo HTML mới với thông tin sản phẩm đã cập nhật
+                    var html = '<tr data-category-id="' + category.id + '">\
+                                   <td><img style="width:100px; height:100px" src="' + category.image +'" alt=""></td>\
+                                   <td class="text-danger">' + category.name +'</td>\
+                                   <td><button style="text-align: center" class="badge badge-danger" value="' + category.id + '" id="editCategory">Sửa</button>\
+                                   <button style="text-align: center" class="badge badge-danger" value=' + category.id + ' id="inforCategory">Chi tiết</button>\
+                                   <button style="text-align: center" class="badge badge-danger" value="' + category.id + '" id="deleteCategory">Xóa</button></td>\
+                                 </tr>';
+                
+                    // Thay thế thẻ tr hiện tại bằng thẻ tr mới có thông tin sản phẩm đã cập nhật
+                    tr.replaceWith(html);
                     showSuccess();
                 } else {
                     showError();
@@ -370,7 +383,7 @@ $("#insertCategory").on("submit", function (e) {
                     $("#addCategoryModal").find("input").val("");
                     let category = res.category;
                     $("#index-categories").prepend(
-                        '<tr>\
+                        '<tr data-category-id="' + category.id + '">\
                         <td><img style="width:100px; height:100px" src="' +
                      category.image +
                      '" alt=""></td>\
@@ -439,7 +452,7 @@ $(document).on("click", "#trashCanCategory", function (e) {
                 $("#tbodyTrashCanCategory").html(" ");
                 $.each(response.categories, function (index, category) {
                     $("#tbodyTrashCanCategory").append(
-                        '<tr>\
+                        '<tr data-category-id="' + category.id + '">\
                     <td><img style="width:100px; height:100px" src="' +
                             category.image +
                             '" alt=""></td>\

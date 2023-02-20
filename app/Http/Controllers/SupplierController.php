@@ -78,6 +78,7 @@ class SupplierController extends Controller
         if ($supplier) {
 
             return response()->json([
+                'supplier' => $supplier,
                 'messeges' => 'Cập nhật thành công',
                 "status" => 200,
             ]);

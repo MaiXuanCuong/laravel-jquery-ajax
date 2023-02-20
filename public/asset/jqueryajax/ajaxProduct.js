@@ -381,16 +381,7 @@ $(document).on("click", "#confirmUpdateProductEdit", function (event) {
                     $("#editProductModal").modal("hide");
                     $("#editProductModal").find("input").val("");
                     $("#editProductModal").find("select").val("");
-                    // getProduct();
-
-
-                    // var $tr = $('tr[data-product-id="' + product.id + '"]');
-                    // var $newTr = $('<tr>')
-                    // .attr('data-product-id', product.id)
-                    // .append($('<td>').text(product.name))
-                    // .append($('<td>').text(product.price))
-                    // .append($('<td>').text(product.category.name));
-                    // $tr.replaceWith($newTr);
+                 
                     var tr = $('tr[data-product-id="' + product.id + '"]');
 
                     // Tạo HTML mới với thông tin sản phẩm đã cập nhật
@@ -479,7 +470,7 @@ $("#insertProduct").on("submit", function (e) {
                     $("#addProductModal").find("select").val("");
                     let product = res.product;
                     $("#index-products").prepend(
-                        '<tr>\
+                        '<tr data-product-id="' + product.id + '">\
                         <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
                         <td class="text-danger">' + product.name +'</td>\
                         <td class="text-danger">' +product.category.name +'</td>\
@@ -543,7 +534,7 @@ $(document).on("click", "#trashCanProduct", function (e) {
                 $("#tbodyTrashCanProduct").html(" ");
                 $.each(response.products, function (index, product) {
                     $("#tbodyTrashCanProduct").append(
-                    '<tr>\
+                    '<tr data-product-id="' + product.id + '">\
                         <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
                         <td class="text-danger">' + product.name +'</td>\
                         <td class="text-danger">' +product.category.name +'</td>\

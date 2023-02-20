@@ -120,6 +120,7 @@ class UserController extends Controller
         if ($user) {
 
             return response()->json([
+                'user' => $user,
                 'messeges' => 'Cập nhật thành công',
                 "status" => 200,
             ]);
