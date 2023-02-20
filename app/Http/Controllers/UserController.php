@@ -8,6 +8,8 @@ use App\Models\Province;
 use App\Models\Ward;
 use App\Services\User\UserServiceInterface;
 use Illuminate\Http\Request;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -206,6 +208,18 @@ class UserController extends Controller
             ]);
         }
 
+    }
+
+    public function export(Request $request)
+    {
+        // Get data from request
+        $data = $request->all();
+
+        // Build the export
+        $export = new UsersExport($data);
+
+        // Download the file
+        return Excel::download(new UsersExport, 'Xuat-danh-sach-nhan-vien-'.date("d_m_Y").'.xlsx');
     }
   
 

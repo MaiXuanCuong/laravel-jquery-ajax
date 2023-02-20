@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ProductExport;
+use App\Exports\ProductsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -241,8 +241,18 @@ class ProductController extends Controller
 
     }
 
-    public function exportExcel(){
-        // return Excel::download(new ProductExport, 'products.xlsx');
+  
+    public function export(Request $request)
+    {
+        // Get data from request
+        $data = $request->all();
+
+        // Build the export
+        $export = new ProductsExport($data);
+
+        // Download the file
+        return Excel::download(new ProductsExport, 'Xuat-danh-sach-san-pham-'.date("d_m_Y").'.xlsx');
     }
+  
 
 }

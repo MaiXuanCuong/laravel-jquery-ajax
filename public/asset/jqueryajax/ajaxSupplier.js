@@ -466,4 +466,25 @@ $(document).on("click", "#trashCanSupplier", function (e) {
     
 });
 // ------
+$(document).on("click", '#icon-download', function (e) {
+  
+    e.preventDefault();
+    $.ajax({
+        url: "/supplier/export-suppliers",
+        method: "GET",
+        success: function (response) {
+              var link = document.createElement('a');
+              var today = new Date();
+              var time = today.getHours()+'h'+today.getMinutes()+'p-'+ today.getDate()+'/'+today.getMonth()+'/'+ today.getFullYear();
+              link.href = window.URL.createObjectURL(new Blob([response]));
+              link.download = 'Xuat-nha-cung-cap-'+time+'.xlsx';
+              link.style.display = 'none';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              window.URL.revokeObjectURL(link.href);
+                showSuccess();
+        }
+    })
+})
 

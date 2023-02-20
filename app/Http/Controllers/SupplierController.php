@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\Supplier\SupplierServiceInterface;
 use Illuminate\Http\Request;
+use App\Exports\SuppliersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SupplierController extends Controller
 {
@@ -167,5 +169,17 @@ class SupplierController extends Controller
                 'status' => 404,
             ]);
         }
+    }
+ 
+    public function export(Request $request)
+    {
+        // Get data from request
+        $data = $request->all();
+
+        // Build the export
+        $export = new SuppliersExport($data);
+
+        // Download the file
+        return Excel::download(new SuppliersExport, 'Xuat-danh-sach-nha-cung-cap-'.date("d_m_Y").'.xlsx');
     }
 }

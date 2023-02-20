@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Services\Category\CategoryServiceInterface;
 use Illuminate\Http\Request;
-
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
 class CategoryController extends Controller
 {
     private $categoryService;
@@ -168,5 +169,17 @@ class CategoryController extends Controller
             ]);
         }
 
+    }
+    
+    public function export(Request $request)
+    {
+        // Get data from request
+        $data = $request->all();
+
+        // Build the export
+        $export = new CategoriesExport($data);
+
+        // Download the file
+        return Excel::download(new CategoriesExport, 'Xuat-danh-sach-danh-muc-'.date("d_m_Y").'.xlsx');
     }
 }
