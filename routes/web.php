@@ -65,6 +65,7 @@ Route::prefix('product')->group(function () {
     Route::get('/getTrashCanProduct', [ProductController::class, 'getTrashCan'])->name('product.getTrashCan');
         Route::post('/storeProduct',[ProductController::class, 'store'])->name('product.store');
         Route::post('/updateProduct/{id}',[ProductController::class, 'update'])->name('product.update');
+        Route::post('/updateStatus/{id}/{status}',[ProductController::class, 'updateStatus'])->name('product.updateStatus');
         Route::post('/restoreProduct/{id}', [ProductController::class, 'restore'])->name('product.restore');
             Route::delete('/deleteProduct/{id}',[ProductController::class, 'destroy'])->name('product.destroy');
             Route::delete('/destroyProduct/{id}', [ProductController::class, 'force_destroy'])->name('product.force_destroy');

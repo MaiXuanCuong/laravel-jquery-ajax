@@ -1,9 +1,10 @@
 <div class="card" style="border-radius: .5rem;">
     <div class="row g-0">
         <div class="col-md-4 gradient-custom text-center text-white" 
-            style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-            
-            <img id="inforImageProduct" src="" alt="Avatar" class="" style="width: 100%;height: 100%;" />
+            style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;" id="image-infor">
+            <img id="inforImageProduct" src="" alt="Avatar" class="" style="width: 400px;height: 400px;" /><br>
+            <hr class="mt-0 mb-4">
+            <h6>Ảnh chi tiết</h6>
         </div>
         <div class="col-md-8 gradient-custom">
             <div class="card-body p-4">
@@ -36,6 +37,11 @@
                         <p class="text-muted" id="inforGenderProduct"></p>
                     </div>
                 </div>
+            </div>
+            <div class="card-body p-4">
+                <h6>Mô tả sản phẩm:</h6>
+                <hr class="mt-0 mb-4">
+                <p class="text-muted" id="inforDescriptionProduct"></p>
             </div>
         </div>
     </div>

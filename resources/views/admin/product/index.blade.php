@@ -27,6 +27,7 @@
                                         <th>Tên</th>
                                         <th>Danh mục</th>
                                         <th>Giá</th>
+                                        <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>

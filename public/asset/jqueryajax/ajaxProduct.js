@@ -33,7 +33,8 @@ function getProduct() {
                            <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
                            <td class="text-danger">' + product.name +'</td>\
                            <td class="text-danger">' +product.category.name +'</td>\
-                           <td class="text-danger">' + product.price + '</td>\
+                           <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ'+ '</td>\
+                           <td>' + (product.status ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
                            <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
                            <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
                            <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
@@ -47,6 +48,58 @@ function getProduct() {
         },
     });
 }
+
+$(document).on('click', '.mdi', function(e){
+    e.preventDefault();
+    var status = $(this).data('value');
+    var id = $(this).data('id');
+  
+    // Lấy icon hiển thị trạng thái
+// var statusIcon = $('#status-icon');
+// Cập nhật lớp CSS của icon hiển thị trạng thái
+// statusIcon.removeClass('product-status-unprocessed');
+// statusIcon.removeClass('product-status-processing');
+// statusIcon.addClass('product-status-processed');
+$.ajaxSetup({
+    headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+            "content"
+        ),
+    },
+});
+$.ajax({
+    type: "POST",
+    url: "/product/updateStatus/"+id+'/'+ status,
+    success: function (res) {
+        if (res.status == 200) {
+            var product = res.product;
+            var tr = $('tr[data-product-id="' + product.id + '"]');
+
+            // Tạo HTML mới với thông tin sản phẩm đã cập nhật
+            var html = '<tr data-product-id="' + product.id + '">\
+                           <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
+                           <td class="text-danger">' + product.name +'</td>\
+                           <td class="text-danger">' + product.category.name +'</td>\
+                           <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ' + '</td>\
+                           <td>' + (product.status ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
+                           <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
+                           <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
+                           <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
+                         </tr>';
+        
+            // Thay thế thẻ tr hiện tại bằng thẻ tr mới có thông tin sản phẩm đã cập nhật
+            tr.replaceWith(html);
+           
+        } else {
+           
+        }
+    },
+    error: function (e) {
+       
+    },
+});
+    
+})
 // -------
 
 $(document).on("click", "#deleteProduct", function (e) {
@@ -389,7 +442,8 @@ $(document).on("click", "#confirmUpdateProductEdit", function (event) {
                                    <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
                                    <td class="text-danger">' + product.name +'</td>\
                                    <td class="text-danger">' + product.category.name +'</td>\
-                                   <td class="text-danger">' + product.price + '</td>\
+                                   <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ' + '</td>\
+                                   <td>' + (product.status ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
                                    <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
                                    <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
                                    <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
@@ -474,7 +528,8 @@ $("#insertProduct").on("submit", function (e) {
                         <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
                         <td class="text-danger">' + product.name +'</td>\
                         <td class="text-danger">' +product.category.name +'</td>\
-                        <td class="text-danger">' + product.price + '</td>\
+                        <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ' + '</td>\
+                        <td>' + (product.status ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
                         <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
                         <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
                         <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
@@ -538,7 +593,7 @@ $(document).on("click", "#trashCanProduct", function (e) {
                         <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
                         <td class="text-danger">' + product.name +'</td>\
                         <td class="text-danger">' +product.category.name +'</td>\
-                        <td class="text-danger">' + product.price + '</td>\
+                        <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ' + '</td>\
                         <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="restoreProduct">Lấy lại</button>\
                         <button style="text-align: center" class="badge badge-danger" value="' + product.id +'" id="destroyProduct">Xóa vĩnh viễn</button></td>\
                     </tr>'
@@ -565,6 +620,18 @@ $(document).on("click", "#inforProduct", function (e) {
                 category = product.category;
                 supplier = product.supplier;
                 images = product.product_images;
+                $.each(images, function (index, image) {
+                    var imgElement = $("<img>").attr({
+
+                        "src": image.image,
+                        "id": "inforImageProduct" + image.id, 
+                        "width": "400px", 
+                        "height": "400px" 
+                     });
+                    imgElement.appendTo("#image-infor");
+                })
+
+
                 $("#inforImageProduct").attr("src", product.image);
                 $("#inforNameProduct").html("");
                 var node = document.createTextNode(product.name);
@@ -578,7 +645,7 @@ $(document).on("click", "#inforProduct", function (e) {
                 $("#inforSupplierProduct")[0].appendChild(node);
 
                 $("#inforPriceProduct").html("");
-                var node = document.createTextNode(product.price);
+                var node = document.createTextNode((product.price).toLocaleString() + ' VNĐ');
                 $("#inforPriceProduct")[0].appendChild(node);
 
                 $("#inforQuantityProduct").html("");
@@ -596,6 +663,9 @@ $(document).on("click", "#inforProduct", function (e) {
                 var node = document.createTextNode(gender);
                 $("#inforGenderProduct")[0].appendChild(node);
 
+                
+                $("#inforDescriptionProduct").html("");
+                $("#inforDescriptionProduct").html(product.description);
 
                 $("#inforProductModal").modal("show");
             } else {

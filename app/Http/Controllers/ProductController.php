@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Services\Product\ProductServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
@@ -206,23 +207,36 @@ class ProductController extends Controller
             }
     }
     public function updateStatus($id, $status)
-    {
-        $product = Product::findOrFail($id);
-        if($status==1){
-            $product->status = 0;
-            $product->save();
+    {   
+        try {
+            $product = Product::findOrFail($id);
+            if($status==1){
+                $product->status = 0;
+                $product->save();
+                $product = Product::with('category')->find($product->id);
+                return response()->json([
+                    'product' => $product,
+                    'status' => 200,
+                    'message' => 'success',
+                ]);
+            }else{
+                $product->status = 1;
+                $product->save();
+                $product = Product::with('category')->find($product->id);
+                return response()->json([
+                    'product' => $product,
+                    'status' => 200,
+                    'message' => 'success',
+                ]);
+            }
+        } catch (\Exception $e) {
+            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
             return response()->json([
-                'code' => 0,
-                'message' => 'success',
-            ], status:200);
-        }else{
-            $product->status = 1;
-            $product->save();
-            return response()->json([
-                'code' => 1,
-                'message' => 'success',
-            ], status:200);
+                'status' => 400,
+                'message' => 'errr',
+            ]);
         }
+        
 
 
     }

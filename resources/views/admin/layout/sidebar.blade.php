@@ -18,6 +18,11 @@
             <li class="nav-item"> <a class="nav-link" href="#">Danh sách khách hàng</a></li>
           </ul>
         </div>
+        <div class="collapse" id="ui-basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="#">Danh sách đơn hàng</a></li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item nav-category">Quản lí trang chủ</li>
       <li class="nav-item">
