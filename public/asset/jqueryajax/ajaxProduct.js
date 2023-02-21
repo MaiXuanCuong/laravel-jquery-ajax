@@ -34,7 +34,7 @@ function getProduct() {
                            <td class="text-danger">' + product.name +'</td>\
                            <td class="text-danger">' +product.category.name +'</td>\
                            <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ'+ '</td>\
-                           <td>' + (product.status ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
+                           <td>' + (product.status == 1 ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
                            <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
                            <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
                            <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
@@ -53,13 +53,6 @@ $(document).on('click', '.mdi', function(e){
     e.preventDefault();
     var status = $(this).data('value');
     var id = $(this).data('id');
-  
-    // Lấy icon hiển thị trạng thái
-// var statusIcon = $('#status-icon');
-// Cập nhật lớp CSS của icon hiển thị trạng thái
-// statusIcon.removeClass('product-status-unprocessed');
-// statusIcon.removeClass('product-status-processing');
-// statusIcon.addClass('product-status-processed');
 $.ajaxSetup({
     headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -81,7 +74,7 @@ $.ajax({
                            <td class="text-danger">' + product.name +'</td>\
                            <td class="text-danger">' + product.category.name +'</td>\
                            <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ' + '</td>\
-                           <td>' + (product.status ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
+                           <td>' + (product.status == 1 ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
                            <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
                            <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
                            <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
@@ -443,7 +436,7 @@ $(document).on("click", "#confirmUpdateProductEdit", function (event) {
                                    <td class="text-danger">' + product.name +'</td>\
                                    <td class="text-danger">' + product.category.name +'</td>\
                                    <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ' + '</td>\
-                                   <td>' + (product.status ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
+                                   <td>' + (product.status == 1 ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
                                    <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
                                    <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
                                    <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\
@@ -529,7 +522,7 @@ $("#insertProduct").on("submit", function (e) {
                         <td class="text-danger">' + product.name +'</td>\
                         <td class="text-danger">' +product.category.name +'</td>\
                         <td class="text-danger">' + (product.price).toLocaleString() + ' VNĐ' + '</td>\
-                        <td>' + (product.status ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
+                        <td>' + (product.status == 1 ? '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:green;" class="mdi mdi-eye"></i>' : '<i data-value="'+product.status+'" data-id="'+product.id+'" style="color:red" class="mdi mdi-eye-off"></i>') +'</td>\
                         <td><button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="editProduct">Sửa</button>\
                         <button style="text-align: center" class="badge badge-danger" value=' + product.id + ' id="inforProduct">Chi tiết</button>\
                         <button style="text-align: center" class="badge badge-danger" value="' + product.id + '" id="deleteProduct">Xóa</button></td>\

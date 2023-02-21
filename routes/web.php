@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BannerController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/checklogin',[AuthController::class, 'checklogin'])->name('checklogin');
@@ -77,6 +78,14 @@ Route::prefix('/')->middleware(['auth', 'revalidate'])->group(function () {
             Route::post('/restoreProduct/{id}', [ProductController::class, 'restore'])->name('product.restore');
                 Route::delete('/deleteProduct/{id}',[ProductController::class, 'destroy'])->name('product.destroy');
                 Route::delete('/destroyProduct/{id}', [ProductController::class, 'force_destroy'])->name('product.force_destroy');
+    });
+    Route::prefix('banner')->group(function () {
+        Route::get('/',[BannerController::class, 'index'])->name('banner.index');
+        Route::get('/getBanner',[BannerController::class, 'getBanner'])->name('banner.getBanner');
+            Route::post('/storeBanner',[BannerController::class, 'store'])->name('banner.store');
+            Route::post('/updateBanner/{id}',[BannerController::class, 'update'])->name('banner.update');
+            Route::post('/updateStatus/{id}/{status}',[BannerController::class, 'updateStatus'])->name('banner.updateStatus');
+                Route::delete('/deleteBanner/{id}',[BannerController::class, 'destroy'])->name('banner.destroy');
     });
 });
 Route::prefix('shops')->group(function (){

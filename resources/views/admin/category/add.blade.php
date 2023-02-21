@@ -35,9 +35,9 @@
 
 
                                   <div id="imageCategoryAddError" class="form-text text-danger error-msg"></div>
+                                  <img type="hidden" width="990px" height="300px" id="blah" src=""
+                                      alt="" />
                                 </div>
-                              <img type="hidden" width="90px" height="300px" id="blah" src=""
-                                  alt="" />
                           </div>
 
                       </div>
