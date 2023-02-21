@@ -83,4 +83,5 @@ Route::prefix('shops')->group(function (){
     Route::get('/',function(){
         return view('shop.master');
     });
+    Route::post('/checklogin',[ShopController::class, 'checkLogin'])->name('checklogin');
 });

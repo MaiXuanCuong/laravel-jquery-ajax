@@ -1,69 +1,80 @@
-        @include('shop.header')
+            @include('shop.header')
+            <!--====== End - Main Header ======-->
+        </div>
+        <!--====== End - Header Wrapper ======-->
+
+
         <!--====== App Content ======-->
         <div class="app-content">
 
             <!--====== Primary Slider ======-->
-            <div class="s-skeleton s-skeleton--h-600 s-skeleton--bg-grey">
-                <div class="owl-carousel primary-style-1" id="hero-slider">
-                    <div class="hero-slide hero-slide--1">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="slider-content slider-content--animation">
+            <div class="s-skeleton s-skeleton--h-640 s-skeleton--bg-grey">
+                <div class="owl-carousel primary-style-3" id="hero-slider">
+                    <div class="hero-slide hero-slide--7">
+                        <div class="primary-style-3-wrap">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="slider-content slider-content--animation">
 
-                                        <span class="content-span-1 u-c-secondary">Latest Update Stock</span>
+                                            <span class="content-span-1 u-c-white">Update Your Fashion</span>
 
-                                        <span class="content-span-2 u-c-secondary">30% Off On Electronics</span>
+                                            <span class="content-span-2 u-c-white">10% Discount on Outwear</span>
 
-                                        <span class="content-span-3 u-c-secondary">Find electronics on best prices, Also Discover most selling products of electronics</span>
+                                            <span class="content-span-3 u-c-white">Find outwear on best prices</span>
 
-                                        <span class="content-span-4 u-c-secondary">Starting At
+                                            <span class="content-span-4 u-c-white">Starting At
 
-                                            <span class="u-c-brand">$1050.00</span></span>
+                                                <span class="u-c-brand">$100.00</span></span>
 
-                                        <a class="shop-now-link btn--e-brand" href="{{ asset('shop/shop-side-version-2.html') }}">SHOP NOW</a></div>
+                                            <a class="shop-now-link btn--e-brand" href="{{ asset('shop/shop-side-version-2.html') }}">SHOP NOW</a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="hero-slide hero-slide--2">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="slider-content slider-content--animation">
+                    <div class="hero-slide hero-slide--8">
+                        <div class="primary-style-3-wrap">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="slider-content slider-content--animation">
 
-                                        <span class="content-span-1 u-c-white">Find Top Brands</span>
+                                            <span class="content-span-1 u-c-white">Open Your Eyes</span>
 
-                                        <span class="content-span-2 u-c-white">10% Off On Electronics</span>
+                                            <span class="content-span-2 u-c-white">10% Off On Intimates</span>
 
-                                        <span class="content-span-3 u-c-white">Find electronics on best prices, Also Discover most selling products of electronics</span>
+                                            <span class="content-span-3 u-c-white">Find intimates on best prices</span>
 
-                                        <span class="content-span-4 u-c-white">Starting At
+                                            <span class="content-span-4 u-c-white">Starting At
 
-                                            <span class="u-c-brand">$380.00</span></span>
+                                                <span class="u-c-brand">$100.00</span></span>
 
-                                        <a class="shop-now-link btn--e-brand" href="{{ asset('shop/shop-side-version-2.html') }}">SHOP NOW</a></div>
+                                            <a class="shop-now-link btn--e-brand" href="{{ asset('shop/shop-side-version-2.html') }}">SHOP NOW</a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="hero-slide hero-slide--3">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="slider-content slider-content--animation">
+                    <div class="hero-slide hero-slide--9">
+                        <div class="primary-style-3-wrap">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="slider-content slider-content--animation">
 
-                                        <span class="content-span-1 u-c-secondary">Find Top Brands</span>
+                                            <span class="content-span-1 u-c-white">Find Top Brands</span>
 
-                                        <span class="content-span-2 u-c-secondary">10% Off On Electronics</span>
+                                            <span class="content-span-2 u-c-white">10% Off On Outwear</span>
 
-                                        <span class="content-span-3 u-c-secondary">Find electronics on best prices, Also Discover most selling products of electronics</span>
+                                            <span class="content-span-3 u-c-white">Find outwear on best prices</span>
 
-                                        <span class="content-span-4 u-c-secondary">Starting At
+                                            <span class="content-span-4 u-c-white">Starting At
 
-                                            <span class="u-c-brand">$550.00</span></span>
+                                                <span class="u-c-brand">$100.00</span></span>
 
-                                        <a class="shop-now-link btn--e-brand" href="{{ asset('shop/shop-side-version-2.html') }}">SHOP NOW</a></div>
+                                            <a class="shop-now-link btn--e-brand" href="{{ asset('shop/shop-side-version-2.html') }}">SHOP NOW</a></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,60 +87,44 @@
             <!--====== Section 1 ======-->
             <div class="u-s-p-y-60">
 
-                <!--====== Section Intro ======-->
-                <div class="section__intro u-s-m-b-46">
+                <!--====== Section Content ======-->
+                <div class="section__content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">SHOP BY DEALS</h1>
+                            <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="promotion-o">
+                                    <div class="aspect aspect--bg-grey aspect--square">
 
-                                    <span class="section__span u-c-silver">BROWSE FAVOURITE DEALS</span>
+                                        <img class="aspect__img" src="{{ asset('shop/images/promo/promo-img-4.jpg') }}" alt=""></div>
+                                    <div class="promotion-o__content">
+
+                                        <a class="promotion-o__link btn--e-white-brand" href="{{ asset('shop/shop-side-version-2.html') }}">Women's Clothing</a></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="promotion-o">
+                                    <div class="aspect aspect--bg-grey aspect--square">
+
+                                        <img class="aspect__img" src="{{ asset('shop/images/promo/promo-img-5.jpg') }}" alt=""></div>
+                                    <div class="promotion-o__content">
+
+                                        <a class="promotion-o__link btn--e-white-brand" href="{{ asset('shop/shop-side-version-2.html') }}">Fashion Accessories</a></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="promotion-o">
+                                    <div class="aspect aspect--bg-grey aspect--square">
+
+                                        <img class="aspect__img" src="{{ asset('shop/images/promo/promo-img-6.jpg') }}" alt=""></div>
+                                    <div class="promotion-o__content">
+
+                                        <a class="promotion-o__link btn--e-white-brand" href="{{ asset('shop/shop-side-version-2.html') }}">Men's Clothing</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--====== End - Section Intro ======-->
-
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5 u-s-m-b-30">
-
-                                <a class="collection" href="{{ asset('shop/shop-side-version-2.html') }}">
-                                    <div class="aspect aspect--bg-grey aspect--square">
-
-                                        <img class="aspect__img collection__img" src="{{ asset('shop/images/collection/coll-1.jpg') }}" alt=""></div>
-                                </a></div>
-                            <div class="col-lg-7 col-md-7 u-s-m-b-30">
-
-                                <a class="collection" href="{{ asset('shop/shop-side-version-2.html') }}">
-                                    <div class="aspect aspect--bg-grey aspect--1286-890">
-
-                                        <img class="aspect__img collection__img" src="{{ asset('shop/images/collection/coll-2.jpg') }}" alt=""></div>
-                                </a></div>
-                            <div class="col-lg-7 col-md-7 u-s-m-b-30">
-
-                                <a class="collection" href="{{ asset('shop/shop-side-version-2.html') }}">
-                                    <div class="aspect aspect--bg-grey aspect--1286-890">
-
-                                        <img class="aspect__img collection__img" src="{{ asset('shop/images/collection/coll-3.jpg') }}" alt=""></div>
-                                </a></div>
-                            <div class="col-lg-5 col-md-5 u-s-m-b-30">
-
-                                <a class="collection" href="{{ asset('shop/shop-side-version-2.html') }}">
-                                    <div class="aspect aspect--bg-grey aspect--square">
-
-                                        <img class="aspect__img collection__img" src="{{ asset('shop/images/collection/coll-4.jpg') }}" alt=""></div>
-                                </a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--====== Section Content ======-->
+                <!--====== End - Section Content ======-->
             </div>
             <!--====== End - Section 1 ======-->
 
@@ -137,423 +132,73 @@
             <!--====== Section 2 ======-->
             <div class="u-s-p-b-60">
 
-                <!--====== Section Intro ======-->
-                <div class="section__intro u-s-m-b-16">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">TOP TRENDING</h1>
-
-                                    <span class="section__span u-c-silver">CHOOSE CATEGORY</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Intro ======-->
-
-
                 <!--====== Section Content ======-->
                 <div class="section__content">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="filter-category-container">
-                                    <div class="filter__category-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
 
-                                        <button class="btn filter__btn filter__btn--style-1 js-checked" type="button" data-filter="*">ALL</button></div>
-                                    <div class="filter__category-wrapper">
+                                    <a class="i3-banner" href="{{ asset('shop/shop-side-version-2.html') }}">
+                                        <div class="aspect aspect--bg-grey-fb aspect--square">
 
-                                        <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".headphone">HEADPHONES</button></div>
-                                    <div class="filter__category-wrapper">
-
-                                        <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".smartphone">SMARTPHONES</button></div>
-                                    <div class="filter__category-wrapper">
-
-                                        <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".sportgadget">SPORT GADGETS</button></div>
-                                    <div class="filter__category-wrapper">
-
-                                        <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".dslr">DSLR</button></div>
-                                </div>
-                                <div class="filter__grid-wrapper u-s-m-t-30">
+                                            <img class="aspect__img i3-banner__img" src="{{ asset('shop/images/banners/i3-banner-1.jpg') }}" alt=""></div>
+                                    </a></div>
+                                <div class="col-lg-6 col-md-12">
                                     <div class="row">
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item headphone">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 u-s-m-b-30">
+                                            <div class="product-short u-h-100">
+                                                <div class="product-short__container">
+                                                    <div class="product-short__img-wrap">
 
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                                        <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product2.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
+                                                            <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product14.jpg') }}" alt=""></a></div>
+                                                    <div class="product-short__info">
 
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
+                                                        <span class="product-short__price">$126.77</span>
 
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
+                                                        <span class="product-short__name">
 
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
+                                                            <a href="{{ asset('shop/product-detail.html') }}">Women Shoes</a></span>
 
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
+                                                        <span class="product-short__category">
+
+                                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
                                                 </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Red Wireless Headphone</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
                                             </div>
                                         </div>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item headphone">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 u-s-m-b-30">
+                                            <div class="product-short u-h-100">
+                                                <div class="product-short__container">
+                                                    <div class="product-short__img-wrap">
 
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                                        <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product3.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
+                                                            <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/men/product12.jpg') }}" alt=""></a></div>
+                                                    <div class="product-short__info">
 
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
+                                                        <span class="product-short__price">$126.77</span>
 
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
+                                                        <span class="product-short__name">
 
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
+                                                            <a href="{{ asset('shop/product-detail.html') }}">Men Leather Wallet</a></span>
 
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
+                                                        <span class="product-short__category">
+
+                                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span></div>
                                                 </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Yellow Wireless Headphone</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
                                             </div>
                                         </div>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item sportgadget">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
+                                        <div class="col-lg-12">
 
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                            <a class="i3-banner" href="{{ asset('shop/shop-side-version-2.html') }}">
+                                                <div class="aspect aspect--bg-grey-fb aspect--1048-334">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product4.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Hover Skateboard Scooter</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item sportgadget">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
-
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product5.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Hover Red Skateboard Scooter</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item dslr">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
-
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product6.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Canon DSLR Camera 4k</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item dslr">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
-
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product7.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Nikon DSLR Camera 4k</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item smartphone">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
-
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product8.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Smartphone RAM 4GB New</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item smartphone">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
-
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product9.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Smartphone RAM 8GB New</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item smartphone">
-                                            <div class="product-o product-o--hover-on product-o--radius">
-                                                <div class="product-o__wrap">
-
-                                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product10.jpg') }}" alt=""></a>
-                                                    <div class="product-o__action-wrap">
-                                                        <ul class="product-o__action-list">
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                            <li>
-
-                                                                <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                            <li>
-
-                                                                <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                                <span class="product-o__category">
-
-                                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                                <span class="product-o__name">
-
-                                                    <a href="{{ asset('shop/product-detail.html') }}">Smartphone RAM 16GB New</a></span>
-                                                <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                                    <span class="product-o__review">(23)</span></div>
-
-                                                <span class="product-o__price">$125.00
-
-                                                    <span class="product-o__discount">$160.00</span></span>
-                                            </div>
-                                        </div>
+                                                    <img class="aspect__img i3-banner__img" src="{{ asset('shop/images/banners/i3-banner-2.jpg') }}" alt=""></div>
+                                            </a></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="load-more">
-
-                                    <button class="btn btn--e-brand" type="button">Load More</button></div>
                             </div>
                         </div>
                     </div>
@@ -572,11 +217,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">DEAL OF THE DAY</h1>
+                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">RECENT PRODUCTS</h1>
 
-                                    <span class="section__span u-c-silver">BUY DEAL OF THE DAY, HURRY UP! THESE NEW PRODUCTS WILL EXPIRE SOON.</span>
-
-                                    <span class="section__span u-c-silver">ADD THESE ON YOUR CART.</span>
+                                    <span class="section__span u-c-silver">NEWLY ADDED PRODUCTS</span>
                                 </div>
                             </div>
                         </div>
@@ -589,92 +232,332 @@
                 <div class="section__content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 u-s-m-b-30">
-                                <div class="product-o product-o--radius product-o--hover-off u-h-100">
-                                    <div class="product-o__wrap">
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-r u-h-100">
+                                    <div class="product-r__container">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                            <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product11.jpg') }}" alt=""></a>
-                                        <div class="product-o__special-count-wrap">
-                                            <div class="countdown countdown--style-special" data-countdown="2020/05/01"></div>
-                                        </div>
-                                        <div class="product-o__action-wrap">
-                                            <ul class="product-o__action-list">
+                                            <img class="aspect__img" src="{{ asset('shop/images/product/women/product5.jpg') }}" alt=""></a>
+                                        <div class="product-r__action-wrap">
+                                            <ul class="product-r__action-list">
                                                 <li>
 
-                                                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
+                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
                                                 <li>
 
-                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
                                                 <li>
 
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
                                                 <li>
 
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
+                                    <div class="product-r__info-wrap">
 
-                                    <span class="product-o__category">
+                                        <span class="product-r__category">
 
-                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
+                                        <div class="product-r__n-p-wrap">
 
-                                    <span class="product-o__name">
+                                            <span class="product-r__name">
 
-                                        <a href="{{ asset('shop/product-detail.html') }}">DJI Phantom Drone 4k</a></span>
-                                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress A Nice Elegant</a></span>
 
-                                        <span class="product-o__review">(2)</span></div>
+                                            <span class="product-r__price">$125.00</span></div>
 
-                                    <span class="product-o__price">$125.00
-
-                                        <span class="product-o__discount">$160.00</span></span>
+                                        <span class="product-r__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 u-s-m-b-30">
-                                <div class="product-o product-o--radius product-o--hover-off u-h-100">
-                                    <div class="product-o__wrap">
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-r u-h-100">
+                                    <div class="product-r__container">
 
                                         <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                            <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product12.jpg') }}" alt=""></a>
-                                        <div class="product-o__special-count-wrap">
-                                            <div class="countdown countdown--style-special" data-countdown="2020/05/01"></div>
-                                        </div>
-                                        <div class="product-o__action-wrap">
-                                            <ul class="product-o__action-list">
+                                            <img class="aspect__img" src="{{ asset('shop/images/product/women/product6.jpg') }}" alt=""></a>
+                                        <div class="product-r__action-wrap">
+                                            <ul class="product-r__action-list">
                                                 <li>
 
-                                                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
+                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
                                                 <li>
 
-                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
                                                 <li>
 
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
                                                 <li>
 
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
+                                    <div class="product-r__info-wrap">
 
-                                    <span class="product-o__category">
+                                        <span class="product-r__category">
 
-                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
+                                        <div class="product-r__n-p-wrap">
 
-                                    <span class="product-o__name">
+                                            <span class="product-r__name">
 
-                                        <a href="{{ asset('shop/product-detail.html') }}">DJI Phantom Drone 2k</a></span>
-                                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress B Nice Elegant</a></span>
 
-                                        <span class="product-o__review">(2)</span></div>
+                                            <span class="product-r__price">$125.00</span></div>
 
-                                    <span class="product-o__price">$125.00
+                                        <span class="product-r__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-r u-h-100">
+                                    <div class="product-r__container">
 
-                                        <span class="product-o__discount">$160.00</span></span>
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                            <img class="aspect__img" src="{{ asset('shop/images/product/women/product7.jpg') }}" alt=""></a>
+                                        <div class="product-r__action-wrap">
+                                            <ul class="product-r__action-list">
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-r__info-wrap">
+
+                                        <span class="product-r__category">
+
+                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
+                                        <div class="product-r__n-p-wrap">
+
+                                            <span class="product-r__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress C Nice Elegant</a></span>
+
+                                            <span class="product-r__price">$125.00</span></div>
+
+                                        <span class="product-r__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-r u-h-100">
+                                    <div class="product-r__container">
+
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                            <img class="aspect__img" src="{{ asset('shop/images/product/women/product8.jpg') }}" alt=""></a>
+                                        <div class="product-r__action-wrap">
+                                            <ul class="product-r__action-list">
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-r__info-wrap">
+
+                                        <span class="product-r__category">
+
+                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
+                                        <div class="product-r__n-p-wrap">
+
+                                            <span class="product-r__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress D Nice Elegant</a></span>
+
+                                            <span class="product-r__price">$125.00</span></div>
+
+                                        <span class="product-r__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-r u-h-100">
+                                    <div class="product-r__container">
+
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product5.jpg') }}" alt=""></a>
+                                        <div class="product-r__action-wrap">
+                                            <ul class="product-r__action-list">
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-r__info-wrap">
+
+                                        <span class="product-r__category">
+
+                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
+                                        <div class="product-r__n-p-wrap">
+
+                                            <span class="product-r__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Fashion A Nice Elegant</a></span>
+
+                                            <span class="product-r__price">$125.00</span></div>
+
+                                        <span class="product-r__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-r u-h-100">
+                                    <div class="product-r__container">
+
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product6.jpg') }}" alt=""></a>
+                                        <div class="product-r__action-wrap">
+                                            <ul class="product-r__action-list">
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-r__info-wrap">
+
+                                        <span class="product-r__category">
+
+                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
+                                        <div class="product-r__n-p-wrap">
+
+                                            <span class="product-r__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Fashion B Nice Elegant</a></span>
+
+                                            <span class="product-r__price">$125.00</span></div>
+
+                                        <span class="product-r__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-r u-h-100">
+                                    <div class="product-r__container">
+
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product7.jpg') }}" alt=""></a>
+                                        <div class="product-r__action-wrap">
+                                            <ul class="product-r__action-list">
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-r__info-wrap">
+
+                                        <span class="product-r__category">
+
+                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
+                                        <div class="product-r__n-p-wrap">
+
+                                            <span class="product-r__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Fashion C Nice Elegant</a></span>
+
+                                            <span class="product-r__price">$125.00</span></div>
+
+                                        <span class="product-r__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-r u-h-100">
+                                    <div class="product-r__container">
+
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product8.jpg') }}" alt=""></a>
+                                        <div class="product-r__action-wrap">
+                                            <ul class="product-r__action-list">
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                <li>
+
+                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                <li>
+
+                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-r__info-wrap">
+
+                                        <span class="product-r__category">
+
+                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
+                                        <div class="product-r__n-p-wrap">
+
+                                            <span class="product-r__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Fashion D Nice Elegant</a></span>
+
+                                            <span class="product-r__price">$125.00</span></div>
+
+                                        <span class="product-r__description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -689,14 +572,14 @@
             <div class="u-s-p-b-60">
 
                 <!--====== Section Intro ======-->
-                <div class="section__intro u-s-m-b-46">
+                <div class="section__intro u-s-m-b-16">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">NEW ARRIVALS</h1>
+                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">BEST SELLING PRODUCT</h1>
 
-                                    <span class="section__span u-c-silver">GET UP FOR NEW ARRIVALS</span>
+                                    <span class="section__span u-c-silver u-s-m-b-16">FIND PRODUCTS THAT ARE MOST SELLING</span>
                                 </div>
                             </div>
                         </div>
@@ -708,254 +591,378 @@
                 <!--====== Section Content ======-->
                 <div class="section__content">
                     <div class="container">
-                        <div class="slider-fouc">
-                            <div class="owl-carousel product-slider" data-item="4">
-                                <div class="u-s-m-b-30">
-                                    <div class="product-o product-o--hover-on">
-                                        <div class="product-o__wrap">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="filter-category-container">
+                                    <div class="filter__category-wrapper">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                        <button class="btn filter__btn filter__btn--style-2 js-checked" type="button" data-filter="*">ALL</button></div>
+                                    <div class="filter__category-wrapper">
 
-                                                <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product13.jpg') }}" alt=""></a>
-                                            <div class="product-o__action-wrap">
-                                                <ul class="product-o__action-list">
-                                                    <li>
+                                        <button class="btn filter__btn filter__btn--style-2" type="button" data-filter=".outwear">OUTWEAR</button></div>
+                                    <div class="filter__category-wrapper">
 
-                                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                    <li>
+                                        <button class="btn filter__btn filter__btn--style-2" type="button" data-filter=".bottom">BOTTOM</button></div>
+                                    <div class="filter__category-wrapper">
 
-                                                        <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                    <li>
+                                        <button class="btn filter__btn filter__btn--style-2" type="button" data-filter=".footwear">FOOTWEAR</button></div>
+                                    <div class="filter__category-wrapper">
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                    <li>
+                                        <button class="btn filter__btn filter__btn--style-2" type="button" data-filter=".accessories">ACCESSORIES</button></div>
+                                </div>
+                                <div class="filter__grid-wrapper u-s-m-t-30">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item outwear">
+                                            <div class="product-bs">
+                                                <div class="product-bs__container">
+                                                    <div class="product-bs__wrap">
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                </ul>
+                                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product11.jpg') }}" alt=""></a>
+                                                        <div class="product-bs__action-wrap">
+                                                            <ul class="product-bs__action-list">
+                                                                <li>
+
+                                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
+
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                                <li>
+
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                                <li>
+
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <span class="product-bs__category">
+
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
+
+                                                    <span class="product-bs__name">
+
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Black &amp; White Sweater</a></span>
+                                                    <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+
+                                                        <span class="product-bs__review">(23)</span></div>
+
+                                                    <span class="product-bs__price">$125.00
+
+                                                        <span class="product-bs__discount">$160.00</span></span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item outwear">
+                                            <div class="product-bs">
+                                                <div class="product-bs__container">
+                                                    <div class="product-bs__wrap">
 
-                                        <span class="product-o__category">
+                                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                            <img class="aspect__img" src="{{ asset('shop/images/product/women/product15.jpg') }}" alt=""></a>
+                                                        <div class="product-bs__action-wrap">
+                                                            <ul class="product-bs__action-list">
+                                                                <li>
 
-                                        <span class="product-o__name">
+                                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">Nikon DSLR 4K Camera</a></span>
-                                        <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                                <li>
 
-                                            <span class="product-o__review">(0)</span></div>
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                                <li>
 
-                                        <span class="product-o__price">$125.00
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                            <span class="product-o__discount">$160.00</span></span>
-                                    </div>
-                                </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="product-o product-o--hover-on">
-                                        <div class="product-o__wrap">
+                                                    <span class="product-bs__category">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
-                                                <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product14.jpg') }}" alt=""></a>
-                                            <div class="product-o__action-wrap">
-                                                <ul class="product-o__action-list">
-                                                    <li>
+                                                    <span class="product-bs__name">
 
-                                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                    <li>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Color Yellow Modest A Fashion</a></span>
+                                                    <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
-                                                        <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                    <li>
+                                                        <span class="product-bs__review">(23)</span></div>
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                    <li>
+                                                    <span class="product-bs__price">$125.00
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                </ul>
+                                                        <span class="product-bs__discount">$160.00</span></span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item bottom">
+                                            <div class="product-bs">
+                                                <div class="product-bs__container">
+                                                    <div class="product-bs__wrap">
 
-                                        <span class="product-o__category">
+                                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product2.jpg') }}" alt=""></a>
+                                                        <div class="product-bs__action-wrap">
+                                                            <ul class="product-bs__action-list">
+                                                                <li>
 
-                                        <span class="product-o__name">
+                                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">Nikon DSLR 2K Camera</a></span>
-                                        <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                                <li>
 
-                                            <span class="product-o__review">(0)</span></div>
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                                <li>
 
-                                        <span class="product-o__price">$125.00
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                            <span class="product-o__discount">$160.00</span></span>
-                                    </div>
-                                </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="product-o product-o--hover-on">
-                                        <div class="product-o__wrap">
+                                                    <span class="product-bs__category">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
 
-                                                <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product15.jpg') }}" alt=""></a>
-                                            <div class="product-o__action-wrap">
-                                                <ul class="product-o__action-list">
-                                                    <li>
+                                                    <span class="product-bs__name">
 
-                                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                    <li>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">White Full Men Underwear</a></span>
+                                                    <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
-                                                        <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                    <li>
+                                                        <span class="product-bs__review">(23)</span></div>
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                    <li>
+                                                    <span class="product-bs__price">$125.00
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                </ul>
+                                                        <span class="product-bs__discount">$160.00</span></span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item bottom">
+                                            <div class="product-bs">
+                                                <div class="product-bs__container">
+                                                    <div class="product-bs__wrap">
 
-                                        <span class="product-o__category">
+                                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                            <img class="aspect__img" src="{{ asset('shop/images/product/women/product3.jpg') }}" alt=""></a>
+                                                        <div class="product-bs__action-wrap">
+                                                            <ul class="product-bs__action-list">
+                                                                <li>
 
-                                        <span class="product-o__name">
+                                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">Sony DSLR 4K Camera</a></span>
-                                        <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                                <li>
 
-                                            <span class="product-o__review">(0)</span></div>
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                                <li>
 
-                                        <span class="product-o__price">$125.00
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                            <span class="product-o__discount">$160.00</span></span>
-                                    </div>
-                                </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="product-o product-o--hover-on">
-                                        <div class="product-o__wrap">
+                                                    <span class="product-bs__category">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
-                                                <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product16.jpg') }}" alt=""></a>
-                                            <div class="product-o__action-wrap">
-                                                <ul class="product-o__action-list">
-                                                    <li>
+                                                    <span class="product-bs__name">
 
-                                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                    <li>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Color Yellow Modest B Fashion</a></span>
+                                                    <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
-                                                        <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                    <li>
+                                                        <span class="product-bs__review">(23)</span></div>
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                    <li>
+                                                    <span class="product-bs__price">$125.00
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                </ul>
+                                                        <span class="product-bs__discount">$160.00</span></span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item accessories">
+                                            <div class="product-bs">
+                                                <div class="product-bs__container">
+                                                    <div class="product-bs__wrap">
 
-                                        <span class="product-o__category">
+                                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product3.jpg') }}" alt=""></a>
+                                                        <div class="product-bs__action-wrap">
+                                                            <ul class="product-bs__action-list">
+                                                                <li>
 
-                                        <span class="product-o__name">
+                                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">Sony DSLR 2K Camera</a></span>
-                                        <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                                <li>
 
-                                            <span class="product-o__review">(0)</span></div>
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                                <li>
 
-                                        <span class="product-o__price">$125.00
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                            <span class="product-o__discount">$160.00</span></span>
-                                    </div>
-                                </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="product-o product-o--hover-on">
-                                        <div class="product-o__wrap">
+                                                    <span class="product-bs__category">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
 
-                                                <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product17.jpg') }}" alt=""></a>
-                                            <div class="product-o__action-wrap">
-                                                <ul class="product-o__action-list">
-                                                    <li>
+                                                    <span class="product-bs__name">
 
-                                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                    <li>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Blown Sunglasses For Deux</a></span>
+                                                    <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
-                                                        <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                    <li>
+                                                        <span class="product-bs__review">(23)</span></div>
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                    <li>
+                                                    <span class="product-bs__price">$125.00
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                </ul>
+                                                        <span class="product-bs__discount">$160.00</span></span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item accessories">
+                                            <div class="product-bs">
+                                                <div class="product-bs__container">
+                                                    <div class="product-bs__wrap">
 
-                                        <span class="product-o__category">
+                                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                            <img class="aspect__img" src="{{ asset('shop/images/product/women/product4.jpg') }}" alt=""></a>
+                                                        <div class="product-bs__action-wrap">
+                                                            <ul class="product-bs__action-list">
+                                                                <li>
 
-                                        <span class="product-o__name">
+                                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">Canon DSLR 4K Camera</a></span>
-                                        <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                                <li>
 
-                                            <span class="product-o__review">(0)</span></div>
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                                <li>
 
-                                        <span class="product-o__price">$125.00
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                            <span class="product-o__discount">$160.00</span></span>
-                                    </div>
-                                </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="product-o product-o--hover-on">
-                                        <div class="product-o__wrap">
+                                                    <span class="product-bs__category">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
-                                                <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product18.jpg') }}" alt=""></a>
-                                            <div class="product-o__action-wrap">
-                                                <ul class="product-o__action-list">
-                                                    <li>
+                                                    <span class="product-bs__name">
 
-                                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                    <li>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Ladies Black Bag</a></span>
+                                                    <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
-                                                        <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                    <li>
+                                                        <span class="product-bs__review">(23)</span></div>
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                    <li>
+                                                    <span class="product-bs__price">$125.00
 
-                                                        <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                                </ul>
+                                                        <span class="product-bs__discount">$160.00</span></span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item footwear">
+                                            <div class="product-bs">
+                                                <div class="product-bs__container">
+                                                    <div class="product-bs__wrap">
 
-                                        <span class="product-o__category">
+                                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                            <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product13.jpg') }}" alt=""></a>
+                                                        <div class="product-bs__action-wrap">
+                                                            <ul class="product-bs__action-list">
+                                                                <li>
 
-                                        <span class="product-o__name">
+                                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">Canon DSLR 2K Camera</a></span>
-                                        <div class="product-o__rating gl-rating-style"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                                <li>
 
-                                            <span class="product-o__review">(0)</span></div>
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                                <li>
 
-                                        <span class="product-o__price">$125.00
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                            <span class="product-o__discount">$160.00</span></span>
+                                                    <span class="product-bs__category">
+
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
+
+                                                    <span class="product-bs__name">
+
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Casual Shoes Independence</a></span>
+                                                    <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+
+                                                        <span class="product-bs__review">(23)</span></div>
+
+                                                    <span class="product-bs__price">$125.00
+
+                                                        <span class="product-bs__discount">$160.00</span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30 filter__item footwear">
+                                            <div class="product-bs">
+                                                <div class="product-bs__container">
+                                                    <div class="product-bs__wrap">
+
+                                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                                            <img class="aspect__img" src="{{ asset('shop/images/product/men/product14.jpg') }}" alt=""></a>
+                                                        <div class="product-bs__action-wrap">
+                                                            <ul class="product-bs__action-list">
+                                                                <li>
+
+                                                                    <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
+                                                                <li>
+
+                                                                    <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                                                <li>
+
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
+                                                                <li>
+
+                                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <span class="product-bs__category">
+
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
+
+                                                    <span class="product-bs__name">
+
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Men Casual Shoes Charcoal</a></span>
+                                                    <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+
+                                                        <span class="product-bs__review">(23)</span></div>
+
+                                                    <span class="product-bs__price">$125.00
+
+                                                        <span class="product-bs__discount">$160.00</span></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="load-more">
+
+                                    <button class="btn btn--e-brand" type="button">Load More</button></div>
                             </div>
                         </div>
                     </div>
@@ -966,31 +973,115 @@
 
 
             <!--====== Section 5 ======-->
-            <div class="banner-bg">
+            <div class="u-s-p-b-60">
+
+                <!--====== Section Intro ======-->
+                <div class="section__intro u-s-m-b-46">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section__text-wrap">
+                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">URBAN SOUL</h1>
+
+                                    <span class="section__span u-c-silver">RECENTLY URBAN PRODUCTS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====== End - Section Intro ======-->
+
 
                 <!--====== Section Content ======-->
                 <div class="section__content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="banner-bg__countdown">
-                                    <div class="countdown countdown--style-banner" data-countdown="2020/05/01"></div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-short u-h-100">
+                                    <div class="product-short__container">
+                                        <div class="product-short__img-wrap">
+
+                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product16.jpg') }}" alt=""></a></div>
+                                        <div class="product-short__info">
+
+                                            <span class="product-short__price">$126.77</span>
+
+                                            <span class="product-short__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress A Nice Elegant</a></span>
+
+                                            <span class="product-short__category">
+
+                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
+                                    </div>
                                 </div>
-                                <div class="banner-bg__wrap">
-                                    <div class="banner-bg__text-1">
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-short u-h-100">
+                                    <div class="product-short__container">
+                                        <div class="product-short__img-wrap">
 
-                                        <span class="u-c-white">Global</span>
+                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
 
-                                        <span class="u-c-secondary">Offers</span></div>
-                                    <div class="banner-bg__text-2">
+                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product17.jpg') }}" alt=""></a></div>
+                                        <div class="product-short__info">
 
-                                        <span class="u-c-secondary">Official Launch</span>
+                                            <span class="product-short__price">$126.77</span>
 
-                                        <span class="u-c-white">Don't Miss!</span></div>
+                                            <span class="product-short__name">
 
-                                    <span class="banner-bg__text-block banner-bg__text-3 u-c-secondary">Enjoy Free Shipping when you buy 2 items and above!</span>
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress B Nice Elegant</a></span>
 
-                                    <a class="banner-bg__shop-now btn--e-secondary" href="{{ asset('shop/shop-side-version-2.html') }}">Shop Now</a>
+                                            <span class="product-short__category">
+
+                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-short u-h-100">
+                                    <div class="product-short__container">
+                                        <div class="product-short__img-wrap">
+
+                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product18.jpg') }}" alt=""></a></div>
+                                        <div class="product-short__info">
+
+                                            <span class="product-short__price">$126.77</span>
+
+                                            <span class="product-short__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress C Nice Elegant</a></span>
+
+                                            <span class="product-short__category">
+
+                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
+                                <div class="product-short u-h-100">
+                                    <div class="product-short__container">
+                                        <div class="product-short__img-wrap">
+
+                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+
+                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product19.jpg') }}" alt=""></a></div>
+                                        <div class="product-short__info">
+
+                                            <span class="product-short__price">$126.77</span>
+
+                                            <span class="product-short__name">
+
+                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress D Nice Elegant</a></span>
+
+                                            <span class="product-short__category">
+
+                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1002,272 +1093,6 @@
 
 
             <!--====== Section 6 ======-->
-            <div class="u-s-p-y-60">
-
-                <!--====== Section Intro ======-->
-                <div class="section__intro u-s-m-b-46">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">FEATURED PRODUCTS</h1>
-
-                                    <span class="section__span u-c-silver">FIND NEW FEATURED PRODUCTS</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Intro ======-->
-
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
-                                <div class="product-o product-o--hover-on u-h-100">
-                                    <div class="product-o__wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                            <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product19.jpg') }}" alt=""></a>
-                                        <div class="product-o__action-wrap">
-                                            <ul class="product-o__action-list">
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                <li>
-
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                <li>
-
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <span class="product-o__category">
-
-                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                    <span class="product-o__name">
-
-                                        <a href="{{ asset('shop/product-detail.html') }}">Tablet 14inch Screen</a></span>
-                                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                        <span class="product-o__review">(23)</span></div>
-
-                                    <span class="product-o__price">$125.00
-
-                                        <span class="product-o__discount">$160.00</span></span>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
-                                <div class="product-o product-o--hover-on u-h-100">
-                                    <div class="product-o__wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                            <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product20.jpg') }}" alt=""></a>
-                                        <div class="product-o__action-wrap">
-                                            <ul class="product-o__action-list">
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                <li>
-
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                <li>
-
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <span class="product-o__category">
-
-                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                    <span class="product-o__name">
-
-                                        <a href="{{ asset('shop/product-detail.html') }}">Tablet 18inch Screen</a></span>
-                                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                        <span class="product-o__review">(23)</span></div>
-
-                                    <span class="product-o__price">$125.00
-
-                                        <span class="product-o__discount">$160.00</span></span>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
-                                <div class="product-o product-o--hover-on u-h-100">
-                                    <div class="product-o__wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                            <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product21.jpg') }}" alt=""></a>
-                                        <div class="product-o__action-wrap">
-                                            <ul class="product-o__action-list">
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                <li>
-
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                <li>
-
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <span class="product-o__category">
-
-                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                    <span class="product-o__name">
-
-                                        <a href="{{ asset('shop/product-detail.html') }}">Tablet 13inch Screen Ram 16GB</a></span>
-                                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                        <span class="product-o__review">(23)</span></div>
-
-                                    <span class="product-o__price">$125.00
-
-                                        <span class="product-o__discount">$160.00</span></span>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
-                                <div class="product-o product-o--hover-on u-h-100">
-                                    <div class="product-o__wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                            <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product22.jpg') }}" alt=""></a>
-                                        <div class="product-o__action-wrap">
-                                            <ul class="product-o__action-list">
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                <li>
-
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                <li>
-
-                                                    <a href="{{ asset('shop/signin.html') }}" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <span class="product-o__category">
-
-                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
-
-                                    <span class="product-o__name">
-
-                                        <a href="{{ asset('shop/product-detail.html') }}">Tablet 12inch Screen Ram 16GB</a></span>
-                                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-
-                                        <span class="product-o__review">(23)</span></div>
-
-                                    <span class="product-o__price">$125.00
-
-                                        <span class="product-o__discount">$160.00</span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Content ======-->
-            </div>
-            <!--====== End - Section 6 ======-->
-
-
-            <!--====== Section 7 ======-->
-            <div class="u-s-p-b-60">
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
-
-                                <a class="promotion" href="{{ asset('shop/shop-side-version-2.html') }}">
-                                    <div class="aspect aspect--bg-grey aspect--square">
-
-                                        <img class="aspect__img promotion__img" src="{{ asset('shop/images/promo/promo-img-1.jpg') }}" alt=""></div>
-                                    <div class="promotion__content">
-                                        <div class="promotion__text-wrap">
-                                            <div class="promotion__text-1">
-
-                                                <span class="u-c-secondary">ACCESSORIES FOR YOUR EVERYDAY</span></div>
-                                            <div class="promotion__text-2">
-
-                                                <span class="u-c-secondary">GET IN</span>
-
-                                                <span class="u-c-brand">TOUCH</span></div>
-                                        </div>
-                                    </div>
-                                </a></div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
-
-                                <a class="promotion" href="{{ asset('shop/shop-side-version-2.html') }}">
-                                    <div class="aspect aspect--bg-grey aspect--square">
-
-                                        <img class="aspect__img promotion__img" src="{{ asset('shop/images/promo/promo-img-2.jpg') }}" alt=""></div>
-                                    <div class="promotion__content">
-                                        <div class="promotion__text-wrap">
-                                            <div class="promotion__text-1">
-
-                                                <span class="u-c-secondary">SMARTPHONE</span>
-
-                                                <span class="u-c-brand">2019</span></div>
-                                            <div class="promotion__text-2">
-
-                                                <span class="u-c-secondary">NEW ARRIVALS</span></div>
-                                        </div>
-                                    </div>
-                                </a></div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
-
-                                <a class="promotion" href="{{ asset('shop/shop-side-version-2.html') }}">
-                                    <div class="aspect aspect--bg-grey aspect--square">
-
-                                        <img class="aspect__img promotion__img" src="{{ asset('shop/images/promo/promo-img-3.jpg') }}" alt=""></div>
-                                    <div class="promotion__content">
-                                        <div class="promotion__text-wrap">
-                                            <div class="promotion__text-1">
-
-                                                <span class="u-c-secondary">DSLR FOR NEW GENERATION</span></div>
-                                            <div class="promotion__text-2">
-
-                                                <span class="u-c-brand">GET UP TO 10% OFF</span></div>
-                                        </div>
-                                    </div>
-                                </a></div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Content ======-->
-            </div>
-            <!--====== End - Section 7 ======-->
-
-
-            <!--====== Section 8 ======-->
             <div class="u-s-p-b-60">
 
                 <!--====== Section Content ======-->
@@ -1285,16 +1110,16 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product23.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/men/product9.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 15 Ram 16GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">New Fashion A Nice Elegant</a></span>
 
                                                     <span class="product-l__price">$125.00</span></div>
                                             </div>
@@ -1305,16 +1130,16 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product24.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/men/product10.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 13 Ram 16GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">New Fashion B Nice Elegant</a></span>
 
                                                     <span class="product-l__price">$125.00</span></div>
                                             </div>
@@ -1325,16 +1150,16 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product25.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/women/product9.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 15 Ram 8GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">New Dress A Nice Elegant</a></span>
 
                                                     <span class="product-l__price">$125.00</span></div>
                                             </div>
@@ -1353,16 +1178,16 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product26.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/women/product10.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 10 Ram 16GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">New Dress B Nice Elegant</a></span>
 
                                                     <span class="product-l__price">$125.00
 
@@ -1375,16 +1200,16 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product27.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/women/product11.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 15 Ram 8GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">New Dress C Nice Elegant</a></span>
 
                                                     <span class="product-l__price">$125.00
 
@@ -1397,16 +1222,16 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product28.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/women/product12.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 15 Ultra Ram 16GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">New Dress D Nice Elegant</a></span>
 
                                                     <span class="product-l__price">$125.00
 
@@ -1427,17 +1252,17 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product29.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/women/product13.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
                                                     <div class="product-l__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></div>
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 20 Ultra Ram 16GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">New Dress E Nice Elegant</a></span>
 
                                                     <span class="product-l__price">$125.00</span>
                                                 </div>
@@ -1449,17 +1274,17 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product30.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/women/product1.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
                                                     <div class="product-l__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></div>
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 11 Ultra Ram 16GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Women intimate Bra</a></span>
 
                                                     <span class="product-l__price">$125.00</span>
                                                 </div>
@@ -1471,17 +1296,17 @@
 
                                                     <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
 
-                                                        <img class="aspect__img" src="{{ asset('shop/images/product/electronic/product31.jpg') }}" alt=""></a></div>
+                                                        <img class="aspect__img" src="{{ asset('shop/images/product/women/product2.jpg') }}" alt=""></a></div>
                                                 <div class="product-l__info-wrap">
                                                     <div class="product-l__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></div>
 
                                                     <span class="product-l__category">
 
-                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
 
                                                     <span class="product-l__name">
 
-                                                        <a href="{{ asset('shop/product-detail.html') }}">Razor Gear 10 Ultra Ram 16GB</a></span>
+                                                        <a href="{{ asset('shop/product-detail.html') }}">Women Wedding Event Dress</a></span>
 
                                                     <span class="product-l__price">$125.00</span>
                                                 </div>
@@ -1495,357 +1320,10 @@
                 </div>
                 <!--====== End - Section Content ======-->
             </div>
-            <!--====== End - Section 8 ======-->
+            <!--====== End - Section 6 ======-->
 
 
-            <!--====== Section 9 ======-->
-            <div class="u-s-p-b-60">
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="service u-h-100">
-                                    <div class="service__icon"><i class="fas fa-truck"></i></div>
-                                    <div class="service__info-wrap">
-
-                                        <span class="service__info-text-1">Free Shipping</span>
-
-                                        <span class="service__info-text-2">Free shipping on all US order or order above $200</span></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="service u-h-100">
-                                    <div class="service__icon"><i class="fas fa-redo"></i></div>
-                                    <div class="service__info-wrap">
-
-                                        <span class="service__info-text-1">Shop with Confidence</span>
-
-                                        <span class="service__info-text-2">Our Protection covers your purchase from click to delivery</span></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="service u-h-100">
-                                    <div class="service__icon"><i class="fas fa-headphones-alt"></i></div>
-                                    <div class="service__info-wrap">
-
-                                        <span class="service__info-text-1">24/7 Help Center</span>
-
-                                        <span class="service__info-text-2">Round-the-clock assistance for a smooth shopping experience</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Content ======-->
-            </div>
-            <!--====== End - Section 9 ======-->
-
-
-            <!--====== Section 10 ======-->
-            <div class="u-s-p-b-60">
-
-                <!--====== Section Intro ======-->
-                <div class="section__intro u-s-m-b-46">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">LATEST FROM BLOG</h1>
-
-                                    <span class="section__span u-c-silver">START YOU DAY WITH FRESH AND LATEST NEWS</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Intro ======-->
-
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="bp-mini bp-mini--img u-h-100">
-                                    <div class="bp-mini__thumbnail">
-
-                                        <!--====== Image Code ======-->
-
-                                        <a class="aspect aspect--bg-grey aspect--1366-768 u-d-block" href="{{ asset('shop/blog-detail.html') }}">
-
-                                            <img class="aspect__img" src="{{ asset('shop/images/blog/post-2.jpg') }}" alt=""></a>
-                                        <!--====== End - Image Code ======-->
-                                    </div>
-                                    <div class="bp-mini__content">
-                                        <div class="bp-mini__stat">
-
-                                            <span class="bp-mini__stat-wrap">
-
-                                                <span class="bp-mini__publish-date">
-
-                                                    <a>
-
-                                                        <span>25 February 2018</span></a></span></span>
-
-                                            <span class="bp-mini__stat-wrap">
-
-                                                <span class="bp-mini__preposition">By</span>
-
-                                                <span class="bp-mini__author">
-
-                                                    <a href="#">Dayle</a></span></span>
-
-                                            <span class="bp-mini__stat">
-
-                                                <span class="bp-mini__comment">
-
-                                                    <a href="{{ asset('shop/blog-detail.html') }}"><i class="far fa-comments u-s-m-r-4"></i>
-
-                                                        <span>8</span></a></span></span></div>
-                                        <div class="bp-mini__category">
-
-                                            <a>Learning</a>
-
-                                            <a>News</a>
-
-                                            <a>Health</a></div>
-
-                                        <span class="bp-mini__h1">
-
-                                            <a href="{{ asset('shop/blog-detail.html') }}">Life is an extraordinary Adventure</a></span>
-                                        <p class="bp-mini__p">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        <div class="blog-t-w">
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Travel</a>
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Culture</a>
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Place</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="bp-mini bp-mini--img u-h-100">
-                                    <div class="bp-mini__thumbnail">
-
-                                        <!--====== Image Code ======-->
-
-                                        <a class="aspect aspect--bg-grey aspect--1366-768 u-d-block" href="{{ asset('shop/blog-detail.html') }}">
-
-                                            <img class="aspect__img" src="{{ asset('shop/images/blog/post-12.jpg') }}" alt=""></a>
-                                        <!--====== End - Image Code ======-->
-                                    </div>
-                                    <div class="bp-mini__content">
-                                        <div class="bp-mini__stat">
-
-                                            <span class="bp-mini__stat-wrap">
-
-                                                <span class="bp-mini__publish-date">
-
-                                                    <a>
-
-                                                        <span>25 February 2018</span></a></span></span>
-
-                                            <span class="bp-mini__stat-wrap">
-
-                                                <span class="bp-mini__preposition">By</span>
-
-                                                <span class="bp-mini__author">
-
-                                                    <a href="#">Dayle</a></span></span>
-
-                                            <span class="bp-mini__stat">
-
-                                                <span class="bp-mini__comment">
-
-                                                    <a href="{{ asset('shop/blog-detail.html') }}"><i class="far fa-comments u-s-m-r-4"></i>
-
-                                                        <span>8</span></a></span></span></div>
-                                        <div class="bp-mini__category">
-
-                                            <a>Learning</a>
-
-                                            <a>News</a>
-
-                                            <a>Health</a></div>
-
-                                        <span class="bp-mini__h1">
-
-                                            <a href="{{ asset('shop/blog-detail.html') }}">Wait till its open</a></span>
-                                        <p class="bp-mini__p">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        <div class="blog-t-w">
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Travel</a>
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Culture</a>
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Place</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="bp-mini bp-mini--img u-h-100">
-                                    <div class="bp-mini__thumbnail">
-
-                                        <!--====== Image Code ======-->
-
-                                        <a class="aspect aspect--bg-grey aspect--1366-768 u-d-block" href="{{ asset('shop/blog-detail.html') }}">
-
-                                            <img class="aspect__img" src="{{ asset('shop/images/blog/post-5.jpg') }}" alt=""></a>
-                                        <!--====== End - Image Code ======-->
-                                    </div>
-                                    <div class="bp-mini__content">
-                                        <div class="bp-mini__stat">
-
-                                            <span class="bp-mini__stat-wrap">
-
-                                                <span class="bp-mini__publish-date">
-
-                                                    <a>
-
-                                                        <span>25 February 2018</span></a></span></span>
-
-                                            <span class="bp-mini__stat-wrap">
-
-                                                <span class="bp-mini__preposition">By</span>
-
-                                                <span class="bp-mini__author">
-
-                                                    <a href="#">Dayle</a></span></span>
-
-                                            <span class="bp-mini__stat">
-
-                                                <span class="bp-mini__comment">
-
-                                                    <a href="{{ asset('shop/blog-detail.html') }}"><i class="far fa-comments u-s-m-r-4"></i>
-
-                                                        <span>8</span></a></span></span></div>
-                                        <div class="bp-mini__category">
-
-                                            <a>Learning</a>
-
-                                            <a>News</a>
-
-                                            <a>Health</a></div>
-
-                                        <span class="bp-mini__h1">
-
-                                            <a href="{{ asset('shop/blog-detail.html') }}">Tell me difference between smoke and vape</a></span>
-                                        <p class="bp-mini__p">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        <div class="blog-t-w">
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Travel</a>
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Culture</a>
-
-                                            <a class="gl-tag btn--e-transparent-hover-brand-b-2">Place</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Content ======-->
-            </div>
-            <!--====== End - Section 10 ======-->
-
-
-            <!--====== Section 11 ======-->
-            <div class="u-s-p-b-90 u-s-m-b-30">
-
-                <!--====== Section Intro ======-->
-                <div class="section__intro u-s-m-b-46">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">CLIENTS FEEDBACK</h1>
-
-                                    <span class="section__span u-c-silver">WHAT OUR CLIENTS SAY</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Intro ======-->
-
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-
-                        <!--====== Testimonial Slider ======-->
-                        <div class="slider-fouc">
-                            <div class="owl-carousel" id="testimonial-slider">
-                                <div class="testimonial">
-                                    <div class="testimonial__img-wrap">
-
-                                        <img class="testimonial__img" src="{{ asset('shop/images/about/test-1.jpg') }}" alt=""></div>
-                                    <div class="testimonial__content-wrap">
-
-                                        <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
-                                        <blockquote class="testimonial__block-quote">
-                                            <p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-                                        </blockquote>
-
-                                        <span class="testimonial__author">John D. / DVNTR Inc.</span>
-                                    </div>
-                                </div>
-                                <div class="testimonial">
-                                    <div class="testimonial__img-wrap">
-
-                                        <img class="testimonial__img" src="{{ asset('shop/images/about/test-2.jpg') }}" alt=""></div>
-                                    <div class="testimonial__content-wrap">
-
-                                        <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
-                                        <blockquote class="testimonial__block-quote">
-                                            <p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-                                        </blockquote>
-
-                                        <span class="testimonial__author">John D. / DVNTR Inc.</span>
-                                    </div>
-                                </div>
-                                <div class="testimonial">
-                                    <div class="testimonial__img-wrap">
-
-                                        <img class="testimonial__img" src="{{ asset('shop/images/about/test-3.jpg') }}" alt=""></div>
-                                    <div class="testimonial__content-wrap">
-
-                                        <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
-                                        <blockquote class="testimonial__block-quote">
-                                            <p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-                                        </blockquote>
-
-                                        <span class="testimonial__author">John D. / DVNTR Inc.</span>
-                                    </div>
-                                </div>
-                                <div class="testimonial">
-                                    <div class="testimonial__img-wrap">
-
-                                        <img class="testimonial__img" src="{{ asset('shop/images/about/test-4.jpg') }}" alt=""></div>
-                                    <div class="testimonial__content-wrap">
-
-                                        <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
-                                        <blockquote class="testimonial__block-quote">
-                                            <p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-                                        </blockquote>
-
-                                        <span class="testimonial__author">John D. / DVNTR Inc.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--====== End - Testimonial Slider ======-->
-                    </div>
-                </div>
-                <!--====== End - Section Content ======-->
-            </div>
-            <!--====== End - Section 11 ======-->
-
-
-            <!--====== Section 12 ======-->
+            <!--====== Section 7 ======-->
             <div class="u-s-p-b-60">
 
                 <!--====== Section Content ======-->
@@ -1892,13 +1370,14 @@
                 </div>
                 <!--====== End - Section Content ======-->
             </div>
-            <!--====== End - Section 12 ======-->
+            <!--====== End - Section 7 ======-->
         </div>
         <!--====== End - App Content ======-->
 
 
         <!--====== Main Footer ======-->
-        @include('shop.footer')
+       @include('shop.footer')
+
         <!--====== Modal Section ======-->
 
 
@@ -2129,12 +1608,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!--====== End - Add to Cart Modal ======-->
-
-
         <!--====== Newsletter Subscribe Modal ======-->
         {{-- <div class="modal fade new-l" id="newsletter-modal">
             <div class="modal-dialog modal-dialog-centered">
@@ -2177,33 +1654,12 @@
                 </div>
             </div>
         </div> --}}
-
         <!--====== End - Newsletter Subscribe Modal ======-->
         <!--====== End - Modal Section ======-->
     </div>
-    <!--====== End - Main App ======-->
-
-
-    <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
-    {{-- <script>
-        window.ga = function() {
-            ga.q.push(arguments)
-        };
-        ga.q = [];
-        ga.l = +new Date;
-        ga('create', 'UA-XXXXX-Y', 'auto');
-        ga('send', 'pageview')
-    </script> --}}
-    <script src="{{ asset('shop/https://www.google-analytics.com/analytics.js') }}" async defer></script>
-
-    <!--====== Vendor Js ======-->
-    <script src="{{ asset('shop/js/vendor.js') }}"></script>
-
-    <!--====== jQuery Shopnav plugin ======-->
-    <script src="{{ asset('shop/js/jquery.shopnav.js') }}"></script>
-
-    <!--====== App ======-->
-    <script src="{{ asset('shop/js/app.js') }}"></script>
-
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <script src="{{ asset('shop/js/vendor.js ') }}"></script>
+    <script src="{{ asset('shop/js/jquery.shopnav.js ') }}"></script>
+    <script src="{{ asset('shop/js/app.js ') }}"></script>
 </body>
 </html>

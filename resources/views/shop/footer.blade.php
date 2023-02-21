@@ -77,7 +77,7 @@
                                             <a href="{{ asset('shop/contact.html') }}">Contact Us</a></li>
                                         <li>
 
-                                            <a href="{{ asset('shop/index.html') }}">Sitemap</a></li>
+                                            <a href="{{ asset('shop/index-3.html') }}">Sitemap</a></li>
                                         <li>
 
                                             <a href="{{ asset('shop/dash-my-order.html') }}">Delivery</a></li>
@@ -135,7 +135,7 @@
 
                             <span>Copyright © 2018</span>
 
-                            <a href="{{ asset('shop/index.html') }}">Reshop</a>
+                            <a href="{{ asset('shop/index-3.html') }}">Reshop</a>
 
                             <span>All Right Reserved</span></div>
                         <div class="lower-footer__payment">
