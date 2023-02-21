@@ -824,3 +824,10 @@ $(document).on("click", '#icon-download', function (e) {
         }
     })
 })
+$("#icon-printer").click(function() {
+    var divToPrint = $(".card-body");
+    newWin = window.open("");
+    newWin.document.write(divToPrint.html());
+    newWin.print();
+    // newWin.close();
+  });

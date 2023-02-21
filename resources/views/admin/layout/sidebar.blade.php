@@ -1,7 +1,7 @@
  <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+        <a class="nav-link" href="{{ route('/') }}">
           <i class="mdi mdi-grid-large menu-icon"></i>
           <span class="menu-title">Trang chủ</span>
         </a>

@@ -158,7 +158,7 @@
             </div>
             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Thông tin tài khoản <span class="badge badge-pill badge-danger">1</span></a>
             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Tin nhắn</a>
-            <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Đăng xuất</a>
+            <a class="dropdown-item" id="logout-user"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Đăng xuất</a>
           </div>
         </li>
       </ul>
