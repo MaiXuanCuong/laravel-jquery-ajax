@@ -383,6 +383,8 @@
                 <div class="section__content">
                     <div class="container">
                         <div class="row">
+
+                            {{-- @foreach ($histories as $history)
                             <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
                                 <div class="product-short u-h-100">
                                     <div class="product-short__container">
@@ -405,116 +407,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
-                                <div class="product-short u-h-100">
-                                    <div class="product-short__container">
-                                        <div class="product-short__img-wrap">
-
-                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product16.jpg') }}" alt=""></a></div>
-                                        <div class="product-short__info">
-
-                                            <span class="product-short__price">$126.77</span>
-
-                                            <span class="product-short__name">
-
-                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress A Nice Elegant</a></span>
-
-                                            <span class="product-short__category">
-
-                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
-                                <div class="product-short u-h-100">
-                                    <div class="product-short__container">
-                                        <div class="product-short__img-wrap">
-
-                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product16.jpg') }}" alt=""></a></div>
-                                        <div class="product-short__info">
-
-                                            <span class="product-short__price">$126.77</span>
-
-                                            <span class="product-short__name">
-
-                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress A Nice Elegant</a></span>
-
-                                            <span class="product-short__category">
-
-                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
-                                <div class="product-short u-h-100">
-                                    <div class="product-short__container">
-                                        <div class="product-short__img-wrap">
-
-                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product17.jpg') }}" alt=""></a></div>
-                                        <div class="product-short__info">
-
-                                            <span class="product-short__price">$126.77</span>
-
-                                            <span class="product-short__name">
-
-                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress B Nice Elegant</a></span>
-
-                                            <span class="product-short__category">
-
-                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
-                                <div class="product-short u-h-100">
-                                    <div class="product-short__container">
-                                        <div class="product-short__img-wrap">
-
-                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product18.jpg') }}" alt=""></a></div>
-                                        <div class="product-short__info">
-
-                                            <span class="product-short__price">$126.77</span>
-
-                                            <span class="product-short__name">
-
-                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress C Nice Elegant</a></span>
-
-                                            <span class="product-short__category">
-
-                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
-                                <div class="product-short u-h-100">
-                                    <div class="product-short__container">
-                                        <div class="product-short__img-wrap">
-
-                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product19.jpg') }}" alt=""></a></div>
-                                        <div class="product-short__info">
-
-                                            <span class="product-short__price">$126.77</span>
-
-                                            <span class="product-short__name">
-
-                                                <a href="{{ asset('shop/product-detail.html') }}">New Dress D Nice Elegant</a></span>
-
-                                            <span class="product-short__category">
-
-                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach --}}
+                          
                         </div>
                     </div>
                 </div>

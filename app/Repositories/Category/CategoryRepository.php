@@ -41,7 +41,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                 $images = str_replace('storage', 'public',  $path);
                 Storage::delete($images);
             }
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -75,7 +75,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                 $images = str_replace('storage', 'public', $path);
                 Storage::delete($images);
             }
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
 
@@ -87,7 +87,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             $category->delete();
             return true;
         } catch (\Exception$e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
        
@@ -98,7 +98,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             $category = $this->model->onlyTrashed();
             return $category->orderBy('deleted_at', 'DESC')->get();
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -110,7 +110,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             return $category;
           
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -124,7 +124,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             Storage::delete($images);
             return $category;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }

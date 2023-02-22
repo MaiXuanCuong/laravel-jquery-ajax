@@ -30,7 +30,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $user->delete();
             return true;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+           Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -41,8 +41,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $user = $this->model;
             $user->name = $data->name;
             $user->phone = $data->phone;
-            $password = '123456';
-            // $password = Str::random(6);
+            $password = Str::random(6);
             $user->password = Hash::make($password);
             $user->birthday = $data->birthday;
             $user->email = $data->email;
@@ -62,24 +61,21 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             }
 
             $user->save();
-            //     $params = [
-            //     "password" => $password,
-            //     'name' => $data->name,
-            // ];
-            // Mail::send('admin.emails.users', compact('params'), function ($email) use ($data) {
-            //     $email->subject('TCC-Shop');
-            //     $email->to($data->email, $data->name);
-            // });
-
-            // DB::commit();
-            // Session::flash('success', 'Thêm nhân viên' . ' ' . $data->name . ' ' . 'thành công');
+                $params = [
+                "password" => $password,
+                'name' => $data->name,
+            ];
+            Mail::send('admin.mail.mailPasswordUser', compact('params'), function ($email) use ($data) {
+                $email->subject('Xuân Cường Shop');
+                $email->to($data->email, $data->name);
+            });
             return $user;
         } catch (\Exception $e) {
             if (isset($path) && !empty($path)) {
                 $images = str_replace('storage', 'public',  $path);
                 Storage::delete($images);
             }
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+           Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -123,7 +119,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 $images = str_replace('storage', 'public', $path);
                 Storage::delete($images);
             }
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+           Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -133,7 +129,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $users->orderBy('deleted_at', 'DESC')->get();
       
     } catch (\Exception $e) {
-        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+       Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
         return false;
     }
     }
@@ -145,7 +141,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $user->restore();
             return true;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+           Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -161,7 +157,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             return $user;
             ;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+           Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }

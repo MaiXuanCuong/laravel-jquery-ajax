@@ -24,7 +24,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return $products;
  
     } catch (\Exception $e) {
-        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
         
     }
     }
@@ -86,7 +86,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 }
                 
             }
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -156,7 +156,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 }
                 
             }
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
         return $product;
@@ -168,7 +168,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->delete();
             return true;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
         return $product;
@@ -180,7 +180,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $products = $query->get();
             return $products;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
      
@@ -192,7 +192,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $product->restore();
         return $product;
     } catch (\Exception $e) {
-        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
         return false;
     }
     }
@@ -220,7 +220,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $product->forceDelete();
         return $product;
     } catch (\Exception $e) {
-        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
         return false;
     }
     }

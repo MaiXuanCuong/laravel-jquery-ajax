@@ -19,52 +19,13 @@ use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller
 {
+
+   
     public function index()
     {
-    
-
-        // if (isset(Auth::guard('customers')->user()->id)) {
-        //     $user = Auth::guard('customers')->user()->id;
-        //     $historyProducts = [];
-        //     $carts = Cache::get('carts'.$user);
-        //     $historyProduct = Cache::get('historyProducts'.$user);
-        //     if (isset($carts[Auth::guard('customers')->user()->id])){
-        //         $carts = array_values($carts);
-        //     }
-        
-        //     if (isset($historyProduct)) {
-              
-        //        $historyProducts = array_values($historyProduct);
-        //     }
-        // } else {
-        //         $carts = [];
-        //         $historyProducts = [];
-        //     } 
-        // $products = Product::all();
-        // $productsNew = Product::orderBy('id','DESC')->take(6)->get();
-        // $categories = Category::all();
-        // $topProducts = DB::table('orders_detail')
-        // ->leftJoin('products', 'products.id', '=', 'orders_detail.product_id')
-        // ->selectRaw('products.*, sum(orders_detail.quantity) totalProduct, sum(orders_detail.total) totalPrice')
-        // ->groupBy('orders_detail.product_id')
-        // ->orderBy('totalProduct', 'desc')
-        // ->take(6)
-        // ->get();
-        // $param = [
-        //     'products' => $products,
-        //     'categories' => $categories,
-        //     'carts' => $carts,
-        //     'topProducts' => $topProducts,
-        //     'productsNew' => $productsNew,
-        //     'historyProducts' => $historyProducts,
-
-        // ];
-
-
         $banners = Banner::where('status', '<>', 0)->get();
         $categories = Category::whereNull('deleted_at')->has('products')->get();
         $products = Product::with('category', 'supplier')
-        // ->where('status', 1)
         ->whereNull('deleted_at')
         ->whereHas('category', function ($query) {
             $query->whereNull('deleted_at');
@@ -84,7 +45,6 @@ class ShopController extends Controller
     public function view($id)
     {
         $product = Product::findOrFail($id);
-       
         try {
             if(isset(Auth::guard('customers')->user()->id)){
                 $user = Auth::guard('customers')->user()->id;
@@ -178,10 +138,6 @@ class ShopController extends Controller
             ], status:200);
         }
     }
-    public function update(Request $request)
-    {
-
-    }
     public function remove($id)
     {
         try {
@@ -242,10 +198,6 @@ class ShopController extends Controller
                 Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
                 return redirect()->route('shop.home');
             }
-
-    }
-    public function history()
-    {
 
     }
     public function checkOuts(){

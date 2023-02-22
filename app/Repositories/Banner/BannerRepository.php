@@ -38,7 +38,7 @@ class BannerRepository extends BaseRepository implements BannerRepositoryInterfa
                 $images = str_replace('storage', 'public',  $path);
                 Storage::delete($images);
             }
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -67,7 +67,7 @@ class BannerRepository extends BaseRepository implements BannerRepositoryInterfa
                 $images = str_replace('storage', 'public', $path);
                 Storage::delete($images);
             }
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -81,7 +81,7 @@ class BannerRepository extends BaseRepository implements BannerRepositoryInterfa
             Storage::delete($images);
             return $banner;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }

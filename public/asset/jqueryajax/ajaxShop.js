@@ -13,16 +13,44 @@ $(document).ready(function(){
         if (position < 100) {
           input.css('background-color', 'white');
           input.css('color', 'black');
+          input.css('top', '15px');
         } else if (bg === 'rgb(0, 0, 0)') {
           input.css('background-color', 'white');
           input.css('color', 'black');
+          input.css('top', '15px');
         } else {
           input.css('background-color', 'black');
           input.css('color', 'white');
+          input.css('top', '-1px');
         }
       });
    
 });
+
+function history(id){
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                "content"
+            ),
+        },
+    });
+    $.ajax({
+        type: "POST",
+        url: "/shops/history"+id,
+        dataType: "json",
+        success: function (response) {
+            $.each(response.products, function (index, product) {
+                if (response.status == 200) {
+                    console.log(response.products);
+                $("#index-products").append(
+                   
+                    );
+                } 
+            });
+        },
+    });
+}
 $(document).on('click','#login-customer',function(){
     e.preventDefault();
     var email = $("#email").val();

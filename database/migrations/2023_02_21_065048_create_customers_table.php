@@ -17,21 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('password');
-            $table->string('phone');
             $table->string('image')->nullable();
             $table->string('email')->unique();
-            $table->unsignedBigInteger('province_id');
-            $table->foreign('province_id')
-                ->references('id')
-                ->on('provinces');
-            $table->unsignedBigInteger('district_id');
-            $table->foreign('district_id')
-                ->references('id')
-                ->on('districts');
-            $table->unsignedBigInteger('ward_id');
-            $table->foreign('ward_id')
-                ->references('id')
-                ->on('wards');
             $table->timestamp('email_verified_at')->nullable();
             $table->softDeletes();
             $table->rememberToken();

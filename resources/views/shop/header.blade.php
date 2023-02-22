@@ -82,87 +82,39 @@
                                             <ul style="width:120px">
                                                 <li>
 
-                                                    <a href="{{ asset('shop/dashboard.html') }}"><i class="fas fa-user-circle u-s-m-r-6"></i>
+                                                    <a ><i class="fas fa-user-circle u-s-m-r-6"></i>
 
-                                                        <span>Account</span></a></li>
+                                                        <span>Tài khoản</span></a></li>
+                                                        @if(Auth::user()->id)
                                                 <li>
 
-                                                    <a href="{{ asset('shop/signup.html') }}"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                                    <a ><i class="fas fa-user-plus u-s-m-r-6"></i>
 
-                                                        <span>Signup</span></a></li>
+                                                        <span>Đăng nhập</span></a></li>
+                                                       
                                                 <li>
 
-                                                    <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-lock u-s-m-r-6"></i>
+                                                    <a ><i class="fas fa-lock u-s-m-r-6"></i>
 
-                                                        <span>Signin</span></a></li>
+                                                        <span>Đăng ký</span></a></li>
+                                                        @else
+                                                       
                                                 <li>
 
-                                                    <a href="{{ asset('shop/signup.html') }}"><i class="fas fa-lock-open u-s-m-r-6"></i>
+                                                    <a ><i class="fas fa-lock-open u-s-m-r-6"></i>
 
-                                                        <span>Signout</span></a></li>
+                                                        <span>Đăng xuất</span></a></li>
+                                                        @endif
                                             </ul>
                                             <!--====== End - Dropdown ======-->
                                         </li>
-                                        <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Settings">
+                                       
+                                        <li data-tooltip="tooltip" data-placement="left" title="Liên hệ">
 
-                                            <a><i class="fas fa-user-cog"></i></a>
+                                            <a href="tel:+0843442357"><i class="fas fa-phone-volume"></i></a></li>
+                                        <li data-tooltip="tooltip" data-placement="left" title="Email">
 
-                                            <!--====== Dropdown ======-->
-
-                                            <span class="js-menu-toggle"></span>
-                                            <ul style="width:120px">
-                                                <li class="has-dropdown has-dropdown--ul-right-100">
-
-                                                    <a>Language<i class="fas fa-angle-down u-s-m-l-6"></i></a>
-
-                                                    <!--====== Dropdown ======-->
-
-                                                    <span class="js-menu-toggle"></span>
-                                                    <ul style="width:120px">
-                                                        <li>
-
-                                                            <a class="u-c-brand">ENGLISH</a></li>
-                                                        <li>
-
-                                                            <a>ARABIC</a></li>
-                                                        <li>
-
-                                                            <a>FRANCAIS</a></li>
-                                                        <li>
-
-                                                            <a>ESPANOL</a></li>
-                                                    </ul>
-                                                    <!--====== End - Dropdown ======-->
-                                                </li>
-                                                <li class="has-dropdown has-dropdown--ul-right-100">
-
-                                                    <a>Currency<i class="fas fa-angle-down u-s-m-l-6"></i></a>
-
-                                                    <!--====== Dropdown ======-->
-
-                                                    <span class="js-menu-toggle"></span>
-                                                    <ul style="width:225px">
-                                                        <li>
-
-                                                            <a class="u-c-brand">$ - US DOLLAR</a></li>
-                                                        <li>
-
-                                                            <a>£ - BRITISH POUND STERLING</a></li>
-                                                        <li>
-
-                                                            <a>€ - EURO</a></li>
-                                                    </ul>
-                                                    <!--====== End - Dropdown ======-->
-                                                </li>
-                                            </ul>
-                                            <!--====== End - Dropdown ======-->
-                                        </li>
-                                        <li data-tooltip="tooltip" data-placement="left" title="Contact">
-
-                                            <a href="tel:+0900901904"><i class="fas fa-phone-volume"></i></a></li>
-                                        <li data-tooltip="tooltip" data-placement="left" title="Mail">
-
-                                            <a href="mailto:contact@domain.com"><i class="far fa-envelope"></i></a></li>
+                                            <a href="mailto:maixuancuong2906@gmail.com"><i class="far fa-envelope"></i></a></li>
                                     </ul>
                                     <!--====== End - List ======-->
                                 </div>
@@ -1042,6 +994,7 @@
                                         <li>
 
                                             <a href="{{ asset('shop/wishlist.html') }}"><i class="far fa-heart"></i></a></li>
+                                            
                                         <li class="has-dropdown">
 
                                             <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
@@ -1050,7 +1003,7 @@
 
                                             <!--====== Dropdown ======-->
 
-                                            <span class="js-menu-toggle"></span>
+                                            {{-- <span class="js-menu-toggle"></span> --}}
                                             <div class="mini-cart">
 
                                                 <!--====== Mini Product Container ======-->
@@ -1187,6 +1140,9 @@
                                             </div>
                                             <!--====== End - Dropdown ======-->
                                         </li>
+
+
+                                        
                                     </ul>
                                     <!--====== End - List ======-->
                                 </div>

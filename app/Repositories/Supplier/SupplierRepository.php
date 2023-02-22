@@ -27,7 +27,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
             $supplier->save();
             return $supplier;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -42,7 +42,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
             $supplier->save();
             return $supplier;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
     }
@@ -53,7 +53,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
             $supplier->delete();
             return true;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
         return $supplier;
@@ -64,7 +64,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
         $query = $this->model->onlyTrashed();
         return $query->orderBy('deleted_at','DESC')->get();
        } catch (\Exception $e) {
-        Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+        Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
         return false;
        }
        
@@ -75,7 +75,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
             $supplier->restore();
             return $supplier;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
       
@@ -86,7 +86,7 @@ class SupplierRepository extends BaseRepository implements SupplierRepositoryInt
             $supplier->forceDelete();
             return $supplier;
         } catch (\Exception $e) {
-            Log::error('Message: ' . $e->getMessage() . ' --- Line : ' . $e->getLine());
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
             return false;
         }
       

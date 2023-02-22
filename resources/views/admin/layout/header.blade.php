@@ -6,18 +6,13 @@
         </button>
       </div>
       <div>
-        <a class="navbar-brand brand-logo" href="index.html">
-          <img src="" alt="logo" />
-        </a>
-        <a class="navbar-brand brand-logo-mini" href="index.html">
-          <img src="" alt="logo" />
-        </a>
+     
       </div>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-top"> 
       <ul class="navbar-nav">
         <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-          <h1 class="welcome-text">Chào, <span class="text-black fw-bold">John Doe</span></h1>
+          <h1 class="welcome-text">Chào, <span class="text-black fw-bold">{{ Auth::user()->name }}</span></h1>
           <h3 class="welcome-sub-text">Đội ngũ Admin chúc bạn một ngày làm việc tốt lành</h3>
         </li>
       </ul>
@@ -149,12 +144,12 @@
         </li>
         <li class="nav-item dropdown d-none d-lg-block user-dropdown">
           <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="img-xs rounded-circle" src="" alt="Profile image"> </a>
+            <img class="img-xs rounded-circle" src="{{ asset(Auth::user()->image) }}" alt="Profile image"> </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
             <div class="dropdown-header text-center">
-              <img class="img-md rounded-circle" src="" alt="Profile image">
-              <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-              <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+              <img class="img-md rounded-circle" width="90px" height="90px" src="{{ asset(Auth::user()->image) }}" alt="Profile image">
+              <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->name }}</p>
+              <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
             </div>
             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Thông tin tài khoản <span class="badge badge-pill badge-danger">1</span></a>
             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Tin nhắn</a>

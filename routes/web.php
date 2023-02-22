@@ -90,9 +90,10 @@ Route::prefix('/')->middleware(['auth', 'revalidate'])->group(function () {
     });
 });
 Route::prefix('shops')->group(function (){
-    // Route::get('/',function(){
-    //     return view('shop.master');
-    // });
-    Route::get('/',[ShopController::class, 'index'])->name('index');
-    Route::post('/checklogin',[ShopController::class, 'checkLogin'])->name('checklogin');
+    Route::get('/',[ShopController::class, 'index'])->name('shop.index');
+    Route::post('/history/{id}',[ShopController::class, 'view'])->name('shop.view');
+    Route::post('/checklogin',[ShopController::class, 'checkLogin'])->name('shop.checklogin');
+});
+Route::middleware(['auth.token'])->group(function () {
+    // các route cần xác thực token
 });
