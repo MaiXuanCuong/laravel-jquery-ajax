@@ -25,10 +25,8 @@ class BannerRepository extends BaseRepository implements BannerRepositoryInterfa
             $banner->status = $request->status;
             $fieldName = 'inputFileAdd';
             if ($request->hasFile($fieldName)) {
-                $fullFileNameOrigin = $request->file($fieldName)->getClientOriginalName();
-                $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
                 $extenshion = $request->file($fieldName)->getClientOriginalExtension();
-                $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
+                $fileName = rand() . '_' . time() . '.' . $extenshion;
                 $path = 'storage/' . $request->file($fieldName)->storeAs('public/images/banners', $fileName);
                 $path = str_replace('public/', '', $path);
                 $banner->image = $path;
@@ -51,10 +49,8 @@ class BannerRepository extends BaseRepository implements BannerRepositoryInterfa
             $banner->status = $request->status;
             $fieldName = 'inputFileUpdate';
             if ($request->hasFile($fieldName)) {
-                $fullFileNameOrigin = $request->file($fieldName)->getClientOriginalName();
-                $fileNameOrigin = pathinfo($fullFileNameOrigin, PATHINFO_FILENAME);
                 $extenshion = $request->file($fieldName)->getClientOriginalExtension();
-                $fileName = $fileNameOrigin . '-' . rand() . '_' . time() . '.' . $extenshion;
+                $fileName = rand() . '_' . time() . '.' . $extenshion;
                 $path = 'storage/' . $request->file($fieldName)->storeAs('public/images/banners', $fileName);
                 $path = str_replace('public/', '', $path);
                 $banner->image = $path;

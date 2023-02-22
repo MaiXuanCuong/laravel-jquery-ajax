@@ -1,5 +1,27 @@
 $(document).ready(function(){
-
+    $("#main-search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#List-products #Product-search").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    $(window).scroll(function() {
+        var input = $('#main-search');
+        var position = input.offset().top;
+        var bg = $('body').css('background-color');
+        
+        if (position < 100) {
+          input.css('background-color', 'white');
+          input.css('color', 'black');
+        } else if (bg === 'rgb(0, 0, 0)') {
+          input.css('background-color', 'white');
+          input.css('color', 'black');
+        } else {
+          input.css('background-color', 'black');
+          input.css('color', 'white');
+        }
+      });
+   
 });
 $(document).on('click','#login-customer',function(){
     e.preventDefault();
@@ -67,3 +89,4 @@ $(document).on('click','#login-customer',function(){
 //         // Lấy thông tin profile thành công
 //     }
 // });
+

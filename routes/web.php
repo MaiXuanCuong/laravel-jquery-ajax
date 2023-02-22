@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/checklogin',[AuthController::class, 'checklogin'])->name('checklogin');
@@ -89,8 +90,9 @@ Route::prefix('/')->middleware(['auth', 'revalidate'])->group(function () {
     });
 });
 Route::prefix('shops')->group(function (){
-    Route::get('/',function(){
-        return view('shop.master');
-    });
+    // Route::get('/',function(){
+    //     return view('shop.master');
+    // });
+    Route::get('/',[ShopController::class, 'index'])->name('index');
     Route::post('/checklogin',[ShopController::class, 'checkLogin'])->name('checklogin');
 });

@@ -55,12 +55,8 @@
 
                             <!--====== Search Form ======-->
                             <form class="main-form">
-
-                                <label for="main-search"></label>
-
                                 <input class="input-text input-text--border-radius input-text--only-white" type="text" id="main-search" placeholder="Search">
-
-                                <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button></form>
+                            </form>
                             <!--====== End - Search Form ======-->
 
 

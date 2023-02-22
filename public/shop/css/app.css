@@ -1974,11 +1974,15 @@ input::-ms-clear {
 
 .main-form {
   position: relative;
+  
   width: 35%; }
 
 #main-search {
+  position: fixed;
+  top: 15px;
+  z-index: 999;
   padding: 0 36px 0 18px;
-  width: 100%; }
+  width: 35%; }
 
 .main-search-button {
   position: absolute;
@@ -6034,7 +6038,7 @@ input::-ms-clear {
   z-index: 1;
   width: 100%; }
 
-.hero-slide {
+/* .hero-slide {
   background: center center/cover no-repeat; }
   .hero-slide--1 {
     background-image: url(../images/slider/slide-1.jpg); }
@@ -6053,7 +6057,7 @@ input::-ms-clear {
   .hero-slide--8 {
     background-image: url(../images/slider/slide-8.jpg); }
   .hero-slide--9 {
-    background-image: url(../images/slider/slide-9.jpg); }
+    background-image: url(../images/slider/slide-9.jpg); } */
 
 .owl-carousel .owl-dots {
   position: absolute; }

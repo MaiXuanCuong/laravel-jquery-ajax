@@ -1,23 +1,18 @@
 $(document).ready(function () {
     getSupplier();
-});
-//------
-$(document).ready(function(){
-  $("#search").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#index-suppliers tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-$(document).ready(function(){
-    $("#searchTrashcan").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#tbodyTrashCanSupplier tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#index-suppliers tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
       });
-    });
-  });
+      $("#searchTrashcan").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#tbodyTrashCanSupplier tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+});
 // ------
 function getSupplier() {
     $.ajax({

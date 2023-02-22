@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-
-use App\Http\Requests\StoreOderRequest;
+use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Customer;
@@ -17,50 +16,69 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
+
 class ShopController extends Controller
 {
     public function index()
     {
     
 
-        if (isset(Auth::guard('customers')->user()->id)) {
-            $user = Auth::guard('customers')->user()->id;
-            $historyProducts = [];
-            $carts = Cache::get('carts'.$user);
-            $historyProduct = Cache::get('historyProducts'.$user);
-            if (isset($carts[Auth::guard('customers')->user()->id])){
-                $carts = array_values($carts);
-            }
+        // if (isset(Auth::guard('customers')->user()->id)) {
+        //     $user = Auth::guard('customers')->user()->id;
+        //     $historyProducts = [];
+        //     $carts = Cache::get('carts'.$user);
+        //     $historyProduct = Cache::get('historyProducts'.$user);
+        //     if (isset($carts[Auth::guard('customers')->user()->id])){
+        //         $carts = array_values($carts);
+        //     }
         
-            if (isset($historyProduct)) {
+        //     if (isset($historyProduct)) {
               
-               $historyProducts = array_values($historyProduct);
-            }
-        } else {
-                $carts = [];
-                $historyProducts = [];
-            } 
-        $products = Product::all();
-        $productsNew = Product::orderBy('id','DESC')->take(6)->get();
-        $categories = Category::all();
-        $topProducts = DB::table('orders_detail')
-        ->leftJoin('products', 'products.id', '=', 'orders_detail.product_id')
-        ->selectRaw('products.*, sum(orders_detail.quantity) totalProduct, sum(orders_detail.total) totalPrice')
-        ->groupBy('orders_detail.product_id')
-        ->orderBy('totalProduct', 'desc')
-        ->take(6)
+        //        $historyProducts = array_values($historyProduct);
+        //     }
+        // } else {
+        //         $carts = [];
+        //         $historyProducts = [];
+        //     } 
+        // $products = Product::all();
+        // $productsNew = Product::orderBy('id','DESC')->take(6)->get();
+        // $categories = Category::all();
+        // $topProducts = DB::table('orders_detail')
+        // ->leftJoin('products', 'products.id', '=', 'orders_detail.product_id')
+        // ->selectRaw('products.*, sum(orders_detail.quantity) totalProduct, sum(orders_detail.total) totalPrice')
+        // ->groupBy('orders_detail.product_id')
+        // ->orderBy('totalProduct', 'desc')
+        // ->take(6)
+        // ->get();
+        // $param = [
+        //     'products' => $products,
+        //     'categories' => $categories,
+        //     'carts' => $carts,
+        //     'topProducts' => $topProducts,
+        //     'productsNew' => $productsNew,
+        //     'historyProducts' => $historyProducts,
+
+        // ];
+
+
+        $banners = Banner::where('status', '<>', 0)->get();
+        $categories = Category::whereNull('deleted_at')->has('products')->get();
+        $products = Product::with('category', 'supplier')
+        // ->where('status', 1)
+        ->whereNull('deleted_at')
+        ->whereHas('category', function ($query) {
+            $query->whereNull('deleted_at');
+        })
+        ->whereHas('supplier', function ($query) {
+            $query->whereNull('deleted_at');
+        })
         ->get();
         $param = [
-            'products' => $products,
             'categories' => $categories,
-            'carts' => $carts,
-            'topProducts' => $topProducts,
-            'productsNew' => $productsNew,
-            'historyProducts' => $historyProducts,
-
+            'banners' => $banners,
+            'products' => $products,
         ];
-        return view('shop.index', $param);
+        return view('shop.master', $param);
     }
 
     public function view($id)

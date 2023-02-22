@@ -33,6 +33,7 @@ class ProductController extends Controller
     }
     public function getProduct(){
         $products = $this->productService->all();
+        // dd($products);
         if($products){
             return response()->json([
                 'products' => $products,

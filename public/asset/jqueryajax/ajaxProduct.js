@@ -1,23 +1,19 @@
 $(document).ready(function () {
     getProduct();
-});
-//------
-$(document).ready(function(){
-  $("#search").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#index-products tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-$(document).ready(function(){
-    $("#searchTrashcan").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#tbodyTrashCanProduct tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#index-products tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
       });
-    });
-  });
+      $("#searchTrashcan").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#tbodyTrashCanProduct tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+});
+
 // ------
 function getProduct() {
     $.ajax({
@@ -28,6 +24,7 @@ function getProduct() {
             $("#index-products").html(" ");
             $.each(response.products, function (index, product) {
                 if (response.status == 200) {
+                    console.log(response.products);
                 $("#index-products").append(
                     '<tr data-product-id="' + product.id + '">\
                            <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
@@ -511,6 +508,7 @@ $("#insertProduct").on("submit", function (e) {
             contentType: false,
             processData: false,
             success: function (res) {
+                files = []
                 if (res.status == 200) {
                     $("#addProductModal").modal("hide");
                     $("#addProductModal").find("input").val("");
@@ -613,6 +611,7 @@ $(document).on("click", "#inforProduct", function (e) {
                 category = product.category;
                 supplier = product.supplier;
                 images = product.product_images;
+                $("#image-infor").html('')
                 $.each(images, function (index, image) {
                     var imgElement = $("<img>").attr({
 

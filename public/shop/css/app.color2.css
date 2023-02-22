@@ -1978,7 +1978,8 @@ input::-ms-clear {
 
 #main-search {
   padding: 0 36px 0 18px;
-  width: 100%; }
+  width: 100%;
+ }
 
 .main-search-button {
   position: absolute;

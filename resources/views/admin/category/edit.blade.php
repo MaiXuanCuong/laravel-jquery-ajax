@@ -37,9 +37,9 @@
                 <div class="col-sm-9">
                 <input accept="image/*" type='file' class="form-control" id="imageCategoryEdit" name="inputFileUpdate" />
                 <div id="imageCategoryEditError" class="form-text text-danger error-msg"></div>
+                <img type="hidden" width="390px" height="350px" id="blah1" src=""
+                alt="" />
               </div>
-              <img type="hidden" width="90px" height="350px" id="blah1" src=""
-              alt="" />
             </div>
             </div>
          
