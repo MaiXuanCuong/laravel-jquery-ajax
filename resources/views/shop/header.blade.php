@@ -86,11 +86,15 @@
 
                                                         <span>Tài khoản</span></a></li>
                                                         @if(Auth::user()->id)
-                                                <li>
+                                                        <li>
 
-                                                    <a ><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                                    <a id="login-customer"><i class="fas fa-user-plus u-s-m-r-6"></i>
 
-                                                        <span>Đăng nhập</span></a></li>
+                                                        <span>Đăng nhập</span></a>
+                                                    
+                                                    
+                                                    
+                                                    </li>
                                                        
                                                 <li>
 
@@ -885,7 +889,7 @@
                                     <ul class="ah-list ah-list--design2 ah-list--link-color-white">
                                         <li>
 
-                                            <a href="http://127.0.0.1:8000/shops">Trang chủ</a></li>
+                                            <a data-page="home-page" id="home-page">Trang chủ</a></li>
                                         <li class="has-dropdown">
 
                                             <a>Trang<i class="fas fa-angle-down u-s-m-l-6"></i></a>
@@ -991,10 +995,156 @@
                                         <li>
 
                                             <a href="http://127.0.0.1:8000/shops"><i class="fas fa-home u-c-brand"></i></a></li>
-                                        <li>
+                                        {{-- <li>
 
-                                            <a href="{{ asset('shop/wishlist.html') }}"><i class="far fa-heart"></i></a></li>
-                                            
+                                            <a href="{{ asset('shop/wishlist.html') }}"><i class="far fa-heart"></i></a></li> --}}
+                                            <li class="has-dropdown">
+
+                                                <a class="mini-cart-shop-link"><i class="far fa-heart"></i>
+    
+                                                    <span class="total-item-round">2</span></a>
+    
+                                                <!--====== Dropdown ======-->
+    
+                                                {{-- <span class="js-menu-toggle"></span> --}}
+                                                <div class="mini-cart">
+    
+                                                    <!--====== Mini Product Container ======-->
+                                                    <div class="mini-product-container gl-scroll u-s-m-b-15">
+    
+                                                        <!--====== Card for mini cart ======-->
+                                                        <div class="card-mini-product">
+                                                            <div class="mini-product">
+                                                                <div class="mini-product__image-wrapper">
+    
+                                                                    <a class="mini-product__link" href="{{ asset('shop/product-detail.html') }}">
+    
+                                                                        <img class="u-img-fluid" src="{{ asset('shop/images/product/electronic/product3.jpg') }}" alt=""></a></div>
+                                                                <div class="mini-product__info-wrapper">
+    
+                                                                    <span class="mini-product__category">
+    
+                                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+    
+                                                                    <span class="mini-product__name">
+    
+                                                                        <a href="{{ asset('shop/product-detail.html') }}">Yellow Wireless Headphone</a></span>
+    
+                                                                    <span class="mini-product__quantity">1 x</span>
+    
+                                                                    <span class="mini-product__price">$8</span></div>
+                                                            </div>
+    
+                                                            <a class="mini-product__delete-link far fa-trash-alt"></a>
+                                                        </div>
+                                                        <!--====== End - Card for mini cart ======-->
+    
+    
+                                                        <!--====== Card for mini cart ======-->
+                                                        <div class="card-mini-product">
+                                                            <div class="mini-product">
+                                                                <div class="mini-product__image-wrapper">
+    
+                                                                    <a class="mini-product__link" href="{{ asset('shop/product-detail.html') }}">
+    
+                                                                        <img class="u-img-fluid" src="{{ asset('shop/images/product/electronic/product18.jpg') }}" alt=""></a></div>
+                                                                <div class="mini-product__info-wrapper">
+    
+                                                                    <span class="mini-product__category">
+    
+                                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Electronics</a></span>
+    
+                                                                    <span class="mini-product__name">
+    
+                                                                        <a href="{{ asset('shop/product-detail.html') }}">Nikon DSLR Camera 4k</a></span>
+    
+                                                                    <span class="mini-product__quantity">1 x</span>
+    
+                                                                    <span class="mini-product__price">$8</span></div>
+                                                            </div>
+    
+                                                            <a class="mini-product__delete-link far fa-trash-alt"></a>
+                                                        </div>
+                                                        <!--====== End - Card for mini cart ======-->
+    
+    
+                                                        <!--====== Card for mini cart ======-->
+                                                        <div class="card-mini-product">
+                                                            <div class="mini-product">
+                                                                <div class="mini-product__image-wrapper">
+    
+                                                                    <a class="mini-product__link" href="{{ asset('shop/product-detail.html') }}">
+    
+                                                                        <img class="u-img-fluid" src="{{ asset('shop/images/product/women/product8.jpg') }}" alt=""></a></div>
+                                                                <div class="mini-product__info-wrapper">
+    
+                                                                    <span class="mini-product__category">
+    
+                                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span>
+    
+                                                                    <span class="mini-product__name">
+    
+                                                                        <a href="{{ asset('shop/product-detail.html') }}">New Dress D Nice Elegant</a></span>
+    
+                                                                    <span class="mini-product__quantity">1 x</span>
+    
+                                                                    <span class="mini-product__price">$8</span></div>
+                                                            </div>
+    
+                                                            <a class="mini-product__delete-link far fa-trash-alt"></a>
+                                                        </div>
+                                                        <!--====== End - Card for mini cart ======-->
+    
+    
+                                                        <!--====== Card for mini cart ======-->
+                                                        <div class="card-mini-product">
+                                                            <div class="mini-product">
+                                                                <div class="mini-product__image-wrapper">
+    
+                                                                    <a class="mini-product__link" href="{{ asset('shop/product-detail.html') }}">
+    
+                                                                        <img class="u-img-fluid" src="{{ asset('shop/images/product/men/product8.jpg') }}" alt=""></a></div>
+                                                                <div class="mini-product__info-wrapper">
+    
+                                                                    <span class="mini-product__category">
+    
+                                                                        <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span>
+    
+                                                                    <span class="mini-product__name">
+    
+                                                                        <a href="{{ asset('shop/product-detail.html') }}">New Fashion D Nice Elegant</a></span>
+    
+                                                                    <span class="mini-product__quantity">1 x</span>
+    
+                                                                    <span class="mini-product__price">$8</span></div>
+                                                            </div>
+    
+                                                            <a class="mini-product__delete-link far fa-trash-alt"></a>
+                                                        </div>
+                                                        <!--====== End - Card for mini cart ======-->
+                                                    </div>
+                                                    <!--====== End - Mini Product Container ======-->
+    
+    
+                                                    <!--====== Mini Product Statistics ======-->
+                                                    <div class="mini-product-stat">
+                                                        <div class="mini-total">
+    
+                                                            <span class="subtotal-text">SUBTOTAL</span>
+    
+                                                            <span class="subtotal-value">$16</span></div>
+                                                        <div class="mini-action">
+    
+                                                            <a class="mini-link btn--e-brand-b-2" href="{{ asset('shop/checkout.html') }}">PROCEED TO CHECKOUT</a>
+    
+                                                            <a class="mini-link btn--e-transparent-secondary-b-2" href="{{ asset('shop/cart.html') }}">VIEW CART</a></div>
+                                                    </div>
+                                                    <!--====== End - Mini Product Statistics ======-->
+                                                </div>
+                                                <!--====== End - Dropdown ======-->
+                                            </li>
+
+                                            {{-- ---------- --}}
                                         <li class="has-dropdown">
 
                                             <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
@@ -1140,7 +1290,7 @@
                                             </div>
                                             <!--====== End - Dropdown ======-->
                                         </li>
-
+                                        {{-- ---------------------- --}}
 
                                         
                                     </ul>
@@ -1155,3 +1305,36 @@
                 </nav>
                 <!--====== End - Nav 2 ======-->
             </header>
+        </div>
+            <div class="s-skeleton s-skeleton--h-640 s-skeleton--bg-grey">
+                <div class="owl-carousel primary-style-3" id="hero-slider">
+                    @foreach ($banners as $banner)
+                            <div class="hero-slide hero-slide" style="background: center center/cover no-repeat; background-image: url({{ asset($banner->image) }})">
+                        <div class="primary-style-3-wrap">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="slider-content slider-content--animation">
+            
+                                            <span class="content-span-1 u-c-white">Thay đổi thời trang của bạn</span>
+            
+                                            <span class="content-span-2 u-c-white">Giảm 10% khách hàng mới</span>
+            
+                                            <span class="content-span-3 u-c-white">Tìm đồ với giá tốt nhất</span>
+            
+                                            <span class="content-span-4 u-c-white">Bắt đầu từ
+            
+                                                <span class="u-c-brand">100.000 VNĐ</span></span>
+            
+                                            <a class="shop-now-link btn--e-brand" href="{{ asset('shop/shop-side-version-2.html') }}">Đén shop</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                
+                    
+                   
+                </div>
+            </div>

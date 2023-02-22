@@ -92,6 +92,8 @@ Route::prefix('/')->middleware(['auth', 'revalidate'])->group(function () {
 Route::prefix('shops')->group(function (){
     Route::get('/',[ShopController::class, 'index'])->name('shop.index');
     Route::post('/history/{id}',[ShopController::class, 'view'])->name('shop.view');
+    Route::get('/page',[ShopController::class, 'page'])->name('shop.page');
+    Route::get('/home',[ShopController::class, 'home'])->name('shop.home');
     Route::post('/checklogin',[ShopController::class, 'checkLogin'])->name('shop.checklogin');
 });
 Route::middleware(['auth.token'])->group(function () {

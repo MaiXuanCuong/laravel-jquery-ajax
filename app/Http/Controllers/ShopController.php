@@ -20,7 +20,44 @@ use Illuminate\Support\Facades\Log;
 class ShopController extends Controller
 {
 
+   public function page(Request $request){
+    // dd($request->page);
+    switch ($request->page) {
+        case 'home-page':
+            $page = view('shop.components.main', $this->home())->render();
+            // $page = view('shop.components.main')->render();
+            break;
+        case 'product-detail-page':
+            $product = Product::with('product_images')->find($request->id);
+            $page = view('shop.components.productdetail',compact('product'))->render();
+            break;
+        default:
+            // Code xử lý khi biến $variable không bằng bất kỳ giá trị nào trong các case trên
+    }
+
    
+
+    return response()->json(['html' => $page]);
+   }
+    public function home(){
+        $banners = Banner::where('status', '<>', 0)->get();
+        $categories = Category::whereNull('deleted_at')->has('products')->get();
+        $products = Product::with('category', 'supplier')
+        ->whereNull('deleted_at')
+        ->whereHas('category', function ($query) {
+            $query->whereNull('deleted_at');
+        })
+        ->whereHas('supplier', function ($query) {
+            $query->whereNull('deleted_at');
+        })
+        ->get();
+        $param = [
+            'categories' => $categories,
+            'banners' => $banners,
+            'products' => $products,
+        ];
+        return $param;
+    }
     public function index()
     {
         $banners = Banner::where('status', '<>', 0)->get();
@@ -39,7 +76,7 @@ class ShopController extends Controller
             'banners' => $banners,
             'products' => $products,
         ];
-        return view('shop.master', $param);
+        return view('shop.main', $param);
     }
 
     public function view($id)

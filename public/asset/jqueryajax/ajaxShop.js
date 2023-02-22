@@ -51,49 +51,76 @@ function history(id){
         },
     });
 }
-$(document).on('click','#login-customer',function(){
-    e.preventDefault();
-    var email = $("#email").val();
-    var password = $("#password").val();
-    var haserror = false;
-    if (email == "") { $("#emailUserLogin").html("Hãy Nhập Tài Khoản"); haserror = true; }
-    if (password == "") {  $("#passwordUserLogin").html("Hãy Nhập Mật Khẩu"); haserror = true; }
-    if (haserror === false) {
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-        });
-        let formdata = new FormData($("#loginCustomer")[0]);
-        $.ajax({
-            url: "/shops/checklogin",
-            method: "post",
-            data: formdata,
-            dataType: "json",
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                if (response.status) {
-                    window.location.replace(response.redirect);
-                    // localStorage.setItem('auth_token', response.token);
-                } else {
-                    history.replaceState(null, '', '/');
-                    window.addEventListener('popstate', function() {
-                    history.pushState(null, '', '/');
-                    window.location.replace(response.redirect);
-                });
-                $("#passwordCustomerLogin").html("Tài khoản hoặc Mật khẩu không đúng");
+// $(document).on('click','#login-customer',function(e){
+//     e.preventDefault();
+//     var email = $("#email").val();
+//     var password = $("#password").val();
+//     var haserror = false;
+//     if (email == "") { $("#emailUserLogin").html("Hãy Nhập Tài Khoản"); haserror = true; }
+//     if (password == "") {  $("#passwordUserLogin").html("Hãy Nhập Mật Khẩu"); haserror = true; }
+//     if (haserror === false) {
+//         $.ajaxSetup({
+//             headers: {
+//                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//             },
+//         });
+//         let formdata = new FormData($("#loginCustomer")[0]);
+//         $.ajax({
+//             url: "/shops/checklogin",
+//             method: "post",
+//             data: formdata,
+//             dataType: "json",
+//             contentType: false,
+//             processData: false,
+//             success: function (response) {
+//                 if (response.status) {
+//                     window.location.replace(response.redirect);
+//                     // localStorage.setItem('auth_token', response.token);
+//                 } else {
+//                     history.replaceState(null, '', '/');
+//                     window.addEventListener('popstate', function() {
+//                     history.pushState(null, '', '/');
+//                     window.location.replace(response.redirect);
+//                 });
+//                 $("#passwordCustomerLogin").html("Tài khoản hoặc Mật khẩu không đúng");
 
-                }
+//                 }
                    
-            },
-            error: function (err) {
+//             },
+//             error: function (err) {
             
-            },
-        });
-    }
+//             },
+//         });
+//     }
 
-});
+// });
+$(document).on('click','#login-customer', function(){
+    $("#loginModal").modal("show");
+})
+$(document).on('click','a', function(e){
+    e.preventDefault();
+    var page = $(this).data('page')
+    if(typeof page !== 'undefined'){
+        page = $(this).data('page')
+        var id = $(this).data('value');
+        $.ajax({
+            url: "/shops/page",
+            method: "get",
+            data: {
+                page: page,
+                id: id
+            },
+            dataType: "json",
+            success: function(response) {
+                $('.app-content').html('');
+                $('.app-content').html(response.html);
+            },
+        })
+    }
+})
+// app-content
+
+
 // $.ajax({
 //     url: '/api/login',
 //     method: 'POST',
