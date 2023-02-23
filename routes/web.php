@@ -99,3 +99,6 @@ Route::prefix('shops')->group(function (){
 Route::middleware(['auth.token'])->group(function () {
     // các route cần xác thực token
 });
+Route::get('/test',function(){
+    return view('shop.test');
+})->name('shop.index');

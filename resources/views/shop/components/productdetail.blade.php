@@ -1,4 +1,13 @@
 
+<body class="config">
+    <div class="preloader is-active">
+        <div class="preloader__wrap">
+            <img class="preloader__img" src="images/preloader.png" alt=""></div>
+    </div>
+    <!--====== Main App ======-->
+    <div id="app">
+        <!--====== App Content ======-->
+        <div class="app-content">
 
             <!--====== Section 1 ======-->
             <div class="u-s-p-t-90">
@@ -6,19 +15,35 @@
                     <div class="row">
                         <div class="col-lg-5">
 
-             
+                            <!--====== Product Breadcrumb ======-->
+                            <div class="pd-breadcrumb u-s-m-b-30">
+                                <ul class="pd-breadcrumb__list">
+                                    <li class="has-separator">
+
+                                        <a href="index.hml">Home</a></li>
+                                    <li class="has-separator">
+
+                                        <a href="shop-side-version-2.html">Electronics</a></li>
+                                    <li class="has-separator">
+
+                                        <a href="shop-side-version-2.html">DSLR Cameras</a></li>
+                                    <li class="is-marked">
+
+                                        <a href="shop-side-version-2.html">Nikon Cameras</a></li>
+                                </ul>
+                            </div>
+                            <!--====== End - Product Breadcrumb ======-->
+
 
                             <!--====== Product Detail Zoom ======-->
                             <div class="pd u-s-m-b-30">
                                 <div class="slider-fouc pd-wrap">
                                     <div id="pd-o-initiate">
                                         @foreach ($product->product_images as $image)
-                                        <div class="pd-o-img-wrap" data-src="{{ asset($image) }}">
+                                        <div class="pd-o-img-wrap" data-src="{{ asset($image->image) }}">
 
-                                            <img class="u-img-fluid" src="{{ asset($image) }}" data-zoom-image="{{ asset($image) }}" alt=""></div>
-                                            
-                                        @endforeach
-
+                                            <img class="u-img-fluid" src="{{ asset($image->image) }}" data-zoom-image="{{ asset($image->image) }}" alt=""></div>
+                                            @endforeach
                                     </div>
 
                                     <span class="pd-text">Click for larger zoom</span>
@@ -29,13 +54,17 @@
                                             @foreach ($product->product_images as $image)
                                             <div>
 
-                                                <img class="u-img-fluid" src="{{ asset($image) }}" alt=""></div>
-                                                @endforeach
-
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                                 @endforeach
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
+                            {{-- -------------------------------------------- --}}
+                     
+
                             <!--====== End - Product Detail Zoom ======-->
                         </div>
                         <div class="col-lg-7">
@@ -48,9 +77,9 @@
                                 <div>
                                     <div class="pd-detail__inline">
 
-                                        <span class="pd-detail__price">{{ $product->price }}</span>
+                                        <span class="pd-detail__price">{{ number_format($product->price." VNĐ") }}</span>
 
-                                        <span class="pd-detail__discount">(26% OFF)</span><del class="pd-detail__del">{{ $product->price + (26/100*$product->price) }}</del></div>
+                                        <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
                                 </div>
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -61,31 +90,27 @@
                                 </div>
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__inline">
-
-                                        <span class="pd-detail__stock">200 in stock</span>
-
-                                        <span class="pd-detail__left">Only 2 left</span></div>
+                                        @if($product->quantity > 10)
+                                        <span class="pd-detail__stock">Còn {{ $product->quantity }} chiếc</span>
+                                        @else
+                                        <span class="pd-detail__left">Chỉ còn {{ $product->quantity }} chiếc</span>
+                                        @endif
                                 </div>
                                 <div class="u-s-m-b-15">
 
-                                    <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                                    {{-- <span class="pd-detail__preview-desc">{!! $product->description !!}</span></div> --}}
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__inline">
 
                                         <span class="pd-detail__click-wrap"><i class="far fa-heart u-s-m-r-6"></i>
 
-                                            <a href="signin.html">Add to Wishlist</a>
+                                            <a href="signin.html">Thêm vào giỏ yêu thích</a>
 
                                             <span class="pd-detail__click-count">(222)</span></span></div>
                                 </div>
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__inline">
 
-                                        <span class="pd-detail__click-wrap"><i class="far fa-envelope u-s-m-r-6"></i>
-
-                                            <a href="signin.html">Email me When the price drops</a>
-
-                                            <span class="pd-detail__click-count">(20)</span></span></div>
                                 </div>
                                 <div class="u-s-m-b-15">
                                     <ul class="pd-social-list">
@@ -108,37 +133,6 @@
                                 </div>
                                 <div class="u-s-m-b-15">
                                     <form class="pd-detail__form">
-                                        <div class="u-s-m-b-15">
-
-                                            <span class="pd-detail__label u-s-m-b-8">Color:</span>
-                                            <div class="pd-detail__color">
-                                                <div class="color__radio">
-
-                                                    <input type="radio" id="jet" name="color" checked>
-
-                                                    <label class="color__radio-label" for="jet" style="background-color: #333333"></label></div>
-                                                <div class="color__radio">
-
-                                                    <input type="radio" id="folly" name="color">
-
-                                                    <label class="color__radio-label" for="folly" style="background-color: #FF0055"></label></div>
-                                                <div class="color__radio">
-
-                                                    <input type="radio" id="yellow" name="color">
-
-                                                    <label class="color__radio-label" for="yellow" style="background-color: #FFFF00"></label></div>
-                                                <div class="color__radio">
-
-                                                    <input type="radio" id="granite-gray" name="color">
-
-                                                    <label class="color__radio-label" for="granite-gray" style="background-color: #605F5E"></label></div>
-                                                <div class="color__radio">
-
-                                                    <input type="radio" id="space-cadet" name="color">
-
-                                                    <label class="color__radio-label" for="space-cadet" style="background-color: #1D3461"></label></div>
-                                            </div>
-                                        </div>
                                         <div class="u-s-m-b-15">
 
                                             <span class="pd-detail__label u-s-m-b-8">Size:</span>
@@ -190,23 +184,23 @@
                                             </div>
                                             <div class="u-s-m-b-15">
 
-                                                <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button></div>
+                                                <button class="btn btn--e-brand-b-2" type="submit">Thêm vào giỏ hàng</button></div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="u-s-m-b-15">
 
-                                    <span class="pd-detail__label u-s-m-b-8">Product Policy:</span>
+                                    <span class="pd-detail__label u-s-m-b-8">Bảo vệ người tiêu dùng.</span>
                                     <ul class="pd-detail__policy-list">
                                         <li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
                                             <span>Buyer Protection.</span></li>
                                         <li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                            <span>Full Refund if you don't receive your order.</span></li>
+                                            <span>Hoàn trả đầy đủ nếu bạn không nhận được đơn đặt hàng của bạn.</span></li>
                                         <li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                            <span>Returns accepted if product not as described.</span></li>
+                                            <span>Chấp nhận đổi trả nếu sản phẩm không như mô tả.</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -226,13 +220,11 @@
                                     <ul class="nav pd-tab__list">
                                         <li class="nav-item">
 
-                                            <a class="nav-link" data-toggle="tab" href="#pd-desc">DESCRIPTION</a></li>
+                                            <a class="nav-link active" data-toggle="tab" href="#pd-desc">DESCRIPTION</a></li>
+                                     
                                         <li class="nav-item">
 
-                                            <a class="nav-link" data-toggle="tab" href="#pd-tag">TAGS</a></li>
-                                        <li class="nav-item">
-
-                                            <a class="nav-link active" id="view-review" data-toggle="tab" href="#pd-rev">REVIEWS
+                                            <a class="nav-link" id="view-review" data-toggle="tab" href="#pd-rev">REVIEWS
 
                                                 <span>(23)</span></a></li>
                                     </ul>
@@ -240,10 +232,10 @@
                                 <div class="tab-content">
 
                                     <!--====== Tab 1 ======-->
-                                    <div class="tab-pane" id="pd-desc">
+                                    <div class="tab-pane fade show active" id="pd-desc">
                                         <div class="pd-tab__desc">
                                             <div class="u-s-m-b-15">
-                                                {!! $product->description !!}
+                                                <p>{!! $product->description !!}</p>
                                             </div>
                                             <div class="u-s-m-b-30"><iframe src="https://www.youtube.com/embed/qKqSBm07KZk" allowfullscreen></iframe></div>
                                             <div class="u-s-m-b-30">
@@ -260,48 +252,46 @@
                                                 </ul>
                                             </div>
                                             <div class="u-s-m-b-15">
-                                                <h4>PRODUCT INFORMATION</h4>
+                                                <h4>Thông tin sản phẩm</h4>
                                             </div>
                                             <div class="u-s-m-b-15">
                                                 <div class="pd-table gl-scroll">
                                                     <table>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Main Material</td>
-                                                                <td>Cotton</td>
+                                                                <td>Tên</td>
+                                                                <td>{{ $product->name }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Color</td>
-                                                                <td>Green, Blue, Red</td>
+                                                                <td>Giá</td>
+                                                                <td>{{ $product->name }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Sleeves</td>
-                                                                <td>Long Sleeve</td>
+                                                                <td>size</td>
+                                                                <td>{{ $product->name }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Top Fit</td>
-                                                                <td>Regular</td>
+                                                                <td>Số lượng</td>
+                                                                <td>{{ $product->quantity }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Print</td>
-                                                                <td>Not Printed</td>
+                                                                <td>Loại hàng</td>
+                                                                <td>{{ $product->type_gender }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Neck</td>
-                                                                <td>Round Neck</td>
+                                                                <td>Danh mục</td>
+                                                                <td>{{ $product->category->name }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Pieces Count</td>
-                                                                <td>1 Piece</td>
+                                                                <td>Nhà cung cấp</td>
+                                                                <td>{{ $product->supplier->name }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Occasion</td>
-                                                                <td>Casual</td>
+                                                                <td>Ngày sản xuất</td>
+                                                                <td>{{ $product->created_at->format('d/m/Y') }}</td>
                                                             </tr>
-                                                            <tr>
-                                                                <td>Shipping Weight (kg)</td>
-                                                                <td>0.5</td>
-                                                            </tr>
+                                                           
+                                                           
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -312,25 +302,12 @@
 
 
                                     <!--====== Tab 2 ======-->
-                                    <div class="tab-pane" id="pd-tag">
-                                        <div class="pd-tab__tag">
-                                            <h2 class="u-s-m-b-15">ADD YOUR TAGS</h2>
-                                            <div class="u-s-m-b-15">
-                                                <form>
-
-                                                    <input class="input-text input-text--primary-style" type="text">
-
-                                                    <button class="btn btn--e-brand-b-2" type="submit">ADD TAGS</button></form>
-                                            </div>
-
-                                            <span class="gl-text">Use spaces to separate tags. Use single quotes (') for phrases.</span>
-                                        </div>
-                                    </div>
+                           
                                     <!--====== End - Tab 2 ======-->
 
 
                                     <!--====== Tab 3 ======-->
-                                    <div class="tab-pane fade show active" id="pd-rev">
+                                    <div class="tab-pane" id="pd-rev">
                                         <div class="pd-tab__rev">
                                             <div class="u-s-m-b-30">
                                                 <div class="pd-tab__rev-score">
@@ -876,5 +853,257 @@
                 <!--====== End - Section Content ======-->
             </div>
             <!--====== End - Section 1 ======-->
- 
+        </div>
+        <!--====== End - App Content ======-->
 
+
+        <!--====== Main Footer ======-->
+        
+        <!--====== Modal Section ======-->
+
+
+        <!--====== Quick Look Modal ======-->
+        <div class="modal fade" id="quick-look">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal--shadow">
+
+                    <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-5">
+
+                                <!--====== Product Breadcrumb ======-->
+                                <div class="pd-breadcrumb u-s-m-b-30">
+                                    <ul class="pd-breadcrumb__list">
+                                        <li class="has-separator">
+
+                                            <a href="index.hml">Home</a></li>
+                                        <li class="has-separator">
+
+                                            <a href="shop-side-version-2.html">Electronics</a></li>
+                                        <li class="has-separator">
+
+                                            <a href="shop-side-version-2.html">DSLR Cameras</a></li>
+                                        <li class="is-marked">
+
+                                            <a href="shop-side-version-2.html">Nikon Cameras</a></li>
+                                    </ul>
+                                </div>
+                                <!--====== End - Product Breadcrumb ======-->
+
+
+                                <!--====== Product Detail ======-->
+                                <div class="pd u-s-m-b-30">
+                                    <div class="pd-wrap">
+                                        <div id="js-product-detail-modal">
+                                            <div>
+
+                                                <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                        </div>
+                                    </div>
+                                    <div class="u-s-m-t-15">
+                                        <div id="js-product-detail-modal-thumbnail">
+                                            <div>
+
+                                                <img class="u-img-fluid" src="images/product/product-d-1.jpg" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($image->image) }}" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--====== End - Product Detail ======-->
+                            </div>
+                            <div class="col-lg-7">
+
+                                <!--====== Product Right Side Details ======-->
+                                <div class="pd-detail">
+                                    <div>
+
+                                        <span class="pd-detail__name">{{ $product->name }}</span></div>
+                                    <div>
+                                        <div class="pd-detail__inline">
+
+                                            <span class="pd-detail__price">$6.99</span>
+
+                                            <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
+                                    </div>
+                                    <div class="u-s-m-b-15">
+                                        <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+
+                                            <span class="pd-detail__review u-s-m-l-4">
+
+                                                <a href="product-detail.html">23 Reviews</a></span></div>
+                                    </div>
+                                    <div class="u-s-m-b-15">
+                                        <div class="pd-detail__inline">
+
+                                            <span class="pd-detail__stock">200 in stock</span>
+
+                                            <span class="pd-detail__left">Only 2 left</span></div>
+                                    </div>
+                                    <div class="u-s-m-b-15">
+
+                                        <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                                    <div class="u-s-m-b-15">
+                                        <div class="pd-detail__inline">
+
+                                            <span class="pd-detail__click-wrap"><i class="far fa-heart u-s-m-r-6"></i>
+
+                                                <a href="signin.html">Add to Wishlist</a>
+
+                                                <span class="pd-detail__click-count">(222)</span></span></div>
+                                    </div>
+                                    <div class="u-s-m-b-15">
+                                        <div class="pd-detail__inline">
+
+                                            <span class="pd-detail__click-wrap"><i class="far fa-envelope u-s-m-r-6"></i>
+
+                                                <a href="signin.html">Email me When the price drops</a>
+
+                                                <span class="pd-detail__click-count">(20)</span></span></div>
+                                    </div>
+                                    <div class="u-s-m-b-15">
+                                        <ul class="pd-social-list">
+                                            <li>
+
+                                                <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li>
+
+                                                <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
+                                            <li>
+
+                                                <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
+                                            <li>
+
+                                                <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                            <li>
+
+                                                <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="u-s-m-b-15">
+                                        <form class="pd-detail__form">
+                                            <div class="pd-detail-inline-2">
+                                                <div class="u-s-m-b-15">
+
+                                                    <!--====== Input Counter ======-->
+                                                    <div class="input-counter">
+
+                                                        <span class="input-counter__minus fas fa-minus"></span>
+
+                                                        <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
+
+                                                        <span class="input-counter__plus fas fa-plus"></span></div>
+                                                    <!--====== End - Input Counter ======-->
+                                                </div>
+                                                <div class="u-s-m-b-15">
+
+                                                    <button class="btn btn--e-brand-b-2" type="submit">Thêm vào giỏ hàng</button></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="u-s-m-b-15">
+
+                                        <span class="pd-detail__label u-s-m-b-8">Chính sách sản phẩm</span>
+                                        <ul class="pd-detail__policy-list">
+                                            <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+
+                                                <span>Bảo vệ người tiêu dùng.</span></li>
+                                            <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+
+                                                <span>Hoàn trả đầy đủ nếu bạn không nhận được đơn đặt hàng của bạn.</span></li>
+                                            <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+
+                                                <span>Chấp nhận đổi trả nếu sản phẩm không như mô tả.</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--====== End - Product Right Side Details ======-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--====== End - Quick Look Modal ======-->
+
+
+        <!--====== Add to Cart Modal ======-->
+        <div class="modal fade" id="add-to-cart">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-radius modal-shadow">
+
+                    <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="success u-s-m-b-30">
+                                    <div class="success__text-wrap"><i class="fas fa-check"></i>
+
+                                        <span>Item is added successfully!</span></div>
+                                    <div class="success__img-wrap">
+
+                                        <img class="u-img-fluid" src="images/product/electronic/product1.jpg" alt=""></div>
+                                    <div class="success__info-wrap">
+
+                                        <span class="success__name">Beats Bomb Wireless Headphone</span>
+
+                                        <span class="success__quantity">Quantity: 1</span>
+
+                                        <span class="success__price">$170.00</span></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="s-option">
+
+                                    <span class="s-option__text">1 item (s) in your cart</span>
+                                    <div class="s-option__link-box">
+
+                                        <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">CONTINUE SHOPPING</a>
+
+                                        <a class="s-option__link btn--e-white-brand-shadow" href="cart.html">VIEW CART</a>
+
+                                        <a class="s-option__link btn--e-brand-shadow" href="checkout.html">PROCEED TO CHECKOUT</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--====== End - Add to Cart Modal ======-->
+        <!--====== End - Modal Section ======-->
+    </div>
+    <!--====== End - Main App ======-->
+
+
+
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <script src="{{ asset('shop/js/vendor.js ') }}"></script>
+    <script src="{{ asset('shop/js/jquery.shopnav.js ') }}"></script>
+    <script src="{{ asset('shop/js/app.js ') }}"></script>
+    <script src="{{ asset('asset/jqueryajax/ajaxShop.js ') }}"></script>
+</body>
+</html>

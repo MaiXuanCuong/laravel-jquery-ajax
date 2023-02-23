@@ -1,132 +1,5 @@
- <!--====== Primary Slider ======-->
 @extends('shop.master')
  @section('content')
-
-<!--====== End - Primary Slider ======-->
-
-
-<!--====== Section 1 ======-->
-{{-- <div class="u-s-p-y-60">
-
-    <!--====== Section Content ======-->
-    <div class="section__content">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
-                    <div class="promotion-o">
-                        <div class="aspect aspect--bg-grey aspect--square">
-
-                            <img class="aspect__img" src="{{ asset('shop/images/promo/promo-img-4.jpg') }}" alt=""></div>
-                        <div class="promotion-o__content">
-
-                            <a class="promotion-o__link btn--e-white-brand" href="{{ asset('shop/shop-side-version-2.html') }}">Women's Clothing</a></div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
-                    <div class="promotion-o">
-                        <div class="aspect aspect--bg-grey aspect--square">
-
-                            <img class="aspect__img" src="{{ asset('shop/images/promo/promo-img-5.jpg') }}" alt=""></div>
-                        <div class="promotion-o__content">
-
-                            <a class="promotion-o__link btn--e-white-brand" href="{{ asset('shop/shop-side-version-2.html') }}">Fashion Accessories</a></div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
-                    <div class="promotion-o">
-                        <div class="aspect aspect--bg-grey aspect--square">
-
-                            <img class="aspect__img" src="{{ asset('shop/images/promo/promo-img-6.jpg') }}" alt=""></div>
-                        <div class="promotion-o__content">
-
-                            <a class="promotion-o__link btn--e-white-brand" href="{{ asset('shop/shop-side-version-2.html') }}">Men's Clothing</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--====== End - Section Content ======-->
-</div> --}}
-<!--====== End - Section 1 ======-->
-
-
-<!--====== Section 2 ======-->
-{{-- <div class="u-s-p-b-60">
-
-    <!--====== Section Content ======-->
-    <div class="section__content">
-        <div class="container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-
-                        <a class="i3-banner" href="{{ asset('shop/shop-side-version-2.html') }}">
-                            <div class="aspect aspect--bg-grey-fb aspect--square">
-
-                                <img class="aspect__img i3-banner__img" src="{{ asset('shop/images/banners/i3-banner-1.jpg') }}" alt=""></div>
-                        </a></div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 u-s-m-b-30">
-                                <div class="product-short u-h-100">
-                                    <div class="product-short__container">
-                                        <div class="product-short__img-wrap">
-
-                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product14.jpg') }}" alt=""></a></div>
-                                        <div class="product-short__info">
-
-                                            <span class="product-short__price">$126.77</span>
-
-                                            <span class="product-short__name">
-
-                                                <a href="{{ asset('shop/product-detail.html') }}">Women Shoes</a></span>
-
-                                            <span class="product-short__category">
-
-                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 u-s-m-b-30">
-                                <div class="product-short u-h-100">
-                                    <div class="product-short__container">
-                                        <div class="product-short__img-wrap">
-
-                                            <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
-
-                                                <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/men/product12.jpg') }}" alt=""></a></div>
-                                        <div class="product-short__info">
-
-                                            <span class="product-short__price">$126.77</span>
-
-                                            <span class="product-short__name">
-
-                                                <a href="{{ asset('shop/product-detail.html') }}">Men Leather Wallet</a></span>
-
-                                            <span class="product-short__category">
-
-                                                <a href="{{ asset('shop/shop-side-version-2.html') }}">Men Clothing</a></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-
-                                <a class="i3-banner" href="{{ asset('shop/shop-side-version-2.html') }}">
-                                    <div class="aspect aspect--bg-grey-fb aspect--1048-334">
-
-                                        <img class="aspect__img i3-banner__img" src="{{ asset('shop/images/banners/i3-banner-2.jpg') }}" alt=""></div>
-                                </a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--====== End - Section Content ======-->
-</div> --}}
-<!--====== End - Section 2 ======-->
 
 
 <!--====== Section 3 ======-->
@@ -161,7 +34,7 @@
                     <div class="product-r u-h-100">
                         <div class="product-r__container">
 
-                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                            <a class="aspect aspect--bg-grey aspect--square u-d-block" data-page="product-detail-page" data-value="{{ $product->id}}">
 
                                 <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a>
                             <div class="product-r__action-wrap">
@@ -184,7 +57,7 @@
                         <div class="product-r__info-wrap">
 
                             <span class="product-r__category">
-
+                                
                                 <a >{{ $product->category->name }}</a></span>
                             <div class="product-r__n-p-wrap">
 
@@ -244,16 +117,6 @@
 
                                 <button class="btn filter__btn filter__btn--style-2" type="button" data-filter=".{{str_replace(' ', '', $category)}}">{{$category}}</button></div>
                             @endforeach
-
-                        {{-- <div class="filter__category-wrapper">
-
-                            <button class="btn filter__btn filter__btn--style-2" type="button" data-filter=".bottom">Quần</button></div>
-                        <div class="filter__category-wrapper">
-
-                            <button class="btn filter__btn filter__btn--style-2" type="button" data-filter=".footwear">Dày</button></div>
-                        <div class="filter__category-wrapper">
-
-                            <button class="btn filter__btn filter__btn--style-2" type="button" data-filter=".accessories">Dày</button></div> --}}
                     </div>
 
                     <div class="filter__grid-wrapper u-s-m-t-30">
@@ -266,7 +129,7 @@
                                     <div class="product-bs__container">
                                         <div class="product-bs__wrap">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" data-page="product-detail-page" data-value="{{ $product->id}}">
 
                                                 <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a>
                                             <div class="product-bs__action-wrap">
@@ -293,7 +156,7 @@
 
                                         <span class="product-bs__name">
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">{{ $product->name }}</a></span>
+                                            <a data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
                                         <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
                                             <span class="product-bs__review">(23)</span></div>
@@ -352,7 +215,7 @@
                         <div class="product-short__container">
                             <div class="product-short__img-wrap">
 
-                                <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" href="{{ asset('shop/product-detail.html') }}">
+                                <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" data-page="product-detail-page" data-value="{{ $product->id}}">
 
                                     <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product16.jpg') }}" alt=""></a></div>
                             <div class="product-short__info">
@@ -361,7 +224,7 @@
 
                                 <span class="product-short__name">
 
-                                    <a href="{{ asset('shop/product-detail.html') }}">New Dress A Nice Elegant</a></span>
+                                    <a data-page="product-detail-page" data-value="{{ $product->id}}">New Dress A Nice Elegant</a></span>
 
                                 <span class="product-short__category">
 
@@ -399,7 +262,7 @@
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" data-page="product-detail-page" data-value="{{ $product->id}}">
 
                                             <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a></div>
                                     <div class="product-l__info-wrap">
@@ -410,7 +273,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">{{ $product->name }}</a></span>
+                                            <a data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
 
                                         <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}</span></div>
                                 </div>
@@ -433,7 +296,7 @@
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" data-page="product-detail-page" data-value="{{ $product->id}}">
 
                                             <img class="aspect__img" src="{{ asset( $product->image) }}" alt=""></a></div>
                                     <div class="product-l__info-wrap">
@@ -444,7 +307,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">{{ $product->name }}</a></span>
+                                            <a data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
 
                                         <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}
 
@@ -470,7 +333,7 @@
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="{{ asset('shop/product-detail.html') }}">
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" data-page="product-detail-page" data-value="{{ $product->id}}">
 
                                             <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a></div>
                                     <div class="product-l__info-wrap">
@@ -481,7 +344,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a href="{{ asset('shop/product-detail.html') }}">{{ $product->name }}</a></span>
+                                            <a data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
 
                                         <span class="product-l__price">Giá dự kiến: {{ number_format($product->price+(25/100*($product->price))). ' VNĐ' }}</span>
                                     </div>

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href=" {{asset('shop/images/favicon.png') }}" rel="shortcut icon">
-    <title>Ludus - Electronics, Apparel, Computers, Books, DVDs & more</title>
+    <title>Xuân Cường Shop</title>
 
     <!--====== Google Font ======-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
@@ -85,7 +85,7 @@
                                                     <a ><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                         <span>Tài khoản</span></a></li>
-                                                        @if(Auth::user()->id)
+                                                        @if(!isset(Auth::user()->id))
                                                         <li>
 
                                                     <a id="login-customer"><i class="fas fa-user-plus u-s-m-r-6"></i>
@@ -1326,7 +1326,7 @@
             
                                                 <span class="u-c-brand">100.000 VNĐ</span></span>
             
-                                            <a class="shop-now-link btn--e-brand" href="{{ asset('shop/shop-side-version-2.html') }}">Đén shop</a></div>
+                                            <a class="shop-now-link btn--e-brand" data-page="home-page">Đén shop</a></div>
                                     </div>
                                 </div>
                             </div>

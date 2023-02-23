@@ -28,7 +28,7 @@ class ShopController extends Controller
             // $page = view('shop.components.main')->render();
             break;
         case 'product-detail-page':
-            $product = Product::with('product_images')->find($request->id);
+            $product = Product::with('product_images','category','supplier')->find($request->id);
             $page = view('shop.components.productdetail',compact('product'))->render();
             break;
         default:
