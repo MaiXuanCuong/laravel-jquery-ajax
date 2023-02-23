@@ -20,4 +20,12 @@ class Product extends Model
     public function product_images(){
         return $this->hasMany(ProductImage::class, 'product_id','id');
     }
+    public function productSizes()
+    {
+        return $this->hasMany(ProductSize::class);
+    }
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'product_sizes', 'product_id', 'size_id')->withTimestamps(); //withTimestamps tự động cập nhật hai cột created_at và updated_at trong bảng liên kết.
+    }
 }

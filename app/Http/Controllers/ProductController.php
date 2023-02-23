@@ -6,6 +6,7 @@ use App\Exports\ProductsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Size;
 use App\Models\Supplier;
 use App\Services\Product\ProductServiceInterface;
 use Illuminate\Http\Request;
@@ -23,7 +24,9 @@ class ProductController extends Controller
     public function index()
     {   $categories = Category::get();
         $suppliers = Supplier::get();
+        $sizes = Size::get();
         $params = [
+            'sizes' => $sizes,
             'categories' => $categories,
             'suppliers' => $suppliers
         ];
@@ -51,7 +54,10 @@ class ProductController extends Controller
     {
         $categories = Category::get();
         $suppliers = Supplier::get();
+        $sizes = Size::get();
+
         return response()->json([
+            'sizes' => $sizes,
             'categories' => $categories,
             'suppliers' => $suppliers
         ]) ;
@@ -96,11 +102,13 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $products = $this->productService->find($id);
-        $productsImage = $products->product_images;
-        if ($products) {
+        $product = $this->productService->find($id);
+        $selectedSizes = old('sizes') ? old('sizes') : $product->sizes->pluck('id')->toArray();
+        $productsImage = $product->product_images;
+        if ($product) {
             return response()->json([
-                "product" => $products,
+                "selectedSizes" => $selectedSizes,
+                "product" => $product,
                 "productsImage" => $productsImage,
                 "status" => 200,
             ]);

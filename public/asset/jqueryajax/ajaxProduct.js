@@ -24,7 +24,6 @@ function getProduct() {
             $("#index-products").html(" ");
             $.each(response.products, function (index, product) {
                 if (response.status == 200) {
-                    console.log(response.products);
                 $("#index-products").append(
                     '<tr data-product-id="' + product.id + '">\
                            <td><img style="width:100px; height:100px" src="' + product.image +'" alt=""></td>\
@@ -271,8 +270,12 @@ $(document).on("click", "#addProduct", function (e) {
     form.reset();
     showImages();
     })
-   
-   
+   for(var i = 1; i <= 100; i++){
+    $("#discount").append(
+        '<option value="'+i +'" >Giảm '+i +' %</option>'
+    );
+   }
+
     $("#addProductModal").modal("show");
 });
 const showImages = () => {
@@ -309,6 +312,7 @@ $(document).on("click", "#editProduct", function (e) {
             files.push(file[i]);
         }
     }
+ 
     form.reset();
     showImages();
     })
@@ -326,9 +330,21 @@ $(document).on("click", "#editProduct", function (e) {
                 $("#statusProductEdit").val(res.product.status);
                 $("#categoryProductEdit").val(res.product.category_id);
                 $("#supplierProductEdit").val(res.product.supplier_id);
+                $("#discountEdit").val(res.product.discount);
                 CKEDITOR.instances.ckeditor1.setData(res.product.description);
                 $("#blah1").attr("src", res.product.image);
-          
+                
+                $.each(res.product.sizes, function (index, size) {
+                    $("#sizeEdit").append(
+                        '<option value="'+size.id +'">'+size.name +'</option>'
+                    );
+             
+                });
+                for(var i = 1; i <= 100; i++){
+                    $("#discountEdit").append(
+                        '<option value="'+i +'" >Giảm '+i +' %</option>'
+                    );
+                   }
                 let imagesEdit = '';
                 res.productsImage.forEach((e, i) => {
                     imagesEdit += `
@@ -468,8 +484,10 @@ $("#insertProduct").on("submit", function (e) {
     var quantityRegex =  regex.test(quantity);
     var regexs = /((^[0-9]{1,19}$)\b)/g;
     var priceRegex =  regexs.test(price);
+    var size = $("#sizeProduct").val();
     var haserror = false;
     if (name == "") { $("#nameProductAddError").html("Vui Lòng Nhập Tên Sản Phẩm");haserror = true;}
+    if (size == "") { $("#sizeProductAddError").html("Vui Lòng Chọn Size Sản Phẩm");haserror = true;}
     if (price == "") { $("#priceProductAddError").html("Hãy Nhập Giá Sản Phẩm");haserror = true;}
     if (!priceRegex && price != '')  { $("#priceProductAddError").html("Giá Sản Phẩm Quá Lớn");haserror = true;}
     if (quantity == "") {$("#quantityProductAddError").html("Hãy Nhập Số Lượng Sản Phẩm");haserror = true;}

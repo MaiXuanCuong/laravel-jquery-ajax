@@ -70,6 +70,29 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Giảm giá</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" class="form-control" id="discountEdit" name="discount">
+                                        <option selected>--Không giảm giá--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Chọn size</label>
+                                <div class="col-sm-9">
+                            <select id="sizeEdit" class="form-select" name="sizes[]" multiple aria-label="multiple select example">
+                             
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Nhà cung cấp</label>
                                 <div class="col-sm-9">
                                     <select id="supplierProductEdit"  name="supplier_id" class="form-control">
@@ -101,6 +124,7 @@
                                         <option value="All">Cả Nam/Nữ</option>
                                     </select>
                                 </div>
+                               
                                 <div id="type_genderProductEditError" class="form-text text-danger error-msg"></div>
 
                             </div>

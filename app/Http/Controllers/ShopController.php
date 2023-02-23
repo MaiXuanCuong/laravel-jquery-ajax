@@ -61,7 +61,9 @@ class ShopController extends Controller
     public function index()
     {
         $banners = Banner::where('status', '<>', 0)->get();
-        $categories = Category::whereNull('deleted_at')->has('products')->get();
+        $categories = Category::whereNull('deleted_at')->whereHas('products', function ($query) {
+            $query->where('products.status','=',1);
+        })->get();
         $products = Product::with('category', 'supplier')
         ->whereNull('deleted_at')
         ->whereHas('category', function ($query) {

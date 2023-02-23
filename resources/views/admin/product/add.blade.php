@@ -65,6 +65,35 @@
                                 </div>
                             </div>
                         </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Giảm giá</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="discount" name="discount">
+                                        <option selected>--Không giảm giá--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Chọn size</label>
+                                <div class="col-sm-9">
+                                <select class="form-select" id="sizeProduct" name="sizes[]" multiple aria-label="multiple select example">
+                                    @if(isset($sizes) && !empty($sizes))
+                                        @foreach ($sizes as $size)
+                                            <option value="{{ $size->id }}">{{ $size->name }}</option>
+                                        @endforeach
+                                    @endif
+                              </select>
+                              <div id="sizeProductAddError" class="form-text text-danger error-msg"></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -100,6 +129,7 @@
                                         <option value="All">Cả Nam/Nữ</option>
                                     </select>
                                 </div>
+                        
                                 <div id="type_genderProductAddError" class="form-text text-danger error-msg"></div>
 
                             </div>

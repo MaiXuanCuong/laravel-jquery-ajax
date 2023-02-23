@@ -39,6 +39,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->description = $data->description;
             $product->supplier_id = $data->supplier_id;
             $product->category_id = $data->category_id;
+            $product->discount = $data->discount;
             if($data->status == 1 || $data->status == 0){
             $product->status = $data->status;
             }
@@ -53,7 +54,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 $product->image = $path;
             }
             $product->save();
-
+            $product->sizes()->attach($data->input('sizes'));
             //create product_images
             $arrImage = [];
             $fieldProductImages = 'file_names';
@@ -102,6 +103,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $product->description = $data->description;
             $product->supplier_id = $data->supplier_id;
             $product->category_id = $data->category_id;
+            $product->discount = $data->discount;
             if($data->status == 1 || $data->status == 0){
             $product->status = $data->status;
             }
@@ -116,7 +118,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 $product->image = $path;
             }
             $product->save();
-
+            if($data->input('sizes') != ''){
+                $product->sizes()->sync($data->input('sizes'));
+            }
             //create product_images
             $arrImage = [];
             $fieldProductImages = 'file_names';
