@@ -51,23 +51,25 @@ class AuthController extends Controller
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
+            'email' => 'required|string|email|max:100|unique:customers',
+            'password' => 'required',
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json(['status'=> 400,'messages' => $validator->errors()->toJson()] );
         }
 
-        $user = Customer::create(array_merge(
+        $customer = Customer::create(array_merge(
                     $validator->validated(),
                     ['password' => bcrypt($request->password)]
                 ));
-
+        $customer = ['email' => $request->input('email'),
+                    'password' => $request->input('password')];
         return response()->json([
+            'status' => 200,
             'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+            'customer' => $customer
+        ]);
     }
 
 
@@ -79,7 +81,7 @@ class AuthController extends Controller
     public function logout() {
         auth('api')->logout();
 
-        return response()->json(['message' => 'User successfully signed out']);
+        return response()->json(['status'=> 200,'message' => 'Đăng xuất thành công']);
     }
 
     /**

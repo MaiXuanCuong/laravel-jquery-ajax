@@ -3,27 +3,27 @@ $(document).ready(function (){
 })
 $(document).on('click', '#login-user' ,function (e){
     e.preventDefault();
-    var email = $("#loginEmail").val();
-    var password = $("#loginPassword").val();
+    var email = $("#Email").val();
+    var password = $("#Password").val();
     var haserror = false;
 
     if (email == "") {
         $("#emailUserLogin").html("Hãy Nhập Tài Khoản");
         haserror = true;
-    }else if (!isValidEmailAddress(email)) {
+    } 
+    if (!isValidEmailAddress(email)) {
         $("#emailUserLogin").html("Email không hợp lệ");
         haserror = true;
     }
     if (isValidEmailAddress(email)) {
         $("#emailUserLogin").html("");
-        haserror = true;
     }
 
     if (password == "") {
         $("#passwordUserLogin").html("Hãy Nhập Mật Khẩu");
         haserror = true;
     }
-    if (haserror === false) {
+    if (haserror == false) {
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),

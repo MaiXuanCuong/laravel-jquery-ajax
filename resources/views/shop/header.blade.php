@@ -11,7 +11,8 @@
     <title>Xuân Cường Shop</title>
     <!--====== Google Font ======-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('asset/css/vertical-layout-light/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--====== Vendor Css ======-->
     <link rel="stylesheet" href=" {{asset('shop/css/vendor.css') }}">
 
@@ -20,6 +21,12 @@
 
     <!--====== App ======-->
     <link rel="stylesheet" href=" {{asset('shop/css/app.css') }}">
+    <style>
+        .swal2-modal {
+            min-height: 420px;
+            padding-bottom: 194px;
+        }
+    </style>
 </head>
 <body class="config">
     <div class="preloader is-active">
@@ -79,7 +86,7 @@
 
                                             <span class="js-menu-toggle"></span>
                                             <ul style="width:120px" id="check-customer">
-                                                <li><a id="id-customer"><i class="fas fa-user-circle u-s-m-r-6"></i> <span>Tài khoản</span></a></li>
+                                                
                                                         
                                                
                                                        

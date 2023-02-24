@@ -37,14 +37,14 @@
 
                                 <label class="gl-label" for="reg-password">Mật khẩu*</label>
 
-                                <input class="input-text input-text--primary-style" type="text" name="password" id="registerPassword" placeholder="Nhập mật khẩu">
+                                <input class="input-text input-text--primary-style" type="password" name="password" id="registerPassword" placeholder="Nhập mật khẩu">
                                 <div id="passwordRegisterError" class="form-text text-danger"></div>
                             </div>
                             <div class="u-s-m-b-30">
 
                                 <label class="gl-label" for="reg-password">Xác nhận mật khẩu*</label>
 
-                                <input class="input-text input-text--primary-style" type="text" id="confirmPassword" placeholder="Nhập xác nhận mật khẩu">
+                                <input class="input-text input-text--primary-style" type="password" id="confirmPassword" placeholder="Nhập xác nhận mật khẩu">
                                 <div id="passwordConfirmError" class="form-text text-danger"></div>
                             </div>
                             <div class="u-s-m-b-15">
