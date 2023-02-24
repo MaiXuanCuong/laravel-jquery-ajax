@@ -1,6 +1,5 @@
 @extends('shop.master')
- @section('content')
-
+@section('content')
 
 <!--====== Section 3 ======-->
 <div class="u-s-p-b-60">
@@ -22,7 +21,7 @@
     <!--====== End - Section Intro ======-->
 
 
-    <!--====== Section Content ======-->
+        <!--====== Section Content ======-->
     <div class="section__content">
         <div class="container">
             <div class="row" id="List-products">

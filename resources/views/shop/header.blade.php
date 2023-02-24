@@ -9,7 +9,6 @@
     <meta name="author" content="">
     <link href=" {{asset('shop/images/favicon.png') }}" rel="shortcut icon">
     <title>Xuân Cường Shop</title>
-
     <!--====== Google Font ======-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
 
@@ -72,43 +71,21 @@
 
                                     <!--====== List ======-->
                                     <ul class="ah-list ah-list--design1 ah-list--link-color-white">
-                                        <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Account">
+                                        <li class="has-dropdown" id="name-customer" data-tooltip="tooltip" data-placement="left" title="">
 
                                             <a><i class="far fa-user-circle"></i></a>
 
                                             <!--====== Dropdown ======-->
 
                                             <span class="js-menu-toggle"></span>
-                                            <ul style="width:120px">
-                                                <li>
-
-                                                    <a ><i class="fas fa-user-circle u-s-m-r-6"></i>
-
-                                                        <span>Tài khoản</span></a></li>
-                                                        @if(!isset(Auth::user()->id))
-                                                        <li>
-
-                                                    <a id="login-customer"><i class="fas fa-user-plus u-s-m-r-6"></i>
-
-                                                        <span>Đăng nhập</span></a>
-                                                    
-                                                    
-                                                    
-                                                    </li>
+                                            <ul style="width:120px" id="check-customer">
+                                                <li><a id="id-customer"><i class="fas fa-user-circle u-s-m-r-6"></i> <span>Tài khoản</span></a></li>
+                                                        
+                                               
                                                        
-                                                <li>
-
-                                                    <a ><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                        <span>Đăng ký</span></a></li>
-                                                        @else
                                                        
-                                                <li>
-
-                                                    <a ><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                        <span>Đăng xuất</span></a></li>
-                                                        @endif
+                                                
+                                                     
                                             </ul>
                                             <!--====== End - Dropdown ======-->
                                         </li>

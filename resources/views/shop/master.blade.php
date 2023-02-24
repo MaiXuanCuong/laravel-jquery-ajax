@@ -1,6 +1,5 @@
 
         @include('shop.header')
-       
         <div class="app-content">
 
            @yield('content')
@@ -262,7 +261,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
     
-               
+               @include('shop.components.login')
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+    
+               @include('shop.components.register')
             </div>
         </div>
     </div>

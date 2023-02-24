@@ -3,12 +3,19 @@ $(document).ready(function (){
 })
 $(document).on('click', '#login-user' ,function (e){
     e.preventDefault();
-    var email = $("#Email").val();
-    var password = $("#Password").val();
+    var email = $("#loginEmail").val();
+    var password = $("#loginPassword").val();
     var haserror = false;
 
     if (email == "") {
         $("#emailUserLogin").html("Hãy Nhập Tài Khoản");
+        haserror = true;
+    }else if (!isValidEmailAddress(email)) {
+        $("#emailUserLogin").html("Email không hợp lệ");
+        haserror = true;
+    }
+    if (isValidEmailAddress(email)) {
+        $("#emailUserLogin").html("");
         haserror = true;
     }
 
@@ -82,3 +89,7 @@ $(document).on('click', '#logout-user' ,function (e){
             },
         });
     })
+    function isValidEmailAddress(email) {
+        var pattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+        return pattern.test(email);
+    }

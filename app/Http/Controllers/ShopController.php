@@ -24,15 +24,14 @@ class ShopController extends Controller
     // dd($request->page);
     switch ($request->page) {
         case 'home-page':
-            $page = view('shop.components.main', $this->home())->render();
+            $page = app('App\Http\Controllers\ShopController')->index()->render();
             // $page = view('shop.components.main')->render();
             break;
         case 'product-detail-page':
-            $product = Product::with('product_images','category','supplier')->find($request->id);
+            $product = Product::with('product_images','category','supplier','sizes')->find($request->id);
             $page = view('shop.components.productdetail',compact('product'))->render();
             break;
         default:
-            // Code xử lý khi biến $variable không bằng bất kỳ giá trị nào trong các case trên
     }
 
    
@@ -40,7 +39,6 @@ class ShopController extends Controller
     return response()->json(['html' => $page]);
    }
     public function home(){
-        $banners = Banner::where('status', '<>', 0)->get();
         $categories = Category::whereNull('deleted_at')->has('products')->get();
         $products = Product::with('category', 'supplier')
         ->whereNull('deleted_at')
@@ -53,10 +51,13 @@ class ShopController extends Controller
         ->get();
         $param = [
             'categories' => $categories,
-            'banners' => $banners,
             'products' => $products,
         ];
         return $param;
+    }
+    public function getBanner(){
+        $banners = Banner::where('status', '<>', 0)->get();
+        return  $banners;
     }
     public function index()
     {
@@ -85,8 +86,7 @@ class ShopController extends Controller
     {
         $product = Product::findOrFail($id);
         try {
-            if(isset(Auth::guard('customers')->user()->id)){
-                $user = Auth::guard('customers')->user()->id;
+                $user = 1;
                 $historyProducts = Cache::get('historyProducts'.$user);
                     $historyProducts[$id] = [
                         'id' => $id,
@@ -98,7 +98,6 @@ class ShopController extends Controller
                     ];
                     $expiresAt = Carbon::now()->addMinutes(60);
                 Cache::put('historyProducts'.$user, $historyProducts,$expiresAt);
-            }
         } catch (\Exception $e) {
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
         }
@@ -109,10 +108,9 @@ class ShopController extends Controller
     }
     public function cart()
     {
-        if (isset(Auth::guard('customers')->user()->id)) {
             try {
                 $products = Product::search()->get();
-                $user = Auth::guard('customers')->user()->id;
+                $user = 1;
                 $carts = Cache::get('carts'.$user);
                 if ($carts) {
 
@@ -138,16 +136,13 @@ class ShopController extends Controller
                     ];
                 return view('shop.cart', $param);
             }
-        } else {
-            return view('shop.customers.login');
-        }
+       
     }
     public function store($id)
     {
         try {
             $product = Product::find($id);
-            if (isset(Auth::guard('customers')->user()->id)) {
-                $user = Auth::guard('customers')->user()->id;
+                $user = 1;
                 $carts = Cache::get('carts'.$user);
                 if(isset($carts[$id])){
                     $carts[$id]['quantity']++;
@@ -162,7 +157,6 @@ class ShopController extends Controller
                     'quantity_product' => $product->quantity,
                 ];
             }
-            } 
             $expiresAt = Carbon::now()->addDays(30);
             Cache::put('carts'.$user, $carts, $expiresAt);
             return response()->json([
@@ -180,8 +174,7 @@ class ShopController extends Controller
     public function remove($id)
     {
         try {
-            if (isset(Auth::guard('customers')->user()->id)) {
-                $user = Auth::guard('customers')->user()->id;
+                $user = 1;
                 $carts = Cache::get('carts'.$user);
                 unset($carts[$id]);
                 Cache::put('carts'.$user, $carts);
@@ -189,7 +182,6 @@ class ShopController extends Controller
                     'code' => 200,
                     'message' => 'success',
                 ], status:200);
-        }
         } catch (\Exception$e) {
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
             return response()->json([
@@ -202,7 +194,7 @@ class ShopController extends Controller
     {
         try{
             DB::beginTransaction();
-            $user = Auth::guard('customers')->user()->id;
+            $user = 1;
             $order = new Order;
             $order->note = $request->note;
             $order->address = $request->address;
@@ -240,8 +232,7 @@ class ShopController extends Controller
 
     }
     public function checkOuts(){
-        if (isset(Auth::guard('customers')->user()->id)) {
-            $user = Auth::guard('customers')->user()->id;
+            $user = 1;
                 $carts = Cache::get('carts'.$user);
                 $provinces = Province::get();
                 if ($carts) {
@@ -254,9 +245,7 @@ class ShopController extends Controller
     } else {
         return redirect()->route('shop.home');
     }
-    } else {
-        return redirect()->route('shop.home');
-    }
+  
 }   
     public function GetDistricts(Request $request)
     {

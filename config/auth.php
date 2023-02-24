@@ -40,15 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'customers' => [
-            'driver' => 'session',
-            'provider' => 'customers',
-        ],
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'customers',
             'hash' => false,
         ],
+        // 'api' => [
+        //     'driver' => 'token',
+        //     'provider' => 'customers',
+        //     'hash' => false,
+        // ],
     ],
 
  
@@ -128,5 +129,10 @@ return [
     */
 
     'password_timeout' => 10800,
+    'api' => [
+        'driver' => 'token',
+        'provider' => 'customers',
+        'hash' => false,
+    ],
 
 ];

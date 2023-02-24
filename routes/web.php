@@ -7,11 +7,10 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
-use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/checklogin',[AuthController::class, 'checklogin'])->name('checklogin');
-Route::get('/login',[AuthController::class, 'index'])->name('login');
+Route::post('/checklogin',[HomeController::class, 'checklogin'])->name('checklogin');
+Route::get('/login',[HomeController::class, 'login'])->name('login');
 Route::prefix('/')->middleware(['auth', 'revalidate'])->group(function () {
     Route::get('/',[HomeController::class, 'index'])->name('/');
     Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
@@ -89,16 +88,4 @@ Route::prefix('/')->middleware(['auth', 'revalidate'])->group(function () {
                 Route::delete('/deleteBanner/{id}',[BannerController::class, 'destroy'])->name('banner.destroy');
     });
 });
-Route::prefix('shops')->group(function (){
-    Route::get('/',[ShopController::class, 'index'])->name('shop.index');
-    Route::post('/history/{id}',[ShopController::class, 'view'])->name('shop.view');
-    Route::get('/page',[ShopController::class, 'page'])->name('shop.page');
-    Route::get('/home',[ShopController::class, 'home'])->name('shop.home');
-    Route::post('/checklogin',[ShopController::class, 'checkLogin'])->name('shop.checklogin');
-});
-Route::middleware(['auth.token'])->group(function () {
-    // các route cần xác thực token
-});
-Route::get('/test',function(){
-    return view('shop.test');
-})->name('shop.index');
+

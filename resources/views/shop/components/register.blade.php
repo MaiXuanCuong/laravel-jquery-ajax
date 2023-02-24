@@ -1,77 +1,60 @@
-<div class="l-f-o__pad-box">
-    <h1 class="gl-h1">PERSONAL INFORMATION</h1>
-    <form class="l-f-o__form">
-        <div class="gl-s-api">
-            <div class="u-s-m-b-15">
+<div class="section__content">
+    <div class="container">
+        <div class="row row--center">
+            <div class="col-md-12">
+                <div class="l-f-o">
+                    <div class="l-f-o__pad-box">
+                        <form id="registerCustomer" class="l-f-o__form">
+                            <div class="gl-s-api">
+                                <div class="u-s-m-b-15">
+                                    <a class="l-f-o__create-link btn--e-transparent-brand-b-2" id="loginAccount">Đăng nhập ngay</a><br>
+                                    <button class="gl-s-api__btn gl-s-api__btn--fb" type="button"><i class="fab fa-facebook-f"></i>
 
-                <button class="gl-s-api__btn gl-s-api__btn--fb" type="button"><i class="fab fa-facebook-f"></i>
+                                        <span>Đăng nhập bằng Facebook</span></button></div>
+                                <div class="u-s-m-b-30">
 
-                    <span>Signup with Facebook</span></button></div>
-            <div class="u-s-m-b-30">
+                                    <button class="gl-s-api__btn gl-s-api__btn--gplus" type="button"><i class="fab fa-google"></i>
 
-                <button class="gl-s-api__btn gl-s-api__btn--gplus" type="button"><i class="fab fa-google"></i>
+                                        <span>Đăng nhập bằng Google</span></button></div>
+                            </div>
+                           
+                            <div class="u-s-m-b-30">
 
-                    <span>Signup with Google</span></button></div>
-        </div>
-        <div class="u-s-m-b-30">
+                                <label class="gl-label" for="reg-lname">Họ và tên*</label>
 
-            <label class="gl-label" for="reg-fname">FIRST NAME *</label>
+                                <input class="input-text input-text--primary-style" type="text" name="name" id="registerName" placeholder="Nhập họ và tên">
+                                <div id="nameRegisterError" class="form-text text-danger"></div>
+                            </div>
+                      
+                            <div class="u-s-m-b-30">
 
-            <input class="input-text input-text--primary-style" type="text" id="reg-fname" placeholder="First Name"></div>
-        <div class="u-s-m-b-30">
+                                <label class="gl-label" for="reg-email">Tài khoản*</label>
 
-            <label class="gl-label" for="reg-lname">LAST NAME *</label>
+                                <input class="input-text input-text--primary-style" type="text" name="email" id="registerEmail" placeholder="Nhập tài khoản">
+                                <div id="emailRegisterError" class="form-text text-danger"></div>
+                            </div>
+                            <div class="u-s-m-b-30">
 
-            <input class="input-text input-text--primary-style" type="text" id="reg-lname" placeholder="Last Name"></div>
-        <div class="gl-inline">
-            <div class="u-s-m-b-30">
+                                <label class="gl-label" for="reg-password">Mật khẩu*</label>
 
-                <!--====== Date of Birth Select-Box ======-->
+                                <input class="input-text input-text--primary-style" type="text" name="password" id="registerPassword" placeholder="Nhập mật khẩu">
+                                <div id="passwordRegisterError" class="form-text text-danger"></div>
+                            </div>
+                            <div class="u-s-m-b-30">
 
-                <span class="gl-label">BIRTHDAY</span>
-                <div class="gl-dob"><select class="select-box select-box--primary-style">
-                        <option selected="">Month</option>
-                        <option value="male">January</option>
-                        <option value="male">February</option>
-                        <option value="male">March</option>
-                        <option value="male">April</option>
-                    </select><select class="select-box select-box--primary-style">
-                        <option selected="">Day</option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                    </select><select class="select-box select-box--primary-style">
-                        <option selected="">Year</option>
-                        <option value="1991">1991</option>
-                        <option value="1992">1992</option>
-                        <option value="1993">1993</option>
-                        <option value="1994">1994</option>
-                    </select></div>
-                <!--====== End - Date of Birth Select-Box ======-->
+                                <label class="gl-label" for="reg-password">Xác nhận mật khẩu*</label>
+
+                                <input class="input-text input-text--primary-style" type="text" id="confirmPassword" placeholder="Nhập xác nhận mật khẩu">
+                                <div id="passwordConfirmError" class="form-text text-danger"></div>
+                            </div>
+                            <div class="u-s-m-b-15">
+
+                                <button class="btn btn--e-transparent-brand-b-2" id="confirmRegister"type="submit">Tạo tài khoản</button></div>
+                            </form>
+                            
+                    </div>
+                </div>
             </div>
-            <div class="u-s-m-b-30">
-
-                <label class="gl-label" for="gender">GENDER</label><select class="select-box select-box--primary-style u-w-100" id="gender">
-                    <option selected="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="male">Female</option>
-                </select></div>
         </div>
-        <div class="u-s-m-b-30">
-
-            <label class="gl-label" for="reg-email">E-MAIL *</label>
-
-            <input class="input-text input-text--primary-style" type="text" id="reg-email" placeholder="Enter E-mail"></div>
-        <div class="u-s-m-b-30">
-
-            <label class="gl-label" for="reg-password">PASSWORD *</label>
-
-            <input class="input-text input-text--primary-style" type="text" id="reg-password" placeholder="Enter Password"></div>
-        <div class="u-s-m-b-15">
-
-            <button class="btn btn--e-transparent-brand-b-2" type="submit">CREATE</button></div>
-
-        <a class="gl-link" href="#">Return to Store</a>
-    </form>
+    </div>
 </div>

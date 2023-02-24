@@ -1,4 +1,5 @@
 
+
 <body class="config">
     <div class="preloader is-active">
         <div class="preloader__wrap">
@@ -20,16 +21,14 @@
                                 <ul class="pd-breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="index.hml">Home</a></li>
+                                        <a data-page="home-page">Trang chủ</a></li>
                                     <li class="has-separator">
 
-                                        <a href="shop-side-version-2.html">Electronics</a></li>
-                                    <li class="has-separator">
-
-                                        <a href="shop-side-version-2.html">DSLR Cameras</a></li>
+                                        <a>{{ $product->category->name }}</a></li>
+                                  
                                     <li class="is-marked">
 
-                                        <a href="shop-side-version-2.html">Nikon Cameras</a></li>
+                                        <a>Chi tiết sản phẩm</a></li>
                                 </ul>
                             </div>
                             <!--====== End - Product Breadcrumb ======-->
@@ -39,6 +38,8 @@
                             <div class="pd u-s-m-b-30">
                                 <div class="slider-fouc pd-wrap">
                                     <div id="pd-o-initiate">
+                                        <div class="pd-o-img-wrap" data-src="{{ asset($product->image) }}">
+                                            <img class="u-img-fluid" src="{{ asset($product->image) }}" data-zoom-image="{{ asset($product->image) }}" alt=""></div>
                                         @foreach ($product->product_images as $image)
                                         <div class="pd-o-img-wrap" data-src="{{ asset($image->image) }}">
 
@@ -46,11 +47,14 @@
                                             @endforeach
                                     </div>
 
-                                    <span class="pd-text">Click for larger zoom</span>
+                                    <span class="pd-text">Click vào để xem ảnh</span>
                                 </div>
                                 <div class="u-s-m-t-15">
                                     <div class="slider-fouc">
                                         <div id="pd-o-thumbnail">
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{ asset($product->image) }}" alt=""></div>
                                             @foreach ($product->product_images as $image)
                                             <div>
 
@@ -77,9 +81,9 @@
                                 <div>
                                     <div class="pd-detail__inline">
 
-                                        <span class="pd-detail__price">{{ number_format($product->price." VNĐ") }}</span>
+                                        <span class="pd-detail__price">{{ $product->discount ? number_format($product->price -(($product->discount/100)*$product->price)).' VNĐ' : number_format($product->price).' VNĐ'}}</span>
 
-                                        <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
+                                        <span class="pd-detail__discount">{{ $product->discount ? 'Giảm '.$product->discount.'% của' : ''}}</span><del class="pd-detail__del">{{$product->discount ? number_format($product->price). ' VNĐ' : '' }} </del></div>
                                 </div>
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -137,36 +141,15 @@
 
                                             <span class="pd-detail__label u-s-m-b-8">Size:</span>
                                             <div class="pd-detail__size">
+                                                @foreach ($product->sizes as $size)
+                                                    
                                                 <div class="size__radio">
 
-                                                    <input type="radio" id="xs" name="size" checked>
+                                                    <input type="radio" id="{{ $size->name }}" name="size" checked>
 
-                                                    <label class="size__radio-label" for="xs">XS</label></div>
-                                                <div class="size__radio">
-
-                                                    <input type="radio" id="small" name="size">
-
-                                                    <label class="size__radio-label" for="xxl">Small</label></div>
-                                                <div class="size__radio">
-
-                                                    <input type="radio" id="medium" name="size">
-
-                                                    <label class="size__radio-label" for="medium">Medium</label></div>
-                                                <div class="size__radio">
-
-                                                    <input type="radio" id="large" name="size">
-
-                                                    <label class="size__radio-label" for="xxl">Large</label></div>
-                                                <div class="size__radio">
-
-                                                    <input type="radio" id="xl" name="size">
-
-                                                    <label class="size__radio-label" for="xl">XL</label></div>
-                                                <div class="size__radio">
-
-                                                    <input type="radio" id="xxl" name="size">
-
-                                                    <label class="size__radio-label" for="xxl">XXL</label></div>
+                                                    <label class="size__radio-label" for="{{ $size->name }}">{{ $size->name }}</label></div>
+                                                @endforeach
+                                              
                                             </div>
                                         </div>
                                         <div class="pd-detail-inline-2">
@@ -190,11 +173,11 @@
                                 </div>
                                 <div class="u-s-m-b-15">
 
-                                    <span class="pd-detail__label u-s-m-b-8">Bảo vệ người tiêu dùng.</span>
+                                    <span class="pd-detail__label u-s-m-b-8">Chính sách sản phẩm</span>
                                     <ul class="pd-detail__policy-list">
                                         <li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                            <span>Buyer Protection.</span></li>
+                                            <span>Bảo vệ người tiêu dùng.</span></li>
                                         <li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
                                             <span>Hoàn trả đầy đủ nếu bạn không nhận được đơn đặt hàng của bạn.</span></li>
@@ -237,18 +220,17 @@
                                             <div class="u-s-m-b-15">
                                                 <p>{!! $product->description !!}</p>
                                             </div>
-                                            <div class="u-s-m-b-30"><iframe src="https://www.youtube.com/embed/qKqSBm07KZk" allowfullscreen></iframe></div>
                                             <div class="u-s-m-b-30">
                                                 <ul>
                                                     <li><i class="fas fa-check u-s-m-r-8"></i>
 
-                                                        <span>Buyer Protection.</span></li>
+                                                        <span>Bảo vệ người tiêu dùng</span></li>
                                                     <li><i class="fas fa-check u-s-m-r-8"></i>
 
-                                                        <span>Full Refund if you don't receive your order.</span></li>
+                                                        <span>Hoàn trả đầy đủ nếu bạn không nhận được đơn đặt hàng của bạn.</span></li>
                                                     <li><i class="fas fa-check u-s-m-r-8"></i>
 
-                                                        <span>Returns accepted if product not as described.</span></li>
+                                                        <span>Returns accepted if product not as described</span></li>
                                                 </ul>
                                             </div>
                                             <div class="u-s-m-b-15">
@@ -264,11 +246,15 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>Giá</td>
-                                                                <td>{{ $product->name }}</td>
+                                                                <td>{{ number_format($product->discount ? $product->price - (($product->discount/100)*$product->price) : $product->price)." VNĐ" }}</td>
+                                                             
                                                             </tr>
                                                             <tr>
                                                                 <td>size</td>
-                                                                <td>{{ $product->name }}</td>
+                                                                <td>@foreach($product->sizes as $size)
+                                                                    {{ $size->name }}
+                                                                    @endforeach
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Số lượng</td>
@@ -877,16 +863,13 @@
                                     <ul class="pd-breadcrumb__list">
                                         <li class="has-separator">
 
-                                            <a href="index.hml">Home</a></li>
+                                            <a data-page="home-page">Trang chủ</a></li>
                                         <li class="has-separator">
 
-                                            <a href="shop-side-version-2.html">Electronics</a></li>
-                                        <li class="has-separator">
-
-                                            <a href="shop-side-version-2.html">DSLR Cameras</a></li>
+                                            <a >{{ $product->category->name }}</a></li>
                                         <li class="is-marked">
 
-                                            <a href="shop-side-version-2.html">Nikon Cameras</a></li>
+                                            <a ><b>Chi tiết sản phẩm</b></a></li>
                                     </ul>
                                 </div>
                                 <!--====== End - Product Breadcrumb ======-->
@@ -941,7 +924,7 @@
                                 <div class="pd-detail">
                                     <div>
 
-                                        <span class="pd-detail__name">{{ $product->name }}</span></div>
+                                        <span class="pd-detail__name">name</span></div>
                                     <div>
                                         <div class="pd-detail__inline">
 
