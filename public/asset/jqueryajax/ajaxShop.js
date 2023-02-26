@@ -30,6 +30,11 @@ $(document).ready(function(){
       });
    
 });
+function scrollToProductList() {
+    document.getElementById('list_products').scrollIntoView({behavior: 'smooth'});
+  }
+  
+  document.getElementById('main-search').addEventListener('click', scrollToProductList);
 $(document).on('click','#logout-customer',function() {
     $.ajax({
         url: "http://127.0.0.1:8000/api/auth/logout",
@@ -66,7 +71,7 @@ $(document).on('click','#logout-customer',function() {
 })
 
 
-checkCustomer = () =>{
+function checkCustomer(){
     if(localStorage.getItem('token')){
         var customer = Cookies.get("customer");
         let arr = customer.split(',');
@@ -253,65 +258,79 @@ function isValidEmailAddress(email) {
     var pattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
     return pattern.test(email);
 }
-
+let canSendRequest = true;
 $(document).on('click','a', function(e){
+    let $this = $(this);
     e.preventDefault();
+    if (!$this.attr('disabled')) {
+        $this.attr('disabled', true);
+    if (canSendRequest) {
+        canSendRequest = false;
     var page = $(this).data('page')
     if((typeof page !== 'undefined') && page != 'home-page'){
-        page = $(this).data('page')
-        var id = $(this).data('value');
-        $.ajax({
-            url: "http://127.0.0.1:8000/api/auth/page",
-            method: "get",
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            },
-            data: {
-                page: page,
-                id: id
-            },
-            dataType: "json",
-            success: function(response) {
-                $('.app-content').html('');
-                $('.app-content').append(response.html);
-            },
-            error: function(xhr) {
-                if (xhr.status === 401) {
-                    localStorage.removeItem('token');
-                    Cookies.remove('customer');
-                    $('#check-customer').empty();
-                    checkCustomer();
-                }}
-        })
+            
+            page = $(this).data('page')
+            var id = $(this).data('value');
+
+            $.ajax({
+                url: "http://127.0.0.1:8000/api/auth/page",
+                method: "get",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    page: page,
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    canSendRequest = true;
+                    $this.attr('disabled', false);
+                    $('body').html('');
+                    $('body').append(response.html);
+                },
+                error: function(xhr) {
+                    if (xhr.status === 401) {
+                        canSendRequest = true;
+                        $this.attr('disabled', false);
+                        localStorage.removeItem('token');
+                        Cookies.remove('customer');
+                        $('#check-customer').empty();
+                        checkCustomer();
+                    }}
+            })
+        
     }
     else if(page == 'home-page'){
-        page = $(this).data('page')
-        $.ajax({
-            url: "http://127.0.0.1:8000/api/auth/page",
-            method: "get",
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'Content-Type': 'application/json'
-            },
-            data: {
-                page: page,
-                id: id
-            },
-            dataType: "json",
-            success: function(response) {
-                $('body').html('');
-                $('body').append(response.html);
-            },
-            error: function(xhr) {
-                if (xhr.status === 401) {
-                    localStorage.removeItem('token');
-                    Cookies.remove('customer');
-                    $('#check-customer').empty();
-                    checkCustomer();
-                }}
-        })
+            page = $(this).data('page')
+            $.ajax({
+                url: "http://127.0.0.1:8000/api/auth/page",
+                method: "get",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    page: page,
+                },
+                dataType: "json",
+                success: function(response) {
+                    canSendRequest = true;
+                    $('body').html('');
+                    $('body').append(response.html);
+                },
+                error: function(xhr) {
+                    if (xhr.status === 401) {
+                        canSendRequest = true;
+                        localStorage.removeItem('token');
+                        Cookies.remove('customer');
+                        $('#check-customer').empty();
+                        checkCustomer();
+                    }}
+            })
     }
+}}
 })
 
 

@@ -24,12 +24,18 @@ class ShopController extends Controller
     // dd($request->page);
     switch ($request->page) {
         case 'home-page':
-            $page = app('App\Http\Controllers\ShopController')->index()->render();
-            // $page = view('shop.components.main')->render();
+            // $page = app('App\Http\Controllers\ShopController')->index()->render();
+            $page = view('shop.main',$this->mainHome())->render();
             break;
         case 'product-detail-page':
+            $banners = Banner::where('status', '<>', 0)->get();
             $product = Product::with('product_images','category','supplier','sizes')->find($request->id);
-            $page = view('shop.components.productdetail',compact('product'))->render();
+            $params = [
+                'product' => $product,
+                 'banners' => $banners
+            ];
+            // $params = $this->mainHome($product);
+            $page = view('shop.components.productdetail',$params)->render();
             break;
         default:
     }
@@ -38,8 +44,16 @@ class ShopController extends Controller
 
     return response()->json(['html' => $page]);
    }
-    public function home(){
-        $categories = Category::whereNull('deleted_at')->has('products')->get();
+
+    // public function getBanner(){
+    //     $banners = Banner::where('status', '<>', 0)->get();
+    //     return  $banners;
+    // }
+    public function mainHome($product = null){
+        $banners = Banner::where('status', '<>', 0)->get();
+        $categories = Category::whereNull('deleted_at')->whereHas('products', function ($query) {
+            $query->where('products.status','=',1);
+        })->get();
         $products = Product::with('category', 'supplier')
         ->whereNull('deleted_at')
         ->whereHas('category', function ($query) {
@@ -51,13 +65,11 @@ class ShopController extends Controller
         ->get();
         $param = [
             'categories' => $categories,
+            'banners' => $banners,
             'products' => $products,
+            'product' => $product,
         ];
-        return $param;
-    }
-    public function getBanner(){
-        $banners = Banner::where('status', '<>', 0)->get();
-        return  $banners;
+       return $param;
     }
     public function index()
     {
@@ -82,22 +94,73 @@ class ShopController extends Controller
         return view('shop.main', $param);
     }
 
+    public function getHistoryProduct(){
+        try {
+            if (isset(auth('api')->user()->id)) {
+                $user = auth('api')->user()->id;
+                $historyProducts = [];
+                $historyProduct = Cache::get('historyProducts'.$user);
+                if (isset($historyProduct)) {
+                   $historyProducts = array_values($historyProduct);
+                }
+                } else {
+                    $historyProducts = [];
+                } 
+                return response()->json([
+                    'historyProducts' => $historyProducts,
+                    'status' => 200
+                ]);
+        } catch (\Exception $e) {
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
+            return response()->json([
+                'status' => 401
+            ]);
+        }
+
+    }
+    
+    public function getCart(){
+        try {
+        if (isset(auth('api')->user()->id)) {
+            $user = auth('api')->user()->id;
+            $carts = Cache::get('carts'.$user);
+            if (isset($carts[$user])){
+                $carts = array_values($carts);
+            }
+            } else {
+                $carts = [];
+            } 
+            return response()->json([
+                'carts' => $carts,
+                'status' => 200
+            ]);
+        } catch (\Exception $e) {
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
+            return response()->json([
+                'status' => 401
+            ]);
+        }
+    }
     public function view($id)
     {
         $product = Product::findOrFail($id);
+       
         try {
-                $user = 1;
-                $historyProducts = Cache::get('historyProducts'.$user);
-                    $historyProducts[$id] = [
-                        'id' => $id,
-                        'quantity' => 1,
-                        'name' => $product->name,
-                        'price' => $product->price,
-                        'image' => $product->image,
-                        'quantity_product' => $product->quantity,
-                    ];
-                    $expiresAt = Carbon::now()->addMinutes(60);
-                Cache::put('historyProducts'.$user, $historyProducts,$expiresAt);
+            if(isset(auth('api')->user()->id)){
+            $user = auth('api')->user()->id;
+            $historyProducts = Cache::get('historyProducts'.$user);
+                $historyProducts[$id] = [
+                    'id' => $id,
+                    'quantity' => 1,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'image' => $product->image,
+                    'quantity_product' => $product->quantity,
+                ];
+                $expiresAt = Carbon::now()->addMinutes(60);
+           $product = Cache::put('historyProducts'.$user, $historyProducts,$expiresAt);
+                return $historyProducts[$id];
+                }
         } catch (\Exception $e) {
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
         }

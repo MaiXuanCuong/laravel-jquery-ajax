@@ -9,6 +9,7 @@ use App\Models\Ward;
 use App\Services\User\UserServiceInterface;
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
+use App\Http\Requests\StoreUserRequest;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
@@ -59,8 +60,15 @@ class UserController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
+        if ($request->fails()) {
+            $errors = $request->errors()->all();
+            return response()->json([
+                'status' => '400',
+                'message' => $errors,
+            ]);
+        }
         $user = $this->userService->create($request);
         if ($user) {
             return response()->json([

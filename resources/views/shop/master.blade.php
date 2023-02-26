@@ -1,11 +1,21 @@
 
-        @include('shop.header')
-        <div class="app-content">
+@include('shop.header')
+@yield('header')
+<body class="config">
+    <div class="preloader is-active">
+            <div class="preloader__wrap">
+        
+            <img class="preloader__img" src="{{ asset('shop/images/preloader.png') }}" alt=""></div>
+    </div>  
+            <!--====== Main App ======-->
+        <div id="app">
 
+        <div class="app-content">
            @yield('content')
      
         </div>
-       @include('shop.footer')
+        @include('shop.footer')
+        @yield('footer')
 
 
         <!--====== Quick Look Modal ======-->

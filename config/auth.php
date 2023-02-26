@@ -45,11 +45,6 @@ return [
             'provider' => 'customers',
             'hash' => false,
         ],
-        // 'api' => [
-        //     'driver' => 'token',
-        //     'provider' => 'customers',
-        //     'hash' => false,
-        // ],
     ],
 
  

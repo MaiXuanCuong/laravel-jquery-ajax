@@ -630,11 +630,10 @@ $("#insertUser").on("submit", function (e) {
                     $("#blah").hide();
                     jQuery("#blah1").attr("src", "");
                     showSuccess();
-                } else {
-                    showError();
                 }
             },
             error: function (err) {
+             console.log(err);
                 showError();
             },
         });

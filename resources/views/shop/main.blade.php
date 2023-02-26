@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section__text-wrap">
+                    <div class="section__text-wrap" id="list_products">
                         <h1 class="section__heading u-c-secondary u-s-m-b-12">SẢN PHẨM MỚI</h1>
 
                         <span class="section__span u-c-silver">SẢN PHẨM MỚI ĐƯỢC BỔ SUNG</span>
@@ -22,7 +22,7 @@
 
 
         <!--====== Section Content ======-->
-    <div class="section__content">
+    <div class="section__content" id="about">
         <div class="container">
             <div class="row" id="List-products">
 
@@ -208,7 +208,7 @@
         <div class="container">
             <div class="row">
 
-                {{-- @foreach ($histories as $history)
+                {{-- @foreach ($historyProducts as $history) --}}
                 <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
                     <div class="product-short u-h-100">
                         <div class="product-short__container">
@@ -231,7 +231,7 @@
                         </div>
                     </div>
                 </div>
-                @endforeach --}}
+                {{-- @endforeach --}}
               
             </div>
         </div>
@@ -358,4 +358,9 @@
     </div>
     <!--====== End - Section Content ======-->
 </div>
+{{-- <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+<script src="{{ asset('shop/js/vendor.js ') }}"></script>
+<script src="{{ asset('shop/js/jquery.shopnav.js ') }}"></script>
+<script src="{{ asset('shop/js/app.js ') }}"></script>
+<script src="{{ asset('asset/jqueryajax/ajaxShop.js ') }}"></script> --}}
 @endsection

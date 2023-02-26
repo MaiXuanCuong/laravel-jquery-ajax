@@ -1,6 +1,8 @@
 
-
-<body class="config">
+ 
+{{-- <body class="config"> --}}
+@extends('shop.master')
+@section('content')
     <div class="preloader is-active">
         <div class="preloader__wrap">
             <img class="preloader__img" src="images/preloader.png" alt=""></div>
@@ -11,6 +13,7 @@
         <div class="app-content">
 
             <!--====== Section 1 ======-->
+
             <div class="u-s-p-t-90">
                 <div class="container">
                     <div class="row">
@@ -1079,14 +1082,16 @@
         <!--====== End - Add to Cart Modal ======-->
         <!--====== End - Modal Section ======-->
     </div>
+</div>
+</div>
+@endsection
     <!--====== End - Main App ======-->
-
+{{-- 
 
 
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
     <script src="{{ asset('shop/js/vendor.js ') }}"></script>
     <script src="{{ asset('shop/js/jquery.shopnav.js ') }}"></script>
     <script src="{{ asset('shop/js/app.js ') }}"></script>
-    <script src="{{ asset('asset/jqueryajax/ajaxShop.js ') }}"></script>
-</body>
-</html>
+    <script src="{{ asset('asset/jqueryajax/ajaxShop.js ') }}"></script> --}}
+{{-- </body> --}}
