@@ -5,6 +5,7 @@
     .swal2-modal {
         padding-bottom: 0px;
     }
+
     </style>
 <body class="config">
     <div class="preloader is-active">
@@ -53,6 +54,14 @@
             <div class="modal-content">
     
                @include('shop.components.register')
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" data-modal="resetPasswordModal" id="resetPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+    
+               @include('shop.components.changepassword')
             </div>
         </div>
     </div>

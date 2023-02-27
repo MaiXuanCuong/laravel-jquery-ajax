@@ -8,7 +8,7 @@ $(document).ready(function(){
         let value = $(this).val().toLowerCase();
         $("#List-products #Product-search").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+        });getCart
       });
     $(window).scroll(function() {
         let input = $('#main-search');
@@ -154,6 +154,10 @@ $(document).on('click','#logout-customer',function() {
                 Cookies.remove('customer');
                 $('#check-customer').empty();
                 checkCustomer();
+                $("#list-cart").html("")
+                $("#list-cart-wishlist").html("")
+                $("#count-carts").text(0);
+                $("#count-carts-wishlist").text(0);
                 Swal.fire({
                     title: 'Bạn đã đăng xuất thành công, Ghét quá đy -.-',
                     width: 615,
@@ -216,10 +220,15 @@ function checkTokenExpiration() {
 $(document).on('click','#login-customer, #loginAccount', function(){
     $("#registerModal").modal("hide");
     $("#loginModal").modal("show");
+    $("#resetPasswordModal").modal("hide");
 })
 $(document).on('click','#register-customer , #createAccount', function(){
     $("#loginModal").modal("hide");
     $("#registerModal").modal("show");
+})
+$(document).on('click','#reset-password', function(){
+    $("#loginModal").modal("hide");
+    $("#resetPasswordModal").modal("show");
 })
 
 
@@ -385,6 +394,7 @@ $(document).on('click','.my-link', function(e){
                     $('body').html('');
                     $('body').append(response.html);
                     history_product_detail(response.products['original'])
+                    checkCustomer();
                     getCart()
                     getCartWishlist()
                     document.getElementById('scroll-product').scrollIntoView({behavior: 'smooth'});
@@ -732,3 +742,39 @@ getCartWishlist = () => {
    }
     })
 }   
+
+$(document).on('click','#sendmail',function (e){
+    e.preventDefault();
+    var email = $('input[name="email-reset"]').val();
+    let haserror = false;
+    if (email == "") {$("#resetError").html("Hãy Nhập Tài Khoản");  haserror = true;}
+    else if (!isValidEmailAddress(email)) {  $("#resetError").html("Email không hợp lệ"); haserror = true; }
+    if (isValidEmailAddress(email)) {$("#resetError").html(""); }
+    if (haserror == false) {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $.ajax({
+            url: "http://127.0.0.1:8000/api/auth/changePassMailCustomer",
+            method: "post",
+            data: {
+                email: email
+            },
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == 200) {
+
+                } else {
+                    $("#resetError").html("Email không tồn tại")
+                } 
+            },
+            error: function (err) {
+            
+            },
+        });
+    }
+})

@@ -1,18 +1,17 @@
 <div class="l-f-o__pad-box">
-    <h1 class="gl-h1">PASSWORD RESET</h1>
+    <h1 class="gl-h1">Thay đổi mật khẩu</h1>
 
-    <span class="gl-text u-s-m-b-30">Enter your email or username below and we will send you a link to reset your password.</span>
-    <form class="l-f-o__form">
+    <span class="gl-text u-s-m-b-30">Nhập email để nhận mã thay đổi mật khẩu</span>
+        <div class="u-s-m-b-30" id="token-cofirm">
+
+            <label class="gl-label" for="reset-email">Email *</label>
+
+            <input class="input-text input-text--primary-style" name="email-reset" style="font-size: 36px;" type="text" id="reset-email" placeholder="Nhập email"></div>
+            <div id="resetError" class="form-text text-danger"></div>
         <div class="u-s-m-b-30">
 
-            <label class="gl-label" for="reset-email">E-MAIL *</label>
-
-            <input class="input-text input-text--primary-style" type="text" id="reset-email" placeholder="Enter E-mail"></div>
+            <button class="btn btn--e-transparent-brand-b-2" id="sendmail">Gửi yêu cầu</button></div>
         <div class="u-s-m-b-30">
 
-            <button class="btn btn--e-transparent-brand-b-2" type="submit">SUBMIT</button></div>
-        <div class="u-s-m-b-30">
-
-            <a class="gl-link" href="signin.html">Back to Login</a></div>
-    </form>
+            <a class="gl-link" id="loginAccount">Quay lại đăng nhập</a></div>
 </div>

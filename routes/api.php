@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +45,5 @@ Route::group([
     Route::get('/getHistoryProduct',[ShopController::class, 'getHistoryProduct'])->name('shop.getHistoryProduct');
     Route::get('/page',[ShopController::class, 'page'])->name('shop.page');
     Route::get('/home',[ShopController::class, 'home'])->name('shop.home');
-    // Route::post('/changePassMailCustomer', [UserController::class, 'changePassByEmailCustomer']);       
+    Route::post('/changePassMailCustomer', [CustomerController::class, 'changePassByEmailCustomer']);       
 });

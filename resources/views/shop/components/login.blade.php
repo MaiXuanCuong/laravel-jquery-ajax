@@ -44,7 +44,7 @@
                                     <button class="btn btn--e-transparent-brand-b-2" id="confirmLogin" type="submit">Đăng nhập</button></div>
                                 <div class="u-s-m-b-30">
 
-                                    <a class="gl-link" >Quên mật khẩu?</a></div>
+                                    <a class="gl-link" id="reset-password">Quên mật khẩu?</a></div>
                             </div>
                             <div class="u-s-m-b-30">
 
