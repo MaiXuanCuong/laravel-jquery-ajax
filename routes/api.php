@@ -35,6 +35,10 @@ Route::group([
     //shop
     Route::get('/',[ShopController::class, 'index'])->name('shop.index');
     Route::post('/history/{id}',[ShopController::class, 'view'])->name('shop.view');
+    Route::get('/getCart',[ShopController::class, 'getCart'])->name('shop.getCart');
+    Route::post('/addCart',[ShopController::class, 'store'])->name('shop.addCart');
+    Route::post('/removeCart',[ShopController::class, 'remove'])->name('shop.removeCart');
+    Route::get('/getHistoryProduct',[ShopController::class, 'getHistoryProduct'])->name('shop.getHistoryProduct');
     Route::get('/page',[ShopController::class, 'page'])->name('shop.page');
     Route::get('/home',[ShopController::class, 'home'])->name('shop.home');
     // Route::post('/changePassMailCustomer', [UserController::class, 'changePassByEmailCustomer']);       

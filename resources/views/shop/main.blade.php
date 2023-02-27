@@ -2,7 +2,7 @@
 @section('content')
 
 <!--====== Section 3 ======-->
-<div class="u-s-p-b-60">
+<div class="u-s-p-b-60" >
 
     <!--====== Section Intro ======-->
     <div class="section__intro u-s-m-b-46">
@@ -33,7 +33,7 @@
                     <div class="product-r u-h-100">
                         <div class="product-r__container">
 
-                            <a class="aspect aspect--bg-grey aspect--square u-d-block" data-page="product-detail-page" data-value="{{ $product->id}}">
+                            <a class="aspect aspect--bg-grey aspect--square u-d-block my-link" data-page="product-detail-page" data-value="{{ $product->id}}" id="product-detail">
 
                                 <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a>
                             <div class="product-r__action-wrap">
@@ -43,7 +43,7 @@
                                         <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
                                     <li>
 
-                                        <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
+                                        <a data-value="{{ $product->id}}" data-page="product-detail-page" id="add-to-carts"><i class="fas fa-plus-circle my-link"></i></a></li>
                                     <li>
 
                                         <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
@@ -62,7 +62,7 @@
 
                                 <span class="product-r__name">
 
-                                    <a id="product-detail" data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
+                                    <a  data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
                                 <span class="product-r__price">{{ number_format($product->price).' VNĐ' }}</span></div>
 
@@ -128,7 +128,7 @@
                                     <div class="product-bs__container">
                                         <div class="product-bs__wrap">
 
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" data-page="product-detail-page" data-value="{{ $product->id}}">
+                                            <a class="aspect aspect--bg-grey aspect--square u-d-block my-link" data-page="product-detail-page" data-value="{{ $product->id}}" id="product-detail">
 
                                                 <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a>
                                             <div class="product-bs__action-wrap">
@@ -155,7 +155,7 @@
 
                                         <span class="product-bs__name">
 
-                                            <a data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
+                                            <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
                                         <div class="product-bs__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
                                             <span class="product-bs__review">(23)</span></div>
@@ -206,32 +206,9 @@
     <!--====== Section Content ======-->
     <div class="section__content">
         <div class="container">
-            <div class="row">
+            <div class="row" id="history-product-main">
 
-                {{-- @foreach ($historyProducts as $history) --}}
-                <div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">
-                    <div class="product-short u-h-100">
-                        <div class="product-short__container">
-                            <div class="product-short__img-wrap">
-
-                                <a class="aspect aspect--bg-grey-fb aspect--square u-d-block" data-page="product-detail-page" data-value="{{ $product->id}}">
-
-                                    <img class="aspect__img product-short__img" src="{{ asset('shop/images/product/women/product16.jpg') }}" alt=""></a></div>
-                            <div class="product-short__info">
-
-                                <span class="product-short__price">$126.77</span>
-
-                                <span class="product-short__name">
-
-                                    <a data-page="product-detail-page" data-value="{{ $product->id}}">New Dress A Nice Elegant</a></span>
-
-                                <span class="product-short__category">
-
-                                    <a href="{{ asset('shop/shop-side-version-2.html') }}">Women Clothing</a></span></div>
-                        </div>
-                    </div>
-                </div>
-                {{-- @endforeach --}}
+                
               
             </div>
         </div>
@@ -261,7 +238,7 @@
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" data-page="product-detail-page" data-value="{{ $product->id}}">
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link my-link" data-page="product-detail-page" data-value="{{ $product->id}}" id="product-detail">
 
                                             <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a></div>
                                     <div class="product-l__info-wrap">
@@ -272,7 +249,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
+                                            <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
                                         <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}</span></div>
                                 </div>
@@ -295,7 +272,7 @@
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" data-page="product-detail-page" data-value="{{ $product->id}}">
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link my-link" data-page="product-detail-page" data-value="{{ $product->id}}" id="product-detail">
 
                                             <img class="aspect__img" src="{{ asset( $product->image) }}" alt=""></a></div>
                                     <div class="product-l__info-wrap">
@@ -306,7 +283,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
+                                            <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
                                         <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}
 
@@ -332,7 +309,7 @@
                                 <div class="product-l">
                                     <div class="product-l__img-wrap">
 
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link" data-page="product-detail-page" data-value="{{ $product->id}}">
+                                        <a class="aspect aspect--bg-grey aspect--square u-d-block product-l__link my-link" data-page="product-detail-page" data-value="{{ $product->id}}" id="product-detail">
 
                                             <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a></div>
                                     <div class="product-l__info-wrap">
@@ -343,7 +320,7 @@
 
                                         <span class="product-l__name">
 
-                                            <a data-page="product-detail-page" data-value="{{ $product->id}}">{{ $product->name }}</a></span>
+                                            <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
                                         <span class="product-l__price">Giá dự kiến: {{ number_format($product->price+(25/100*($product->price))). ' VNĐ' }}</span>
                                     </div>
@@ -358,9 +335,4 @@
     </div>
     <!--====== End - Section Content ======-->
 </div>
-{{-- <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-<script src="{{ asset('shop/js/vendor.js ') }}"></script>
-<script src="{{ asset('shop/js/jquery.shopnav.js ') }}"></script>
-<script src="{{ asset('shop/js/app.js ') }}"></script>
-<script src="{{ asset('asset/jqueryajax/ajaxShop.js ') }}"></script> --}}
 @endsection

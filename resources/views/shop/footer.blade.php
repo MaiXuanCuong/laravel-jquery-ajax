@@ -1,4 +1,3 @@
-@section('footer')
 <footer>
     <div class="outer-footer">
         <div class="container">
@@ -158,4 +157,3 @@
     document.getElementById("hvn").innerHTML = time;
    </script>
    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
-@endsection

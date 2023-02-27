@@ -21,18 +21,14 @@ class ShopController extends Controller
 {
 
    public function page(Request $request){
-    // dd($request->page);
     switch ($request->page) {
-        case 'home-page':
-            // $page = app('App\Http\Controllers\ShopController')->index()->render();
-            $page = view('shop.main',$this->mainHome())->render();
-            break;
         case 'product-detail-page':
             $banners = Banner::where('status', '<>', 0)->get();
             $product = Product::with('product_images','category','supplier','sizes')->find($request->id);
             $params = [
                 'product' => $product,
-                 'banners' => $banners
+                 'banners' => $banners,
+                 
             ];
             // $params = $this->mainHome($product);
             $page = view('shop.components.productdetail',$params)->render();
@@ -42,7 +38,8 @@ class ShopController extends Controller
 
    
 
-    return response()->json(['html' => $page]);
+    return response()->json(['html' => $page,
+    'products' => $this->getHistoryProduct()]);
    }
 
     // public function getBanner(){
@@ -141,123 +138,103 @@ class ShopController extends Controller
             ]);
         }
     }
+    
     public function view($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with('category')->find($id);
        
         try {
             if(isset(auth('api')->user()->id)){
             $user = auth('api')->user()->id;
             $historyProducts = Cache::get('historyProducts'.$user);
-                $historyProducts[$id] = [
-                    'id' => $id,
-                    'quantity' => 1,
-                    'name' => $product->name,
-                    'price' => $product->price,
-                    'image' => $product->image,
-                    'quantity_product' => $product->quantity,
-                ];
+                if(!isset($historyProducts[$id])){
+                    $historyProducts[$id] = [
+                        'id' => $id,
+                        'name' => $product->name,
+                        'price' => $product->price,
+                        'image' => $product->image,
+                        'discount' => $product->discount,
+                        'category' => $product->category->name,
+                    ];
+                } 
                 $expiresAt = Carbon::now()->addMinutes(60);
-           $product = Cache::put('historyProducts'.$user, $historyProducts,$expiresAt);
-                return $historyProducts[$id];
+                $product = Cache::put('historyProducts'.$user, $historyProducts,$expiresAt);
+      
                 }
         } catch (\Exception $e) {
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
         }
-        $params = [
-            'product' => $product,
-        ];
-        return view('shop.product', $params);
     }
-    public function cart()
-    {
-            try {
-                $products = Product::search()->get();
-                $user = 1;
-                $carts = Cache::get('carts'.$user);
-                if ($carts) {
-
-                    $carts = array_values($carts);
-                    $param = [
-                        'products' => $products,
-                        'carts' => $carts,
-                    ];
-                } else {
-                    $carts = [];
-                    $param = [
-                        'products' => $products,
-                        'carts' => $carts,
-                    ];
-                }
-                return view('shop.cart', $param);
-            } catch (\Exception$e) {
-                Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
-                $carts = [];
-                    $param = [
-                        'products' => $products,
-                        'carts' => $carts,
-                    ];
-                return view('shop.cart', $param);
-            }
-       
-    }
-    public function store($id)
+    public function store(Request $request)
     {
         try {
-            $product = Product::find($id);
-                $user = 1;
+            if (isset(auth('api')->user()->id)) {
+            $id = $request->id;
+            $size = $request->size;
+            $Name = $request->Name;
+            $product = Product::with('sizes','category')->find($id);
+                $user = auth('api')->user()->id;
                 $carts = Cache::get('carts'.$user);
-                if(isset($carts[$id])){
-                    $carts[$id]['quantity']++;
-                    $carts[$id]['price'] = $product->price;
-                }else {
-                $carts[$id] = [
+                if(isset($carts[$id][$size])){
+                    $carts[$id][$size]['quantity'] +=  $request->quantity;
+                    $carts[$id][$size]['price'] = $product->price;
+                } else {
+                $carts[$id][$size] = [
                     'id' => $id,
-                    'quantity' => 1,
+                    'quantity' => $request->quantity,
                     'name' => $product->name,
+                    'size' => $Name,
+                    'size_id' => $size,
                     'price' => $product->price,
                     'image' => $product->image,
                     'quantity_product' => $product->quantity,
+                    'discount' => $product->discount,
+                    'category' => $product->category->name,
                 ];
             }
             $expiresAt = Carbon::now()->addDays(30);
             Cache::put('carts'.$user, $carts, $expiresAt);
             return response()->json([
-                'code' => 200,
-                'message' => 'success',
-            ], status:200);
+                'status' => 200,
+                'product' => $carts[$id][$size],
+            ]);}
         } catch (\Exception $e) {
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
             return response()->json([
-                'code' => 201,
+                'status' => 401,
                 'message' => 'error',
-            ], status:200);
+            ]);
         }
     }
-    public function remove($id)
+    public function remove(Request $request)
     {
-        try {
-                $user = 1;
+        try { 
+            $id = $request->id;
+            $size = $request->size;
+            if (isset(auth('api')->user()->id)) {
+                $user = auth('api')->user()->id;
                 $carts = Cache::get('carts'.$user);
-                unset($carts[$id]);
+                unset($carts[$id][$size]);
                 Cache::put('carts'.$user, $carts);
                 return response()->json([
-                    'code' => 200,
+                    'status' => 200,
                     'message' => 'success',
-                ], status:200);
+                ]);
+            }
         } catch (\Exception$e) {
             Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
             return response()->json([
-                'code' => 201,
+                'status' => 401,
                 'message' => 'error',
-            ], status:200);
+            ]);
         }
     }
     public function order(Request $request)
     {
         try{
+            if (isset(auth('api')->user()->id)) {
             DB::beginTransaction();
-            $user = 1;
+            $user = auth('api')->user()->id;
             $order = new Order;
             $order->note = $request->note;
             $order->address = $request->address;
@@ -286,7 +263,7 @@ class ShopController extends Controller
             $order->total= $order_total_price;
             $order->save();
             DB::commit();
-            return redirect()->route('shop.home');
+        }
             }catch(\Exception $e){
                 DB::rollBack();
                 Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());

@@ -1,6 +1,11 @@
 
 @include('shop.header')
-@yield('header')
+
+<style>
+    .swal2-modal {
+        padding-bottom: 0px;
+    }
+    </style>
 <body class="config">
     <div class="preloader is-active">
             <div class="preloader__wrap">
@@ -10,16 +15,16 @@
             <!--====== Main App ======-->
         <div id="app">
 
-        <div class="app-content">
-           @yield('content')
+            <div class="app-content" >
+            @yield('content')
+            
      
         </div>
         @include('shop.footer')
-        @yield('footer')
 
 
         <!--====== Quick Look Modal ======-->
-        <div class="modal fade" id="quick-look">
+        <div class="modal fade" data-modal="quick-look" id="quick-look">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content modal--shadow">
 
@@ -207,43 +212,14 @@
 
 
         <!--====== Add to Cart Modal ======-->
-        <div class="modal fade" id="add-to-cart">
+        <div class="modal fade" data-modal="add-to-cart" id="add-to-cart">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content modal-radius modal-shadow">
 
                     <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="success u-s-m-b-30">
-                                    <div class="success__text-wrap"><i class="fas fa-check"></i>
-
-                                        <span>Item is added successfully!</span></div>
-                                    <div class="success__img-wrap">
-
-                                        <img class="u-img-fluid" src="{{ asset('shop/images/product/electronic/product1.jpg') }}" alt=""></div>
-                                    <div class="success__info-wrap">
-
-                                        <span class="success__name">Beats Bomb Wireless Headphone</span>
-
-                                        <span class="success__quantity">Quantity: 1</span>
-
-                                        <span class="success__price">$170.00</span></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="s-option">
-
-                                    <span class="s-option__text">1 item (s) in your cart</span>
-                                    <div class="s-option__link-box">
-
-                                        <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">CONTINUE SHOPPING</a>
-
-                                        <a class="s-option__link btn--e-white-brand-shadow" href="{{ asset('shop/cart.html') }}">VIEW CART</a>
-
-                                        <a class="s-option__link btn--e-brand-shadow" href="{{ asset('shop/checkout.html') }}">PROCEED TO CHECKOUT</a></div>
-                                </div>
-                            </div>
+                        <div class="row" id="modal-cart-success">
+                
                         </div>
                     </div>
                 </div>
@@ -267,7 +243,7 @@
             </div>
         </div>
     </noscript>
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" data-modal="loginModal" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
     
@@ -275,7 +251,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" data-modal="registerModal" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
     

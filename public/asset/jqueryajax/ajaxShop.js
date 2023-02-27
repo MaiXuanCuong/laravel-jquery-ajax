@@ -1,18 +1,19 @@
 $(document).ready(function(){
+    getHistoryProduct()
     // localStorage.removeItem('token');
     // localStorage.removeItem('customer');
     $('#check-customer').empty();
     checkCustomer();
     $("#main-search").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
+        let value = $(this).val().toLowerCase();
         $("#List-products #Product-search").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
       });
     $(window).scroll(function() {
-        var input = $('#main-search');
-        var position = input.offset().top;
-        var bg = $('body').css('background-color');
+        let input = $('#main-search');
+        let position = input.offset().top;
+        let bg = $('body').css('background-color');
         
         if (position < 600) {
           input.css('background-color', 'white');
@@ -30,11 +31,112 @@ $(document).ready(function(){
       });
    
 });
+$(document).on('click','#Add-to-cart-item',function(e){
+    e.preventDefault();
+    let id = $(this).data('value');
+    var size = $('input[name="size"]:checked').val();
+    var Name = $('input[name="size"]:checked').data('name');
+    var quantity = $('#quantity-product-detail').val();
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:8000/api/auth/addCart",
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
+            id: id,
+            size: size,
+            quantity: quantity,
+            Name: Name
+        }),
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.status == 200) {
+                var product_cart_success = response.product
+                getCart()
+                $('#modal-cart-success').html('')
+                $('#modal-cart-success').append(
+                    '<div class="col-lg-6 col-md-12">\
+                    <div class="success u-s-m-b-30">\
+                        <div class="success__text-wrap"><i class="fas fa-check"></i>\
+                            <span>Thêm sản phẩm vào giỏ hàng thành công!</span></div>\
+                        <div class="success__img-wrap" style="magrin:30px">\
+                            <img class="u-img-fluid" style="width:100px;height:120px" src="http://127.0.0.1:8000/'+product_cart_success.image+'" alt=""></div>\
+                        <div class="success__info-wrap">\
+                            <span class="success__name">'+product_cart_success.name+'</span>\
+                            <span class="success__size">Size: '+product_cart_success.size+'</span>\
+                            <span class="success__quantity">Số lượng sản phẩm này trong giỏ: '+product_cart_success.quantity+'</span>\
+                            <span class="success__price">'+(product_cart_success.price).toLocaleString() + ' VNĐ'+'</span></div>\
+                    </div>\
+                    </div>\
+                    <div class="col-lg-6 col-md-12">\
+                    <div class="s-option">\
+                        <div class="s-option__link-box">\
+                            <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">Tiếp tục mua sắm</a>\
+                            <a class="s-option__link btn--e-brand-shadow" href="">Đên trang thanh toán</a></div>\
+                    </div>\
+                    </div>'
+                )
+                $('#add-to-cart').modal('show');
+            } 
+        },
+    });
+})
+
+
+$(document).on('click','.remove-cart',function(e){
+    e.preventDefault();
+    var size_name = $(this).data('size_name');
+    var name = $(this).data('name');
+    var size = $(this).data('size');
+    Swal.fire({
+        title: 'Bạn có muốn xóa sản phẩm?',
+        text: name+' Size: '+size_name,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Đúng vậy, xóa nó!',
+        cancelButtonText: 'Hủy, không xóa'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            let id = $(this).data('id');
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/auth/removeCart",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify({
+                    id: id,
+                    size: size,
+                }),
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.status == 200) {
+                        getCart()
+                        Swal.fire(
+                            'Đã xóa thành công sản phẩm!',
+                            name+' Size: '+size_name,
+                            'success'
+                          )
+                    } 
+                },
+            });
+        }
+      })
+ 
+})
 function scrollToProductList() {
     document.getElementById('list_products').scrollIntoView({behavior: 'smooth'});
   }
   
   document.getElementById('main-search').addEventListener('click', scrollToProductList);
+
 $(document).on('click','#logout-customer',function() {
     $.ajax({
         url: "http://127.0.0.1:8000/api/auth/logout",
@@ -46,7 +148,6 @@ $(document).on('click','#logout-customer',function() {
         success: function(response) {
             if(response.status === 200) {
                 $('#name-customer').removeAttr('title');
-                // $('#id-customer').removeAttr('data-customer');
                 localStorage.removeItem('token');
                 Cookies.remove('customer');
                 $('#check-customer').empty();
@@ -72,17 +173,19 @@ $(document).on('click','#logout-customer',function() {
 
 
 function checkCustomer(){
-    if(localStorage.getItem('token')){
-        var customer = Cookies.get("customer");
+    if(!checkTokenExpiration()){
+        let customer = Cookies.get("customer");
         let arr = customer.split(',');
         $('#name-customer').attr('title', arr[1]);
-        // $('#id-customer').attr('data-customer', arr[0]);
+        getCart()
         $('#check-customer').append(
             '<li><a id="id-customer" data-customer="'+arr[0]+'"><i class="fas fa-user-circle u-s-m-r-6"></i> <span>Tài khoản</span></a></li>\
             <li> <a id="logout-customer"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Đăng xuất</span></a></li>'
         )
     }
      else {
+        localStorage.removeItem('token');
+        Cookies.remove('customer');
         $('#check-customer').append(
             '<li> <a id="login-customer"><i class="fas fa-user-plus u-s-m-r-6"></i> <span>Đăng nhập</span></a> </li>\
             <li> <a id="register-customer"><i class="fas fa-lock u-s-m-r-6"></i><span>Đăng ký</span></a></li>'
@@ -90,23 +193,91 @@ function checkCustomer(){
     }
     
 }
-function history(id){
-    $.ajax({
-        type: "POST",
-        url: "/shops/history"+id,
-        dataType: "json",
-        success: function (response) {
-            $.each(response.products, function (index, product) {
-                if (response.status == 200) {
-                    console.log(response.products);
-                $("#index-products").append(
-                   
-                    );
-                } 
-            });
-        },
-    });
-}
+function checkTokenExpiration() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const tokenData = JSON.parse(atob(token.split('.')[1]));
+      const expirationTime = tokenData.exp * 1000;
+      const currentTime = new Date().getTime();
+      if (expirationTime < currentTime) {
+       return true;
+      }
+    } else {
+        return true;
+    } 
+    return false;
+  }
+
+
+
+// $(document).on('click', '#product-detail',function (){
+//     let id = $(this).data('value');
+//     $.ajax({
+//         type: "POST",
+//         url: "http://127.0.0.1:8000/api/auth/history/"+id,
+//         headers: {
+//             'Authorization': 'Bearer ' + localStorage.getItem('token'),
+//             'Content-Type': 'application/json'
+//         },
+//         dataType: "json",
+//         success: function (response) {
+  
+//         },
+//     });
+// })
+
+
+//   $(document).on('click', '#add-to-carts',function (e){
+//     e.preventDefault();
+//     let formdata = new FormData($("#form-cart")[0]);
+//     let id = $(this).data('value');
+//     formdata.append("id", id);
+//     $.ajax({
+//         type: "POST",
+//         url: "http://127.0.0.1:8000/api/auth/addCart",
+//         headers: {
+//             'Authorization': 'Bearer ' + localStorage.getItem('token'),
+//             'Content-Type': 'application/json'
+//         },
+//         data: formdata,
+//         contentType: false,
+//         processData: false,
+//         success: function (response) {
+//             console.log(response);
+//             if (response.status == 200) {
+//                 var product_cart_success = response.product
+//                 getCart()
+
+//                 $('#modal-cart-success').append(
+//                     '<div class="col-lg-6 col-md-12">\
+//                     <div class="success u-s-m-b-30">\
+//                         <div class="success__text-wrap"><i class="fas fa-check"></i>\
+//                             <span>Item is added successfully!</span></div>\
+//                         <div class="success__img-wrap">\
+//                             <img class="u-img-fluid" src="http://127.0.0.1:8000/'+product_cart_success.image+'" alt=""></div>\
+//                         <div class="success__info-wrap">\
+//                             <span class="success__name">'+product_cart_success.name+'</span>\
+//                             <span class="success__quantity">Quantity: '+product_cart_success.quantity+'</span>\
+//                             <span class="success__price">'+product_cart_success.price+'</span></div>\
+//                     </div>\
+//                     </div>\
+//                     <div class="col-lg-6 col-md-12">\
+//                     <div class="s-option">\
+//                         <span class="s-option__text">1 item (s) in your cart</span>\
+//                         <div class="s-option__link-box">\
+//                             <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">Tiếp tục mua sắm</a>\
+//                             <a class="s-option__link btn--e-brand-shadow" href="">Đên trang thanh toán</a></div>\
+//                     </div>\
+//                     </div>'
+//                 )
+//                 $('#add-to-cart').modal('show');
+//             } 
+//         },
+//     });
+// })
+//modal-cart-success
+
+
 
 $(document).on('click','#login-customer, #loginAccount', function(){
     $("#registerModal").modal("hide");
@@ -116,18 +287,15 @@ $(document).on('click','#register-customer , #createAccount', function(){
     $("#loginModal").modal("hide");
     $("#registerModal").modal("show");
 })
-//form đăng ký registerCustomer  xác nhận confirmRegister
-//form đăng nhâp loginCustomer // xác nhận đăng confirmLogin
-// đăng nhập thành công add tên $('li.has-dropdown').attr('title', 'Giá trị mới của title');
 
 
 
 
 $(document).on('click', '#confirmLogin' ,function (e){
     e.preventDefault();
-    var email = $("#loginEmail").val();
-    var password = $("#loginPassword").val();
-    var haserror = false;
+    let email = $("#loginEmail").val();
+    let password = $("#loginPassword").val();
+    let haserror = false;
 
     if (email == "") {
         $("#emailLoginError").html("Hãy Nhập Tài Khoản");
@@ -160,7 +328,7 @@ $(document).on('click', '#confirmLogin' ,function (e){
             processData: false,
             success: function (response) {
                 if (response.status == 200) {
-                    var customer = {
+                    let customer = {
                         id: response.user.id,
                         name: response.user.name,
                         email: response.user.email,
@@ -206,11 +374,11 @@ if($("#registerPassword").val() == $("#confirmPassword").val()){
 
 $(document).on('click', '#confirmRegister' ,function (e){
     e.preventDefault();
-    var email = $("#registerEmail").val();
-    var password = $("#registerPassword").val();
-    var name = $("#registerName").val();
-    var confirmPassword = $("#confirmPassword").val();
-    var haserror = false;
+    let email = $("#registerEmail").val();
+    let password = $("#registerPassword").val();
+    let name = $("#registerName").val();
+    let confirmPassword = $("#confirmPassword").val();
+    let haserror = false;
     if (name == "") {$("#nameRegisterError").html("Hãy Nhập Tài Khoản"); haserror = true; }
     if (email == "") {$("#emailRegisterError").html("Hãy Nhập Tài Khoản");  haserror = true;}
     else if (!isValidEmailAddress(email)) {  $("#emailRegisterError").html("Email không hợp lệ"); haserror = true; }
@@ -244,7 +412,6 @@ $(document).on('click', '#confirmRegister' ,function (e){
                 } else {
                     $("#emailRegisterError").html("Email đã tồn tại")
                 } 
-                   
             },
             error: function (err) {
             
@@ -252,25 +419,21 @@ $(document).on('click', '#confirmRegister' ,function (e){
         });
     }
 })
-
-
 function isValidEmailAddress(email) {
-    var pattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+    let pattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+    // let pattern =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return pattern.test(email);
 }
 let canSendRequest = true;
-$(document).on('click','a', function(e){
-    let $this = $(this);
+$(document).on('click','.my-link', function(e){
     e.preventDefault();
-    if (!$this.attr('disabled')) {
-        $this.attr('disabled', true);
+    let $this = $(this);
     if (canSendRequest) {
         canSendRequest = false;
-    var page = $(this).data('page')
-    if((typeof page !== 'undefined') && page != 'home-page'){
-            
+    let page = $(this).data('page')
+    if((typeof page != 'undefined') && page != 'home-page'){
             page = $(this).data('page')
-            var id = $(this).data('value');
+            let id = $(this).data('value');
 
             $.ajax({
                 url: "http://127.0.0.1:8000/api/auth/page",
@@ -286,9 +449,11 @@ $(document).on('click','a', function(e){
                 dataType: "json",
                 success: function(response) {
                     canSendRequest = true;
-                    $this.attr('disabled', false);
                     $('body').html('');
                     $('body').append(response.html);
+                    history_product_detail(response.products['original'])
+                    getCart()
+                    document.getElementById('scroll-product').scrollIntoView({behavior: 'smooth'});
                 },
                 error: function(xhr) {
                     if (xhr.status === 401) {
@@ -300,37 +465,137 @@ $(document).on('click','a', function(e){
                         checkCustomer();
                     }}
             })
-        
-    }
-    else if(page == 'home-page'){
-            page = $(this).data('page')
             $.ajax({
-                url: "http://127.0.0.1:8000/api/auth/page",
-                method: "get",
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/auth/history/"+id,
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token'),
                     'Content-Type': 'application/json'
                 },
-                data: {
-                    page: page,
-                },
                 dataType: "json",
-                success: function(response) {
-                    canSendRequest = true;
-                    $('body').html('');
-                    $('body').append(response.html);
+                success: function (response) {
+          
                 },
-                error: function(xhr) {
-                    if (xhr.status === 401) {
-                        canSendRequest = true;
-                        localStorage.removeItem('token');
-                        Cookies.remove('customer');
-                        $('#check-customer').empty();
-                        checkCustomer();
-                    }}
-            })
+            });
+        
     }
-}}
+    else if(page == 'home-page'){
+    
+            location.reload();
+    }
+}
+
+// }
 })
 
+getHistoryProduct = () => {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/auth/getHistoryProduct",
+        method: "get",
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        dataType: "json",
+        success: function(response) {
+            if (response.status === 200) {
+                $.each((response.historyProducts).reverse(), function (index, product) {
+                $("#history-product-main").append(
+                '<div class="col-lg-3 col-md-4 col-sm-6 u-s-m-b-30">\
+                    <div class="product-short u-h-100">\
+                        <div class="product-short__container">\
+                            <div class="product-short__img-wrap">\
+                                <a class="aspect aspect--bg-grey-fb aspect--square u-d-block my-link" data-page="product-detail-page" data-value="'+product.id+'">\
+                                    <img class="aspect__img product-short__img" src="http://127.0.0.1:8000/'+product.image+'" alt=""></a></div>\
+                            <div class="product-short__info">\
+                                <span class="product-short__price">' + (product.price).toLocaleString() + ' VNĐ'+ '</span>\
+                                <span class="product-short__name">\
+                                    <a data-page="product-detail-page" class="my-link" data-value="'+product.id+'">'+product.name+'</a></span>\
+                                <span class="product-short__category">\
+                                    <a href="">'+product.category+'</a></span></div>\
+                        </div>\
+                    </div>\
+                </div>')})
+            }
+        },
+        error: function(xhr) {
+   }
+    })
+}
+
+
+
+getCart = () => {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/auth/getCart",
+        method: "get",
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+            var totalcarts= 0;
+            if (response.status === 200) {
+                $("#list-cart").html("")
+                $("#total-carts").text("")
+                $.each(response.carts, function (index, products) {
+                    $.each(products, function (index, product) {
+                    var totalproduct = (product.quantity * (product.price-((product.discount/100)*product.price)));
+                        totalcarts += totalproduct;
+                $("#list-cart").append(
+                    '<div class="card-mini-product">\
+                    <div class="mini-product">\
+                        <div class="mini-product__image-wrapper">\
+                            <a class="mini-product__link my-link" data-page="product-detail-page" data-value="'+product.id+'">\
+                                <img class="u-img-fluid" style="width:90px;height:90px" src="http://127.0.0.1:8000/'+product.image+'" alt=""></a></div>\
+                        <div class="mini-product__info-wrapper">\
+                            <span class="mini-product__category">\
+                                <a>'+product.category+' Size '+product.size+'</a></span>\
+                            <span class="mini-product__name">\
+                                <a data-page="product-detail-page" class="my-link" data-value="'+product.id+'">'+product.name+'</a></span>\
+                            <span class="mini-product__quantity">'+product.quantity+' x</span>\
+                            <span class="mini-product__quantity">' + (product.price-((product.discount/100)*product.price)).toLocaleString() + ' VNĐ'+ ' = '+totalproduct.toLocaleString() + ' VNĐ'+'</span></div>\
+                    </div>\
+                    <a class="mini-product__delete-link far fa-trash-alt remove-cart" data-id="'+product.id+'" data-size="'+product.size_id+'" data-size_name="'+product.size+'" data-name="'+product.name+'"></a>\
+                </div>'
+                )
+            })
+        })
+                $("#total-carts").text(totalcarts.toLocaleString() + " VNĐ");
+            }
+        },
+        error: function(xhr) {
+   }
+    })
+}   
+
+function history_product_detail(response){
+    if (response.status == 200) {
+        $.each(response['historyProducts'].reverse(), function (index, product) {
+              
+                $('#history-product-detail').append(
+                '<div class="owl-item active" style="width: 277.5px;">\
+                <div class="u-s-m-b-30">\
+                <div class="product-o product-o--hover-on">\
+                    <div class="product-o__wrap">\
+                        <a class="aspect aspect--bg-grey aspect--square u-d-block my-link" data-page="product-detail-page" data-value="'+product.id+'">\
+                            <img class="aspect__img" src="http://127.0.0.1:8000/'+product.image+'"></a>\
+                    </div>\
+                    <span class="product-o__category">\
+                        <a>'+product.category+'</a></span>\
+                    <span class="product-o__name">\
+                        <a data-page="product-detail-page" class="my-link" data-value="'+product.id+'">'+product.name+'</a></span>\
+                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>\
+                        <span class="product-o__review">(20)</span></div>\
+                    <span class="product-o__price">'+ (product.discount != null ? (product.price -((product.discount/100)*product.price)).toLocaleString() + ' VNĐ' : (product.price).toLocaleString() + ' VNĐ')+'\
+                        <span class="product-o__discount">' + (product.discount == null ? " " : (product.price).toLocaleString() + ' VNĐ' )+ '</span></span>\
+                </div>\
+                </div>\
+            </div>'
+            )
+            });
+        } 
+}
 
