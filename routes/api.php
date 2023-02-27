@@ -38,6 +38,9 @@ Route::group([
     Route::get('/getCart',[ShopController::class, 'getCart'])->name('shop.getCart');
     Route::post('/addCart',[ShopController::class, 'store'])->name('shop.addCart');
     Route::post('/removeCart',[ShopController::class, 'remove'])->name('shop.removeCart');
+    Route::get('/getCartWishlist',[ShopController::class, 'getCartWishlist'])->name('shop.getCartWishlist');
+    Route::post('/addCartWishlist',[ShopController::class, 'storeWishlist'])->name('shop.addCartWishlist');
+    Route::post('/removeCartWishlist',[ShopController::class, 'removeWishlist'])->name('shop.removeCartWishlist');
     Route::get('/getHistoryProduct',[ShopController::class, 'getHistoryProduct'])->name('shop.getHistoryProduct');
     Route::get('/page',[ShopController::class, 'page'])->name('shop.page');
     Route::get('/home',[ShopController::class, 'home'])->name('shop.home');

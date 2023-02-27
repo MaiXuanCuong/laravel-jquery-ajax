@@ -68,7 +68,7 @@ $(document).on('click','#Add-to-cart-item',function(e){
                             <span class="success__name">'+product_cart_success.name+'</span>\
                             <span class="success__size">Size: '+product_cart_success.size+'</span>\
                             <span class="success__quantity">Số lượng sản phẩm này trong giỏ: '+product_cart_success.quantity+'</span>\
-                            <span class="success__price">'+(product_cart_success.price).toLocaleString() + ' VNĐ'+'</span></div>\
+                            <span class="success__price">'+(product_cart_success.price-((product_cart_success.discount/100)*product_cart_success.price)).toLocaleString() + ' VNĐ'+'</span></div>\
                     </div>\
                     </div>\
                     <div class="col-lg-6 col-md-12">\
@@ -131,6 +131,8 @@ $(document).on('click','.remove-cart',function(e){
       })
  
 })
+
+
 function scrollToProductList() {
     document.getElementById('list_products').scrollIntoView({behavior: 'smooth'});
   }
@@ -178,6 +180,7 @@ function checkCustomer(){
         let arr = customer.split(',');
         $('#name-customer').attr('title', arr[1]);
         getCart()
+        getCartWishlist()
         $('#check-customer').append(
             '<li><a id="id-customer" data-customer="'+arr[0]+'"><i class="fas fa-user-circle u-s-m-r-6"></i> <span>Tài khoản</span></a></li>\
             <li> <a id="logout-customer"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Đăng xuất</span></a></li>'
@@ -207,75 +210,6 @@ function checkTokenExpiration() {
     } 
     return false;
   }
-
-
-
-// $(document).on('click', '#product-detail',function (){
-//     let id = $(this).data('value');
-//     $.ajax({
-//         type: "POST",
-//         url: "http://127.0.0.1:8000/api/auth/history/"+id,
-//         headers: {
-//             'Authorization': 'Bearer ' + localStorage.getItem('token'),
-//             'Content-Type': 'application/json'
-//         },
-//         dataType: "json",
-//         success: function (response) {
-  
-//         },
-//     });
-// })
-
-
-//   $(document).on('click', '#add-to-carts',function (e){
-//     e.preventDefault();
-//     let formdata = new FormData($("#form-cart")[0]);
-//     let id = $(this).data('value');
-//     formdata.append("id", id);
-//     $.ajax({
-//         type: "POST",
-//         url: "http://127.0.0.1:8000/api/auth/addCart",
-//         headers: {
-//             'Authorization': 'Bearer ' + localStorage.getItem('token'),
-//             'Content-Type': 'application/json'
-//         },
-//         data: formdata,
-//         contentType: false,
-//         processData: false,
-//         success: function (response) {
-//             console.log(response);
-//             if (response.status == 200) {
-//                 var product_cart_success = response.product
-//                 getCart()
-
-//                 $('#modal-cart-success').append(
-//                     '<div class="col-lg-6 col-md-12">\
-//                     <div class="success u-s-m-b-30">\
-//                         <div class="success__text-wrap"><i class="fas fa-check"></i>\
-//                             <span>Item is added successfully!</span></div>\
-//                         <div class="success__img-wrap">\
-//                             <img class="u-img-fluid" src="http://127.0.0.1:8000/'+product_cart_success.image+'" alt=""></div>\
-//                         <div class="success__info-wrap">\
-//                             <span class="success__name">'+product_cart_success.name+'</span>\
-//                             <span class="success__quantity">Quantity: '+product_cart_success.quantity+'</span>\
-//                             <span class="success__price">'+product_cart_success.price+'</span></div>\
-//                     </div>\
-//                     </div>\
-//                     <div class="col-lg-6 col-md-12">\
-//                     <div class="s-option">\
-//                         <span class="s-option__text">1 item (s) in your cart</span>\
-//                         <div class="s-option__link-box">\
-//                             <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">Tiếp tục mua sắm</a>\
-//                             <a class="s-option__link btn--e-brand-shadow" href="">Đên trang thanh toán</a></div>\
-//                     </div>\
-//                     </div>'
-//                 )
-//                 $('#add-to-cart').modal('show');
-//             } 
-//         },
-//     });
-// })
-//modal-cart-success
 
 
 
@@ -404,7 +338,6 @@ $(document).on('click', '#confirmRegister' ,function (e){
             processData: false,
             success: function (response) {
                 if (response.status == 200) {
-                console.log(response.customer);
                 $("#registerModal").modal("hide");
                 $("#loginEmail").val(response.customer.email);
                 $("#loginPassword").val(response.customer.password);
@@ -453,6 +386,7 @@ $(document).on('click','.my-link', function(e){
                     $('body').append(response.html);
                     history_product_detail(response.products['original'])
                     getCart()
+                    getCartWishlist()
                     document.getElementById('scroll-product').scrollIntoView({behavior: 'smooth'});
                 },
                 error: function(xhr) {
@@ -485,7 +419,6 @@ $(document).on('click','.my-link', function(e){
     }
 }
 
-// }
 })
 
 getHistoryProduct = () => {
@@ -522,9 +455,6 @@ getHistoryProduct = () => {
    }
     })
 }
-
-
-
 getCart = () => {
     $.ajax({
         url: "http://127.0.0.1:8000/api/auth/getCart",
@@ -535,13 +465,14 @@ getCart = () => {
         },
         dataType: "json",
         success: function(response) {
-            console.log(response);
             var totalcarts= 0;
+            var countID= 0;
             if (response.status === 200) {
                 $("#list-cart").html("")
                 $("#total-carts").text("")
                 $.each(response.carts, function (index, products) {
-                    $.each(products, function (index, product) {
+                    $.each(products, function (count, product) {
+                        ++countID
                     var totalproduct = (product.quantity * (product.price-((product.discount/100)*product.price)));
                         totalcarts += totalproduct;
                 $("#list-cart").append(
@@ -564,12 +495,18 @@ getCart = () => {
             })
         })
                 $("#total-carts").text(totalcarts.toLocaleString() + " VNĐ");
+                $("#count-carts").text(countID);
             }
         },
         error: function(xhr) {
    }
     })
 }   
+
+
+
+
+
 
 function history_product_detail(response){
     if (response.status == 200) {
@@ -599,3 +536,199 @@ function history_product_detail(response){
         } 
 }
 
+
+$(document).on('click','#Add-to-cart-wishlist',function(e){
+    e.preventDefault();
+    let id = $(this).data('value');
+    var size = $('input[name="size"]:checked').val();
+    var Name = $('input[name="size"]:checked').data('name');
+    var quantity = $('#quantity-product-detail').val();
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:8000/api/auth/addCartWishlist",
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
+            id: id,
+            size: size,
+            quantity: quantity,
+            Name: Name
+        }),
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.status == 200) {
+                var product_cart_success = response.product
+                getCartWishlist()
+                $('#modal-cart-success').html('')
+                $('#modal-cart-success').append(
+                    '<div class="col-lg-6 col-md-12">\
+                    <div class="success u-s-m-b-30">\
+                        <div class="success__text-wrap"><i class="fas fa-check"></i>\
+                            <span>Thêm vào giỏ hàng yêu thích thành công!</span></div>\
+                        <div class="success__img-wrap" style="magrin:30px">\
+                            <img class="u-img-fluid" style="width:100px;height:120px" src="http://127.0.0.1:8000/'+product_cart_success.image+'" alt=""></div>\
+                        <div class="success__info-wrap">\
+                            <span class="success__name">'+product_cart_success.name+'</span>\
+                            <span class="success__size">Size: '+product_cart_success.size+'</span>\
+                            <span class="success__quantity">Số lượng sản phẩm này trong giỏ: '+product_cart_success.quantity+'</span>\
+                            <span class="success__price">'+(product_cart_success.price-((product_cart_success.discount/100)*product_cart_success.price)).toLocaleString() + ' VNĐ'+'</span></div>\
+                    </div>\
+                    </div>\
+                    <div class="col-lg-6 col-md-12">\
+                    <div class="s-option">\
+                        <div class="s-option__link-box">\
+                            <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">Tiếp tục mua sắm</a>\
+                    </div>\
+                    </div>'
+                )
+                $('#add-to-cart').modal('show');
+            } 
+        },
+    });
+})
+
+
+
+
+$(document).on('click','.remove-cart-wishlist',function(e){
+    e.preventDefault();
+    var size_name = $(this).data('size_name');
+    var name = $(this).data('name');
+    var size = $(this).data('size');
+    Swal.fire({
+        title: 'Bạn có muốn xóa sản phẩm yêu thích?',
+        text: name+' Size: '+size_name,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Đúng vậy, xóa nó!',
+        cancelButtonText: 'Hủy, không xóa'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            let id = $(this).data('id');
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/auth/removeCartWishlist",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify({
+                    id: id,
+                    size: size,
+                }),
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.status == 200) {
+                        getCartWishlist()
+                        Swal.fire(
+                            'Đã xóa thành công sản phẩm yêu thích!',
+                            name+' Size: '+size_name,
+                            'success'
+                          )
+                    } 
+                },
+            });
+        }
+      })
+ 
+})
+
+$(document).on('click','#Add-cart-to-wishlist',function(e){
+    e.preventDefault();
+    let id = $(this).data('value');
+    let size = $(this).data('size');
+    let Name = $(this).data('name');
+    let quantity = $(this).data('quantity');
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:8000/api/auth/addCart",
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
+            id: id,
+            size: size,
+            quantity: quantity,
+            Name: Name
+        }),
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.status == 200) {
+                var product_cart_success = response.product
+                getCart()
+                $('#modal-cart-success').html('')
+                $('#modal-cart-success').append(
+                    '<div class="col-lg-6 col-md-12">\
+                    <div class="success u-s-m-b-30">\
+                        <div class="success__text-wrap"><i class="fas fa-check"></i>\
+                            <span>Thêm sản phẩm vào giỏ hàng thành công!</span></div>\
+                        <div class="success__img-wrap" style="magrin:30px">\
+                            <img class="u-img-fluid" style="width:100px;height:120px" src="http://127.0.0.1:8000/'+product_cart_success.image+'" alt=""></div>\
+                        <div class="success__info-wrap">\
+                            <span class="success__name">'+product_cart_success.name+'</span>\
+                            <span class="success__size">Size: '+product_cart_success.size+'</span>\
+                            <span class="success__quantity">Số lượng sản phẩm này trong giỏ: '+product_cart_success.quantity+'</span>\
+                            <span class="success__price">'+(product_cart_success.price).toLocaleString() + ' VNĐ'+'</span></div>\
+                    </div>\
+                    </div>\
+                    <div class="col-lg-6 col-md-12">\
+                    <div class="s-option">\
+                        <div class="s-option__link-box">\
+                            <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">Tiếp tục mua sắm</a>\
+                    </div>\
+                    </div>'
+                )
+                $('#add-to-cart').modal('show');
+            } 
+        },
+    });
+})
+getCartWishlist = () => {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/auth/getCartWishlist",
+        method: "get",
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        },
+        dataType: "json",
+        success: function(response) {
+            var countID= 0;
+            if (response.status === 200) {
+                $("#list-cart-wishlist").html("")
+                $.each(response.cartsWishlist, function (index, products) {
+                    $.each(products, function (count, product) {
+                        ++countID
+                $("#list-cart-wishlist").append(
+                    '<div class="card-mini-product">\
+                    <div class="mini-product">\
+                        <div class="mini-product__image-wrapper">\
+                            <a class="mini-product__link my-link" data-page="product-detail-page" data-value="'+product.id+'">\
+                                <img class="u-img-fluid" style="width:90px;height:90px" src="http://127.0.0.1:8000/'+product.image+'" alt=""></a></div>\
+                        <div class="mini-product__info-wrapper">\
+                            <span class="mini-product__category">\
+                                <a>'+product.category+' Size '+product.size+' x '+product.quantity +'</a></span>\
+                            <span class="mini-product__name">\
+                                <a data-page="product-detail-page" class="my-link" data-value="'+product.id+'">'+product.name+'</a></span>\
+                            <span class="mini-product__quantity"><button class="btn btn--e-brand-b-2" data-value="'+product.id+'" data-size="'+product.size_id+'" data-name="'+product.size+'" data-quantity="'+product.quantity+'" id="Add-cart-to-wishlist">Thêm vào giỏ hàng</button></span>\
+                    </div>\
+                    <a class="mini-product__delete-link far fa-trash-alt remove-cart-wishlist" data-id="'+product.id+'" data-size="'+product.size_id+'" data-size_name="'+product.size+'" data-name="'+product.name+'"></a>\
+                </div>'
+                )
+            })
+        })
+                $("#count-carts-wishlist").text(countID);
+            }
+        },
+        error: function(xhr) {
+   }
+    })
+}   

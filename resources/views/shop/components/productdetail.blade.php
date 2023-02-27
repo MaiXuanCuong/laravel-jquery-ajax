@@ -107,13 +107,13 @@
 
                                     {{-- <span class="pd-detail__preview-desc">{!! $product->description !!}</span></div> --}}
                                 <div class="u-s-m-b-15">
-                                    <div class="pd-detail__inline">
+                                    <div class="pd-detail__inline" data-value="{{ $product->id }}" id="Add-to-cart-wishlist">
 
                                         <span class="pd-detail__click-wrap"><i class="far fa-heart u-s-m-r-6"></i>
 
-                                            <a href="signin.html">Thêm vào giỏ yêu thích</a>
+                                            <a >Thêm vào giỏ yêu thích</a>
 
-                                            <span class="pd-detail__click-count">(222)</span></span></div>
+                                            <span class="pd-detail__click-count"></span></span></div>
                                 </div>
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__inline">

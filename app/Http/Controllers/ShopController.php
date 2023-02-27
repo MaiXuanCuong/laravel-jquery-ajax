@@ -215,6 +215,9 @@ class ShopController extends Controller
                 $user = auth('api')->user()->id;
                 $carts = Cache::get('carts'.$user);
                 unset($carts[$id][$size]);
+                if (empty($carts[$id])) {
+                    unset($carts[$id]);
+                }
                 Cache::put('carts'.$user, $carts);
                 return response()->json([
                     'status' => 200,
@@ -299,4 +302,105 @@ class ShopController extends Controller
         $allWards = Ward::where('district_id', $district_id)->get();
         return response()->json($allWards);
     }
+
+
+
+
+    public function getCartWishlist(){
+        try {
+        if (isset(auth('api')->user()->id)) {
+            $user = auth('api')->user()->id;
+            $cartsWishlist = Cache::get('cartsWishlist'.$user);
+            if (isset($carts[$user])){
+                $carts = array_values($carts);
+            }
+            } else {
+                $carts = [];
+            } 
+            return response()->json([
+                'cartsWishlist' => $cartsWishlist,
+                'status' => 200
+            ]);
+        } catch (\Exception $e) {
+            Log::error('message: ' . $e->getMessage() . ' line: ' . $e->getLine() . ' file: ' . $e->getFile());
+            return response()->json([
+                'status' => 401
+            ]);
+        }
+    }
+    
+
+    public function storeWishlist(Request $request)
+    {
+        try {
+            if (isset(auth('api')->user()->id)) {
+            $id = $request->id;
+            $size = $request->size;
+            $Name = $request->Name;
+            $product = Product::with('sizes','category')->find($id);
+                $user = auth('api')->user()->id;
+                $cartsWishlist = Cache::get('cartsWishlist'.$user);
+                if(isset($cartsWishlist[$id][$size])){
+                    $cartsWishlist[$id][$size]['quantity'] = 1;
+                    $cartsWishlist[$id][$size]['price'] = $product->price;
+                } else {
+                $cartsWishlist[$id][$size] = [
+                    'id' => $id,
+                    'quantity' => $request->quantity,
+                    'name' => $product->name,
+                    'size' => $Name,
+                    'size_id' => $size,
+                    'price' => $product->price,
+                    'image' => $product->image,
+                    'quantity_product' => $product->quantity,
+                    'discount' => $product->discount,
+                    'category' => $product->category->name,
+                ];
+            }
+            $expiresAt = Carbon::now()->addDays(30);
+            Cache::put('cartsWishlist'.$user, $cartsWishlist, $expiresAt);
+            return response()->json([
+                'status' => 200,
+                'product' => $cartsWishlist[$id][$size],
+            ]);}
+        } catch (\Exception $e) {
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+            return response()->json([
+                'status' => 401,
+                'message' => 'error',
+            ]);
+        }
+    }
+    public function removeWishlist(Request $request)
+    {
+        try { 
+            $id = $request->id;
+            $size = $request->size;
+            if (isset(auth('api')->user()->id)) {
+                $user = auth('api')->user()->id;
+                $cartsWishlist = Cache::get('cartsWishlist'.$user);
+                unset($cartsWishlist[$id][$size]);
+                if (empty($cartsWishlist[$id])) {
+                    unset($cartsWishlist[$id]);
+                }
+                Cache::put('cartsWishlist'.$user, $cartsWishlist);
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'success',
+                ]);
+            }
+        } catch (\Exception$e) {
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+            return response()->json([
+                'status' => 401,
+                'message' => 'error',
+            ]);
+        }
+    }
+
+
+
+
+
+
 }

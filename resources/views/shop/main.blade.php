@@ -36,22 +36,6 @@
                             <a class="aspect aspect--bg-grey aspect--square u-d-block my-link" data-page="product-detail-page" data-value="{{ $product->id}}" id="product-detail">
 
                                 <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a>
-                            <div class="product-r__action-wrap">
-                                <ul class="product-r__action-list">
-                                    <li>
-
-                                        <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
-                                    <li>
-
-                                        <a data-value="{{ $product->id}}" data-page="product-detail-page" id="add-to-carts"><i class="fas fa-plus-circle my-link"></i></a></li>
-                                    <li>
-
-                                        <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
-                                    <li>
-
-                                        <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
-                                </ul>
-                            </div>
                         </div>
                         <div class="product-r__info-wrap">
 
@@ -131,22 +115,6 @@
                                             <a class="aspect aspect--bg-grey aspect--square u-d-block my-link" data-page="product-detail-page" data-value="{{ $product->id}}" id="product-detail">
 
                                                 <img class="aspect__img" src="{{ asset($product->image) }}" alt=""></a>
-                                            <div class="product-bs__action-wrap">
-                                                <ul class="product-bs__action-list">
-                                                    <li>
-
-                                                        <a data-modal="modal" data-modal-id="#quick-look"><i class="fas fa-search-plus"></i></a></li>
-                                                    <li>
-
-                                                        <a data-modal="modal" data-modal-id="#add-to-cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                    <li>
-
-                                                        <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-heart"></i></a></li>
-                                                    <li>
-
-                                                        <a href="{{ asset('shop/signin.html') }}"><i class="fas fa-envelope"></i></a></li>
-                                                </ul>
-                                            </div>
                                         </div>
 
                                         <span class="product-bs__category">
@@ -251,7 +219,9 @@
 
                                             <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
-                                        <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}</span></div>
+                                            <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}
+
+                                                <span class="product-l__discount">{{ $product->discount != null ? number_format($product->price+($product->discount/100*($product->price))). ' VNĐ' : '' }}</span></span></div>
                                 </div>
                             </li>
                             @endforeach
@@ -287,7 +257,7 @@
 
                                         <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}
 
-                                            <span class="product-l__discount">{{ number_format($product->price+(25/100*($product->price))). ' VNĐ' }}</span></span></div>
+                                            <span class="product-l__discount">{{ $product->discount != null ? number_format($product->price+($product->discount/100*($product->price))). ' VNĐ' : '' }}</span></span></div>
                                 </div>
                             </li>
                             @endforeach
@@ -322,8 +292,9 @@
 
                                             <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
-                                        <span class="product-l__price">Giá dự kiến: {{ number_format($product->price+(25/100*($product->price))). ' VNĐ' }}</span>
-                                    </div>
+                                            <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}
+
+                                                <span class="product-l__discount">{{ $product->discount != null ? number_format($product->price+($product->discount/100*($product->price))). ' VNĐ' : '' }}</span></span></div>
                                 </div>
                             </li>
                             @endforeach
