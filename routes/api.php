@@ -45,5 +45,12 @@ Route::group([
     Route::get('/getHistoryProduct',[ShopController::class, 'getHistoryProduct'])->name('shop.getHistoryProduct');
     Route::get('/page',[ShopController::class, 'page'])->name('shop.page');
     Route::get('/home',[ShopController::class, 'home'])->name('shop.home');
-    Route::post('/changePassMailCustomer', [CustomerController::class, 'changePassByEmailCustomer']);       
+    Route::post('/changePassMailCustomer', [CustomerController::class, 'changePassByEmailCustomer']);      
+    Route::get('/getProvinces', [ShopController::class, 'getProvinces'])->name('shop.getProvinces');
+    Route::get('/getDistricts', [ShopController::class, 'getDistricts'])->name('shop.getDistricts');
+    Route::get('/getWards', [ShopController::class, 'getWards'])->name('shop.getWards');
+    Route::post('/checkout', [ShopController::class, 'checkout'])->name('shop.checkout');
+    Route::get('/test',function(){
+        return view('shop.components.checkout');
+    }) ;
 });

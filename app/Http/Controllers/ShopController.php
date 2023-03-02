@@ -232,79 +232,6 @@ class ShopController extends Controller
             ]);
         }
     }
-    public function order(Request $request)
-    {
-        try{
-            if (isset(auth('api')->user()->id)) {
-            DB::beginTransaction();
-            $user = auth('api')->user()->id;
-            $order = new Order;
-            $order->note = $request->note;
-            $order->address = $request->address;
-            $order->province_id = $request->province_id;
-            $order->district_id = $request->district_id;
-            $order->ward_id = $request->ward_id;
-            $order->name_customer = $request->name_customer;
-            $order->customer_id = $user;
-            $order->phone = $request->phone;
-            $order->total = 0;
-            $order->save();
-            $carts = Cache::get('carts'.$user);
-            $order_total_price = 0;
-            foreach ($carts as $productId => $cart) {
-                $order_total_price += $cart['price'] * $cart['quantity'];
-                OrderDetail::create([
-                    'quantity' => $cart['quantity'],
-                    'product_id' => $productId,
-                    'total' => $cart['price'] * $cart['quantity'],
-                    'order_id' => $order->id,
-                ]);
-                Product::where('id', $productId)->decrement('quantity', $cart['quantity']);
-                
-            }
-            Cache::forget('carts'.$user);
-            $order->total= $order_total_price;
-            $order->save();
-            DB::commit();
-        }
-            }catch(\Exception $e){
-                DB::rollBack();
-                Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
-                return redirect()->route('shop.home');
-            }
-
-    }
-    public function checkOuts(){
-            $user = 1;
-                $carts = Cache::get('carts'.$user);
-                $provinces = Province::get();
-                if ($carts) {
-                    $carts = array_values($carts);
-                    $params = [
-                        'provinces' => $provinces,
-                        'carts' => $carts,
-                    ];
-        return view('shop.checkout',$params);
-    } else {
-        return redirect()->route('shop.home');
-    }
-  
-}   
-    public function GetDistricts(Request $request)
-    {
-        $province_id = $request->province_id;
-        $allDistricts = District::where('province_id', $province_id)->get();
-        return response()->json($allDistricts);
-    }
-    public function getWards(Request $request)
-    {
-        $district_id = $request->district_id;
-        $allWards = Ward::where('district_id', $district_id)->get();
-        return response()->json($allWards);
-    }
-
-
-
 
     public function getCartWishlist(){
         try {
@@ -397,9 +324,76 @@ class ShopController extends Controller
             ]);
         }
     }
+    public function getProvinces()
+    {
+        $allProvinces = Province::all();
+        return response()->json(
+            ['Provinces' => $allProvinces]);
+    }
 
+    public function getDistricts(Request $request)
+    {
+        $province_id = $request->province_id;
+        $allDistricts = District::where('province_id', $province_id)->get();
+        return response()->json($allDistricts);
+    }
+    public function getWards(Request $request)
+    {
+        $district_id = $request->district_id;
+        $allWards = Ward::where('district_id', $district_id)->get();
+        return response()->json($allWards);
+    }
 
-
+    public function checkout(Request $request){
+        if (isset(auth('api')->user()->id)) {
+        try {      
+        $user = auth('api')->user();
+        $carts = Cache::get('carts'.$user->id);
+        $order = new Order;
+        $order->note = $request->note;
+        $order->address = $request->address;
+        $order->province_id = $request->province_id;
+        $order->district_id = $request->district_id;
+        $order->ward_id = $request->ward_id;
+        $order->name_customer = $request->name;
+        $order->customer_id = $user->id;
+        $order->phone = $request->phone;
+        $order->total = 0;
+        $order->save();
+        $carts = Cache::get('carts'.$user->id);
+        $order_total_price = 0;
+        foreach ($carts as $productId => $cart) {
+            foreach ($cart as $size => $value) {
+                $order_total_price += (($value['discount'] != null ? ($value['price'] - ($value['discount']/100) * $value['price']) : $value['price'])) * $value['quantity'];
+                OrderDetail::create([
+                    'price_at_time' => (($value['discount'] != null ? ($value['price'] - ($value['discount']/100) * $value['price']) : $value['price'])),
+                    'quantity' => $value['quantity'],
+                    'product_id' => $productId,
+                    'total' =>  (($value['discount'] != null ? ($value['price'] - ($value['discount']/100) * $value['price']) : $value['price'])) * $value['quantity'],
+                    'order_id' => $order->id,
+                    'size' => $value['size'],
+                ]);
+                Product::where('id', $productId)->decrement('quantity', $value['quantity']);
+            }
+        }
+        $id_order = $order->id;
+        $order->total= $order_total_price;
+        $order->save();
+        Cache::forget('carts'.$user->id);
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+        ]);
+        } catch (\Exception $e) {
+            Log::error('message: ' . $e->getMessage() . 'line: ' . $e->getLine() . 'file: ' . $e->getFile());
+            return response()->json([
+                'status' => 401,
+                'message' => 'error',
+            ]);
+        }
+       
+        }
+    }
 
 
 

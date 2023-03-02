@@ -48,7 +48,7 @@
 
                                     <a  data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
-                                <span class="product-r__price">{{ number_format($product->price).' VNĐ' }}</span></div>
+                                <span class="product-r__price">{{  $product->discount != null ? number_format($product->price-($product->discount/100*($product->price))). ' VNĐ' : number_format($product->price). ' VNĐ'  }}</span></div>
 
                             <span class="product-r__description">Nhà cung cấp {{ $product->supplier->name }}</span>
                         </div>
@@ -128,9 +128,9 @@
 
                                             <span class="product-bs__review">(23)</span></div>
 
-                                        <span class="product-bs__price">{{ number_format($product->price). ' VNĐ' }}
+                                        <span class="product-bs__price">{{ $product->discount != null ? number_format($product->price-($product->discount/100*($product->price))). ' VNĐ' : number_format($product->price). ' VNĐ'  }}
 
-                                            <span class="product-bs__discount">{{ number_format($product->price+(25/100*($product->price))). ' VNĐ' }}</span></span>
+                                            <span class="product-bs__discount">{{  $product->discount != null ? number_format($product->price). ' VNĐ' : '' }}</span></span>
                                     </div>
                                 </div>
                             </div>
@@ -219,9 +219,9 @@
 
                                             <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
-                                            <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}
+                                            <span class="product-l__price">{{ $product->discount != null ? number_format($product->price-($product->discount/100*($product->price))). ' VNĐ' : number_format($product->price). ' VNĐ' }}
 
-                                                <span class="product-l__discount">{{ $product->discount != null ? number_format($product->price+($product->discount/100*($product->price))). ' VNĐ' : '' }}</span></span></div>
+                                                <span class="product-l__discount">{{ $product->discount != null ? number_format($product->price). ' VNĐ' : ''}}</span></span></div>
                                 </div>
                             </li>
                             @endforeach
@@ -255,9 +255,9 @@
 
                                             <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
-                                        <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}
+                                        <span class="product-l__price">{{ $product->discount != null ? number_format($product->price-($product->discount/100*($product->price))). ' VNĐ' : number_format($product->price). ' VNĐ' }}
 
-                                            <span class="product-l__discount">{{ $product->discount != null ? number_format($product->price+($product->discount/100*($product->price))). ' VNĐ' : '' }}</span></span></div>
+                                            <span class="product-l__discount">{{ $product->discount != null ? number_format($product->price). ' VNĐ' : ''}}</span></span></div>
                                 </div>
                             </li>
                             @endforeach
@@ -292,9 +292,9 @@
 
                                             <a data-page="product-detail-page" class="my-link" data-value="{{ $product->id}}" id="product-detail">{{ $product->name }}</a></span>
 
-                                            <span class="product-l__price">{{ number_format($product->price). ' VNĐ' }}
+                                            <span class="product-l__price">{{ $product->discount != null ? number_format($product->price-($product->discount/100*($product->price))). ' VNĐ' : number_format($product->price). ' VNĐ' }}
 
-                                                <span class="product-l__discount">{{ $product->discount != null ? number_format($product->price+($product->discount/100*($product->price))). ' VNĐ' : '' }}</span></span></div>
+                                                <span class="product-l__discount">{{$product->discount != null ? number_format($product->price). ' VNĐ' : '' }}</span></span></div>
                                 </div>
                             </li>
                             @endforeach

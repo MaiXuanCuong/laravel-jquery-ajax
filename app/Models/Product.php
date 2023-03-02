@@ -28,4 +28,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Size::class, 'product_sizes', 'product_id', 'size_id')->withTimestamps(); //withTimestamps tự động cập nhật hai cột created_at và updated_at trong bảng liên kết.
     }
+    public function orderDetails(){
+        return $this->hasMany(OrderDetail::class, 'product_id','id');
+    }
 }

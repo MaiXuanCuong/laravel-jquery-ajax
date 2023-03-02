@@ -1,5 +1,4 @@
-$(document).ready(function(){
-    getHistoryProduct()
+$(document).ready(function(){ 
     // localStorage.removeItem('token');
     // localStorage.removeItem('customer');
     $('#check-customer').empty();
@@ -33,6 +32,8 @@ $(document).ready(function(){
 });
 $(document).on('click','#Add-to-cart-item',function(e){
     e.preventDefault();
+    let token = localStorage.getItem('token')
+    if(token){
     let id = $(this).data('value');
     var size = $('input[name="size"]:checked').val();
     var Name = $('input[name="size"]:checked').data('name');
@@ -75,14 +76,17 @@ $(document).on('click','#Add-to-cart-item',function(e){
                     <div class="s-option">\
                         <div class="s-option__link-box">\
                             <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">Tiếp tục mua sắm</a>\
-                            <a class="s-option__link btn--e-brand-shadow" href="">Đên trang thanh toán</a></div>\
                     </div>\
                     </div>'
-                )
-                $('#add-to-cart').modal('show');
-            } 
-        },
-    });
+                    )
+                        $('#add-to-cart').modal('show');
+                } 
+            },
+        });
+    } else {
+        $("#loginModal").modal("show");
+    }
+
 })
 
 
@@ -91,6 +95,7 @@ $(document).on('click','.remove-cart',function(e){
     var size_name = $(this).data('size_name');
     var name = $(this).data('name');
     var size = $(this).data('size');
+    var id = $(this).data('id');
     Swal.fire({
         title: 'Bạn có muốn xóa sản phẩm?',
         text: name+' Size: '+size_name,
@@ -102,7 +107,6 @@ $(document).on('click','.remove-cart',function(e){
         cancelButtonText: 'Hủy, không xóa'
       }).then((result) => {
         if (result.isConfirmed) {
-            let id = $(this).data('id');
             $.ajax({
                 type: "POST",
                 url: "http://127.0.0.1:8000/api/auth/removeCart",
@@ -158,6 +162,7 @@ $(document).on('click','#logout-customer',function() {
                 $("#list-cart-wishlist").html("")
                 $("#count-carts").text(0);
                 $("#count-carts-wishlist").text(0);
+                $("#history-product-main").html("");
                 Swal.fire({
                     title: 'Bạn đã đăng xuất thành công, Ghét quá đy -.-',
                     width: 615,
@@ -183,8 +188,10 @@ function checkCustomer(){
         let customer = Cookies.get("customer");
         let arr = customer.split(',');
         $('#name-customer').attr('title', arr[1]);
+        $('#name-receiver').val(arr[1])
         getCart()
         getCartWishlist()
+        getHistoryProduct()
         $('#check-customer').append(
             '<li><a id="id-customer" data-customer="'+arr[0]+'"><i class="fas fa-user-circle u-s-m-r-6"></i> <span>Tài khoản</span></a></li>\
             <li> <a id="logout-customer"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Đăng xuất</span></a></li>'
@@ -409,18 +416,20 @@ $(document).on('click','.my-link', function(e){
                         checkCustomer();
                     }}
             })
-            $.ajax({
-                type: "POST",
-                url: "http://127.0.0.1:8000/api/auth/history/"+id,
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                    'Content-Type': 'application/json'
-                },
-                dataType: "json",
-                success: function (response) {
-          
-                },
-            });
+            let token = localStorage.getItem('token')
+            if(token){
+                $.ajax({
+                    type: "POST",
+                    url: "http://127.0.0.1:8000/api/auth/history/"+id,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                        'Content-Type': 'application/json'
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                    },
+                });
+            }
         
     }
     else if(page == 'home-page'){
@@ -479,13 +488,14 @@ getCart = () => {
             var countID= 0;
             if (response.status === 200) {
                 $("#list-cart").html("")
+                $(".list-cart").html("")
                 $("#total-carts").text("")
                 $.each(response.carts, function (index, products) {
                     $.each(products, function (count, product) {
                         ++countID
                     var totalproduct = (product.quantity * (product.price-((product.discount/100)*product.price)));
                         totalcarts += totalproduct;
-                $("#list-cart").append(
+                $("#list-cart,.list-cart").append(
                     '<div class="card-mini-product">\
                     <div class="mini-product">\
                         <div class="mini-product__image-wrapper">\
@@ -506,6 +516,14 @@ getCart = () => {
         })
                 $("#total-carts").text(totalcarts.toLocaleString() + " VNĐ");
                 $("#count-carts").text(countID);
+
+
+                $("#price-product").text(totalcarts.toLocaleString() + " VNĐ");
+                let shipping = 20000;
+                $("#price-shipping").text(shipping.toLocaleString() + " VNĐ");
+                
+                $("#price-payment").text((totalcarts+shipping).toLocaleString() + " VNĐ");
+
             }
         },
         error: function(xhr) {
@@ -774,6 +792,132 @@ $(document).on('click','#sendmail',function (e){
             },
             error: function (err) {
             
+            },
+        });
+    }
+})
+
+
+$(document).on("click", ".checkout", function (e) {
+    e.preventDefault();
+    $('#checkoutModal').modal('show');
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/auth/getProvinces",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            $.each(response.Provinces, function (index, Provinces) {
+                $("#province_id").append(
+                    '<option value="' +
+                        Provinces.id +
+                        '">' +
+                        Provinces.name +
+                        "</option>"
+                );
+            });
+        },
+    });
+});
+
+$(function () {
+    $(document).on("change", ".province_id", function () {
+        var province_id = $(this).val();
+        $.ajax({
+            url: "http://127.0.0.1:8000/api/auth/getDistricts",
+            type: "GET",
+            data: {
+                province_id: province_id,
+            },
+            success: function (data) {
+                let district = '<option value="">Chọn Quận/Huyện</option>';
+                $(".district_id").html(district);
+                let ward = '<option value="">Chọn Xã/Phường</option>';
+                $(".ward_id").html(ward);
+                $.each(data, function (key, v) {
+                    $(".district_id").append(
+                        '<option value="' + v.id + '">' + v.name + "</option>"
+                    );
+                });
+            },
+        });
+    });
+});
+// ------
+$(function () {
+    $(document).on("change", ".district_id", function () {
+        var district_id = $(this).val();
+        $.ajax({
+            url: "http://127.0.0.1:8000/api/auth/getWards",
+            type: "GET",
+            data: {
+                district_id: district_id,
+            },
+            success: function (data) {
+                var html = '<option value="">Chọn Xã/Phường</option>';
+                $(".ward_id").html(html);
+                $.each(data, function (key, v) {
+                    $(".ward_id").append(
+                        '<option value="' + v.id + '">' + v.name + "</option>"
+                    );
+                });
+            },
+        });
+    });
+});
+
+$(document).on('click','#confim-checkout',function (e) { 
+    e.preventDefault();
+    var name = $("#name-receiver").val();
+    var phone = $("#phone-receiver").val();
+    var address = $("#address-receiver").val();
+    var province = $("#province_id").val();
+    var district = $("#district_id").val();
+    var ward = $("#ward_id").val();
+    var regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+    var phoneRegex =  regex.test(phone);
+    var haserror = false;
+    if (name == "") { $("#nameReceiverError").html("Vui Lòng Nhập Tên"); haserror = true; }
+    if (phone == "") { $("#phoneReceiverError").html("Hãy Nhập Số Điện Thoại"); haserror = true;}
+    if (!phoneRegex && phone != "") { $("#phoneReceiverError").html("Hãy Nhập Đúng Định Dạng"); haserror = true; }
+    if (address == "") {  $("#addressReceiverError").html("Hãy Nhập địa chỉ nhận hàng");  haserror = true; }
+    if (province == "") {$("#provincesReceiverError").html("Chọn Tình/Thành Phố"); haserror = true; }
+    if (district == "") { $("#districtsReceiverError").html("Chọn Quận/Huyện"); haserror = true; }
+    if (ward == "") { $("#wardsReceiverError").html("Chọn Xã/Phường"); haserror = true; }
+    if (haserror == true) {
+        $("#checkoutModal").change("shown.bs.modal", function () {
+            if ($("#name-receiver").val() != "") {$("#nameReceiverError").empty();}
+            if ($("#phone-receiver").val() != "") {$("#phoneReceiverError").empty();}
+            if ($("#address-receiver").val() != "") {$("#addressReceiverError").empty(); }
+            if ($("#province_id").val() != "") {$("#provincesReceiverError").empty(); }
+            if ($("#district_id").val() != "") {$("#districtsReceiverError").empty(); }
+            if ($("#ward_id").val() != "") {  $("#wardsReceiverError").empty();}
+        });
+    }
+    if (haserror === false) {
+        $.ajax({
+            url: "http://127.0.0.1:8000/api/auth/checkout",
+            method: "post",
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            },
+            data: {
+                name : name,
+                phone : phone,
+                address : address,
+                province_id : province,
+                district_id : district,
+                ward_id :ward
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.status == 200) {
+                    $("#checkoutModal").modal("hide");
+                    $("#checkoutModal").find("input").val("");
+                    $("#checkoutModal").find("select").val("");
+                }
+            },
+            error: function (err) {
+
             },
         });
     }

@@ -913,7 +913,7 @@
                                     </li>
                                     <li>
 
-                                        <a href="{{ asset('shop/checkout.html') }}">Thanh toán</a></li>
+                                        <a class="checkout">Thanh toán</a></li>
                                   
                                 </ul>
                             </li>
@@ -1016,7 +1016,7 @@
                                             <span class="subtotal-value" id="total-carts"></span></div>
                                         <div class="mini-action">
 
-                                            <a class="mini-link btn--e-brand-b-2" href="{{ asset('shop/checkout.html') }}">Thanh toán</a>
+                                            <a class="mini-link btn--e-brand-b-2 checkout">Thanh toán</a>
 
                                             {{-- <a class="mini-link btn--e-transparent-secondary-b-2" href="{{ asset('shop/cart.html') }}">VIEW CART</a></div> --}}
                                     </div>

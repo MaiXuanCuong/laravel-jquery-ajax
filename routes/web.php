@@ -88,4 +88,3 @@ Route::prefix('/')->middleware(['auth', 'revalidate'])->group(function () {
                 Route::delete('/deleteBanner/{id}',[BannerController::class, 'destroy'])->name('banner.destroy');
     });
 });
-

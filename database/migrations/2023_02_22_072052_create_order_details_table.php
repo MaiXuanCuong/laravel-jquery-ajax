@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
+            $table->string('size');
             $table->bigInteger('quantity');
             $table->bigInteger('total');
             $table->bigInteger('price_at_time');

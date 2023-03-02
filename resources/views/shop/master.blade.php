@@ -65,6 +65,25 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="exampleModalFullscreenXxlLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-xxl-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-4" id="exampleModalFullscreenXxlLabel">Thông tin đặt hàng</h1>
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">...
+               @include('shop.components.checkout')
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
     <script src="{{ asset('shop/js/vendor.js ') }}"></script>
     <script src="{{ asset('shop/js/jquery.shopnav.js ') }}"></script>

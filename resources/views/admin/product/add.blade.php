@@ -73,7 +73,7 @@
                                 <label class="col-sm-3 col-form-label">Giảm giá</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="discount" name="discount">
-                                        <option selected>--Không giảm giá--</option>
+                                        <option selected value="">--Không giảm giá--</option>
                                     </select>
                                 </div>
                             </div>
