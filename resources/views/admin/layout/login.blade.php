@@ -63,6 +63,9 @@
   <script src="{{ asset('asset/js/settings.js') }}"></script>
   <script src="{{ asset('asset/js/todolist.js') }}"></script>
   <script src="{{ asset('asset/jqueryajax/ajaxAuth.js') }}"></script>
-
+  <script type="text/javascript">
+    var _appUrl = '{!! url('/') !!}';
+    var _token = '{!! csrf_token() !!}';
+</script>
 </body>
 </html>

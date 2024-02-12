@@ -12,7 +12,7 @@ $(document).ready(function(){
 function getBanner() {
     $.ajax({
         type: "GET",
-        url: "/banner/getBanner",
+        url: _appUrl+"/banner/getBanner",
         dataType: "json",
         success: function (response) {
             if (response.status == 200) {
@@ -48,7 +48,7 @@ $.ajaxSetup({
 });
 $.ajax({
     type: "POST",
-    url: "/banner/updateStatus/"+id+'/'+ status,
+    url: _appUrl+"/banner/updateStatus/"+id+'/'+ status,
     success: function (res) {
         if (res.status == 200) {
             var banner = res.banner;
@@ -91,7 +91,7 @@ $(document).on("click", "#deleteBanner", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/banner/deleteBanner/" + id,
+                url: _appUrl+"/banner/deleteBanner/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -143,7 +143,7 @@ $(document).on("click", "#confirmeditBanner", function (e) {
         });
         $.ajax({
             type: "POST",
-            url: "/banner/updateBanner/" + id,
+            url: _appUrl+"/banner/updateBanner/" + id,
             data: formdata,
             contentType: false,
             processData: false,
@@ -211,7 +211,7 @@ $("#insertBanner").on("submit", function (e) {
         });
         let formdata = new FormData($("#insertBanner")[0]);
         $.ajax({
-            url: "/banner/storeBanner",
+            url: _appUrl+"/banner/storeBanner",
             method: "post",
             data: formdata,
             dataType: "json",

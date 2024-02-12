@@ -40,7 +40,7 @@ $(document).on('click','#Add-to-cart-item',function(e){
     var quantity = $('#quantity-product-detail').val();
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8000/api/auth/addCart",
+        url: _appUrl+"/api/auth/addCart",
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
             'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ $(document).on('click','#Add-to-cart-item',function(e){
                         <div class="success__text-wrap"><i class="fas fa-check"></i>\
                             <span>Thêm sản phẩm vào giỏ hàng thành công!</span></div>\
                         <div class="success__img-wrap" style="magrin:30px">\
-                            <img class="u-img-fluid" style="width:100px;height:120px" src="http://127.0.0.1:8000/'+product_cart_success.image+'" alt=""></div>\
+                            <img class="u-img-fluid" style="width:100px;height:120px" src="'+_appUrl+'/'+product_cart_success.image+'" alt=""></div>\
                         <div class="success__info-wrap">\
                             <span class="success__name">'+product_cart_success.name+'</span>\
                             <span class="success__size">Size: '+product_cart_success.size+'</span>\
@@ -109,7 +109,7 @@ $(document).on('click','.remove-cart',function(e){
         if (result.isConfirmed) {
             $.ajax({
                 type: "POST",
-                url: "http://127.0.0.1:8000/api/auth/removeCart",
+                url: _appUrl+"/api/auth/removeCart",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token'),
                     'Content-Type': 'application/json'
@@ -145,7 +145,7 @@ function scrollToProductList() {
 
 $(document).on('click','#logout-customer',function() {
     $.ajax({
-        url: "http://127.0.0.1:8000/api/auth/logout",
+        url: _appUrl+"/api/auth/logout",
         method: "post",
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -270,7 +270,7 @@ $(document).on('click', '#confirmLogin' ,function (e){
         });
         let formdata = new FormData($("#loginCustomer")[0]);
         $.ajax({
-            url: "http://127.0.0.1:8000/api/auth/checklogin",
+            url: _appUrl+"/api/auth/checklogin",
             method: "post",
             data: formdata,
             dataType: "json",
@@ -346,7 +346,7 @@ $(document).on('click', '#confirmRegister' ,function (e){
         });
         let formdata = new FormData($("#registerCustomer")[0]);
         $.ajax({
-            url: "http://127.0.0.1:8000/api/auth/registerCustomer",
+            url: _appUrl+"/api/auth/registerCustomer",
             method: "post",
             data: formdata,
             dataType: "json",
@@ -385,7 +385,7 @@ $(document).on('click','.my-link', function(e){
             let id = $(this).data('value');
 
             $.ajax({
-                url: "http://127.0.0.1:8000/api/auth/page",
+                url: _appUrl+"/api/auth/page",
                 method: "get",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -420,7 +420,7 @@ $(document).on('click','.my-link', function(e){
             if(token){
                 $.ajax({
                     type: "POST",
-                    url: "http://127.0.0.1:8000/api/auth/history/"+id,
+                    url: _appUrl+"/api/auth/history/"+id,
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem('token'),
                         'Content-Type': 'application/json'
@@ -442,7 +442,7 @@ $(document).on('click','.my-link', function(e){
 
 getHistoryProduct = () => {
     $.ajax({
-        url: "http://127.0.0.1:8000/api/auth/getHistoryProduct",
+        url: _appUrl+"/api/auth/getHistoryProduct",
         method: "get",
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -458,7 +458,7 @@ getHistoryProduct = () => {
                         <div class="product-short__container">\
                             <div class="product-short__img-wrap">\
                                 <a class="aspect aspect--bg-grey-fb aspect--square u-d-block my-link" data-page="product-detail-page" data-value="'+product.id+'">\
-                                    <img class="aspect__img product-short__img" src="http://127.0.0.1:8000/'+product.image+'" alt=""></a></div>\
+                                    <img class="aspect__img product-short__img" src="'+_appUrl+'/'+product.image+'" alt=""></a></div>\
                             <div class="product-short__info">\
                                 <span class="product-short__price">' + (product.price).toLocaleString() + ' VNĐ'+ '</span>\
                                 <span class="product-short__name">\
@@ -476,7 +476,7 @@ getHistoryProduct = () => {
 }
 getCart = () => {
     $.ajax({
-        url: "http://127.0.0.1:8000/api/auth/getCart",
+        url: _appUrl+"/api/auth/getCart",
         method: "get",
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -500,7 +500,7 @@ getCart = () => {
                     <div class="mini-product">\
                         <div class="mini-product__image-wrapper">\
                             <a class="mini-product__link my-link" data-page="product-detail-page" data-value="'+product.id+'">\
-                                <img class="u-img-fluid" style="width:90px;height:90px" src="http://127.0.0.1:8000/'+product.image+'" alt=""></a></div>\
+                                <img class="u-img-fluid" style="width:90px;height:90px" src="'+_appUrl+'/'+product.image+'" alt=""></a></div>\
                         <div class="mini-product__info-wrapper">\
                             <span class="mini-product__category">\
                                 <a>'+product.category+' Size '+product.size+'</a></span>\
@@ -546,7 +546,7 @@ function history_product_detail(response){
                 <div class="product-o product-o--hover-on">\
                     <div class="product-o__wrap">\
                         <a class="aspect aspect--bg-grey aspect--square u-d-block my-link" data-page="product-detail-page" data-value="'+product.id+'">\
-                            <img class="aspect__img" src="http://127.0.0.1:8000/'+product.image+'"></a>\
+                            <img class="aspect__img" src="'+_appUrl+'/'+product.image+'"></a>\
                     </div>\
                     <span class="product-o__category">\
                         <a>'+product.category+'</a></span>\
@@ -573,7 +573,7 @@ $(document).on('click','#Add-to-cart-wishlist',function(e){
     var quantity = $('#quantity-product-detail').val();
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8000/api/auth/addCartWishlist",
+        url: _appUrl+"/api/auth/addCartWishlist",
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
             'Content-Type': 'application/json'
@@ -597,7 +597,7 @@ $(document).on('click','#Add-to-cart-wishlist',function(e){
                         <div class="success__text-wrap"><i class="fas fa-check"></i>\
                             <span>Thêm vào giỏ hàng yêu thích thành công!</span></div>\
                         <div class="success__img-wrap" style="magrin:30px">\
-                            <img class="u-img-fluid" style="width:100px;height:120px" src="http://127.0.0.1:8000/'+product_cart_success.image+'" alt=""></div>\
+                            <img class="u-img-fluid" style="width:100px;height:120px" src="'+_appUrl+'/'+product_cart_success.image+'" alt=""></div>\
                         <div class="success__info-wrap">\
                             <span class="success__name">'+product_cart_success.name+'</span>\
                             <span class="success__size">Size: '+product_cart_success.size+'</span>\
@@ -640,7 +640,7 @@ $(document).on('click','.remove-cart-wishlist',function(e){
             let id = $(this).data('id');
             $.ajax({
                 type: "POST",
-                url: "http://127.0.0.1:8000/api/auth/removeCartWishlist",
+                url: _appUrl+"/api/auth/removeCartWishlist",
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token'),
                     'Content-Type': 'application/json'
@@ -675,7 +675,7 @@ $(document).on('click','#Add-cart-to-wishlist',function(e){
     let quantity = $(this).data('quantity');
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8000/api/auth/addCart",
+        url: _appUrl+"/api/auth/addCart",
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
             'Content-Type': 'application/json'
@@ -699,7 +699,7 @@ $(document).on('click','#Add-cart-to-wishlist',function(e){
                         <div class="success__text-wrap"><i class="fas fa-check"></i>\
                             <span>Thêm sản phẩm vào giỏ hàng thành công!</span></div>\
                         <div class="success__img-wrap" style="magrin:30px">\
-                            <img class="u-img-fluid" style="width:100px;height:120px" src="http://127.0.0.1:8000/'+product_cart_success.image+'" alt=""></div>\
+                            <img class="u-img-fluid" style="width:100px;height:120px" src="'+_appUrl+'/'+product_cart_success.image+'" alt=""></div>\
                         <div class="success__info-wrap">\
                             <span class="success__name">'+product_cart_success.name+'</span>\
                             <span class="success__size">Size: '+product_cart_success.size+'</span>\
@@ -721,7 +721,7 @@ $(document).on('click','#Add-cart-to-wishlist',function(e){
 })
 getCartWishlist = () => {
     $.ajax({
-        url: "http://127.0.0.1:8000/api/auth/getCartWishlist",
+        url: _appUrl+"/api/auth/getCartWishlist",
         method: "get",
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -740,7 +740,7 @@ getCartWishlist = () => {
                     <div class="mini-product">\
                         <div class="mini-product__image-wrapper">\
                             <a class="mini-product__link my-link" data-page="product-detail-page" data-value="'+product.id+'">\
-                                <img class="u-img-fluid" style="width:90px;height:90px" src="http://127.0.0.1:8000/'+product.image+'" alt=""></a></div>\
+                                <img class="u-img-fluid" style="width:90px;height:90px" src="'+_appUrl+'/'+product.image+'" alt=""></a></div>\
                         <div class="mini-product__info-wrapper">\
                             <span class="mini-product__category">\
                                 <a>'+product.category+' Size '+product.size+' x '+product.quantity +'</a></span>\
@@ -775,7 +775,7 @@ $(document).on('click','#sendmail',function (e){
             },
         });
         $.ajax({
-            url: "http://127.0.0.1:8000/api/auth/changePassMailCustomer",
+            url: _appUrl+"/api/auth/changePassMailCustomer",
             method: "post",
             data: {
                 email: email
@@ -802,7 +802,7 @@ $(document).on("click", ".checkout", function (e) {
     e.preventDefault();
     $('#checkoutModal').modal('show');
     $.ajax({
-        url: "http://127.0.0.1:8000/api/auth/getProvinces",
+        url: _appUrl+"/api/auth/getProvinces",
         type: "GET",
         dataType: "json",
         success: function (response) {
@@ -823,7 +823,7 @@ $(function () {
     $(document).on("change", ".province_id", function () {
         var province_id = $(this).val();
         $.ajax({
-            url: "http://127.0.0.1:8000/api/auth/getDistricts",
+            url: _appUrl+"/api/auth/getDistricts",
             type: "GET",
             data: {
                 province_id: province_id,
@@ -847,7 +847,7 @@ $(function () {
     $(document).on("change", ".district_id", function () {
         var district_id = $(this).val();
         $.ajax({
-            url: "http://127.0.0.1:8000/api/auth/getWards",
+            url: _appUrl+"/api/auth/getWards",
             type: "GET",
             data: {
                 district_id: district_id,
@@ -895,7 +895,7 @@ $(document).on('click','#confim-checkout',function (e) {
     }
     if (haserror === false) {
         $.ajax({
-            url: "http://127.0.0.1:8000/api/auth/checkout",
+            url: _appUrl+"/api/auth/checkout",
             method: "post",
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),

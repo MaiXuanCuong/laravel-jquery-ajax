@@ -17,7 +17,7 @@ $(document).ready(function () {
 function getSupplier() {
     $.ajax({
         type: "GET",
-        url: "/supplier/getSupplier",
+        url: _appUrl+"/supplier/getSupplier",
         dataType: "json",
         success: function (response) {
             $("#index-suppliers").html(" ");
@@ -66,7 +66,7 @@ $(document).on("click", "#deleteSupplier", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/supplier/deleteSupplier/" + id,
+                url: _appUrl+"/supplier/deleteSupplier/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -120,7 +120,7 @@ $(document).on("click", "#restoreSupplier", function (e) {
             });
             $.ajax({
                 type: "POST",
-                url: "/supplier/restoreSupplier/" + id,
+                url: _appUrl+"/supplier/restoreSupplier/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -173,7 +173,7 @@ $(document).on("click", "#destroySupplier", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/supplier/destroySupplier/" + id,
+                url: _appUrl+"/supplier/destroySupplier/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -212,7 +212,7 @@ $(document).on("click", "#editSupplier", function (e) {
     let id = $(this).val();
     $.ajax({
         type: "GET",
-        url: "/supplier/editSupplier/" + id,
+        url: _appUrl+"/supplier/editSupplier/" + id,
         dataType: "json",
         success: function (res) {
             if (res.status == 200) {
@@ -298,7 +298,7 @@ $(document).on("click", "#confirmUpdateSupplier", function (event) {
         });
         $.ajax({
             type: "POST",
-            url: "/supplier/updateSupplier/" + id,
+            url: _appUrl+"/supplier/updateSupplier/" + id,
             data: formdata,
             contentType: false,
             processData: false,
@@ -390,7 +390,7 @@ $("#insertSupplier").on("submit", function (e) {
         });
         let formdata = new FormData($("#insertSupplier")[0]);
         $.ajax({
-            url: "/supplier/storeSupplier",
+            url: _appUrl+"/supplier/storeSupplier",
             method: "post",
             data: formdata,
             contentType: false,
@@ -432,7 +432,7 @@ $(document).on("click", "#close-modal", function () {
 $(document).on("click", "#trashCanSupplier", function (e) {
     e.preventDefault();
     $.ajax({
-        url: "/supplier/getTrashCanSupplier",
+        url: _appUrl+"/supplier/getTrashCanSupplier",
         type: "GET",
         success: function (response) {
             if (response.status == 200) {
@@ -465,7 +465,7 @@ $(document).on("click", '#icon-download', function (e) {
   
     e.preventDefault();
     $.ajax({
-        url: "/supplier/export-suppliers",
+        url: _appUrl+"/supplier/export-suppliers",
         method: "GET",
         success: function (response) {
               var link = document.createElement('a');

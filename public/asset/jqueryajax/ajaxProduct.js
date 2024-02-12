@@ -18,7 +18,7 @@ $(document).ready(function () {
 function getProduct() {
     $.ajax({
         type: "GET",
-        url: "/product/getProduct",
+        url: _appUrl+"/product/getProduct",
         dataType: "json",
         success: function (response) {
             $("#index-products").html(" ");
@@ -58,7 +58,7 @@ $.ajaxSetup({
 });
 $.ajax({
     type: "POST",
-    url: "/product/updateStatus/"+id+'/'+ status,
+    url: _appUrl+"/product/updateStatus/"+id+'/'+ status,
     success: function (res) {
         if (res.status == 200) {
             var product = res.product;
@@ -115,7 +115,7 @@ $(document).on("click", "#deleteProduct", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/product/deleteProduct/" + id,
+                url: _appUrl+"/product/deleteProduct/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -169,7 +169,7 @@ $(document).on("click", "#restoreProduct", function (e) {
             });
             $.ajax({
                 type: "POST",
-                url: "/product/restoreProduct/" + id,
+                url: _appUrl+"/product/restoreProduct/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -222,7 +222,7 @@ $(document).on("click", "#destroyProduct", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/product/destroyProduct/" + id,
+                url: _appUrl+"/product/destroyProduct/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -318,7 +318,7 @@ $(document).on("click", "#editProduct", function (e) {
     })
     $.ajax({
         type: "GET",
-        url: "/product/editProduct/" + id,
+        url: _appUrl+"/product/editProduct/" + id,
         success: function (res) {
             console.log(res);
             if (res.status == 200) {
@@ -429,7 +429,7 @@ $(document).on("click", "#confirmUpdateProductEdit", function (event) {
         });
         $.ajax({
             type: "POST",
-            url: "/product/updateProduct/" + id,
+            url: _appUrl+"/product/updateProduct/" + id,
             data: formdata,
             contentType: false,
             processData: false,
@@ -520,7 +520,7 @@ $("#insertProduct").on("submit", function (e) {
         let formdata = new FormData($("#insertProduct")[0]);
         formdata.append("description", description);
         $.ajax({
-            url: "/product/storeProduct",
+            url: _appUrl+"/product/storeProduct",
             method: "post",
             data: formdata,
             contentType: false,
@@ -591,7 +591,7 @@ $(document).on("click", "#close-modal", function () {
 $(document).on("click", "#trashCanProduct", function (e) {
     e.preventDefault();
     $.ajax({
-        url: "/product/getTrashCanProduct",
+        url: _appUrl+"/product/getTrashCanProduct",
         type: "GET",
         success: function (response) {
             if (response.status == 200) {
@@ -620,7 +620,7 @@ $(document).on("click", "#trashCanProduct", function (e) {
 $(document).on("click", "#inforProduct", function (e) {
     let id = $(this).val();
     $.ajax({
-        url: "/product/inforProduct/" + id,
+        url: _appUrl+"/product/inforProduct/" + id,
         method: "GET",
         success: function (products) {
             if (products.status == 200) {
@@ -691,7 +691,7 @@ $(document).on("click", '#icon-download', function (e) {
   
     e.preventDefault();
     $.ajax({
-        url: "/product/export-products",
+        url: _appUrl+"/product/export-products",
         method: "GET",
         success: function (response) {
               var link = document.createElement('a');

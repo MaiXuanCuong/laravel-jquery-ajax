@@ -31,7 +31,7 @@ $(document).on('click', '#login-user' ,function (e){
         });
         let formdata = new FormData($("#loginUser")[0]);
         $.ajax({
-            url: "/checklogin",
+            url: _appUrl+"/checklogin",
             method: "post",
             data: formdata,
             dataType: "json",
@@ -66,7 +66,7 @@ $(document).on('click', '#logout-user' ,function (e){
         },
     });
         $.ajax({
-            url: "/logout",
+            url: _appUrl+"/logout",
             method: "post",
             dataType: "json",
             contentType: false,

@@ -17,7 +17,7 @@ $(document).ready(function () {
 function getUser() {
     $.ajax({
         type: "GET",
-        url: "/user/getUser",
+        url: _appUrl+"/user/getUser",
         dataType: "json",
         success: function (response) {
             $("#index-users").html(" ");
@@ -105,7 +105,7 @@ $(document).on("click", "#deleteUser", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/user/deleteUser/" + id,
+                url: _appUrl+"/user/deleteUser/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -159,7 +159,7 @@ $(document).on("click", "#restoreUser", function (e) {
             });
             $.ajax({
                 type: "POST",
-                url: "/user/restoreUser/" + id,
+                url: _appUrl+"/user/restoreUser/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -212,7 +212,7 @@ $(document).on("click", "#destroyUser", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/user/destroyUser/" + id,
+                url: _appUrl+"/user/destroyUser/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -245,7 +245,7 @@ $(document).on("click", "#addUser", function (e) {
     e.preventDefault();
     $("#addUserModal").modal("show");
     $.ajax({
-        url: "/user/getProvinces",
+        url: _appUrl+"/user/getProvinces",
         type: "GET",
         dataType: "json",
         success: function (response) {
@@ -265,7 +265,7 @@ $(document).on("click", "#addUser", function (e) {
 $(document).on("click", "#editUser", function (e) {
     let id = $(this).val();
     $.ajax({
-        url: "/user/getProvinces",
+        url: _appUrl+"/user/getProvinces",
         type: "GET",
         dataType: "json",
         success: function (response) {
@@ -283,7 +283,7 @@ $(document).on("click", "#editUser", function (e) {
 
     $.ajax({
         type: "GET",
-        url: "/user/editUser/" + id,
+        url: _appUrl+"/user/editUser/" + id,
         success: function (res) {
             if (res.status == 200) {
                 $("#idUserEdit").val(res.user.id);
@@ -294,7 +294,7 @@ $(document).on("click", "#editUser", function (e) {
                 $("#birthdayUserEdit").val(res.user.birthday);
                 $("#blah1").attr("src", res.user.image);
                 $.ajax({
-                    url: "/user/getDistricts",
+                    url: _appUrl+"/user/getDistricts",
                     type: "GET",
                     data: {
                         province_id: res.user.province_id,
@@ -312,7 +312,7 @@ $(document).on("click", "#editUser", function (e) {
                     },
                 });
                 $.ajax({
-                    url: "/user/getWards",
+                    url: _appUrl+"/user/getWards",
                     type: "GET",
                     data: {
                         district_id: res.user.district_id,
@@ -453,7 +453,7 @@ $(document).on("click", "#confirmUpdateUser", function (event) {
         });
         $.ajax({
             type: "POST",
-            url: "/user/updateUser/" + id,
+            url: _appUrl+"/user/updateUser/" + id,
             data: formdata,
             contentType: false,
             processData: false,
@@ -585,7 +585,7 @@ $("#insertUser").on("submit", function (e) {
         });
         let formdata = new FormData($("#insertUser")[0]);
         $.ajax({
-            url: "/user/storeUser",
+            url: _appUrl+"/user/storeUser",
             method: "post",
             data: formdata,
             contentType: false,
@@ -644,7 +644,7 @@ $(function () {
     $(document).on("change", ".province_id, .add_user", function () {
         var province_id = $(this).val();
         $.ajax({
-            url: "/user/getDistricts",
+            url: _appUrl+"/user/getDistricts",
             type: "GET",
             data: {
                 province_id: province_id,
@@ -668,7 +668,7 @@ $(function () {
     $(document).on("change", ".district_id, .add_user", function () {
         var district_id = $(this).val();
         $.ajax({
-            url: "/user/getWards",
+            url: _appUrl+"/user/getWards",
             type: "GET",
             data: {
                 district_id: district_id,
@@ -716,7 +716,7 @@ $(document).on("click", "#close-modal", function () {
 $(document).on("click", "#trashCanUser", function (e) {
     e.preventDefault();
     $.ajax({
-        url: "/user/getTrashCanUser",
+        url: _appUrl+"/user/getTrashCanUser",
         type: "GET",
         success: function (response) {
             if (response.status == 200) {
@@ -762,7 +762,7 @@ $(document).on("click", "#trashCanUser", function (e) {
 $(document).on("click", "#inforUser", function (e) {
     let id = $(this).val();
     $.ajax({
-        url: "/user/inforUser/" + id,
+        url: _appUrl+"/user/inforUser/" + id,
         method: "GET",
         success: function (users) {
             if (users.status == 200) {
@@ -801,7 +801,7 @@ $(document).on("click", '#icon-download', function (e) {
   
     e.preventDefault();
     $.ajax({
-        url: "/user/export-users",
+        url: _appUrl+"/user/export-users",
         method: "GET",
         success: function (response) {
               var link = document.createElement('a');

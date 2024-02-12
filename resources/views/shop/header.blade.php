@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
@@ -957,7 +957,7 @@
                         <ul class="ah-list ah-list--design1 ah-list--link-color-white">
                             <li>
 
-                                <a href="http://127.0.0.1:8000/shops"><i class="fas fa-home u-c-brand"></i></a></li>
+                                <a href="/shops"><i class="fas fa-home u-c-brand"></i></a></li>
                             {{-- <li>
 
                                 <a href="{{ asset('shop/wishlist.html') }}"><i class="far fa-heart"></i></a></li> --}}

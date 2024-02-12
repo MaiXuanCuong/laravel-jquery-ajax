@@ -316,7 +316,10 @@
   <script src="{{ asset('asset/jqueryajax/ajaxAuth.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- End custom js for this page-->
-  
+  <script type="text/javascript">
+    var _appUrl = '{!! url('/') !!}';
+    var _token = '{!! csrf_token() !!}';
+</script>
  </body>
 
 </html>

@@ -17,7 +17,7 @@ $(document).ready(function () {
 function getCategory() {
     $.ajax({
         type: "GET",
-        url: "/category/getCategory",
+        url: _appUrl+"/category/getCategory",
         dataType: "json",
         success: function (response) {
             if (response.status == 200) {
@@ -77,7 +77,7 @@ $(document).on("click", "#deleteCategory", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/category/deleteCategory/" + id,
+                url: _appUrl+"/category/deleteCategory/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -131,7 +131,7 @@ $(document).on("click", "#restoreCategory", function (e) {
             });
             $.ajax({
                 type: "POST",
-                url: "/category/restoreCategory/" + id,
+                url: _appUrl+"/category/restoreCategory/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -185,7 +185,7 @@ $(document).on("click", "#destroyCategory", function (e) {
             });
             $.ajax({
                 type: "DELETE",
-                url: "/category/destroyCategory/" + id,
+                url: _appUrl+"/category/destroyCategory/" + id,
                 success: function (res) {
                     if (res.status == 200) {
                         tr.parent().parent().remove();
@@ -221,7 +221,7 @@ $(document).on("click", "#editCategory", function (e) {
     var id = $(this).val();
     $.ajax({
         type: "GET",
-        url: "/category/editCategory/" + id,
+        url: _appUrl+"/category/editCategory/" + id,
         success: function (res) {
             if (res.status == 200) {
                 let category = res.category;
@@ -282,7 +282,7 @@ $(document).on("click", "#confirmeditCategory", function (e) {
 
         $.ajax({
             type: "POST",
-            url: "/category/updateCategory/" + id,
+            url: _appUrl+"/category/updateCategory/" + id,
             data: formdata,
             contentType: false,
             processData: false,
@@ -366,7 +366,7 @@ $("#insertCategory").on("submit", function (e) {
         let formdata = new FormData($("#insertCategory")[0]);
         formdata.append("description", description);
         $.ajax({
-            url: "/category/storeCategory",
+            url: _appUrl+"/category/storeCategory",
             method: "post",
             data: formdata,
             dataType: "json",
@@ -441,7 +441,7 @@ $(document).on("click", "#close-modal", function () {
 $(document).on("click", "#trashCanCategory", function (e) {
     e.preventDefault();
     $.ajax({
-        url: "/category/getTrashCanCategory",
+        url: _appUrl+"/category/getTrashCanCategory",
         type: "GET",
         success: function (response) {
             if (response.status === 200) {
@@ -476,7 +476,7 @@ $(document).on("click", "#trashCanCategory", function (e) {
 $(document).on("click", "#inforCategory", function (e) {
     let id = $(this).val();
     $.ajax({
-        url: "/category/inforCategory/" + id,
+        url: _appUrl+"/category/inforCategory/" + id,
         method: "GET",
         success: function (categorys) {
             if (categorys.status == 200) {
@@ -501,7 +501,7 @@ $(document).on("click", '#icon-download', function (e) {
   
     e.preventDefault();
     $.ajax({
-        url: "/category/export-categories",
+        url: _appUrl+"/category/export-categories",
         method: "GET",
         success: function (response) {
               var link = document.createElement('a');

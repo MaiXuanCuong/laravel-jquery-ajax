@@ -7,6 +7,10 @@
     }
 
     </style>
+        <script type="text/javascript">
+            var _appUrl = '{!! url('/') !!}';
+            var _token = '{!! csrf_token() !!}';
+        </script>
 <body class="config">
     <div class="preloader is-active">
             <div class="preloader__wrap">
@@ -89,5 +93,6 @@
     <script src="{{ asset('shop/js/jquery.shopnav.js ') }}"></script>
     <script src="{{ asset('shop/js/app.js ') }}"></script>
     <script src="{{ asset('asset/jqueryajax/ajaxShop.js ') }}"></script>
+
 </body>
 </html>
